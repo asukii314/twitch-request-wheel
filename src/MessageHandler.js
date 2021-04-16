@@ -23,11 +23,10 @@ class GameRequest extends Component {
   render() {
     return (
       <div style={{backgroundColor:'steelblue', textAlign: 'left', borderRadius: '8px', textTransform: 'capitalize'}}>
-      <p style={{margin: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <p style={{margin: '15px', padding: '4px', fontSize: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         {this.props.msg}
         <button type='button' onClick={this.delete} style={{backgroundColor:'red', float: 'right', height: '50%', color: 'white', fontSize: '16px'}}>X</button>
       </p>
-
       </div>
     );
   }
