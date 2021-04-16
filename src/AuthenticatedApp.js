@@ -1,22 +1,11 @@
 
 import React, { Component } from 'react';
 import MessageHandler from './MessageHandler';
+import { withRouter } from "react-router-dom";
+import queryString from 'query-string'
 const fetch = require('node-fetch');
 
-export default class AuthenticatedApp extends Component {
-  render() {
-    if(window.location.pathname === "/login") {
-      return (<LoginHelper />);
-    } else {
-      const loginUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.REACT_APP_TWITCH_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code&scope=chat:read chat:edit`
-      return (
-        <a href={loginUrl} style={{backgroundColor: 'rebeccapurple', borderRadius: '5px', padding: '10px', color: 'white'}}>Log In With Twitch</a>
-      )
-    }
-  }
-}
-
-class LoginHelper extends Component {
+class AuthenticatedApp extends Component {
   constructor(){
     super();
     this.state = {
@@ -25,12 +14,13 @@ class LoginHelper extends Component {
     }
   }
   async componentDidMount() {
+    const queryParams = queryString.parse(this.props.location.search);
     await fetch('https://id.twitch.tv/oauth2/token?' + new URLSearchParams({
       grant_type: 'authorization_code',
-      code: new URLSearchParams(window.location.search).get('code'),
+      code: queryParams.code,
       client_id: process.env.REACT_APP_TWITCH_CLIENT_ID,
       client_secret: process.env.REACT_APP_TWITCH_CLIENT_SECRET,
-      redirect_uri: process.env.REACT_APP_REDIRECT_URI
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI_NOENCODE
     }), {
       method: 'POST',
       headers: {
@@ -77,3 +67,6 @@ class LoginHelper extends Component {
     )
   }
 }
+
+
+export default withRouter(AuthenticatedApp);
