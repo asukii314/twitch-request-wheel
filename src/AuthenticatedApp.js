@@ -11,7 +11,7 @@ class AuthenticatedApp extends Component {
     this.state = {
       username: "",
       access_token: "",
-      attempted_login: false
+      failed_login: false
     }
   }
   async componentDidMount() {
@@ -34,7 +34,7 @@ class AuthenticatedApp extends Component {
         this.setState((state) => {
           return {
             ...state,
-            attempted_login: true
+            failed_login: true
           };
         });
         return;
@@ -69,9 +69,9 @@ class AuthenticatedApp extends Component {
   render() {
     return (
       <p>
-        {!this.state.username && this.state.attempted_login
-          ? <Redirect to="/" />
-          : <MessageHandler channel={this.state.username} access_token={this.state.access_token} />}
+        {this.state.failed_login
+          ? <Redirect to="/login" />
+          : this.state.username && <MessageHandler channel={this.state.username} access_token={this.state.access_token} />}
       </p>
     )
   }

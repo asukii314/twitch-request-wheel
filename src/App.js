@@ -18,10 +18,10 @@ class App extends Component {
       <HashRouter basename='/'>
         <div className="App">
           <header className="App-header">
-            <Route exact path="/">
+            <Route exact path="/login">
               {loginScreen()}
             </Route>
-            <Route path="/dashboard" component={AuthenticatedApp} />
+            <Route path="/" component={AuthenticatedApp} />
           </header>
         </div>
       </HashRouter>
