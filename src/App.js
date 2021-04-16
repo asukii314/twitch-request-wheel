@@ -2,16 +2,21 @@
 import './App.css';
 import AuthenticatedApp from './AuthenticatedApp';
 import React, { Component } from 'react';
+import { HashRouter, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <AuthenticatedApp />
-        </header>
-      </div>
+      <HashRouter basename='/'>
+        <div className="App">
+          <header className="App-header">
+            <Route exact path="/">
+              <AuthenticatedApp />
+            </Route>
+          </header>
+        </div>
+      </HashRouter>
     );
   }
 }
