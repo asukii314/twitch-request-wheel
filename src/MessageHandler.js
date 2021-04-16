@@ -55,7 +55,7 @@ export default class MessageHandler extends Component {
       return {
         ...state,
         messages: newMessageSet,
-        counter: ++this.state.counter
+        counter: this.state.counter + 1
       };
     })
   }
@@ -73,7 +73,7 @@ export default class MessageHandler extends Component {
       return {
         ...state,
         messages: newMessageSet,
-        counter: ++this.state.counter
+        counter: this.state.counter + 1
       };
     })
     this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue.`);
