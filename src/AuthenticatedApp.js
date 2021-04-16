@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import MessageHandler from './MessageHandler';
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import queryString from 'query-string'
 const fetch = require('node-fetch');
 
@@ -10,7 +10,8 @@ class AuthenticatedApp extends Component {
     super();
     this.state = {
       username: "",
-      access_token: ""
+      access_token: "",
+      attempted_login: false
     }
   }
   async componentDidMount() {
@@ -30,7 +31,13 @@ class AuthenticatedApp extends Component {
     .then((oauth) => {
       //console.log(oauth); // access_token, refresh_token, expires_in, scope ['...']
       if(!oauth.access_token) {
-        window.location.href = window.location.origin;
+        this.setState((state) => {
+          return {
+            ...state,
+            attempted_login: true
+          };
+        });
+        return;
       }
 
       this.setState((state) => {
@@ -62,7 +69,9 @@ class AuthenticatedApp extends Component {
   render() {
     return (
       <p>
-        {this.state.username && <MessageHandler channel={this.state.username} access_token={this.state.access_token} />}
+        {!this.state.username && this.state.attempted_login
+          ? <Redirect to="/" />
+          : <MessageHandler channel={this.state.username} access_token={this.state.access_token} />}
       </p>
     )
   }
