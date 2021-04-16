@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/twitch-request-wheel/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/twitch-request-wheel/static/js/main.88136747.chunk.js",
-    "main.js.map": "/twitch-request-wheel/static/js/main.88136747.chunk.js.map",
-    "runtime-main.js": "/twitch-request-wheel/static/js/runtime-main.ebf814bc.js",
-    "runtime-main.js.map": "/twitch-request-wheel/static/js/runtime-main.ebf814bc.js.map",
-    "static/js/2.ba735ba9.chunk.js": "/twitch-request-wheel/static/js/2.ba735ba9.chunk.js",
-    "static/js/2.ba735ba9.chunk.js.map": "/twitch-request-wheel/static/js/2.ba735ba9.chunk.js.map",
-    "static/js/3.27dc2dca.chunk.js": "/twitch-request-wheel/static/js/3.27dc2dca.chunk.js",
-    "static/js/3.27dc2dca.chunk.js.map": "/twitch-request-wheel/static/js/3.27dc2dca.chunk.js.map",
-    "index.html": "/twitch-request-wheel/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/twitch-request-wheel/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.ba735ba9.chunk.js.LICENSE.txt": "/twitch-request-wheel/static/js/2.ba735ba9.chunk.js.LICENSE.txt"
+    "main.css": "/twitch-chat-request-wheel/static/css/main.9d5b29c0.chunk.css",
+    "main.js": "/twitch-chat-request-wheel/static/js/main.405cd921.chunk.js",
+    "main.js.map": "/twitch-chat-request-wheel/static/js/main.405cd921.chunk.js.map",
+    "runtime-main.js": "/twitch-chat-request-wheel/static/js/runtime-main.90a80bb4.js",
+    "runtime-main.js.map": "/twitch-chat-request-wheel/static/js/runtime-main.90a80bb4.js.map",
+    "static/js/2.e096abbe.chunk.js": "/twitch-chat-request-wheel/static/js/2.e096abbe.chunk.js",
+    "static/js/2.e096abbe.chunk.js.map": "/twitch-chat-request-wheel/static/js/2.e096abbe.chunk.js.map",
+    "static/js/3.50c7bc70.chunk.js": "/twitch-chat-request-wheel/static/js/3.50c7bc70.chunk.js",
+    "static/js/3.50c7bc70.chunk.js.map": "/twitch-chat-request-wheel/static/js/3.50c7bc70.chunk.js.map",
+    "index.html": "/twitch-chat-request-wheel/index.html",
+    "static/css/main.9d5b29c0.chunk.css.map": "/twitch-chat-request-wheel/static/css/main.9d5b29c0.chunk.css.map",
+    "static/js/2.e096abbe.chunk.js.LICENSE.txt": "/twitch-chat-request-wheel/static/js/2.e096abbe.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.ebf814bc.js",
-    "static/js/2.ba735ba9.chunk.js",
+    "static/js/runtime-main.90a80bb4.js",
+    "static/js/2.e096abbe.chunk.js",
     "static/css/main.9d5b29c0.chunk.css",
-    "static/js/main.88136747.chunk.js"
+    "static/js/main.405cd921.chunk.js"
   ]
 }
