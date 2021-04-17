@@ -90,8 +90,12 @@ export default class MessageHandler extends Component {
     })
 
     if(prevGame) {
-      this.removeGame(prevGame);
-      this.sendMessage(`/me @${tags.username}, your previous request of ${prevGame} has been replaced with ${game}.`);
+      if(this.props.channel + "ASD" === tags.username) {
+        this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
+      } else {
+        this.removeGame(prevGame);
+        this.sendMessage(`/me @${tags.username}, your previous request of ${prevGame} has been replaced with ${game}.`);
+      }
     } else {
       this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue.`);
     }
