@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import MessageHandler from './MessageHandler';
+import MainScreen from './MainScreen';
 import { Redirect, withRouter } from "react-router-dom";
 import queryString from 'query-string'
 const fetch = require('node-fetch');
@@ -71,7 +71,7 @@ class AuthenticatedApp extends Component {
       <p>
         {this.state.failed_login
           ? <Redirect to="/login" />
-          : this.state.username && <MessageHandler channel={this.state.username} access_token={this.state.access_token} />}
+          : this.state.username && <MainScreen channel={this.state.username} access_token={this.state.access_token} />}
       </p>
     )
   }

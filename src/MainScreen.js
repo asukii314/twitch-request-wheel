@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
+import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
 const randomColor = require('randomcolor');
 
