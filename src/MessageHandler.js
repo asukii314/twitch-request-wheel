@@ -60,9 +60,18 @@ export default class MessageHandler extends Component {
   onMessage = (target, tags, msg, self) => {
     const game = filterGameCommands(msg);
     if (!game) return;
+
     if(this.state.messages[game]) {
       this.sendMessage(`/me @${tags.username}, ${game} has already been requested!`);
       return;
+    }
+
+    let prevGame = null;
+    for(const [game, metadata] of Object.entries(this.state.messages)) {
+      if(metadata.username === tags.username){
+        prevGame = game;
+        break;
+      }
     }
 
     this.setState((state) => {
@@ -79,7 +88,13 @@ export default class MessageHandler extends Component {
         counter: this.state.counter + 1
       };
     })
-    this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue.`);
+
+    if(prevGame) {
+      this.removeGame(prevGame);
+      this.sendMessage(`/me @${tags.username}, your previous request of ${prevGame} has been replaced with ${game}.`);
+    } else {
+      this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue.`);
+    }
   }
 
   sendMessage = (msg) => {
