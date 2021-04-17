@@ -36,7 +36,7 @@ export default class MessageHandler extends Component {
   constructor(props){
     super(props);
     this.state = {
-      messages: new Set(),
+      messages: {},
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
       counter: 0
     };
@@ -47,13 +47,12 @@ export default class MessageHandler extends Component {
   }
 
   removeGame = (game) => {
-    console.log(game)
-    const newMessageSet = new Set(this.state.messages)
-    newMessageSet.delete(game)
+    const newMessageObj = {...this.state.messages};
+    delete newMessageObj[game];
     this.setState((state) => {
       return {
         ...state,
-        messages: newMessageSet,
+        messages: newMessageObj,
         counter: this.state.counter + 1
       };
     })
@@ -62,16 +61,15 @@ export default class MessageHandler extends Component {
   onMessage = (target, tags, msg, self) => {
     const game = filterGameCommands(msg);
     if (!game) return;
-    if(this.state.messages.has(game)) {
+    if(this.state.messages[game]) {
       this.sendMessage(`/me @${tags.username}, ${game} has already been requested!`);
       return;
     }
 
-    const newMessageSet = new Set(this.state.messages).add(game)
     this.setState((state) => {
       return {
         ...state,
-        messages: newMessageSet,
+        messages: {...this.state.messages, [game]: {user: tags.username, time: Date.now()}},
         counter: this.state.counter + 1
       };
     })
@@ -107,7 +105,8 @@ export default class MessageHandler extends Component {
   }
 
   render() {
-    const gameArray = Array.from(this.state.messages);
+    const gameArray = Object.keys(this.state.messages);
+    console.log(this.state.messages);
     return (
       <div style={{display: 'flex'}}>
         <column width="50vw">
