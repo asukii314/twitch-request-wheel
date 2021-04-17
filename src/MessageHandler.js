@@ -21,8 +21,7 @@ class GameRequest extends Component {
   constructor(props){
     super(props);
     this.state = {
-      timeDiff: 0,
-      locked: false
+      timeDiff: 0
     };
   }
 
@@ -40,16 +39,11 @@ class GameRequest extends Component {
   }
 
   toggleLock = () => {
-    this.setState(() => {
-      return {
-        ...this.state,
-        locked: !this.state.locked
-      };
-    });
+    this.props.toggleLock(this.props.msg)
   }
 
   render() {
-    const lockOpacity = this.state.locked ? '1' : '0.2';
+    const lockOpacity = this.props.metadata.locked ? '1' : '0.2';
     return (
       <div>
       <ReactTooltip effect="solid" place="right"/>
@@ -75,6 +69,21 @@ export default class MessageHandler extends Component {
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
       counter: 0
     };
+  }
+
+  toggleLock = (game) => {
+    const stateCopy = {...this.state.messages[game]};
+    console.log(stateCopy)
+    stateCopy.locked = !stateCopy.locked
+    this.setState(() => {
+      return {
+        ...this.state,
+        messages: {
+          ...this.state.messages,
+          [game]: stateCopy
+        }
+      }
+    });
   }
 
   onGameChosen = (game) => {
@@ -104,7 +113,14 @@ export default class MessageHandler extends Component {
     this.setState((state) => {
       return {
         ...state,
-        messages: {...this.state.messages, [game]: {username: tags.username, time: Date.now()}},
+        messages: {
+          ...this.state.messages,
+          [game]: {
+            username: tags.username,
+            time: Date.now(),
+            locked: false
+          }
+        },
         counter: this.state.counter + 1
       };
     })
@@ -147,7 +163,7 @@ export default class MessageHandler extends Component {
         <column width="50vw">
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
           <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
-          {gameArray.map((msg, i) => <GameRequest key={i} msg={msg} metadata={this.state.messages[msg]} onDelete={this.removeGame}/>)}
+          {gameArray.map((msg, i) => <GameRequest key={i} msg={msg} metadata={this.state.messages[msg]} onDelete={this.removeGame} toggleLock={this.toggleLock.bind(msg)}/>)}
         </column>
         <column width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
