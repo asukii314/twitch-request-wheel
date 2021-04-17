@@ -87,7 +87,9 @@ export default class MessageHandler extends Component {
   }
 
   onGameChosen = (game) => {
-    console.log("Game chosen: " + game)
+    if(!this.state.messages[game].locked) {
+      this.removeGame(game);
+    }
   }
 
   removeGame = (game) => {
