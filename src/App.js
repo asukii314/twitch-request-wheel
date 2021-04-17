@@ -3,6 +3,7 @@ import './App.css';
 import AuthenticatedApp from './AuthenticatedApp';
 import React, { Component } from 'react';
 import { HashRouter, Route } from "react-router-dom";
+import JackboxGameList from './JackboxGameList';
 
 const loginScreen = function() {
   const loginUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.REACT_APP_TWITCH_CLIENT_ID}&response_type=code&scope=chat:read chat:edit&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`
@@ -22,6 +23,7 @@ class App extends Component {
               {loginScreen()}
             </Route>
             <Route path="/" component={AuthenticatedApp} />
+            <Route path="/gamelist" component={JackboxGameList} />
           </header>
         </div>
       </HashRouter>

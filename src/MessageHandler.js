@@ -10,7 +10,8 @@ export default class MessageHandler extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      client: null
+      client: null,
+      validGames: []
     };
   }
 
@@ -54,7 +55,7 @@ export default class MessageHandler extends Component {
         }
       }
     }
-    this.sendMessage(`/me @${username}, ${requestedGame} could not be found in the list of valid Jackbox games. Sorry about that!`);
+    this.sendMessage(`/me @${username}, ${requestedGame} could not be found in the list of valid Jackbox games. Click here for a list of valid games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
     return null;
   }
 
