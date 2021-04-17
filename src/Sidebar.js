@@ -40,7 +40,7 @@ export default class Sidebar extends Component {
     return (
       <div style={{marginLeft: "12px", width: "33%", textTransform: 'capitalize'}}>
         <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '1px', marginBottom: '10px'}}>
-          <p style={{fontSize: "14px", fontWeight: "700", height: '50px'}}> Up Next:
+          <p style={{fontSize: "14px", fontWeight: "700", height: '70px', padding: '8px'}}> Up Next:
             {this.props.history.length > this.state.index && <p>{this.props.history[this.state.index]}</p> }
           </p>
         </div>
@@ -50,7 +50,7 @@ export default class Sidebar extends Component {
           <button onClick={this.goForward} style={{backgroundColor: "darkcyan", borderRadius: "5px", marginTop: 0, width: "50%", marginBottom: '20px', marginLeft: '5px'}}> 🢡 </button>
         </div>
 
-        <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '1px'}}>
+        <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '5px'}}>
           <p style={{fontSize: "14px", fontWeight: "700"}}> History </p>
           <p style={{fontSize: "12px"}}>
             {this.props.history.map((playedGame, i) => <li key={i}>{this.printGame(i)}</li> )}

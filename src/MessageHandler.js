@@ -1,13 +1,10 @@
 import { Component } from 'react';
-import GameRequest from './GameRequest'
-import Sidebar from './Sidebar'
+import YAML from 'yaml'
+import rawJackboxGameList from './JackboxGames.yaml';
+const fetch = require('node-fetch');
 const tmi = require('tmi.js');
 
 const GAME_REQUEST_COMMAND = "!request";
-const filterGameCommands = function(message) {
-  if(!message.startsWith(GAME_REQUEST_COMMAND)) return;
-  return message.replace(GAME_REQUEST_COMMAND, "").trim().toLowerCase();
-}
 
 export default class MessageHandler extends Component {
   constructor(props) {
@@ -31,24 +28,45 @@ export default class MessageHandler extends Component {
     client.on('message', this.onMessage);
     client.connect();
 
-    this.setState((state) => {
-      return {
-        ...state,
-        client
+    fetch(rawJackboxGameList)
+      .then(r => r.text())
+      .then(text => {
+        this.setState((state) => {
+          return {
+            ...state,
+            client,
+            validGames: YAML.parse(text)
+          };
+        });
+      })
+    }
+
+  filterGameCommands = (message, username) => {
+    if(!message.startsWith(GAME_REQUEST_COMMAND)) return;
+
+    const requestedGame = message.replace(GAME_REQUEST_COMMAND, "").trim().toLowerCase();
+
+    for(let partyPackName in this.state.validGames) {
+      const partyPack = this.state.validGames[partyPackName]
+      for(const [formalGameName, possibleMatches] of Object.entries(partyPack)){
+        if(possibleMatches.includes(requestedGame)) {
+          return `${formalGameName} (${partyPackName})`;
+        }
       }
-    });
+    }
+    this.sendMessage(`/me @${username}, ${requestedGame} could not be found in the list of valid Jackbox games. Sorry about that!`);
+    return null;
   }
 
   onMessage = (target, tags, msg, self) => {
-    const game = filterGameCommands(msg);
+    if(self) return;
+    const game = this.filterGameCommands(msg, tags.username);
     if (!game) return;
 
     if(this.props.messages[game]) {
       this.sendMessage(`/me @${tags.username}, ${game} has already been requested!`);
       return;
     }
-
-    this.props.addGame(game, tags.username);
 
     let prevGame = null;
     for(const [game, metadata] of Object.entries(this.props.messages)) {
@@ -68,6 +86,8 @@ export default class MessageHandler extends Component {
     } else {
       this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue.`);
     }
+
+    this.props.addGame(game, tags.username);
   }
 
   sendMessage = (msg) => {
