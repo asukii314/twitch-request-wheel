@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
+import Sidebar from './Sidebar'
 const randomColor = require('randomcolor');
 const tmi = require('tmi.js');
 
@@ -43,7 +44,9 @@ export default class MessageHandler extends Component {
   onGameChosen = (game) => {
     if(Object.keys(this.state.messages).length === 0) return;
     if(!this.state.messages[game].locked) {
-      this.removeGame(game, true);
+      setTimeout(() => {
+        this.removeGame(game, true);
+      }, 2500);
     }
     this.setState((state) => {
       return {
@@ -149,14 +152,8 @@ export default class MessageHandler extends Component {
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
           <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
-            <div style={{marginLeft: "12px", flexGrow: "1", backgroundColor: "darkslategrey", borderRadius: "5px"}}>
-              <p style={{fontSize: "14px", fontWeight: "700"}}> History </p>
-              <p style={{fontSize: "12px"}}>
-                {this.state.history.map((playedGame, i) => <li key={i}>{playedGame}</li> )}
-                {this.state.history.length === 0 && <li key='0'>No games have won the spin yet</li> }
-              </p>
-            </div>
-            <div style={{flexGrow: "2", marginLeft: "15px"}}>
+          <Sidebar history={this.state.history}/>
+          <div style={{flexGrow: "2", marginLeft: "15px"}}>
               {gameArray.map((msg, i) => <GameRequest key={i} msg={msg} metadata={this.state.messages[msg]} onDelete={this.removeGame} toggleLock={this.toggleLock.bind(msg)}/>)}
             </div>
           </div>
@@ -175,9 +172,9 @@ export default class MessageHandler extends Component {
               primaryColor={"white"}
               contrastColor={"black"}
             />
+          {/*  <Modal/>*/}
           </div>
         </column>
-
       </div>
     )
   }
