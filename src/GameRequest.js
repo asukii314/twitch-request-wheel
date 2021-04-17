@@ -34,7 +34,7 @@ export default class GameRequest extends Component {
       <div>
       <ReactTooltip effect="solid" place="right"/>
       <div id="baseDiv" data-tip={`Requested ${this.state.timeDiff} by ${this.props.metadata.username}`} style={{backgroundColor:'steelblue', textAlign: 'left', borderRadius: '8px', textTransform: 'capitalize'}} onMouseEnter={this.updateTimeDiff}>
-      <p style={{margin: '15px', padding: '4px', fontSize: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <p style={{margin: '15px', marginTop: '0', padding: '4px', fontSize: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         {this.props.msg}
         <div style={{display:'flex'}}>
           <img src={lock} alt="lock" style={{width: '16px', opacity: lockOpacity, paddingRight: '8px'}} className="lock" onClick={this.toggleLock} />

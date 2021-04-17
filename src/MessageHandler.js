@@ -20,7 +20,8 @@ export default class MessageHandler extends Component {
     this.state = {
       messages: {},
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
-      counter: 0
+      counter: 0,
+      history: []
     };
   }
 
@@ -40,9 +41,19 @@ export default class MessageHandler extends Component {
   }
 
   onGameChosen = (game) => {
+    if(Object.keys(this.state.messages).length === 0) return;
     if(!this.state.messages[game].locked) {
-      this.removeGame(game);
+      this.removeGame(game, true);
     }
+    this.setState((state) => {
+      return {
+        ...state,
+        history: [
+          ...this.state.history,
+          game
+        ]
+      };
+    })
   }
 
   removeGame = (game) => {
@@ -90,7 +101,7 @@ export default class MessageHandler extends Component {
     })
 
     if(prevGame) {
-      if(this.props.channel + "ASD" === tags.username) {
+      if(this.props.channel === tags.username) {
         this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
       } else {
         this.removeGame(prevGame);
@@ -131,13 +142,24 @@ export default class MessageHandler extends Component {
 
   render() {
     const gameArray = Object.keys(this.state.messages);
-    console.log(this.state.messages);
+    console.log(this.state.history);
     return (
       <div style={{display: 'flex'}}>
         <column width="50vw">
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
           <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
-          {gameArray.map((msg, i) => <GameRequest key={i} msg={msg} metadata={this.state.messages[msg]} onDelete={this.removeGame} toggleLock={this.toggleLock.bind(msg)}/>)}
+          <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
+            <div style={{marginLeft: "12px", flexGrow: "1", backgroundColor: "darkslategrey", borderRadius: "5px"}}>
+              <p style={{fontSize: "14px", fontWeight: "700"}}> History </p>
+              <p style={{fontSize: "12px"}}>
+                {this.state.history.map((playedGame, i) => <li key={i}>{playedGame}</li> )}
+                {this.state.history.length === 0 && <li key='0'>No games have won the spin yet</li> }
+              </p>
+            </div>
+            <div style={{flexGrow: "2", marginLeft: "15px"}}>
+              {gameArray.map((msg, i) => <GameRequest key={i} msg={msg} metadata={this.state.messages[msg]} onDelete={this.removeGame} toggleLock={this.toggleLock.bind(msg)}/>)}
+            </div>
+          </div>
         </column>
         <column width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
