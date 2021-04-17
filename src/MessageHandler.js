@@ -43,6 +43,9 @@ export default class MessageHandler extends Component {
     }
 
   filterGameCommands = (message, username) => {
+    if(message.trim() === "!gamelist") {
+      this.sendMessage(`/me @${username}, click here for a list of valid Jackbox games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
+    }
     if(!message.startsWith(GAME_REQUEST_COMMAND)) return;
 
     const requestedGame = message.replace(GAME_REQUEST_COMMAND, "").trim().toLowerCase();
