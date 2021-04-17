@@ -2,6 +2,7 @@ import { Component } from 'react';
 import WheelComponent from 'react-wheel-of-prizes'
 import ReactTooltip from 'react-tooltip'
 import './messageStyles.css';
+import lock from './lock.svg';
 const randomColor = require('randomcolor');
 const tmi = require('tmi.js');
 
@@ -20,7 +21,8 @@ class GameRequest extends Component {
   constructor(props){
     super(props);
     this.state = {
-      timeDiff: 0
+      timeDiff: 0,
+      locked: false
     };
   }
 
@@ -28,6 +30,7 @@ class GameRequest extends Component {
     // return Date.now();
     this.setState(() => {
       return {
+        ...this.state,
         timeDiff: `${Math.floor((Date.now()-this.props.metadata.time)/60000)} minutes ago`
       };
     });
@@ -36,14 +39,27 @@ class GameRequest extends Component {
     this.props.onDelete(this.props.msg)
   }
 
+  toggleLock = () => {
+    this.setState(() => {
+      return {
+        ...this.state,
+        locked: !this.state.locked
+      };
+    });
+  }
+
   render() {
+    const lockOpacity = this.state.locked ? '1' : '0.2';
     return (
       <div>
       <ReactTooltip effect="solid" place="right"/>
       <div id="baseDiv" data-tip={`Requested ${this.state.timeDiff} by ${this.props.metadata.username}`} style={{backgroundColor:'steelblue', textAlign: 'left', borderRadius: '8px', textTransform: 'capitalize'}} onMouseEnter={this.updateTimeDiff}>
-      <p style={{margin: '15px', padding: '4px', fontSize: '24px', display: 'flex', justifyContent: 'left', alignItems: 'center'}}>
-        <button type='button' className="deleteButton" onClick={this.delete}>X</button>
+      <p style={{margin: '15px', padding: '4px', fontSize: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         {this.props.msg}
+        <div style={{display:'flex'}}>
+          <img src={lock} style={{width: '16px', opacity: lockOpacity, paddingRight: '8px'}} className="lock" onClick={this.toggleLock} />
+          <button type='button' className="deleteButton" onClick={this.delete}>X</button>
+        </div>
       </p>
       </div>
       </div>
@@ -130,7 +146,7 @@ export default class MessageHandler extends Component {
       <div style={{display: 'flex'}}>
         <column width="50vw">
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
-          <h4 style={{fontSize:"12px", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
+          <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
           {gameArray.map((msg, i) => <GameRequest key={i} msg={msg} metadata={this.state.messages[msg]} onDelete={this.removeGame}/>)}
         </column>
         <column width="50vw" style={{textTransform: 'capitalize'}}>

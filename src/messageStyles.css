@@ -7,10 +7,10 @@
 }
 
 .deleteButton {
-  margin-right: 12px;
   background-color: red;
   float: right;
   height: 50%;
   color: white;
-  font-size: 16px;
+  font-size: 11px;
+  padding: 3px 5px;
 }
