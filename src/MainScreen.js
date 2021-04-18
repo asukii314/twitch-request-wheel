@@ -3,7 +3,7 @@ import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
-import ChatActivity from './ChatActivity';
+import ChatActivity, { ActivityStatus } from './ChatActivity';
 const randomColor = require('randomcolor');
 
 const column = function(width) {
@@ -57,9 +57,35 @@ export default class MainScreen extends Component {
 
   onGameChosen = (game) => {
     if(Object.keys(this.state.messages).length === 0) return;
+
+    // send confirmation message in chat
+    const requester = this.state.messages[game].username;
+    this.chatActivity.getStatusPromise(requester).then((status) => {
+      let msg = "";
+      switch(status) {
+        case ActivityStatus.DISCONNECTED:
+          msg = `${game} just won the spin, but it doesn't seem like @${requester} is still around. (But please speak up if I got that wrong!) Would anyone else want to play?`
+          break;
+
+        case ActivityStatus.ACTIVE:
+          msg = `@${requester}, good news - ${game} just won the spin!`;
+          break;
+
+        case ActivityStatus.IDLE:
+        default:
+          msg += `@${requester}, good news - ${game} just won the spin! (I hope you're still around!)`;
+        }
+        this.messageHandler.sendMessage(msg);
+    })
+
+    // update history + game card highlight color
     this.setState((state) => {
       return {
         ...state,
+        history: [
+          ...this.state.history,
+          game
+        ],
         messages: {
           ...state.messages,
           [game]: {
@@ -69,20 +95,13 @@ export default class MainScreen extends Component {
         }
       }
     })
+
+    // remove card unless it's locked
     if(!this.state.messages[game].locked) {
       setTimeout(() => {
         this.removeGame(game, true);
       }, 2500);
     }
-    this.setState((state) => {
-      return {
-        ...state,
-        history: [
-          ...this.state.history,
-          game
-        ]
-      };
-    })
   }
 
   removeGame = (game) => {
@@ -112,6 +131,7 @@ export default class MainScreen extends Component {
           access_token={this.props.access_token}
           onMessage={this.onMessage}
           onDelete={this.removeGame}
+          ref={(mh) => this.messageHandler = mh}
         />
         <column width="50vw">
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
