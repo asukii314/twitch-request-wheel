@@ -12,7 +12,7 @@ export default class ChatActivity {
   constructor(channel) {
     this.channel = channel;
     this.lastMessageTimes = {};
-    this.getStatus = this.getStatus.bind(this);
+    this.getStatusPromise = this.getStatusPromise.bind(this);
   }
 
   updateLastMessageTime = (user) => {
@@ -54,7 +54,7 @@ export default class ChatActivity {
       })
   }
 
-  async getStatus(user) {
+  async getStatusPromise(user) {
     // broadcaster always counts as active
     if(user === this.channel) {
       return ActivityStatus.ACTIVE;

@@ -126,7 +126,7 @@ export default class MainScreen extends Component {
                   metadata={this.state.messages[msg]}
                   onDelete={this.removeGame}
                   toggleLock={this.toggleLock.bind(msg)}
-                  getActivity={this.chatActivity.getStatus}
+                  getActivity={this.chatActivity.getStatusPromise}
               />)}
             </div>
           </div>
