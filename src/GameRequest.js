@@ -13,13 +13,31 @@ export default class GameRequest extends Component {
     };
   }
 
+  getFormattedTimeDiff = (timestamp) => {
+    let unit = "minute";
+    let timeDiff = Math.floor((Date.now()-timestamp)/60000);
+    if(timeDiff === 0) {
+      return "just now";
+    }
+    if(timeDiff >= 60) {
+      unit = "hour";
+      timeDiff = Math.floor(timeDiff/60);
+
+      if(timeDiff >= 24) {
+        unit = "day";
+        timeDiff = Math.floor(timeDiff/24);
+      }
+    }
+    return `${timeDiff} ${unit}${timeDiff === 1 ? "" : "s"} ago`;
+  }
+
   updateStatus = () => {
     // return Date.now();
     this.props.getActivity(this.props.metadata.username).then((activityStatus) => {
       this.setState(() => {
         return {
           ...this.state,
-          timeDiff: `${Math.floor((Date.now()-this.props.metadata.time)/60000)} minutes ago`,
+          timeDiff: this.getFormattedTimeDiff(this.props.metadata.time),
           activityStatus
         };
       });
@@ -44,6 +62,9 @@ export default class GameRequest extends Component {
         break;
       case ActivityStatus.DISCONNECTED:
         statusClass = "disconnected";
+        break;
+      default:
+        // no data back yet; don't show an activity status indicator at all
         break;
     }
 
