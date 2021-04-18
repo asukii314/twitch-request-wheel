@@ -31,7 +31,8 @@ export default class MainScreen extends Component {
           [game]: {
             username: user,
             time: Date.now(),
-            locked: false
+            locked: false,
+            chosen: false
           }
         },
         counter: this.state.counter + 1
@@ -56,6 +57,18 @@ export default class MainScreen extends Component {
 
   onGameChosen = (game) => {
     if(Object.keys(this.state.messages).length === 0) return;
+    this.setState((state) => {
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          [game]: {
+            ...state.messages[game],
+            chosen: true
+          }
+        }
+      }
+    })
     if(!this.state.messages[game].locked) {
       setTimeout(() => {
         this.removeGame(game, true);

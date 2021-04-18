@@ -77,19 +77,15 @@ export default class GameRequest extends Component {
 
   render() {
     const lockOpacity = this.props.metadata.locked ? '1' : '0.2';
+    const cardStatus = this.props.metadata.chosen ? 'chosen' : 'pending';
     return (
       <div>
       <ReactTooltip effect="solid" place="right"/>
       <div
         id="baseDiv"
+        className={cardStatus}
         data-tip={this.getTooltipContents()}
         data-html={true}
-        style={{
-          backgroundColor:'steelblue',
-          textAlign: 'left',
-          borderRadius: '8px',
-          textTransform: 'capitalize'
-        }}
         onMouseEnter={this.updateStatus}
       >
       <div style={{margin: '0px 15px 7px', padding: '4px', fontSize: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
