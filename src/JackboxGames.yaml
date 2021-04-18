@@ -28,14 +28,20 @@ Any Version:
 Party Pack 1:
   You Don't Know Jack:
     - ydkj 1
+    - ydkj 2015
     - you dont know jack 1
+    - you dont know jack 2015
     - you don't know jack 1
+    - you don't know jack 2015
+    - "you don't know jack: 2015"
   Drawful:
     - drawful 1
   Word Spud:
     - word spud
+    - wordspud
   Lie Swatter:
     - lie swatter
+    - lieswatter
   Fibbage:
     - fibbage 1
     - fibbage xl
@@ -49,6 +55,7 @@ Party Pack 2:
     - bidiots
   Bomb Corp:
     - bomb corp
+    - bombcorp
   Earwax:
     - earwax
 
@@ -77,6 +84,7 @@ Party Pack 4:
   "Fibbage: Enough About You":
     - eay
     - enough about you
+    - feay
     - fibbage eay
     - "fibbage: eay"
     - fibbage enough about you
@@ -84,22 +92,30 @@ Party Pack 4:
   Fibbage 3:
     - fibbage 3
   Survive The Internet:
+    - survive
     - survive the internet
     - sti
   Monster Seeking Monster:
     - monster seeking monster 1
     - msm 1
   Bracketeering:
-    - bracketeeering
+    - bracketeering
     - bracketeer
+    - bracket
   Civic Doodle:
     - civic doodle
+    - civic
 
 Party Pack 5:
   You Don't Know Jack:
     - ydkj 2
+    - ydkj fs
+    - ydkjfs
     - you dont know jack 2
     - you don't know jack 2
+    - you don't know jack full stream
+    - you don't know jack full steam
+    - "you don't know jack: full stream"
   Mad Verse City:
     - mvc
     - mad verse
@@ -121,10 +137,13 @@ Party Pack 6:
   Push The Button:
     - ptb
     - push the button
+    - push da button
   Dictionarium:
     - dictionarium
+    - dictionary
   Role Models:
     - role models
+    - rolemodels
   Joke Boat:
     - joke boat
     - jokeboat
@@ -133,7 +152,9 @@ Party Pack 7:
   Quiplash:
     - quiplash 3
   Champ'd Up:
+    - champd
     - champd up
+    - champ'd
     - champ'd up
     - champed up
   Blather 'Round:
