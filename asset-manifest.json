@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/twitch-request-wheel/static/css/main.49453269.chunk.css",
-    "main.js": "/twitch-request-wheel/static/js/main.3006d009.chunk.js",
-    "main.js.map": "/twitch-request-wheel/static/js/main.3006d009.chunk.js.map",
+    "main.css": "/twitch-request-wheel/static/css/main.dc8e1a98.chunk.css",
+    "main.js": "/twitch-request-wheel/static/js/main.9e350e60.chunk.js",
+    "main.js.map": "/twitch-request-wheel/static/js/main.9e350e60.chunk.js.map",
     "runtime-main.js": "/twitch-request-wheel/static/js/runtime-main.4eb0bd35.js",
     "runtime-main.js.map": "/twitch-request-wheel/static/js/runtime-main.4eb0bd35.js.map",
-    "static/js/2.73586635.chunk.js": "/twitch-request-wheel/static/js/2.73586635.chunk.js",
-    "static/js/2.73586635.chunk.js.map": "/twitch-request-wheel/static/js/2.73586635.chunk.js.map",
+    "static/js/2.b719ee49.chunk.js": "/twitch-request-wheel/static/js/2.b719ee49.chunk.js",
+    "static/js/2.b719ee49.chunk.js.map": "/twitch-request-wheel/static/js/2.b719ee49.chunk.js.map",
     "static/js/3.5d2d698c.chunk.js": "/twitch-request-wheel/static/js/3.5d2d698c.chunk.js",
     "static/js/3.5d2d698c.chunk.js.map": "/twitch-request-wheel/static/js/3.5d2d698c.chunk.js.map",
     "index.html": "/twitch-request-wheel/index.html",
-    "static/css/main.49453269.chunk.css.map": "/twitch-request-wheel/static/css/main.49453269.chunk.css.map",
-    "static/js/2.73586635.chunk.js.LICENSE.txt": "/twitch-request-wheel/static/js/2.73586635.chunk.js.LICENSE.txt",
-    "static/media/JackboxGames.0b4c1fc6.yaml": "/twitch-request-wheel/static/media/JackboxGames.0b4c1fc6.yaml",
+    "static/css/main.dc8e1a98.chunk.css.map": "/twitch-request-wheel/static/css/main.dc8e1a98.chunk.css.map",
+    "static/js/2.b719ee49.chunk.js.LICENSE.txt": "/twitch-request-wheel/static/js/2.b719ee49.chunk.js.LICENSE.txt",
+    "static/media/JackboxGames.3e1fec84.yaml": "/twitch-request-wheel/static/media/JackboxGames.3e1fec84.yaml",
     "static/media/lock.6857c469.svg": "/twitch-request-wheel/static/media/lock.6857c469.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.4eb0bd35.js",
-    "static/js/2.73586635.chunk.js",
-    "static/css/main.49453269.chunk.css",
-    "static/js/main.3006d009.chunk.js"
+    "static/js/2.b719ee49.chunk.js",
+    "static/css/main.dc8e1a98.chunk.css",
+    "static/js/main.9e350e60.chunk.js"
   ]
 }
