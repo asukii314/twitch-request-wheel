@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/twitch-request-wheel/static/css/main.dc8e1a98.chunk.css",
-    "main.js": "/twitch-request-wheel/static/js/main.9e350e60.chunk.js",
-    "main.js.map": "/twitch-request-wheel/static/js/main.9e350e60.chunk.js.map",
-    "runtime-main.js": "/twitch-request-wheel/static/js/runtime-main.4eb0bd35.js",
-    "runtime-main.js.map": "/twitch-request-wheel/static/js/runtime-main.4eb0bd35.js.map",
-    "static/js/2.b719ee49.chunk.js": "/twitch-request-wheel/static/js/2.b719ee49.chunk.js",
-    "static/js/2.b719ee49.chunk.js.map": "/twitch-request-wheel/static/js/2.b719ee49.chunk.js.map",
-    "static/js/3.5d2d698c.chunk.js": "/twitch-request-wheel/static/js/3.5d2d698c.chunk.js",
-    "static/js/3.5d2d698c.chunk.js.map": "/twitch-request-wheel/static/js/3.5d2d698c.chunk.js.map",
+    "main.css": "/twitch-request-wheel/static/css/main.23add341.chunk.css",
+    "main.js": "/twitch-request-wheel/static/js/main.c67155de.chunk.js",
+    "main.js.map": "/twitch-request-wheel/static/js/main.c67155de.chunk.js.map",
+    "runtime-main.js": "/twitch-request-wheel/static/js/runtime-main.8ffc896a.js",
+    "runtime-main.js.map": "/twitch-request-wheel/static/js/runtime-main.8ffc896a.js.map",
+    "static/js/2.e30fd099.chunk.js": "/twitch-request-wheel/static/js/2.e30fd099.chunk.js",
+    "static/js/2.e30fd099.chunk.js.map": "/twitch-request-wheel/static/js/2.e30fd099.chunk.js.map",
+    "static/js/3.4b44ed66.chunk.js": "/twitch-request-wheel/static/js/3.4b44ed66.chunk.js",
+    "static/js/3.4b44ed66.chunk.js.map": "/twitch-request-wheel/static/js/3.4b44ed66.chunk.js.map",
     "index.html": "/twitch-request-wheel/index.html",
-    "static/css/main.dc8e1a98.chunk.css.map": "/twitch-request-wheel/static/css/main.dc8e1a98.chunk.css.map",
-    "static/js/2.b719ee49.chunk.js.LICENSE.txt": "/twitch-request-wheel/static/js/2.b719ee49.chunk.js.LICENSE.txt",
+    "static/css/main.23add341.chunk.css.map": "/twitch-request-wheel/static/css/main.23add341.chunk.css.map",
+    "static/js/2.e30fd099.chunk.js.LICENSE.txt": "/twitch-request-wheel/static/js/2.e30fd099.chunk.js.LICENSE.txt",
     "static/media/JackboxGames.3e1fec84.yaml": "/twitch-request-wheel/static/media/JackboxGames.3e1fec84.yaml",
     "static/media/lock.6857c469.svg": "/twitch-request-wheel/static/media/lock.6857c469.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4eb0bd35.js",
-    "static/js/2.b719ee49.chunk.js",
-    "static/css/main.dc8e1a98.chunk.css",
-    "static/js/main.9e350e60.chunk.js"
+    "static/js/runtime-main.8ffc896a.js",
+    "static/js/2.e30fd099.chunk.js",
+    "static/css/main.23add341.chunk.css",
+    "static/js/main.c67155de.chunk.js"
   ]
 }
