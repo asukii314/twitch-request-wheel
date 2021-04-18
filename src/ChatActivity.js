@@ -26,6 +26,34 @@ export default class ChatActivity {
     return Math.floor((Date.now()-this.lastMessageTimes[user])/60000);
   }
 
+  // returns a PROMISE, don't just assign the value again like a dweeb. :/
+  //
+  // not just active chatters - anyone with an active connnection to twitch chat.
+  // (thank the lord almighty for free open proxy sites. CORB is annoying.)
+  // note that results are fairly heavily cached, and the API may break
+  // eventually (is undocumented), but this is what twitch themselves
+  // uses to display the list of people connected to chat - best we got.
+  getChatters = () => {
+    return fetch(`https://thingproxy.freeboard.io/fetch/https://tmi.twitch.tv/group/user/${this.channel}/chatters`)
+      .then(r => r.json())
+      .then(res => {
+        if(!res || !res.chatters) return null;
+        return [
+          ...res.chatters.moderators,
+          ...res.chatters.viewers,
+          ...res.chatters.staff,
+          ...res.chatters.admins,
+          ...res.chatters.global_mods
+        ];
+      })
+      .catch((e) => {
+        // don't normally like swallowing errors like this,
+        // but it's a noncritical feature built off an
+        // undocumented api, sooo....
+        return null;
+      })
+  }
+
   async getStatus(user) {
     // broadcaster always counts as active
     if(user === this.channel) {
@@ -37,32 +65,11 @@ export default class ChatActivity {
       return ActivityStatus.ACTIVE;
     }
 
-    // check the twitch api to see if they have an active connection to chat.
-    // (thank the lord almighty for free open proxy sites. CORB is annoying.)
-    // note that results are fairly heavily cached, and the API may break
-    // eventually (is undocumented), but this is what twitch themselves
-    // uses to display the list of people connected to chat - best we got.
-    return fetch(`https://thingproxy.freeboard.io/fetch/https://tmi.twitch.tv/group/user/${this.channel}/chatters`)
-      .then(r => r.json())
-      .then(res => {
-        console.log(res);
-        if(!res.chatters) {
-          return ActivityStatus.DISCONNECTED; // in case the response doesn't parse goodly
-}
-        if(res.chatters.vips.includes(user)
-           || res.chatters.moderators.includes(user)
-           || res.chatters.viewers.includes(user)
-           || res.chatters.staff.includes(user)
-           || res.chatters.admins.includes(user)
-           || res.chatters.global_mods.includes(user)
-        ) {
-          console.log("IDLEEE")
-          return ActivityStatus.IDLE;
-        }
-        return ActivityStatus.DISCONNECTED;
-      })
-      .catch((e) => {
-        console.log(e);
-      })
+    return this.getChatters().then((chatters) =>
+      !chatters || !chatters.includes(user)
+          ? ActivityStatus.DISCONNECTED
+          : ActivityStatus.IDLE
+    );
   }
+
 }
