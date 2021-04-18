@@ -3,6 +3,7 @@ import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
+import ChatActivity from './ChatActivity';
 const randomColor = require('randomcolor');
 
 const column = function(width) {
@@ -12,6 +13,7 @@ const column = function(width) {
 export default class MainScreen extends Component {
   constructor(props){
     super(props);
+    this.chatActivity = new ChatActivity(this.props.channel)
     this.state = {
       messages: {},
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
@@ -82,6 +84,10 @@ export default class MainScreen extends Component {
     })
   }
 
+  onMessage = (message, user, metadata) => {
+    this.chatActivity.updateLastMessageTime(user);
+  }
+
   render() {
     const gameArray = Object.keys(this.state.messages);
     return (
@@ -91,6 +97,8 @@ export default class MainScreen extends Component {
           messages={this.state.messages}
           channel={this.props.channel}
           access_token={this.props.access_token}
+          onMessage={this.onMessage}
+          onDelete={this.removeGame}
         />
         <column width="50vw">
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
@@ -98,7 +106,15 @@ export default class MainScreen extends Component {
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
           <Sidebar history={this.state.history}/>
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
-              {gameArray.map((msg, i) => <GameRequest key={i} msg={msg} metadata={this.state.messages[msg]} onDelete={this.removeGame} toggleLock={this.toggleLock.bind(msg)}/>)}
+              {gameArray.map((msg, i) =>
+                <GameRequest
+                  key={i}
+                  msg={msg}
+                  metadata={this.state.messages[msg]}
+                  onDelete={this.removeGame}
+                  toggleLock={this.toggleLock.bind(msg)}
+                  getActivity={this.chatActivity.getStatus}
+              />)}
             </div>
           </div>
         </column>

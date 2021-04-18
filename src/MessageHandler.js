@@ -64,6 +64,7 @@ export default class MessageHandler extends Component {
 
   onMessage = (target, tags, msg, self) => {
     if(self) return;
+    this.props.onMessage(msg, tags.username, tags)
     const game = this.filterGameCommands(msg, tags.username);
     if (!game) return;
 
@@ -84,7 +85,7 @@ export default class MessageHandler extends Component {
       if(this.props.channel === tags.username) {
         this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
       } else {
-        this.removeGame(prevGame);
+        this.props.onDelete(prevGame);
         this.sendMessage(`/me @${tags.username}, your previous request of ${prevGame} has been replaced with ${game}.`);
       }
     } else {

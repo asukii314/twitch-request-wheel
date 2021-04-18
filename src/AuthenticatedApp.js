@@ -69,7 +69,7 @@ class AuthenticatedApp extends Component {
   render() {
     return (
       <div>
-        {this.state.failed_login && this.props.location.pathname != "/gamelist"
+        {this.state.failed_login && this.props.location.pathname !== "/gamelist"
           ? <Redirect to="/login" />
           : this.state.username && <MainScreen channel={this.state.username} access_token={this.state.access_token} />}
       </div>

@@ -14,3 +14,32 @@
   font-size: 11px;
   padding: 3px 5px;
 }
+
+.tooltip {
+  display: flex;
+  align-items: center;
+}
+
+.tooltipText {
+  margin: 0;
+}
+
+.status {
+  width: 8px;
+  height: 8px;
+  border-radius: 5px;
+  margin-left: 6px;
+  margin-top: 3px;
+}
+
+.status.active {
+    background-color: green;
+}
+
+.status.idle {
+    background-color: yellow;
+}
+
+.status.disconnected {
+  background-color: darkgrey;
+}
