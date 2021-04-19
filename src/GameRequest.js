@@ -45,6 +45,8 @@ export default class GameRequest extends Component {
       case ActivityStatus.DISCONNECTED:
         statusClass = "disconnected";
         break;
+      default:
+        break;
     }
 
     return (`
