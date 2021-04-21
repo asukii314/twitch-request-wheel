@@ -85,7 +85,7 @@ export default class MainScreen extends Component {
       let msg = "";
       switch(status) {
         case ActivityStatus.DISCONNECTED:
-          msg = `${game} just won the spin, but it doesn't seem like @${requester} is still around. (But please speak up if I got that wrong!) Would anyone else want to play?`
+          msg = `${game} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
           break;
 
         case ActivityStatus.ACTIVE:
@@ -152,6 +152,7 @@ export default class MainScreen extends Component {
           access_token={this.props.access_token}
           onMessage={this.onMessage}
           onDelete={this.removeGame}
+          nextGame={this.state.history[this.state.nextGameIdx]}
           ref={(mh) => this.messageHandler = mh}
         />
         <column width="50vw">
