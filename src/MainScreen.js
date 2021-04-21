@@ -18,8 +18,29 @@ export default class MainScreen extends Component {
       messages: {},
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
       counter: 0,
-      history: []
+      history: [],
+      nextGameIdx: 0
     };
+  }
+
+  moveNextGameFwd = () => {
+    if(this.state.nextGameIdx === this.state.history.length) return;
+    this.setState((state) => {
+      return {
+        ...this.state,
+        nextGameIdx: state.nextGameIdx+1
+      }
+    })
+  }
+
+  moveNextGameBack = () => {
+    if(this.state.nextGameIdx <= 0) return;
+    this.setState((state) => {
+      return {
+        ...this.state,
+        nextGameIdx: state.nextGameIdx-1
+      }
+    })
   }
 
   addGame  = (game, user) => {
@@ -137,7 +158,12 @@ export default class MainScreen extends Component {
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
           <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
-          <Sidebar history={this.state.history}/>
+          <Sidebar
+            history={this.state.history}
+            nextGameIdx={this.state.nextGameIdx}
+            moveNextGameFwd={this.moveNextGameFwd}
+            moveNextGameBack={this.moveNextGameBack}
+          />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
               {gameArray.map((msg, i) =>
                 <GameRequest
