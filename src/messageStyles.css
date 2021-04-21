@@ -4,6 +4,17 @@
   box-shadow: inset 1px 1px 40px 0 rgba(0, 0, 0, 0.45);
   background-size: cover;
   border-radius: 5px;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+#baseDiv.chosen {
+  background-color: greenyellow;
+  color: black;
+}
+
+#baseDiv.pending {
+  background-color: steelblue;
 }
 
 .deleteButton {

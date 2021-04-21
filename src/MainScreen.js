@@ -3,7 +3,7 @@ import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
-import ChatActivity from './ChatActivity';
+import ChatActivity, { ActivityStatus } from './ChatActivity';
 const randomColor = require('randomcolor');
 
 const column = function(width) {
@@ -18,8 +18,29 @@ export default class MainScreen extends Component {
       messages: {},
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
       counter: 0,
-      history: []
+      history: [],
+      nextGameIdx: 0
     };
+  }
+
+  moveNextGameFwd = () => {
+    if(this.state.nextGameIdx === this.state.history.length) return;
+    this.setState((state) => {
+      return {
+        ...this.state,
+        nextGameIdx: state.nextGameIdx+1
+      }
+    })
+  }
+
+  moveNextGameBack = () => {
+    if(this.state.nextGameIdx <= 0) return;
+    this.setState((state) => {
+      return {
+        ...this.state,
+        nextGameIdx: state.nextGameIdx-1
+      }
+    })
   }
 
   addGame  = (game, user) => {
@@ -31,7 +52,8 @@ export default class MainScreen extends Component {
           [game]: {
             username: user,
             time: Date.now(),
-            locked: false
+            locked: false,
+            chosen: false
           }
         },
         counter: this.state.counter + 1
@@ -56,20 +78,51 @@ export default class MainScreen extends Component {
 
   onGameChosen = (game) => {
     if(Object.keys(this.state.messages).length === 0) return;
-    if(!this.state.messages[game].locked) {
-      setTimeout(() => {
-        this.removeGame(game, true);
-      }, 2500);
-    }
+
+    // send confirmation message in chat
+    const requester = this.state.messages[game].username;
+    this.chatActivity.getStatusPromise(requester).then((status) => {
+      let msg = "";
+      switch(status) {
+        case ActivityStatus.DISCONNECTED:
+          msg = `${game} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
+          break;
+
+        case ActivityStatus.ACTIVE:
+          msg = `@${requester}, good news - ${game} just won the spin!`;
+          break;
+
+        case ActivityStatus.IDLE:
+        default:
+          msg += `@${requester}, good news - ${game} just won the spin! (I hope you're still around!)`;
+        }
+        this.messageHandler.sendMessage(msg);
+    })
+
+    // update history + game card highlight color
     this.setState((state) => {
       return {
         ...state,
         history: [
           ...this.state.history,
           game
-        ]
-      };
+        ],
+        messages: {
+          ...state.messages,
+          [game]: {
+            ...state.messages[game],
+            chosen: true
+          }
+        }
+      }
     })
+
+    // remove card unless it's locked
+    if(!this.state.messages[game].locked) {
+      setTimeout(() => {
+        this.removeGame(game, true);
+      }, 2500);
+    }
   }
 
   removeGame = (game) => {
@@ -99,12 +152,19 @@ export default class MainScreen extends Component {
           access_token={this.props.access_token}
           onMessage={this.onMessage}
           onDelete={this.removeGame}
+          nextGame={this.state.history[this.state.nextGameIdx]}
+          ref={(mh) => this.messageHandler = mh}
         />
         <column width="50vw">
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
           <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
-          <Sidebar history={this.state.history}/>
+          <Sidebar
+            history={this.state.history}
+            nextGameIdx={this.state.nextGameIdx}
+            moveNextGameFwd={this.moveNextGameFwd}
+            moveNextGameBack={this.moveNextGameBack}
+          />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
               {gameArray.map((msg, i) =>
                 <GameRequest
@@ -113,7 +173,7 @@ export default class MainScreen extends Component {
                   metadata={this.state.messages[msg]}
                   onDelete={this.removeGame}
                   toggleLock={this.toggleLock.bind(msg)}
-                  getActivity={this.chatActivity.getStatus}
+                  getActivity={this.chatActivity.getStatusPromise}
               />)}
             </div>
           </div>

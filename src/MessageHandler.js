@@ -42,8 +42,8 @@ export default class MessageHandler extends Component {
       })
     }
 
-  filterGameCommands = (message, username) => {
-    if(message.trim() === "!gamelist") {
+  checkForGameCommand = (message, username) => {
+    if(message === "!gamelist") {
       this.sendMessage(`/me @${username}, click here for a list of valid Jackbox games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
     }
     if(!message.startsWith(GAME_REQUEST_COMMAND)) return;
@@ -65,7 +65,18 @@ export default class MessageHandler extends Component {
   onMessage = (target, tags, msg, self) => {
     if(self) return;
     this.props.onMessage(msg, tags.username, tags)
-    const game = this.filterGameCommands(msg, tags.username);
+
+    if(msg.trim() === "!nextgame") {
+      if(this.props.nextGame) {
+        this.sendMessage(`/me @${tags.username}, unless someone requested a different one with channel points, the next game up is ${this.props.nextGame}!`)
+      } else {
+        this.sendMessage(`/me @${tags.username}, the next game hasn't been decided yet (unless someone requested one with channel points)!`)
+      }
+
+      return;
+    }
+
+    const game = this.checkForGameCommand(msg.trim(), tags.username);
     if (!game) return;
 
     if(this.props.messages[game]) {
