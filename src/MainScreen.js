@@ -143,6 +143,11 @@ export default class MainScreen extends Component {
 
   render() {
     const gameArray = Object.keys(this.state.messages);
+    let logOutBtn;
+    if (typeof this.props.onLogout === 'function') {
+        logOutBtn = (<button style={{position: 'absolute', top: 0, right: 0, backgroundColor: 'darkcyan', borderRadius: '5px', marginTop: 0, paddingBottom: '5px', paddingTop: '5px', color: '#fff'}} onClick={this.props.onLogout}>Logout &#10151;</button>);
+    }
+
     return (
       <div style={{display: 'flex'}}>
         <MessageHandler
@@ -195,6 +200,7 @@ export default class MainScreen extends Component {
           {/*  <Modal/>*/}
           </div>
         </column>
+        {logOutBtn}
       </div>
     )
   }
