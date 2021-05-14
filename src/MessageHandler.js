@@ -43,12 +43,17 @@ export default class MessageHandler extends Component {
     }
 
   checkForGameCommand = (message, username) => {
-    if(message === "!gamelist") {
+    if(message === "!gamelist" || message === "!gameslist") {
       this.sendMessage(`/me @${username}, click here for a list of valid Jackbox games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
     }
     if(!message.startsWith(GAME_REQUEST_COMMAND)) return;
 
-    const requestedGame = message.replace(GAME_REQUEST_COMMAND, "").trim().toLowerCase();
+    const requestedGame = message.replace(GAME_REQUEST_COMMAND, "").trim();
+
+    if(requestedGame === "") {
+      this.sendMessage(`/me @${username}, please specify the game you would like to request: for example, !request TMP 2`);
+      return null;
+    }
 
     for(let partyPackName in this.state.validGames) {
       const partyPack = this.state.validGames[partyPackName]
@@ -67,8 +72,16 @@ export default class MessageHandler extends Component {
     this.props.onMessage(msg, tags.username, tags)
 
     if(msg.trim() === "!nextgame") {
-      if(this.props.nextGame) {
-        this.sendMessage(`/me @${tags.username}, unless someone requested a different one with channel points, the next game up is ${this.props.nextGame}!`)
+      console.log(this.props.upcomingGames)
+      if(this.props.upcomingGames && this.props.upcomingGames.length > 0) {
+        let upcoming = this.props.upcomingGames[0];
+        if(this.props.upcomingGames.length > 1) {
+          upcoming += `, followed by ${this.props.upcomingGames[1]}`
+          for(let i = 2; i < this.props.upcomingGames.length; i++) {
+            upcoming += ` and ${this.props.upcomingGames[i]}`
+          }
+        }
+        this.sendMessage(`/me @${tags.username}, unless someone requested a different one with channel points, the next game up is ${upcoming}!`)
       } else {
         this.sendMessage(`/me @${tags.username}, the next game hasn't been decided yet (unless someone requested one with channel points)!`)
       }
@@ -76,7 +89,7 @@ export default class MessageHandler extends Component {
       return;
     }
 
-    const game = this.checkForGameCommand(msg.trim(), tags.username);
+    const game = this.checkForGameCommand(msg.trim().toLowerCase(), tags.username);
     if (!game) return;
 
     if(this.props.messages[game]) {

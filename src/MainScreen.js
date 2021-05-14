@@ -154,7 +154,7 @@ export default class MainScreen extends Component {
           access_token={this.props.access_token}
           onMessage={this.onMessage}
           onDelete={this.removeGame}
-          nextGame={this.state.history[this.state.nextGameIdx]}
+          upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
           ref={(mh) => this.messageHandler = mh}
         />
         <div width="50vw">
