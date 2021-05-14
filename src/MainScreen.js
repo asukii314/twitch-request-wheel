@@ -6,9 +6,6 @@ import Sidebar from './Sidebar'
 import ChatActivity, { ActivityStatus } from './ChatActivity';
 const randomColor = require('randomcolor');
 
-const column = function(width) {
-  return (<div style={{float:'left', width:width}} />);
-}
 
 export default class MainScreen extends Component {
   constructor(props){
@@ -143,6 +140,11 @@ export default class MainScreen extends Component {
 
   render() {
     const gameArray = Object.keys(this.state.messages);
+    let logOutBtn;
+    if (typeof this.props.onLogout === 'function') {
+        logOutBtn = (<button style={{position: 'absolute', top: 0, right: 0, backgroundColor: 'darkcyan', borderRadius: '5px', marginTop: 0, paddingBottom: '5px', paddingTop: '5px', color: '#fff'}} onClick={this.props.onLogout}>Logout &#10151;</button>);
+    }
+
     return (
       <div style={{display: 'flex'}}>
         <MessageHandler
@@ -155,7 +157,7 @@ export default class MainScreen extends Component {
           nextGame={this.state.history[this.state.nextGameIdx]}
           ref={(mh) => this.messageHandler = mh}
         />
-        <column width="50vw">
+        <div width="50vw">
           <h2 style={{marginBottom:"0"}}>Game Requests</h2>
           <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
@@ -177,8 +179,8 @@ export default class MainScreen extends Component {
               />)}
             </div>
           </div>
-        </column>
-        <column width="50vw" style={{textTransform: 'capitalize'}}>
+        </div>
+        <div width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
             <WheelComponent
               key={this.state.counter}
@@ -194,7 +196,8 @@ export default class MainScreen extends Component {
             />
           {/*  <Modal/>*/}
           </div>
-        </column>
+        </div>
+        {logOutBtn}
       </div>
     )
   }

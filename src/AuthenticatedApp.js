@@ -9,12 +9,63 @@ class AuthenticatedApp extends Component {
   constructor(){
     super();
     this.state = {
-      username: "",
-      access_token: "",
+      username: localStorage.getItem('__username'),
+      access_token: localStorage.getItem('__access_token'),
       failed_login: false
     }
+    this.getAuth = this.getAuth.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
-  async componentDidMount() {
+  componentDidMount() {
+      if (!this.state.access_token) {
+          return this.getAuth();
+      }
+      fetch('https://api.twitch.tv/helix/users', {
+        headers: {
+          'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
+          Authorization: `Bearer ${this.state.access_token}`
+        }
+      })
+      .then(r => r.json())
+      .then(userInfo => {
+        //console.log(userInfo); //login [aka lowercase username?], display_name, profile_image_url, description
+
+        localStorage.setItem('__username', userInfo.data[0].login);
+        this.setState((state) => {
+          return {
+            ...state,
+            username: userInfo.data[0].login,
+          };
+        })
+      })
+      .catch(e => this.getAuth)
+  }
+
+  logOut() {
+      localStorage.removeItem('__username');
+      localStorage.removeItem('__access_token');
+      fetch('https://id.twitch.tv/oauth2/revoke?' + new URLSearchParams({
+        client_id: process.env.REACT_APP_TWITCH_CLIENT_ID,
+        token: this.state.access_token,
+        redirect_uri: process.env.REACT_APP_REDIRECT_URI_NOENCODE
+      }), {
+        method: 'POST',
+        headers: {
+          Accept: 'application/vnd.twitchtv.v5+json'
+        }
+      })
+      .then(() => {
+          window.location.reload();
+      });
+  }
+
+  async getAuth(e) {
+      if (e) {
+          console.error(e);
+      }
+      localStorage.removeItem('__username');
+      localStorage.removeItem('__access_token');
+
     const queryParams = queryString.parse(this.props.location.search);
     await fetch('https://id.twitch.tv/oauth2/token?' + new URLSearchParams({
       grant_type: 'authorization_code',
@@ -40,6 +91,7 @@ class AuthenticatedApp extends Component {
         return;
       }
 
+      localStorage.setItem('__access_token', oauth.access_token);
       this.setState((state) => {
         return {
           ...state,
@@ -56,6 +108,7 @@ class AuthenticatedApp extends Component {
       .then(r => r.json())
       .then(userInfo => {
         //console.log(userInfo); //login [aka lowercase username?], display_name, profile_image_url, description
+        localStorage.setItem('__username', userInfo.data[0].login);
         this.setState((state) => {
           return {
             ...state,
@@ -71,7 +124,7 @@ class AuthenticatedApp extends Component {
       <div>
         {this.state.failed_login && this.props.location.pathname !== "/gamelist"
           ? <Redirect to="/login" />
-          : this.state.username && <MainScreen channel={this.state.username} access_token={this.state.access_token} />}
+      : this.state.username && <MainScreen channel={this.state.username} access_token={this.state.access_token} onLogout={this.logOut} />}
       </div>
     )
   }
