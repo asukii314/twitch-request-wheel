@@ -2,6 +2,7 @@
   "name": "twitch-bot",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://asukii314.github.io/twitch-request-wheel",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
