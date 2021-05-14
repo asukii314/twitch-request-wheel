@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/twitch-request-wheel/static/css/main.46efcf31.chunk.css",
-    "main.js": "/twitch-request-wheel/static/js/main.15a98401.chunk.js",
-    "main.js.map": "/twitch-request-wheel/static/js/main.15a98401.chunk.js.map",
-    "runtime-main.js": "/twitch-request-wheel/static/js/runtime-main.4eb0bd35.js",
-    "runtime-main.js.map": "/twitch-request-wheel/static/js/runtime-main.4eb0bd35.js.map",
-    "static/js/2.e4e54328.chunk.js": "/twitch-request-wheel/static/js/2.e4e54328.chunk.js",
-    "static/js/2.e4e54328.chunk.js.map": "/twitch-request-wheel/static/js/2.e4e54328.chunk.js.map",
-    "static/js/3.5d2d698c.chunk.js": "/twitch-request-wheel/static/js/3.5d2d698c.chunk.js",
-    "static/js/3.5d2d698c.chunk.js.map": "/twitch-request-wheel/static/js/3.5d2d698c.chunk.js.map",
-    "index.html": "/twitch-request-wheel/index.html",
-    "static/css/main.46efcf31.chunk.css.map": "/twitch-request-wheel/static/css/main.46efcf31.chunk.css.map",
-    "static/js/2.e4e54328.chunk.js.LICENSE.txt": "/twitch-request-wheel/static/js/2.e4e54328.chunk.js.LICENSE.txt",
-    "static/media/JackboxGames.c3767761.yaml": "/twitch-request-wheel/static/media/JackboxGames.c3767761.yaml",
-    "static/media/lock.6857c469.svg": "/twitch-request-wheel/static/media/lock.6857c469.svg"
+    "main.css": "/static/css/main.46efcf31.chunk.css",
+    "main.js": "/static/js/main.bc590cbc.chunk.js",
+    "main.js.map": "/static/js/main.bc590cbc.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a2473e44.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a2473e44.js.map",
+    "static/js/2.c30f0c9d.chunk.js": "/static/js/2.c30f0c9d.chunk.js",
+    "static/js/2.c30f0c9d.chunk.js.map": "/static/js/2.c30f0c9d.chunk.js.map",
+    "static/js/3.4e9cccd6.chunk.js": "/static/js/3.4e9cccd6.chunk.js",
+    "static/js/3.4e9cccd6.chunk.js.map": "/static/js/3.4e9cccd6.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.46efcf31.chunk.css.map": "/static/css/main.46efcf31.chunk.css.map",
+    "static/js/2.c30f0c9d.chunk.js.LICENSE.txt": "/static/js/2.c30f0c9d.chunk.js.LICENSE.txt",
+    "static/media/JackboxGames.6e3cb11a.yaml": "/static/media/JackboxGames.6e3cb11a.yaml",
+    "static/media/lock.6857c469.svg": "/static/media/lock.6857c469.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4eb0bd35.js",
-    "static/js/2.e4e54328.chunk.js",
+    "static/js/runtime-main.a2473e44.js",
+    "static/js/2.c30f0c9d.chunk.js",
     "static/css/main.46efcf31.chunk.css",
-    "static/js/main.15a98401.chunk.js"
+    "static/js/main.bc590cbc.chunk.js"
   ]
 }
