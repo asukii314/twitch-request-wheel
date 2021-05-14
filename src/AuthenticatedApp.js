@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import MainScreen from './MainScreen';
+import JackboxGameList from './JackboxGameList';
 import { Redirect, withRouter } from "react-router-dom";
 import queryString from 'query-string'
 const fetch = require('node-fetch');
@@ -122,9 +123,10 @@ class AuthenticatedApp extends Component {
   render() {
     return (
       <div>
+        {this.props.location.pathname === "/gamelist" && <JackboxGameList /> }
         {this.state.failed_login && this.props.location.pathname !== "/gamelist"
           ? <Redirect to="/login" />
-      : this.state.username && <MainScreen channel={this.state.username} access_token={this.state.access_token} onLogout={this.logOut} />}
+          : this.state.username && <MainScreen channel={this.state.username} access_token={this.state.access_token} onLogout={this.logOut} />}
       </div>
     )
   }

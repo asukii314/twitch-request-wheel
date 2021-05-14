@@ -24,7 +24,6 @@ const PartyPackCard = function (props) {
 // <p> {props.gameName} <p>
 
 const GameCard = function(props) {
-  console.log(props.possibleMatches);
   return (
     <div>
       <p className="gameName">{props.gameName} </p>
@@ -60,7 +59,6 @@ export default class JackboxGameList extends Component {
 
     render() {
       const partyPackList = Object.keys(this.state.validGames);
-      console.log(partyPackList);
       return (
         <div className="partyPackList">
           {partyPackList.map((partyPackName, i) =>
