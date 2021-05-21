@@ -130,9 +130,9 @@ export default class MessageHandler extends Component {
             upcoming += ` and ${this.props.upcomingGames[i].gameName}`
           }
         }
-        this.sendMessage(`/me @${tags.username}, unless someone requested a different one with channel points, the next game up is ${upcoming}!`)
+        this.sendMessage(`/me @${tags.username}, the next game up is ${upcoming}!`)
       } else {
-        this.sendMessage(`/me @${tags.username}, the next game hasn't been decided yet (unless someone requested one with channel points)!`)
+        this.sendMessage(`/me @${tags.username}, the next game hasn't been decided yet - feel free to !request one :)`)
       }
 
       return;
