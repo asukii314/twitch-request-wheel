@@ -50,6 +50,20 @@ export default class MessageHandler extends Component {
       return true;
     }
 
+    //========= advance next game =========
+    if(message === "!advancenextgame") {
+      if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
+        this.sendMessage(`/me @${username}, only channel moderators can use the !setNextGame command.`);
+        return true;
+      }
+      if(this.props.advanceNextGame()) {
+        this.sendMessage(`/me @${username}, the next game has been advanced to ${this.props.upcomingGames[0].gameName}.`);
+      } else {
+        this.sendMessage(`/me @${username}, there are no more games in the queue to advance to!`);
+      }
+      return true;
+    }
+
     //========= set next game =========
     if(message.startsWith("!setnextgame")) {
       if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){

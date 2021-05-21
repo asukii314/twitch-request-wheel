@@ -21,13 +21,14 @@ export default class MainScreen extends Component {
   }
 
   moveNextGameFwd = () => {
-    if(this.state.nextGameIdx === this.state.history.length) return;
+    if(this.state.nextGameIdx === this.state.history.length) return false;
     this.setState((state) => {
       return {
         ...this.state,
         nextGameIdx: state.nextGameIdx+1
       }
     })
+    return true;
   }
 
   moveNextGameBack = () => {
@@ -185,6 +186,7 @@ export default class MainScreen extends Component {
         <MessageHandler
           addGameRequest={this.addGameRequest}
           setNextGame={this.setNextGame}
+          advanceNextGame={this.moveNextGameFwd}
           messages={this.state.messages}
           channel={this.props.channel}
           modList={this.props.modList}
