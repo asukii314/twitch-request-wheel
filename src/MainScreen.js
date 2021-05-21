@@ -73,7 +73,35 @@ export default class MainScreen extends Component {
     });
   }
 
-  addGameToQueue = (gameName, override=false) => {
+  // @return: the number of games ahead of this one, after successfully inserting in queue
+  // (i.e. if it's the very next game, return 0; if there's one ahead, return 1; etc)
+  setNextGame = (gameName) => {
+    let idx = this.state.nextGameIdx;
+
+    // insert next game at next up position by default, but
+    //    *after* any other manually inserted games
+    while(idx < this.state.history.length && this.state.history[idx]?.override) {
+      idx++;
+    }
+
+    this.setState((state) => {
+      return {
+        ...state,
+        history: [
+          ...state.history.slice(0, Math.max(0, idx)),
+          {
+            gameName,
+            override: true
+          },
+          ...state.history.slice(idx)
+        ]
+      }
+    })
+
+    return idx - this.state.nextGameIdx;
+  }
+
+  addGameToQueue = (gameName) => {
     // update history + game card highlight color
     this.setState((state) => {
       return {
@@ -82,7 +110,7 @@ export default class MainScreen extends Component {
           ...this.state.history,
           {
             gameName,
-            override
+            override: false
           }
         ],
         messages: {
@@ -156,8 +184,10 @@ export default class MainScreen extends Component {
       <div style={{display: 'flex'}}>
         <MessageHandler
           addGameRequest={this.addGameRequest}
+          setNextGame={this.setNextGame}
           messages={this.state.messages}
           channel={this.props.channel}
+          modList={this.props.modList}
           access_token={this.props.access_token}
           onMessage={this.onMessage}
           onDelete={this.removeGame}

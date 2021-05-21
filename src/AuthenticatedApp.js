@@ -32,11 +32,22 @@ class AuthenticatedApp extends Component {
         //console.log(userInfo); //login [aka lowercase username?], display_name, profile_image_url, description
 
         localStorage.setItem('__username', userInfo.data[0].login);
-        this.setState((state) => {
-          return {
-            ...state,
-            username: userInfo.data[0].login,
-          };
+        return fetch(`https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=${userInfo.data[0].id}`, {
+          headers: {
+            'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
+            Authorization: `Bearer ${this.state.access_token}`
+          }
+        })
+        .then(r => r.json())
+        .then(modInfo => {
+          const modList = modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
+          this.setState((state) => {
+            return {
+              ...state,
+              username: userInfo.data[0].login,
+              modList
+            };
+          })
         })
       })
       .catch(e => this.getAuth)
@@ -110,11 +121,22 @@ class AuthenticatedApp extends Component {
       .then(userInfo => {
         //console.log(userInfo); //login [aka lowercase username?], display_name, profile_image_url, description
         localStorage.setItem('__username', userInfo.data[0].login);
-        this.setState((state) => {
-          return {
-            ...state,
-            username: userInfo.data[0].login,
-          };
+        return fetch(`https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=${userInfo.data[0].id}`, {
+          headers: {
+            'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
+            Authorization: `Bearer ${this.state.access_token}`
+          }
+        })
+        .then(r => r.json())
+        .then(modInfo => {
+          const modList = modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
+          this.setState((state) => {
+            return {
+              ...state,
+              username: userInfo.data[0].login,
+              modList
+            };
+          })
         })
       })
     })
@@ -126,7 +148,12 @@ class AuthenticatedApp extends Component {
         {this.props.location.pathname === "/gamelist" && <JackboxGameList /> }
         {this.state.failed_login && this.props.location.pathname !== "/gamelist"
           ? <Redirect to="/login" />
-          : this.state.username && <MainScreen channel={this.state.username} access_token={this.state.access_token} onLogout={this.logOut} />}
+          : this.state.username && <MainScreen
+                                      channel={this.state.username}
+                                      modList={this.state.modList}
+                                      access_token={this.state.access_token}
+                                      onLogout={this.logOut}
+                                    />}
       </div>
     )
   }
