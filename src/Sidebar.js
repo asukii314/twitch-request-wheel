@@ -10,9 +10,9 @@ export default class Sidebar extends Component {
 
   printGame = (idx) => {
     if(idx === this.props.nextGameIdx) {
-      return (<b style={{color:'aquamarine'}}>{this.props.history[idx]}</b>)
+      return (<b style={{color:'aquamarine'}}>{this.props.history[idx].gameName}</b>)
     } else {
-      return this.props.history[idx]
+      return this.props.history[idx].gameName
     }
   }
 
@@ -22,7 +22,7 @@ export default class Sidebar extends Component {
         <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '1px', marginBottom: '10px'}}>
           <p style={{fontSize: "14px", fontWeight: "700", height: '70px', padding: '8px'}}> Up Next:
             {this.props.history.length > this.props.nextGameIdx
-               ? <p>{this.props.history[this.props.nextGameIdx]}</p>
+               ? <p>{this.props.history[this.props.nextGameIdx].gameName}</p>
                : <p>not yet decided</p>}
           </p>
         </div>

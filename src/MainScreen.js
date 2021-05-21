@@ -40,6 +40,7 @@ export default class MainScreen extends Component {
     })
   }
 
+  // add game REQUEST, not adding an actual chosen game to the queue
   addGame  = (game, user) => {
     this.setState((state) => {
       return {
@@ -73,7 +74,30 @@ export default class MainScreen extends Component {
     });
   }
 
-  onGameChosen = (game) => {
+  addGameToQueue = (gameName, override=false) => {
+    // update history + game card highlight color
+    this.setState((state) => {
+      return {
+        ...state,
+        history: [
+          ...this.state.history,
+          {
+            gameName,
+            override
+          }
+        ],
+        messages: {
+          ...state.messages,
+          [gameName]: {
+            ...state.messages[gameName],
+            chosen: true
+          }
+        }
+      }
+    })
+  }
+
+  onWheelSpun = (game) => {
     if(Object.keys(this.state.messages).length === 0) return;
 
     // send confirmation message in chat
@@ -96,23 +120,7 @@ export default class MainScreen extends Component {
         this.messageHandler.sendMessage(msg);
     })
 
-    // update history + game card highlight color
-    this.setState((state) => {
-      return {
-        ...state,
-        history: [
-          ...this.state.history,
-          game
-        ],
-        messages: {
-          ...state.messages,
-          [game]: {
-            ...state.messages[game],
-            chosen: true
-          }
-        }
-      }
-    })
+    this.addGameToQueue(game);
 
     // remove card unless it's locked
     if(!this.state.messages[game].locked) {
@@ -186,7 +194,7 @@ export default class MainScreen extends Component {
               key={this.state.counter}
               segments={gameArray}
               segColors={this.state.colors}
-              onFinished={this.onGameChosen}
+              onFinished={this.onWheelSpun}
               isOnlyOnce={false}
               size={250}
               upDuration={100}

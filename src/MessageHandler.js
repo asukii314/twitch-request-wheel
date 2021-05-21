@@ -72,13 +72,12 @@ export default class MessageHandler extends Component {
     this.props.onMessage(msg, tags.username, tags)
 
     if(msg.trim() === "!nextgame") {
-      console.log(this.props.upcomingGames)
       if(this.props.upcomingGames && this.props.upcomingGames.length > 0) {
-        let upcoming = this.props.upcomingGames[0];
+        let upcoming = this.props.upcomingGames[0].gameName;
         if(this.props.upcomingGames.length > 1) {
-          upcoming += `, followed by ${this.props.upcomingGames[1]}`
+          upcoming += `, followed by ${this.props.upcomingGames[1].gameName}`
           for(let i = 2; i < this.props.upcomingGames.length; i++) {
-            upcoming += ` and ${this.props.upcomingGames[i]}`
+            upcoming += ` and ${this.props.upcomingGames[i].gameName}`
           }
         }
         this.sendMessage(`/me @${tags.username}, unless someone requested a different one with channel points, the next game up is ${upcoming}!`)
