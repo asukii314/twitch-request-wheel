@@ -40,8 +40,7 @@ export default class MainScreen extends Component {
     })
   }
 
-  // add game REQUEST, not adding an actual chosen game to the queue
-  addGame  = (game, user) => {
+  addGameRequest  = (game, user) => {
     this.setState((state) => {
       return {
         ...state,
@@ -156,7 +155,7 @@ export default class MainScreen extends Component {
     return (
       <div style={{display: 'flex'}}>
         <MessageHandler
-          addGame={this.addGame}
+          addGameRequest={this.addGameRequest}
           messages={this.state.messages}
           channel={this.props.channel}
           access_token={this.props.access_token}

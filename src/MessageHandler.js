@@ -115,7 +115,7 @@ export default class MessageHandler extends Component {
       this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue.`);
     }
 
-    this.props.addGame(game, tags.username);
+    this.props.addGameRequest(game, tags.username);
   }
 
   sendMessage = (msg) => {
