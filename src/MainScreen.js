@@ -3,6 +3,7 @@ import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
+import PlayerSelectModal from './PlayerSelectModal';
 import ChatActivity, { ActivityStatus } from './ChatActivity';
 const randomColor = require('randomcolor');
 
@@ -16,7 +17,8 @@ export default class MainScreen extends Component {
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
       counter: 0,
       history: [],
-      nextGameIdx: 0
+      nextGameIdx: 0,
+      showPlayerSelectModal: false
     };
   }
 
@@ -174,8 +176,13 @@ export default class MainScreen extends Component {
     this.chatActivity.updateLastMessageTime(user);
   }
 
-  selectPlayers = () => {
-    console.log("SP")
+  togglePlayerSelect = () => {
+    this.setState((state) => {
+      return {
+        ...state,
+        showPlayerSelectModal: !state.showPlayerSelectModal
+      }
+    })
   }
 
   render() {
@@ -209,7 +216,7 @@ export default class MainScreen extends Component {
             nextGameIdx={this.state.nextGameIdx}
             moveNextGameFwd={this.moveNextGameFwd}
             moveNextGameBack={this.moveNextGameBack}
-            selectPlayers={this.selectPlayers}
+            selectPlayers={this.togglePlayerSelect}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
               {gameArray.map((msg, i) =>
@@ -226,7 +233,8 @@ export default class MainScreen extends Component {
         </div>
         <div width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
-            <WheelComponent
+            {this.state.showPlayerSelectModal && <PlayerSelectModal />}
+            {!this.state.showPlayerSelectModal && <WheelComponent
               key={this.state.counter}
               segments={gameArray}
               segColors={this.state.colors}
@@ -237,7 +245,7 @@ export default class MainScreen extends Component {
               downDuration={1000}
               primaryColor={"white"}
               contrastColor={"black"}
-            />
+            />}
           {/*  <Modal/>*/}
           </div>
         </div>
