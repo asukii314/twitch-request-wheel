@@ -53,7 +53,7 @@ export default class MessageHandler extends Component {
     //========= advance next game =========
     if(message === "!advancenextgame") {
       if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
-        this.sendMessage(`/me @${username}, only channel moderators can use the !setNextGame command.`);
+        this.sendMessage(`/me @${username}, only channel moderators can use the !advanceNextGame command.`);
         return true;
       }
       if(this.props.advanceNextGame()) {
@@ -65,15 +65,15 @@ export default class MessageHandler extends Component {
     }
 
     //========= set next game =========
-    if(message.startsWith("!setnextgame")) {
+    if(message.startsWith("!setnextgame") || message.startsWith("!redeem")) {
       if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
-        this.sendMessage(`/me @${username}, only channel moderators can use the !setNextGame command.`);
+        this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!s") ? "!setNextGame" : "!redeem"} command.`);
         return true;
       }
 
-      const requestedGame = message.replace("!setnextgame", "").trim();
+      const requestedGame = message.replace("!setnextgame", "").replace("!redeem", "").trim();
       if(requestedGame === "") {
-        this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, !setNextGame TMP 2`);
+        this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, ${message.startsWith("!s") ? "!setNextGame" : "!redeem"} TMP 2`);
         return true;
       }
 
