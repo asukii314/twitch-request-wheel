@@ -16,14 +16,28 @@ export default class Sidebar extends Component {
     }
   }
 
+  hasNextGame = () => {
+    return this.props.history.length > this.props.nextGameIdx;
+  }
+
+  getNextGameName = () => {
+    return this.hasNextGame()
+      ? this.props.history[this.props.nextGameIdx].gameName
+      : "not yet decided"
+  }
+
+
   render() {
     return (
       <div style={{marginLeft: "12px", width: "33%", textTransform: 'capitalize'}}>
         <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '1px', marginBottom: '10px'}}>
-          <p style={{fontSize: "14px", fontWeight: "700", height: '70px', padding: '8px'}}> Up Next:
-            {this.props.history.length > this.props.nextGameIdx
-               ? <p>{this.props.history[this.props.nextGameIdx].gameName}</p>
-               : <p>not yet decided</p>}
+          <p style={{fontSize: "14px", fontWeight: "700", height: '100px', padding: '8px'}}> Up Next:
+            <p>{this.getNextGameName()}</p>
+            <button disabled={!this.hasNextGame()} onClick={this.props.selectPlayers} style={{fontSize: "12px", padding: "5px", backgroundColor: "aquamarine", color: "black", borderRadius: "5px", width: "90%"}}>
+              {this.hasNextGame()
+                  ? <b>SELECT PLAYERS</b>
+                  : <i style={{color: "gray"}}>SELECT PLAYERS</i>}
+            </button>
           </p>
         </div>
 

@@ -174,6 +174,10 @@ export default class MainScreen extends Component {
     this.chatActivity.updateLastMessageTime(user);
   }
 
+  selectPlayers = () => {
+    console.log("SP")
+  }
+
   render() {
     const gameArray = Object.keys(this.state.messages);
     let logOutBtn;
@@ -205,6 +209,7 @@ export default class MainScreen extends Component {
             nextGameIdx={this.state.nextGameIdx}
             moveNextGameFwd={this.moveNextGameFwd}
             moveNextGameBack={this.moveNextGameBack}
+            selectPlayers={this.selectPlayers}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
               {gameArray.map((msg, i) =>
