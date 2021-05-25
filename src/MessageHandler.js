@@ -45,21 +45,39 @@ export default class MessageHandler extends Component {
   // returns true iff a known command was found & responded to
   checkForMiscCommands = (message, username) => {
     //========= game list =========
-    if(message === "!gamelist" || message === "!gameslist") {
+    if(message.startsWith("!gamelist") || message.startsWith("!gameslist")) {
       this.sendMessage(`/me @${username}, click here for a list of valid Jackbox games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
       return true;
     }
 
     //========= advance next game =========
-    if(message === "!advancenextgame") {
+    if(message === "!advancenextgame" || message === "!nextgamefwd" || message === "!nextgameforward") {
       if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
-        this.sendMessage(`/me @${username}, only channel moderators can use the !advanceNextGame command.`);
+        this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
         return true;
       }
-      if(this.props.advanceNextGame()) {
-        this.sendMessage(`/me @${username}, the next game has been advanced to ${this.props.upcomingGames[0].gameName}.`);
+      if(this.props.changeNextGameIdx(1)) {
+        if(this.props.upcomingGames.length > 0) {
+          this.sendMessage(`/me @${username}, the next game has been changed to ${this.props.upcomingGames[0].gameName}.`);
+        } else {
+          this.sendMessage(`/me @${username}, the next game has been marked as "TBD".`);
+        }
       } else {
         this.sendMessage(`/me @${username}, there are no more games in the queue to advance to!`);
+      }
+      return true;
+    }
+
+    //========= advance next game =========
+    if(message === "!nextgameback" || message === "!nextgamebackward") {
+      if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
+        this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+        return true;
+      }
+      if(this.props.changeNextGameIdx(-1)) {
+        this.sendMessage(`/me @${username}, the next game has been changed to ${this.props.upcomingGames[0].gameName}.`);
+      } else {
+        this.sendMessage(`/me @${username}, there are no previous games in the queue to go back to!`);
       }
       return true;
     }

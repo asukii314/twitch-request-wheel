@@ -20,25 +20,24 @@ export default class MainScreen extends Component {
     };
   }
 
-  moveNextGameFwd = () => {
-    if(this.state.nextGameIdx === this.state.history.length) return false;
+  changeNextGameIdx = (delta = 1) => {
+    if(this.state.nextGameIdx + delta > this.state.history.length) return false;
+    if(this.state.nextGameIdx + delta < 0) return false;
     this.setState((state) => {
       return {
         ...this.state,
-        nextGameIdx: state.nextGameIdx+1
+        nextGameIdx: state.nextGameIdx + delta
       }
-    })
+    });
     return true;
   }
 
+  moveNextGameFwd = () => {
+    return this.changeNextGameIdx();
+  }
+
   moveNextGameBack = () => {
-    if(this.state.nextGameIdx <= 0) return;
-    this.setState((state) => {
-      return {
-        ...this.state,
-        nextGameIdx: state.nextGameIdx-1
-      }
-    })
+    return this.changeNextGameIdx(-1);
   }
 
   addGameRequest  = (game, user) => {
@@ -186,7 +185,7 @@ export default class MainScreen extends Component {
         <MessageHandler
           addGameRequest={this.addGameRequest}
           setNextGame={this.setNextGame}
-          advanceNextGame={this.moveNextGameFwd}
+          changeNextGameIdx={this.changeNextGameIdx}
           messages={this.state.messages}
           channel={this.props.channel}
           modList={this.props.modList}
@@ -203,8 +202,7 @@ export default class MainScreen extends Component {
           <Sidebar
             history={this.state.history}
             nextGameIdx={this.state.nextGameIdx}
-            moveNextGameFwd={this.moveNextGameFwd}
-            moveNextGameBack={this.moveNextGameBack}
+            changeNextGameIdx={this.changeNextGameIdx}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
               {gameArray.map((msg, i) =>

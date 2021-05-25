@@ -16,6 +16,14 @@ export default class Sidebar extends Component {
     }
   }
 
+  moveNextGameFwd = () => {
+    return this.props.changeNextGameIdx(1);
+  }
+
+  moveNextGameBack = () => {
+    return this.props.changeNextGameIdx(-1);
+  }
+
   render() {
     return (
       <div style={{marginLeft: "12px", width: "33%", textTransform: 'capitalize'}}>
@@ -28,8 +36,8 @@ export default class Sidebar extends Component {
         </div>
 
         <div style={{display: "flex", justifyContent: "space-between"}}>
-          <button onClick={this.props.moveNextGameBack} style={{backgroundColor: "darkcyan", borderRadius: "5px", marginTop: 0, width: "50%", marginBottom: '20px', marginRight: '5px'}}> &#8678; </button>
-          <button onClick={this.props.moveNextGameFwd} style={{backgroundColor: "darkcyan", borderRadius: "5px", marginTop: 0, width: "50%", marginBottom: '20px', marginLeft: '5px'}}> &#8680; </button>
+          <button onClick={this.moveNextGameBack} style={{backgroundColor: "darkcyan", borderRadius: "5px", marginTop: 0, width: "50%", marginBottom: '20px', marginRight: '5px'}}> &#8678; </button>
+          <button onClick={this.moveNextGameFwd} style={{backgroundColor: "darkcyan", borderRadius: "5px", marginTop: 0, width: "50%", marginBottom: '20px', marginLeft: '5px'}}> &#8680; </button>
         </div>
 
         <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '5px'}}>
