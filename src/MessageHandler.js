@@ -99,8 +99,8 @@ export default class MessageHandler extends Component {
   matchGameName = (requestedGame, username) => {
     for(let partyPackName in this.state.validGames) {
       const partyPack = this.state.validGames[partyPackName]
-      for(const [formalGameName, possibleMatches] of Object.entries(partyPack)){
-        if(possibleMatches.includes(requestedGame)) {
+      for(const [formalGameName, metadata] of Object.entries(partyPack)){
+        if(metadata?.Variants?.includes(requestedGame)) {
           return `${formalGameName} (${partyPackName})`;
         }
       }
