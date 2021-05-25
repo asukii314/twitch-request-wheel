@@ -32,7 +32,7 @@ export default class PlayerSelectModal extends Component {
       return this.setState((state) => {
         return {
           ...state,
-          requestingPlayers: state.requestingPlayers.filter((rName) => rName != name),
+          requestingPlayers: state.requestingPlayers.filter((rName) => rName !== name),
           confirmedPlayers: [...state.confirmedPlayers, name]
         }
       })
@@ -41,7 +41,7 @@ export default class PlayerSelectModal extends Component {
         return {
           ...state,
           requestingPlayers: [...state.requestingPlayers, name],
-          confirmedPlayers: state.confirmedPlayers.filter((cName) => cName != name)
+          confirmedPlayers: state.confirmedPlayers.filter((cName) => cName !== name)
         }
       })
     }
