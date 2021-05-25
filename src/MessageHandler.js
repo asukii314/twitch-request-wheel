@@ -92,6 +92,7 @@ export default class MessageHandler extends Component {
 
     if(message === "!caniplay") {
       this.props.caniplayHandler(username)
+      return true;
     }
 
   }

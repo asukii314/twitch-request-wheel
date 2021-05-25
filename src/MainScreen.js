@@ -187,7 +187,7 @@ export default class MainScreen extends Component {
 
   routePlayRequest = (user) => {
     if(this.state.showPlayerSelectModal){
-      if(this.playerSelector.handleNewPlayerRequest(user)) {
+      if(this.playerSelector?.handleNewPlayerRequest(user)) {
         this.messageHandler.sendMessage(`/me @${user}, you have successfully joined the lobby.`);
       } else {
         this.messageHandler.sendMessage(`/me @${user}, you had already joined the lobby.`);
@@ -221,8 +221,9 @@ export default class MainScreen extends Component {
           ref={(mh) => this.messageHandler = mh}
         />
         <div width="50vw">
-          <h2 style={{marginBottom:"0"}}>Game Requests</h2>
-          <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
+          <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
+          {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
+          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b>  in {this.props.channel}'s chat if you want to join the upcoming game of <b>{this.state.history?.[this.state.nextGameIdx]?.gameName ?? 'TBD'}</b></h4>}
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
           <Sidebar
             history={this.state.history}
@@ -249,9 +250,9 @@ export default class MainScreen extends Component {
             </div>
           </div>
         </div>
-        <div width="50vw" style={{textTransform: 'capitalize'}}>
+        {!this.state.showPlayerSelectModal && <div width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
-            <WheelComponent
+             <WheelComponent
               key={this.state.counter}
               segments={gameArray}
               segColors={this.state.colors}
@@ -265,7 +266,7 @@ export default class MainScreen extends Component {
             />
           {/*  <Modal/>*/}
           </div>
-        </div>
+        </div>}
         {logOutBtn}
       </div>
     )
