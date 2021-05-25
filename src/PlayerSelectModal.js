@@ -6,7 +6,7 @@ export default class PlayerSelectModal extends Component {
   constructor(props){
     super(props);
     this.state = {
-      interested: ['test', 'longerusernametest'],
+      interested: ['test', 'thelongestallowedusername'],
       playing: [],
       joined: []
     }
@@ -70,7 +70,7 @@ export default class PlayerSelectModal extends Component {
     return (
       <div style={{backgroundColor: 'red'}}>
         <div className="header">
-          <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '14px', fontWeight: 'bold'}}>{this.playerCount()} of ___ seats filled</p>
+          <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '14px', fontWeight: 'bold'}}>{this.playerCount()} of {this.props.game['Max players']} seats filled</p>
           <button className="startGame">Start Game</button>
         </div>
 

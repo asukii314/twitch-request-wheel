@@ -225,7 +225,7 @@ export default class MainScreen extends Component {
         <div width="50vw">
           <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
           {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
-          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b>  in {this.props.channel}'s chat if you want to join the upcoming game of <b>{this.state.history?.[this.state.nextGameIdx]?.name ?? 'TBD'}</b></h4>}
+          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b> in {this.props.channel}'s chat if you want to join the next game</h4>}
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
           <Sidebar
             history={this.state.history}
@@ -233,6 +233,7 @@ export default class MainScreen extends Component {
             moveNextGameFwd={this.moveNextGameFwd}
             moveNextGameBack={this.moveNextGameBack}
             selectPlayers={this.togglePlayerSelect}
+            requestMode={this.state.showPlayerSelectModal ? 'seat' : 'game'}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
             {this.state.showPlayerSelectModal &&
