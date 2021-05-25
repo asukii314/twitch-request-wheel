@@ -219,7 +219,8 @@ export default class MainScreen extends Component {
             selectPlayers={this.togglePlayerSelect}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
-              {gameArray.map((msg, i) =>
+            {this.state.showPlayerSelectModal && <PlayerSelectModal />}
+            {!this.state.showPlayerSelectModal && gameArray.map((msg, i) =>
                 <GameRequest
                   key={i}
                   msg={msg}
@@ -233,8 +234,7 @@ export default class MainScreen extends Component {
         </div>
         <div width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
-            {this.state.showPlayerSelectModal && <PlayerSelectModal />}
-            {!this.state.showPlayerSelectModal && <WheelComponent
+            <WheelComponent
               key={this.state.counter}
               segments={gameArray}
               segColors={this.state.colors}
@@ -245,7 +245,7 @@ export default class MainScreen extends Component {
               downDuration={1000}
               primaryColor={"white"}
               contrastColor={"black"}
-            />}
+            />
           {/*  <Modal/>*/}
           </div>
         </div>

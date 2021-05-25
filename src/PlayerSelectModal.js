@@ -10,7 +10,7 @@ export default class PlayerSelectModal extends Component {
 
   render() {
     return (
-      <div style={{width: "500px", height: "200px", backgroundColor: "red"}}>
+      <div style={{margin: '0px 15px 7px', height: "500px", padding: '4px', fontSize: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: "red"}}>
       </div>
     );
   }
