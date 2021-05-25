@@ -35,7 +35,7 @@ export default class Sidebar extends Component {
 
   render() {
     return (
-      <div style={{marginLeft: "12px", width: "33%", textTransform: 'capitalize'}}>
+      <div style={{marginLeft: "12px", width: (this.props.requestMode === 'game' ? "33%" : "20%"), textTransform: 'capitalize'}}>
         <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '1px', marginBottom: '10px'}}>
           <p style={{fontSize: "14px", fontWeight: "700", padding: '8px'}}> Up Next:
             <p style={{marginBottom: '5px'}}>{this.getNextGameName()}</p>

@@ -7,7 +7,23 @@ button.changeCol {
 
 div.changeColButtonsContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-end;
+  visibility: hidden;
+  margin-top: -25px;
+}
+
+div.changeColButtonsContainer:hover {
+  display: flex;
+  flex-direction: row;
+}
+
+.playerCard:hover {
+  background-color: dimgray;
+}
+
+.playerCard:hover > .changeColButtonsContainer {
+  visibility: visible;
 }
 
 div.header {
@@ -20,12 +36,38 @@ button.startGame {
   margin: 5px;
 }
 
-div.playerCard {
+button.disabled {
+  color: gray;
+}
+
+.playerCardContainer {
+  margin: 0px 15px 7px;
+  height: 700px;
+  padding: 4px;
+  fontSize: 16px;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playerCardColumn {
+  width: 33%;
+  height: 100%;
+  margin: 5px;
+}
+
+.playerCard {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   background-color: gray;
-  margin: 15px;
+  margin: 8px;
   padding: 2px 10px;
   font-size: 12px;
+}
+
+.playerName {
+  margin: 5px;
+  word-wrap: break-word;
+  text-align: left;
 }

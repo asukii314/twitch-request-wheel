@@ -222,7 +222,8 @@ export default class MainScreen extends Component {
           caniplayHandler={this.routePlayRequest}
           ref={(mh) => this.messageHandler = mh}
         />
-        <div width="50vw">
+        <div style={{width: this.state.showPlayerSelectModal ? "97vw" : "45vw"}}>
+
           <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
           {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
           {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b> in {this.props.channel}'s chat if you want to join the next game</h4>}
