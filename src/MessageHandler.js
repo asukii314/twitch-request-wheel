@@ -89,6 +89,11 @@ export default class MessageHandler extends Component {
       }
       return true;
     }
+
+    if(message === "!caniplay") {
+      this.props.caniplayHandler(username)
+    }
+
   }
 
   matchGameName = (requestedGame, username) => {

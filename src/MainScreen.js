@@ -185,6 +185,10 @@ export default class MainScreen extends Component {
     })
   }
 
+  routePlayRequest = (user) => {
+    this.playerSelector.handleNewPlayerRequest(user);
+  }
+
   render() {
     const gameArray = Object.keys(this.state.messages);
     let logOutBtn;
@@ -205,6 +209,7 @@ export default class MainScreen extends Component {
           onMessage={this.onMessage}
           onDelete={this.removeGame}
           upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
+          caniplayHandler={this.routePlayRequest}
           ref={(mh) => this.messageHandler = mh}
         />
         <div width="50vw">
@@ -222,6 +227,7 @@ export default class MainScreen extends Component {
             {this.state.showPlayerSelectModal &&
               <PlayerSelectModal
                 gameName={this.state.history?.[this.state.nextGameIdx]?.gameName ?? 'TBD'}
+                ref={(ps) => this.playerSelector = ps}
               />}
             {!this.state.showPlayerSelectModal && gameArray.map((msg, i) =>
                 <GameRequest

@@ -4,9 +4,24 @@ export default class PlayerSelectModal extends Component {
   constructor(props){
     super(props);
     this.state = {
-      requestingPlayers: ['aaaa', 'bbbb'],
+      requestingPlayers: [],
       confirmedPlayers: []
     }
+  }
+
+  handleNewPlayerRequest = (name) => {
+    if(!this.state.requestingPlayers.includes(name) &&
+       !this.state.confirmedPlayers.includes(name)) {
+          this.setState((state) => {
+            return {
+              ...state,
+              requestingPlayers: [
+                ...state.requestingPlayers,
+                name
+              ]
+            }
+          })
+        }
   }
 
   changeColumn = (name) => {
@@ -27,7 +42,7 @@ export default class PlayerSelectModal extends Component {
           confirmedPlayers: state.confirmedPlayers.filter((cName) => cName != name)
         }
       })
-    } 
+    }
   }
 
   basicPlayerCard = (name, id) => {
