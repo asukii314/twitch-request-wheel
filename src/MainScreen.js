@@ -136,16 +136,16 @@ export default class MainScreen extends Component {
       let msg = "";
       switch(status) {
         case ActivityStatus.DISCONNECTED:
-          msg = `${game} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
+          msg = `/me ${game} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
           break;
 
         case ActivityStatus.ACTIVE:
-          msg = `@${requester}, good news - ${game} just won the spin!`;
+          msg = `/me @${requester}, good news - ${game} just won the spin!`;
           break;
 
         case ActivityStatus.IDLE:
         default:
-          msg += `@${requester}, good news - ${game} just won the spin! (I hope you're still around!)`;
+          msg += `/me @${requester}, good news - ${game} just won the spin! (I hope you're still around!)`;
         }
         this.messageHandler.sendMessage(msg);
     })
@@ -186,7 +186,15 @@ export default class MainScreen extends Component {
   }
 
   routePlayRequest = (user) => {
-    this.playerSelector.handleNewPlayerRequest(user);
+    if(this.state.showPlayerSelectModal){
+      if(this.playerSelector.handleNewPlayerRequest(user)) {
+        this.messageHandler.sendMessage(`/me @${user}, you have successfully joined the lobby.`);
+      } else {
+        this.messageHandler.sendMessage(`/me @${user}, you had already joined the lobby.`);
+      }
+    } else {
+      this.messageHandler.sendMessage(`/me @${user}, sign-up is currently closed; try again after this game wraps up!`);
+    }
   }
 
   render() {

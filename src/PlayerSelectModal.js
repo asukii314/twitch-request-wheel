@@ -21,7 +21,9 @@ export default class PlayerSelectModal extends Component {
               ]
             }
           })
+          return true;
         }
+    return false;
   }
 
   changeColumn = (name) => {
