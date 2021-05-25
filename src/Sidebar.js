@@ -10,9 +10,9 @@ export default class Sidebar extends Component {
 
   printGame = (idx) => {
     if(idx === this.props.nextGameIdx) {
-      return (<b style={{color:'aquamarine'}}>{this.props.history[idx].gameName}</b>)
+      return (<b style={{color:'aquamarine'}}>{this.props.history[idx].name}</b>)
     } else {
-      return this.props.history[idx].gameName
+      return this.props.history[idx].name
     }
   }
 
@@ -22,8 +22,14 @@ export default class Sidebar extends Component {
 
   getNextGameName = () => {
     return this.hasNextGame()
-      ? this.props.history[this.props.nextGameIdx].gameName
+      ? this.props.history[this.props.nextGameIdx].name
       : "not yet decided"
+  }
+
+  getNextGamePartyPack = () => {
+    return this.hasNextGame()
+      ? this.props.history[this.props.nextGameIdx].partyPack
+      : null
   }
 
 
@@ -31,8 +37,9 @@ export default class Sidebar extends Component {
     return (
       <div style={{marginLeft: "12px", width: "33%", textTransform: 'capitalize'}}>
         <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '1px', marginBottom: '10px'}}>
-          <p style={{fontSize: "14px", fontWeight: "700", height: '100px', padding: '8px'}}> Up Next:
-            <p>{this.getNextGameName()}</p>
+          <p style={{fontSize: "14px", fontWeight: "700", height: '125px', padding: '8px'}}> Up Next:
+            <p style={{marginBottom: '5px'}}>{this.getNextGameName()}</p>
+            <p style={{fontSize: "11px", fontWeight: "400", marginTop: '0px', color: "lightgray"}}><i>{this.getNextGamePartyPack()}</i></p>
             <button disabled={!this.hasNextGame()} onClick={this.props.selectPlayers} style={{fontSize: "12px", padding: "5px", backgroundColor: "aquamarine", color: "black", borderRadius: "5px", width: "90%"}}>
               {this.hasNextGame()
                   ? <b>SELECT PLAYERS</b>

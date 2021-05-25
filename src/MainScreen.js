@@ -43,13 +43,14 @@ export default class MainScreen extends Component {
     })
   }
 
-  addGameRequest  = (game, user) => {
+  addGameRequest = (gameObj, user) => {
     this.setState((state) => {
       return {
         ...state,
         messages: {
           ...this.state.messages,
-          [game]: {
+          [gameObj.longName]: {
+            ...gameObj,
             username: user,
             time: Date.now(),
             locked: false,
@@ -78,7 +79,7 @@ export default class MainScreen extends Component {
 
   // @return: the number of games ahead of this one, after successfully inserting in queue
   // (i.e. if it's the very next game, return 0; if there's one ahead, return 1; etc)
-  setNextGame = (gameName) => {
+  setNextGame = (gameObj) => {
     let idx = this.state.nextGameIdx;
 
     // insert next game at next up position by default, but
@@ -93,7 +94,7 @@ export default class MainScreen extends Component {
         history: [
           ...state.history.slice(0, Math.max(0, idx)),
           {
-            gameName,
+            ...gameObj,
             override: true
           },
           ...state.history.slice(idx)
@@ -104,7 +105,7 @@ export default class MainScreen extends Component {
     return idx - this.state.nextGameIdx;
   }
 
-  addGameToQueue = (gameName) => {
+  addGameToQueue = (gameObj) => {
     // update history + game card highlight color
     this.setState((state) => {
       return {
@@ -112,14 +113,14 @@ export default class MainScreen extends Component {
         history: [
           ...this.state.history,
           {
-            gameName,
+            ...gameObj,
             override: false
           }
         ],
         messages: {
           ...state.messages,
-          [gameName]: {
-            ...state.messages[gameName],
+          [gameObj.longName]: {
+            ...state.messages[gameObj.longName],
             chosen: true
           }
         }
@@ -127,42 +128,43 @@ export default class MainScreen extends Component {
     })
   }
 
-  onWheelSpun = (game) => {
-    if(Object.keys(this.state.messages).length === 0) return;
+  onWheelSpun = (gameLongName) => {
+    const gameRequestObj = this.state.messages?.[gameLongName];
+    if(!gameRequestObj) return;
 
     // send confirmation message in chat
-    const requester = this.state.messages[game].username;
+    const requester = gameRequestObj.username;
     this.chatActivity.getStatusPromise(requester).then((status) => {
       let msg = "";
       switch(status) {
         case ActivityStatus.DISCONNECTED:
-          msg = `/me ${game} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
+          msg = `/me ${gameRequestObj.name} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
           break;
 
         case ActivityStatus.ACTIVE:
-          msg = `/me @${requester}, good news - ${game} just won the spin!`;
+          msg = `/me @${requester}, good news - ${gameRequestObj.name} just won the spin!`;
           break;
 
         case ActivityStatus.IDLE:
         default:
-          msg += `/me @${requester}, good news - ${game} just won the spin! (I hope you're still around!)`;
+          msg += `/me @${requester}, good news - ${gameRequestObj.name} just won the spin! (I hope you're still around!)`;
         }
         this.messageHandler.sendMessage(msg);
     })
 
-    this.addGameToQueue(game);
+    this.addGameToQueue(gameRequestObj);
 
     // remove card unless it's locked
-    if(!this.state.messages[game].locked) {
+    if(!this.state.messages[gameLongName].locked) {
       setTimeout(() => {
-        this.removeGame(game, true);
+        this.removeGame(gameLongName, true);
       }, 2500);
     }
   }
 
-  removeGame = (game) => {
+  removeGame = (gameLongName) => {
     const newMessageObj = {...this.state.messages};
-    delete newMessageObj[game];
+    delete newMessageObj[gameLongName];
     this.setState((state) => {
       return {
         ...state,
@@ -198,7 +200,7 @@ export default class MainScreen extends Component {
   }
 
   render() {
-    const gameArray = Object.keys(this.state.messages);
+    const gameRequestArray = Object.keys(this.state.messages);
     let logOutBtn;
     if (typeof this.props.onLogout === 'function') {
         logOutBtn = (<button style={{position: 'absolute', top: 0, right: 0, backgroundColor: 'darkcyan', borderRadius: '5px', marginTop: 0, paddingBottom: '5px', paddingTop: '5px', color: '#fff'}} onClick={this.props.onLogout}>Logout &#10151;</button>);
@@ -223,7 +225,7 @@ export default class MainScreen extends Component {
         <div width="50vw">
           <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
           {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
-          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b>  in {this.props.channel}'s chat if you want to join the upcoming game of <b>{this.state.history?.[this.state.nextGameIdx]?.gameName ?? 'TBD'}</b></h4>}
+          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b>  in {this.props.channel}'s chat if you want to join the upcoming game of <b>{this.state.history?.[this.state.nextGameIdx]?.name ?? 'TBD'}</b></h4>}
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
           <Sidebar
             history={this.state.history}
@@ -235,16 +237,16 @@ export default class MainScreen extends Component {
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
             {this.state.showPlayerSelectModal &&
               <PlayerSelectModal
-                gameName={this.state.history?.[this.state.nextGameIdx]?.gameName ?? 'TBD'}
+                game={this.state.history?.[this.state.nextGameIdx]}
                 ref={(ps) => this.playerSelector = ps}
               />}
-            {!this.state.showPlayerSelectModal && gameArray.map((msg, i) =>
+            {!this.state.showPlayerSelectModal && gameRequestArray.map((gameName, i) =>
                 <GameRequest
                   key={i}
-                  msg={msg}
-                  metadata={this.state.messages[msg]}
+                  gameName={gameName}
+                  metadata={this.state.messages[gameName]}
                   onDelete={this.removeGame}
-                  toggleLock={this.toggleLock.bind(msg)}
+                  toggleLock={this.toggleLock.bind(gameName)}
                   getActivity={this.chatActivity.getStatusPromise}
               />)}
             </div>
@@ -254,7 +256,7 @@ export default class MainScreen extends Component {
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
              <WheelComponent
               key={this.state.counter}
-              segments={gameArray}
+              segments={gameRequestArray}
               segColors={this.state.colors}
               onFinished={this.onWheelSpun}
               isOnlyOnce={false}

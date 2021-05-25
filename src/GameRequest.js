@@ -44,11 +44,11 @@ export default class GameRequest extends Component {
     })
   }
   delete = (e) => {
-    this.props.onDelete(this.props.msg)
+    this.props.onDelete(this.props.gameName)
   }
 
   toggleLock = () => {
-    this.props.toggleLock(this.props.msg)
+    this.props.toggleLock(this.props.gameName)
   }
 
   getTooltipContents = () => {
@@ -89,7 +89,7 @@ export default class GameRequest extends Component {
         onMouseEnter={this.updateStatus}
       >
       <div style={{margin: '0px 15px 7px', padding: '4px', fontSize: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        {this.props.msg}
+        {this.props.gameName}
         <div style={{display:'flex'}}>
           <img src={lock} alt="lock" style={{width: '16px', opacity: lockOpacity, paddingRight: '8px'}} className="lock" onClick={this.toggleLock} />
           <button type='button' className="deleteButton" onClick={this.delete}>X</button>
