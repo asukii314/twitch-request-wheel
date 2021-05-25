@@ -219,7 +219,10 @@ export default class MainScreen extends Component {
             selectPlayers={this.togglePlayerSelect}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
-            {this.state.showPlayerSelectModal && <PlayerSelectModal />}
+            {this.state.showPlayerSelectModal &&
+              <PlayerSelectModal
+                gameName={this.state.history?.[this.state.nextGameIdx]?.gameName ?? 'TBD'}
+              />}
             {!this.state.showPlayerSelectModal && gameArray.map((msg, i) =>
                 <GameRequest
                   key={i}
