@@ -108,11 +108,11 @@ export default class MessageHandler extends Component {
       return true;
     }
 
-    if(message === "!caniplay") {
-      this.props.caniplayHandler(username)
+    // can I play
+    if(message === "!caniplay" || message === "!new") {
+      this.props.caniplayHandler(username, message !== "!new")
       return true;
     }
-
   }
 
   findGame = (requestedGame, username) => {

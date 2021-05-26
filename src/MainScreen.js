@@ -186,15 +186,18 @@ export default class MainScreen extends Component {
     })
   }
 
-  routePlayRequest = (user) => {
+  routePlayRequest = (user, sendConfirmationMsg=true) => {
+    let msg = null;
     if(this.state.showPlayerSelectModal){
-      if(this.playerSelector?.handleNewPlayerRequest(user)) {
-        this.messageHandler?.sendMessage(`/me @${user}, you have successfully joined the lobby.`);
-      } else {
-        this.messageHandler?.sendMessage(`/me @${user}, you had already joined the lobby.`);
-      }
+      const success = this.playerSelector?.handleNewPlayerRequest(user);
+      msg = (success ? `/me @${user}, you have successfully joined the lobby.`
+                     : `/me @${user}, you had already joined the lobby.`);
     } else {
-      this.messageHandler?.sendMessage(`/me @${user}, sign-up is currently closed; try again after this game wraps up!`);
+      msg = `/me @${user}, sign-up is currently closed; try again after this game wraps up!`
+    }
+
+    if(sendConfirmationMsg) {
+      this.messageHandler?.sendMessage(msg);
     }
   }
 
@@ -228,7 +231,7 @@ export default class MainScreen extends Component {
           caniplayHandler={this.routePlayRequest}
           ref={(mh) => this.messageHandler = mh}
         />
-        <div style={{width: this.state.showPlayerSelectModal ? "97vw" : "45vw"}}>
+        <div style={{width: this.state.showPlayerSelectModal ? "90vw" : "45vw"}}>
 
           <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
           {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
