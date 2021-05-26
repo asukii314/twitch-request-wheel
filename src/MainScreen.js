@@ -190,13 +190,20 @@ export default class MainScreen extends Component {
   routePlayRequest = (user) => {
     if(this.state.showPlayerSelectModal){
       if(this.playerSelector?.handleNewPlayerRequest(user)) {
-        this.messageHandler.sendMessage(`/me @${user}, you have successfully joined the lobby.`);
+        this.messageHandler?.sendMessage(`/me @${user}, you have successfully joined the lobby.`);
       } else {
-        this.messageHandler.sendMessage(`/me @${user}, you had already joined the lobby.`);
+        this.messageHandler?.sendMessage(`/me @${user}, you had already joined the lobby.`);
       }
     } else {
-      this.messageHandler.sendMessage(`/me @${user}, sign-up is currently closed; try again after this game wraps up!`);
+      this.messageHandler?.sendMessage(`/me @${user}, sign-up is currently closed; try again after this game wraps up!`);
     }
+  }
+
+  startGame = () => {
+    // I know this is a big ol' React sin, but I can't for the life of me
+    //   figure out why this.togglePlayerSelect() isn't working... sooo...
+    this.state.showPlayerSelectModal = false;
+    this.moveNextGameFwd();
   }
 
   render() {
@@ -240,6 +247,7 @@ export default class MainScreen extends Component {
             {this.state.showPlayerSelectModal &&
               <PlayerSelectModal
                 game={this.state.history?.[this.state.nextGameIdx]}
+                startGame={this.startGame}
                 ref={(ps) => this.playerSelector = ps}
               />}
             {!this.state.showPlayerSelectModal && gameRequestArray.map((gameName, i) =>
