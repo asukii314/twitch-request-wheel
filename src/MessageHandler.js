@@ -95,26 +95,37 @@ export default class MessageHandler extends Component {
         return true;
       }
 
-      const gameName = this.matchGameName(requestedGame);
-      if(gameName) {
-        const numGamesAhead = this.props.setNextGame(gameName);
+      const gameObj = this.findGame(requestedGame);
+      if(gameObj) {
+        const numGamesAhead = this.props.setNextGame(gameObj);
         if(numGamesAhead === 0) {
-          this.sendMessage(`/me @${username}, ${gameName} has been inserted as the next game in the queue.`);
+          this.sendMessage(`/me @${username}, ${gameObj.name} has been inserted as the next game in the queue.`);
         } else {
-          this.sendMessage(`/me @${username}, ${gameName} has been inserted in the queue following ${numGamesAhead} other manual game request${numGamesAhead > 1 ? 's' : ''}.`);
+          this.sendMessage(`/me @${username}, ${gameObj.name} has been inserted in the queue following ${numGamesAhead} other manual game request${numGamesAhead > 1 ? 's' : ''}.`);
         }
 
       }
       return true;
     }
+
+    if(message === "!caniplay") {
+      this.props.caniplayHandler(username)
+      return true;
+    }
+
   }
 
-  matchGameName = (requestedGame, username) => {
+  findGame = (requestedGame, username) => {
     for(let partyPackName in this.state.validGames) {
-      const partyPack = this.state.validGames[partyPackName]
-      for(const [formalGameName, possibleMatches] of Object.entries(partyPack)){
-        if(possibleMatches.includes(requestedGame)) {
-          return `${formalGameName} (${partyPackName})`;
+      const partyPackObj = this.state.validGames[partyPackName]
+      for(const [formalGameName, metadata] of Object.entries(partyPackObj)){
+        if(metadata?.Variants?.includes(requestedGame)) {
+          return {
+            name: formalGameName,
+            longName: `${formalGameName} (${partyPackName})`,
+            partyPack: partyPackName,
+            ...metadata
+          };
         }
       }
     }
@@ -132,7 +143,7 @@ export default class MessageHandler extends Component {
       return null;
     }
 
-    return this.matchGameName(requestedGame, username);
+    return this.findGame(requestedGame, username);
   }
 
   onMessage = (target, tags, msg, self) => {
@@ -158,34 +169,34 @@ export default class MessageHandler extends Component {
 
     const cleanedMsg = msg.trim().toLowerCase();
     if(this.checkForMiscCommands(cleanedMsg, tags.username)) return;
-    const game = this.checkForGameCommand(cleanedMsg, tags.username);
-    if (!game) return;
+    const gameObj = this.checkForGameCommand(cleanedMsg, tags.username);
+    if (!gameObj) return;
 
-    if(this.props.messages[game]) {
-      this.sendMessage(`/me @${tags.username}, ${game} has already been requested!`);
+    if(this.props.messages[gameObj.longName]) {
+      this.sendMessage(`/me @${tags.username}, ${gameObj.name} has already been requested!`);
       return;
     }
 
-    let prevGame = null;
-    for(const [game, metadata] of Object.entries(this.props.messages)) {
+    let prevRequestedGameName = null;
+    for(const [gameName, metadata] of Object.entries(this.props.messages)) {
       if(metadata.username === tags.username){
-        prevGame = game;
+        prevRequestedGameName = metadata.name;
         break;
       }
     }
 
-    if(prevGame) {
+    if(prevRequestedGameName) {
       if(this.props.channel === tags.username) {
-        this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
+        this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
       } else {
-        this.props.onDelete(prevGame);
-        this.sendMessage(`/me @${tags.username}, your previous request of ${prevGame} has been replaced with ${game}.`);
+        this.props.onDelete(prevRequestedGameName);
+        this.sendMessage(`/me @${tags.username}, your previous request of ${prevRequestedGameName} has been replaced with ${gameObj.name}.`);
       }
     } else {
-      this.sendMessage(`/me @${tags.username}, ${game} has been added to the request queue.`);
+      this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue.`);
     }
 
-    this.props.addGameRequest(game, tags.username);
+    this.props.addGameRequest(gameObj, tags.username);
   }
 
   sendMessage = (msg) => {

@@ -13,7 +13,7 @@ const PartyPackCard = function (props) {
         <GameCard
           key={i}
           gameName={gameName}
-          possibleMatches={props.metadata[gameName]}
+          possibleMatches={props.metadata?.[gameName]?.Variants}
         />
       )}
     </div>

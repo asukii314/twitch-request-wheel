@@ -3,6 +3,7 @@ import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
+import PlayerSelectModal from './PlayerSelectModal';
 import ChatActivity, { ActivityStatus } from './ChatActivity';
 const randomColor = require('randomcolor');
 
@@ -16,7 +17,8 @@ export default class MainScreen extends Component {
       colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
       counter: 0,
       history: [],
-      nextGameIdx: 0
+      nextGameIdx: 0,
+      showPlayerSelectModal: false
     };
   }
 
@@ -40,13 +42,14 @@ export default class MainScreen extends Component {
     return this.changeNextGameIdx(-1);
   }
 
-  addGameRequest  = (game, user) => {
+  addGameRequest = (gameObj, user) => {
     this.setState((state) => {
       return {
         ...state,
         messages: {
           ...this.state.messages,
-          [game]: {
+          [gameObj.longName]: {
+            ...gameObj,
             username: user,
             time: Date.now(),
             locked: false,
@@ -75,7 +78,7 @@ export default class MainScreen extends Component {
 
   // @return: the number of games ahead of this one, after successfully inserting in queue
   // (i.e. if it's the very next game, return 0; if there's one ahead, return 1; etc)
-  setNextGame = (gameName) => {
+  setNextGame = (gameObj) => {
     let idx = this.state.nextGameIdx;
 
     // insert next game at next up position by default, but
@@ -90,7 +93,7 @@ export default class MainScreen extends Component {
         history: [
           ...state.history.slice(0, Math.max(0, idx)),
           {
-            gameName,
+            ...gameObj,
             override: true
           },
           ...state.history.slice(idx)
@@ -101,7 +104,7 @@ export default class MainScreen extends Component {
     return idx - this.state.nextGameIdx;
   }
 
-  addGameToQueue = (gameName) => {
+  addGameToQueue = (gameObj) => {
     // update history + game card highlight color
     this.setState((state) => {
       return {
@@ -109,14 +112,14 @@ export default class MainScreen extends Component {
         history: [
           ...this.state.history,
           {
-            gameName,
+            ...gameObj,
             override: false
           }
         ],
         messages: {
           ...state.messages,
-          [gameName]: {
-            ...state.messages[gameName],
+          [gameObj.longName]: {
+            ...state.messages[gameObj.longName],
             chosen: true
           }
         }
@@ -124,42 +127,43 @@ export default class MainScreen extends Component {
     })
   }
 
-  onWheelSpun = (game) => {
-    if(Object.keys(this.state.messages).length === 0) return;
+  onWheelSpun = (gameLongName) => {
+    const gameRequestObj = this.state.messages?.[gameLongName];
+    if(!gameRequestObj) return;
 
     // send confirmation message in chat
-    const requester = this.state.messages[game].username;
+    const requester = gameRequestObj.username;
     this.chatActivity.getStatusPromise(requester).then((status) => {
       let msg = "";
       switch(status) {
         case ActivityStatus.DISCONNECTED:
-          msg = `${game} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
+          msg = `/me ${gameRequestObj.name} just won the spin, but it doesn't seem like @${requester} is still around. Hope someone else wants to play!`
           break;
 
         case ActivityStatus.ACTIVE:
-          msg = `@${requester}, good news - ${game} just won the spin!`;
+          msg = `/me @${requester}, good news - ${gameRequestObj.name} just won the spin!`;
           break;
 
         case ActivityStatus.IDLE:
         default:
-          msg += `@${requester}, good news - ${game} just won the spin! (I hope you're still around!)`;
+          msg += `/me @${requester}, good news - ${gameRequestObj.name} just won the spin! (I hope you're still around!)`;
         }
         this.messageHandler.sendMessage(msg);
     })
 
-    this.addGameToQueue(game);
+    this.addGameToQueue(gameRequestObj);
 
     // remove card unless it's locked
-    if(!this.state.messages[game].locked) {
+    if(!this.state.messages[gameLongName].locked) {
       setTimeout(() => {
-        this.removeGame(game, true);
+        this.removeGame(gameLongName, true);
       }, 2500);
     }
   }
 
-  removeGame = (game) => {
+  removeGame = (gameLongName) => {
     const newMessageObj = {...this.state.messages};
-    delete newMessageObj[game];
+    delete newMessageObj[gameLongName];
     this.setState((state) => {
       return {
         ...state,
@@ -173,8 +177,36 @@ export default class MainScreen extends Component {
     this.chatActivity.updateLastMessageTime(user);
   }
 
+  togglePlayerSelect = () => {
+    this.setState((state) => {
+      return {
+        ...state,
+        showPlayerSelectModal: !state.showPlayerSelectModal
+      }
+    })
+  }
+
+  routePlayRequest = (user) => {
+    if(this.state.showPlayerSelectModal){
+      if(this.playerSelector?.handleNewPlayerRequest(user)) {
+        this.messageHandler?.sendMessage(`/me @${user}, you have successfully joined the lobby.`);
+      } else {
+        this.messageHandler?.sendMessage(`/me @${user}, you had already joined the lobby.`);
+      }
+    } else {
+      this.messageHandler?.sendMessage(`/me @${user}, sign-up is currently closed; try again after this game wraps up!`);
+    }
+  }
+
+  startGame = () => {
+    // I know this is a big ol' React sin, but I can't for the life of me
+    //   figure out why this.togglePlayerSelect() isn't working... sooo...
+    this.state.showPlayerSelectModal = false;
+    this.moveNextGameFwd();
+  }
+
   render() {
-    const gameArray = Object.keys(this.state.messages);
+    const gameRequestArray = Object.keys(this.state.messages);
     let logOutBtn;
     if (typeof this.props.onLogout === 'function') {
         logOutBtn = (<button style={{position: 'absolute', top: 0, right: 0, backgroundColor: 'darkcyan', borderRadius: '5px', marginTop: 0, paddingBottom: '5px', paddingTop: '5px', color: '#fff'}} onClick={this.props.onLogout}>Logout &#10151;</button>);
@@ -193,35 +225,48 @@ export default class MainScreen extends Component {
           onMessage={this.onMessage}
           onDelete={this.removeGame}
           upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
+          caniplayHandler={this.routePlayRequest}
           ref={(mh) => this.messageHandler = mh}
         />
-        <div width="50vw">
-          <h2 style={{marginBottom:"0"}}>Game Requests</h2>
-          <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. "!request Blather Round" in {this.props.channel}'s chat to add</h4>
+        <div style={{width: this.state.showPlayerSelectModal ? "97vw" : "45vw"}}>
+
+          <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
+          {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
+          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b> in {this.props.channel}'s chat if you want to join the next game</h4>}
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
           <Sidebar
             history={this.state.history}
             nextGameIdx={this.state.nextGameIdx}
             changeNextGameIdx={this.changeNextGameIdx}
+            moveNextGameFwd={this.moveNextGameFwd}
+            moveNextGameBack={this.moveNextGameBack}
+            selectPlayers={this.togglePlayerSelect}
+            requestMode={this.state.showPlayerSelectModal ? 'seat' : 'game'}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
-              {gameArray.map((msg, i) =>
+            {this.state.showPlayerSelectModal &&
+              <PlayerSelectModal
+                game={this.state.history?.[this.state.nextGameIdx]}
+                startGame={this.startGame}
+                ref={(ps) => this.playerSelector = ps}
+              />}
+            {!this.state.showPlayerSelectModal && gameRequestArray.map((gameName, i) =>
                 <GameRequest
                   key={i}
-                  msg={msg}
-                  metadata={this.state.messages[msg]}
+                  gameName={gameName}
+                  metadata={this.state.messages[gameName]}
                   onDelete={this.removeGame}
-                  toggleLock={this.toggleLock.bind(msg)}
+                  toggleLock={this.toggleLock.bind(gameName)}
                   getActivity={this.chatActivity.getStatusPromise}
               />)}
             </div>
           </div>
         </div>
-        <div width="50vw" style={{textTransform: 'capitalize'}}>
+        {!this.state.showPlayerSelectModal && <div width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
-            <WheelComponent
+             <WheelComponent
               key={this.state.counter}
-              segments={gameArray}
+              segments={gameRequestArray}
               segColors={this.state.colors}
               onFinished={this.onWheelSpun}
               isOnlyOnce={false}
@@ -233,7 +278,7 @@ export default class MainScreen extends Component {
             />
           {/*  <Modal/>*/}
           </div>
-        </div>
+        </div>}
         {logOutBtn}
       </div>
     )
