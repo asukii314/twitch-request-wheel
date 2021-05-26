@@ -108,9 +108,14 @@ export default class MessageHandler extends Component {
       return true;
     }
 
-    // can I play
+    //========= player join / leave requests =========
     if(message === "!caniplay" || message === "!new") {
-      this.props.caniplayHandler(username, message !== "!new")
+      this.props?.caniplayHandler(username, message !== "!new")
+      return true;
+    }
+
+    if(message === "!leave" || message === "!murd") {
+      this.props?.playerExitHandler(username);
       return true;
     }
   }
