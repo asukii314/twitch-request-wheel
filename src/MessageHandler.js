@@ -152,11 +152,11 @@ export default class MessageHandler extends Component {
 
     if(msg.trim() === "!nextgame") {
       if(this.props.upcomingGames && this.props.upcomingGames.length > 0) {
-        let upcoming = this.props.upcomingGames[0].gameName;
+        let upcoming = this.props.upcomingGames[0].name;
         if(this.props.upcomingGames.length > 1) {
-          upcoming += `, followed by ${this.props.upcomingGames[1].gameName}`
+          upcoming += `, followed by ${this.props.upcomingGames[1].name}`
           for(let i = 2; i < this.props.upcomingGames.length; i++) {
-            upcoming += ` and ${this.props.upcomingGames[i].gameName}`
+            upcoming += ` and ${this.props.upcomingGames[i].name}`
           }
         }
         this.sendMessage(`/me @${tags.username}, the next game up is ${upcoming}!`)
