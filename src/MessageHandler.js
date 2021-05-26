@@ -42,6 +42,10 @@ export default class MessageHandler extends Component {
       })
     }
 
+  isModOrBroadcaster = (username) => {
+    return (this.props.channel === username || this.props.modList.includes(username.toLowerCase()));
+  }
+
   // returns true iff a known command was found & responded to
   checkForMiscCommands = (message, username) => {
     //========= game list =========
@@ -52,13 +56,14 @@ export default class MessageHandler extends Component {
 
     //========= advance next game =========
     if(message === "!advancenextgame" || message === "!nextgamefwd" || message === "!nextgameforward") {
-      if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
+      if(!this.isModOrBroadcaster(username)){
         this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
         return true;
       }
       if(this.props.changeNextGameIdx(1)) {
         if(this.props.upcomingGames.length > 0) {
-          this.sendMessage(`/me @${username}, the next game has been changed to ${this.props.upcomingGames[0].gameName}.`);
+          console.log(this.props.upcomingGames)
+          this.sendMessage(`/me @${username}, the next game has been changed to ${this.props.upcomingGames[0].name}.`);
         } else {
           this.sendMessage(`/me @${username}, the next game has been marked as "TBD".`);
         }
@@ -70,12 +75,12 @@ export default class MessageHandler extends Component {
 
     //========= advance next game =========
     if(message === "!nextgameback" || message === "!nextgamebackward") {
-      if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
+      if(!this.isModOrBroadcaster(username)){
         this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
         return true;
       }
       if(this.props.changeNextGameIdx(-1)) {
-        this.sendMessage(`/me @${username}, the next game has been changed to ${this.props.upcomingGames[0].gameName}.`);
+        this.sendMessage(`/me @${username}, the next game has been changed to ${this.props.upcomingGames[0].name}.`);
       } else {
         this.sendMessage(`/me @${username}, there are no previous games in the queue to go back to!`);
       }
@@ -84,7 +89,7 @@ export default class MessageHandler extends Component {
 
     //========= set next game =========
     if(message.startsWith("!setnextgame") || message.startsWith("!redeem")) {
-      if(this.props.channel !== username && !this.props.modList.includes(username.toLowerCase())){
+      if(!this.isModOrBroadcaster(username)){
         this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!s") ? "!setNextGame" : "!redeem"} command.`);
         return true;
       }
@@ -120,21 +125,21 @@ export default class MessageHandler extends Component {
     }
 
     if(message === "!clear") {
-      if(this.props.channel === username || this.props.modList.includes(username.toLowerCase())){
+      if(this.isModOrBroadcaster(username)){
         this.props?.clearQueueHandler();
       }
       return true;
     }
 
     if(message === "!open") {
-      if(this.props.channel === username || this.props.modList.includes(username.toLowerCase())){
+      if(this.isModOrBroadcaster(username)){
         this.props?.openQueueHandler();
       }
       return true;
     }
 
     if(message === "!close") {
-      if(this.props.channel === username || this.props.modList.includes(username.toLowerCase())){
+      if(this.isModOrBroadcaster(username)){
         this.props?.closeQueueHandler();
       }
       return true;
