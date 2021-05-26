@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './playerSelect.css';
+import dice from './dice.svg';
 
 // yes, I know it's not actually a modal, I changed my mind and I can't be arsed to change the class name
 export default class PlayerSelectModal extends Component {
@@ -96,6 +97,32 @@ export default class PlayerSelectModal extends Component {
     this.props.startGame();
   }
 
+  randomizePlayers = () => {
+    const numPlayersToAdd = Math.min(this.props.game['Max players'] - this.playerCount(), this.state.interested.length);
+
+    let randIdx, randUsername;
+    let randIdxArray = [];
+    let interested = this.state.interested;
+    let playing = this.state.playing;
+
+    while(randIdxArray.length < numPlayersToAdd) {
+      randIdx = Math.floor(Math.random() * this.state.interested.length);
+      if(!randIdxArray.includes(randIdx)) {
+        randIdxArray.push(randIdx);
+        randUsername = this.state.interested[randIdx];
+        interested = interested.filter((rName) => rName !== randUsername);
+        playing = [...playing, randUsername];
+      }
+    }
+    this.setState((state) => {
+      return {
+        ...state,
+        interested,
+        playing
+      }
+    })
+  }
+
   renderPlayerCard = (username, id, curColumn) => {
     return (
       <div key={id} className='playerCard'>
@@ -137,7 +164,6 @@ export default class PlayerSelectModal extends Component {
     if(this.playerCount() < this.props.game?.['Min players']){
       startGameClass += ' disabled';
     }
-
     return (
       <div className='playerSelectContainer'>
         <div className="header">
@@ -152,7 +178,11 @@ export default class PlayerSelectModal extends Component {
           </div>
 
           <div className='playerCardColumn playing'>
-            <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Playing</p>
+            <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Playing
+            <button className="dice" style={{width: '25px', height: '25px', backgroundColor: 'greenyellow', borderRadius: '5px', marginLeft: '10px', padding: '0px'}} onClick={this.randomizePlayers}>
+              <img src={dice} style={{width:'100%', height: '100%'}}/>
+            </button>
+            </p>
             {this.state.playing.map((username, i) => this.renderPlayerCard(username, i, 'playing') )}
           </div>
 
