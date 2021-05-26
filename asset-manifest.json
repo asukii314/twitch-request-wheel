@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/twitch-request-wheel/static/css/main.b2424a65.chunk.css",
-    "main.js": "/twitch-request-wheel/static/js/main.1489b01d.chunk.js",
-    "main.js.map": "/twitch-request-wheel/static/js/main.1489b01d.chunk.js.map",
+    "main.css": "/twitch-request-wheel/static/css/main.94b2b7a8.chunk.css",
+    "main.js": "/twitch-request-wheel/static/js/main.3acc7f77.chunk.js",
+    "main.js.map": "/twitch-request-wheel/static/js/main.3acc7f77.chunk.js.map",
     "runtime-main.js": "/twitch-request-wheel/static/js/runtime-main.e22f64e1.js",
     "runtime-main.js.map": "/twitch-request-wheel/static/js/runtime-main.e22f64e1.js.map",
     "static/js/2.965b8837.chunk.js": "/twitch-request-wheel/static/js/2.965b8837.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.89aacc58.chunk.js": "/twitch-request-wheel/static/js/3.89aacc58.chunk.js",
     "static/js/3.89aacc58.chunk.js.map": "/twitch-request-wheel/static/js/3.89aacc58.chunk.js.map",
     "index.html": "/twitch-request-wheel/index.html",
-    "static/css/main.b2424a65.chunk.css.map": "/twitch-request-wheel/static/css/main.b2424a65.chunk.css.map",
+    "static/css/main.94b2b7a8.chunk.css.map": "/twitch-request-wheel/static/css/main.94b2b7a8.chunk.css.map",
     "static/js/2.965b8837.chunk.js.LICENSE.txt": "/twitch-request-wheel/static/js/2.965b8837.chunk.js.LICENSE.txt",
     "static/media/JackboxGames.9fe02473.yaml": "/twitch-request-wheel/static/media/JackboxGames.9fe02473.yaml",
     "static/media/dice.021a7158.svg": "/twitch-request-wheel/static/media/dice.021a7158.svg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.e22f64e1.js",
     "static/js/2.965b8837.chunk.js",
-    "static/css/main.b2424a65.chunk.css",
-    "static/js/main.1489b01d.chunk.js"
+    "static/css/main.94b2b7a8.chunk.css",
+    "static/js/main.3acc7f77.chunk.js"
   ]
 }
