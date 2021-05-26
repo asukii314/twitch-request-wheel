@@ -31,9 +31,9 @@ export default class PlayerSelectModal extends Component {
   }
 
   handleNewPlayerRequest = (username, column='interested') => {
-    if(this.state?.interested?.includes(username)
-    || this.state?.playing?.includes(username)
-    || this.state?.joined?.includes(username)) {
+    if(this.state?.interested?.map((uObj) => uObj.username)?.includes(username)
+    || this.state?.playing?.map((uObj) => uObj.username)?.includes(username)
+    || this.state?.joined?.map((uObj) => uObj.username)?.includes(username)) {
       return 'you are already in the lobby.';
     }
 
@@ -41,21 +41,22 @@ export default class PlayerSelectModal extends Component {
       return 'the queue is currently closed; users have already been selected for this game.';
     }
 
-    return this.updateColumnForUser(username, 'interested')
+    return this.updateColumnForUser({username}, column)
       ? 'you have successfully joined the lobby.'
       : 'there was an error adding you to the lobby.';
   }
 
-  updateColumnForUser = (username, newColumn) => {
-    if(!this.state || !this.state[newColumn] || this.state[newColumn]?.includes(username)) return false;
+  updateColumnForUser = (userObj, newColumn) => {
+    if(!this.state || !this.state[newColumn]
+      || this.state[newColumn]?.map((uObj) => uObj.username)?.includes(userObj.username)) return false;
 
-    this.removeUser(username);
+    this.removeUser(userObj.username);
     this.setState((state) => {
       return {
         ...state,
         [newColumn]: [
           ...state[newColumn],
-          username
+          userObj
         ]
       }
     });
@@ -66,9 +67,9 @@ export default class PlayerSelectModal extends Component {
     return this.setState((state) => {
       return {
         ...state,
-        interested: state.interested.filter((rName) => rName !== username),
-        playing: state.playing.filter((rName) => rName !== username),
-        joined:  state.joined.filter((rName) => rName !== username)
+        interested: state.interested.filter((iObj) => iObj.username !== username),
+        playing: state.playing.filter((pObj) => pObj.username !== username),
+        joined:  state.joined.filter((jObj) => jObj.username !== username)
       }
     });
   }
@@ -146,8 +147,8 @@ export default class PlayerSelectModal extends Component {
       randIdx = Math.floor(Math.random() * this.state.interested.length);
       if(!randIdxArray.includes(randIdx)) {
         randIdxArray.push(randIdx);
-        randUsername = this.state.interested[randIdx];
-        interested = interested.filter((rName) => rName !== randUsername);
+        randUsername = this.state.interested[randIdx].username;
+        interested = interested.map((uObj) => uObj.username)?.filter((rName) => rName !== randUsername);
         playing = [...playing, randUsername];
       }
     }
@@ -160,15 +161,15 @@ export default class PlayerSelectModal extends Component {
     })
   }
 
-  renderPlayerCard = (username, id, curColumn) => {
+  renderPlayerCard = (userObj, id, curColumn) => {
     return (
       <div key={id} className='playerCard'>
-        <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{username}</p>
+        <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{userObj.username}</p>
         <div className='changeColButtonsContainer'>
-        {curColumn !== 'interested' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, username, 'interested')}>Interested</button>}
-        {curColumn !== 'playing' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, username, 'playing')}>Playing</button>}
-        {/*curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, username, 'joined')}>Joined</button>*/}
-        <button className='changeCol' style={{backgroundColor: 'indianred'}} onClick={this.removeUser.bind(this, username)}>X</button>
+        {curColumn !== 'interested' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
+        {curColumn !== 'playing' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
+        {/*curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
+        <button className='changeCol' style={{backgroundColor: 'indianred'}} onClick={this.removeUser.bind(this, userObj.username)}>X</button>
         </div>
       </div>
     );
@@ -211,7 +212,7 @@ export default class PlayerSelectModal extends Component {
         <div className='playerCardContainer'>
           <div ref={this.firstColumn} className='playerCardColumn interested'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Interested</p>
-            {this.state.interested.map((username, i) => this.renderPlayerCard(username, i, 'interested') )}
+            {this.state.interested.map((userObj, i) => this.renderPlayerCard(userObj, i, 'interested') )}
           </div>
 
           <div className='playerCardColumn playing'>
@@ -220,12 +221,12 @@ export default class PlayerSelectModal extends Component {
               <img src={dice} style={{width:'100%', height: '100%'}}/>
             </button>
             </p>
-            {this.state.playing.map((username, i) => this.renderPlayerCard(username, i, 'playing') )}
+            {this.state.playing.map((userObj, i) => this.renderPlayerCard(userObj, i, 'playing') )}
           </div>
 
           <div className='playerCardColumn joined'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Joined</p>
-            {this.state.joined.map((username, i) => this.renderPlayerCard(username, i, 'joined') )}
+            {this.state.joined.map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
           </div>
         </div>
       </div>
