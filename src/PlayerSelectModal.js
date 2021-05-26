@@ -65,6 +65,17 @@ export default class PlayerSelectModal extends Component {
     });
   }
 
+  clearQueue = () => {
+    return this.setState((state) => {
+      return {
+        ...state,
+        interested: [],
+        playing: [],
+        joined: []
+      }
+    })
+  }
+
   playerCount = () => {
     return this.state.playing.length + this.state.joined.length +
             (this.state.streamerSeat ? 1 : 0);

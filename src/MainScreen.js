@@ -205,6 +205,10 @@ export default class MainScreen extends Component {
     this.playerSelector?.removeUser(user);
   }
 
+  routeClearQueueRequest = () => {
+    this.playerSelector?.clearQueue();
+  }
+
   startGame = () => {
     // I know this is a big ol' React sin, but I can't for the life of me
     //   figure out why this.togglePlayerSelect() isn't working... sooo...
@@ -234,6 +238,7 @@ export default class MainScreen extends Component {
           upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
           caniplayHandler={this.routePlayRequest}
           playerExitHandler={this.routeLeaveRequest}
+          clearQueueHandler={this.routeClearQueueRequest}
           ref={(mh) => this.messageHandler = mh}
         />
         <div style={{width: this.state.showPlayerSelectModal ? "90vw" : "45vw"}}>

@@ -118,6 +118,13 @@ export default class MessageHandler extends Component {
       this.props?.playerExitHandler(username);
       return true;
     }
+
+    if(message === "!clear") {
+      if(this.props.channel === username || this.props.modList.includes(username.toLowerCase())){
+        this.props?.clearQueueHandler();
+      }
+      return true;
+    }
   }
 
   findGame = (requestedGame, username) => {
