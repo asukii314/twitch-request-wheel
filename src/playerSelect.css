@@ -62,7 +62,7 @@ button.startGame {
 }
 
 .playerCardColumn {
-  width: 33%;
+  width: 50%;
   height: 100%;
   margin: 5px;
   border-radius: 5px;
@@ -78,6 +78,7 @@ button.startGame {
 
 .playerCardColumn.joined {
   background-color: seagreen;
+  display: none;
 }
 
 .playerCard {

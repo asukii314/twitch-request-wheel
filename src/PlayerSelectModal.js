@@ -130,7 +130,7 @@ export default class PlayerSelectModal extends Component {
         <div className='changeColButtonsContainer'>
         {curColumn !== 'interested' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, username, 'interested')}>Interested</button>}
         {curColumn !== 'playing' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, username, 'playing')}>Playing</button>}
-        {curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, username, 'joined')}>Joined</button>}
+        {/*curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, username, 'joined')}>Joined</button>*/}
         <button className='changeCol' style={{backgroundColor: 'indianred'}} onClick={this.removeUser.bind(this, username)}>X</button>
         </div>
       </div>
