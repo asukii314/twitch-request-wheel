@@ -34,12 +34,17 @@ div.header {
   margin: 0px 15px;
 }
 
-button.startGame {
-  margin: 5px;
+.playerCount {
+  font-size: 16px;
 }
 
-button.disabled {
-  color: gray;
+.playerCount.overlimit {
+  font-weight: bold;
+  color: darkorange;
+}
+
+button.startGame {
+  margin: 5px;
 }
 
 .playerSelectContainer {

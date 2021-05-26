@@ -78,6 +78,11 @@ export default class PlayerSelectModal extends Component {
     });
   }
 
+  canStartGame = () => {
+    return this.props.game?.['Max players'] >= this.playerCount() &&
+           this.props.game?.['Min players'] <= this.playerCount();
+  }
+
   startGame = () => {
     // clear for now; eventually, save elsewhere to report on user play history for that session
     this.setState ((state) => {
@@ -119,6 +124,14 @@ export default class PlayerSelectModal extends Component {
     )
   }
 
+  renderPlayerCount = () => {
+    let className = 'playerCount';
+    if(this.props.game?.['Max players'] < this.playerCount()) {
+      className += ' overlimit';
+    }
+    return (<p className={className}>{this.playerCount()} of {this.props.game?.['Max players']} seats claimed</p>)
+  }
+
   render() {
     let startGameClass = 'startGame';
     if(this.playerCount() < this.props.game?.['Min players']){
@@ -129,8 +142,8 @@ export default class PlayerSelectModal extends Component {
       <div className='playerSelectContainer'>
         <div className="header">
           {this.renderStreamerSeatToggle()}
-          <p style={{fontSize: '16px', fontWeight: 'bold'}}>{this.playerCount()} of {this.props.game?.['Max players']} seats claimed</p>
-          <button className={startGameClass} onClick={this.startGame}>Start Game</button>
+          {this.renderPlayerCount()}
+          <button className={startGameClass} onClick={this.startGame} disabled={!this.canStartGame()}>Start Game</button>
         </div>
         <div className='playerCardContainer'>
           <div ref={this.firstColumn} className='playerCardColumn interested'>
