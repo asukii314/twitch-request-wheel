@@ -235,7 +235,7 @@ export default class MainScreen extends Component {
 
           <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
           {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
-          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!caniplay</b> in {this.props.channel}'s chat if you want to join the next game</h4>}
+          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!new</b> in {this.props.channel}'s chat if you want to join the next game</h4>}
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
           <Sidebar
             history={this.state.history}
