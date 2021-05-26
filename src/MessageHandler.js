@@ -108,7 +108,7 @@ export default class MessageHandler extends Component {
       return true;
     }
 
-    //========= player join / leave requests =========
+    //========= player queue management =========
     if(message === "!caniplay" || message === "!new") {
       this.props?.caniplayHandler(username, message !== "!new")
       return true;
@@ -122,6 +122,13 @@ export default class MessageHandler extends Component {
     if(message === "!clear") {
       if(this.props.channel === username || this.props.modList.includes(username.toLowerCase())){
         this.props?.clearQueueHandler();
+      }
+      return true;
+    }
+
+    if(message === "!open") {
+      if(this.props.channel === username || this.props.modList.includes(username.toLowerCase())){
+        this.props?.openQueueHandler();
       }
       return true;
     }

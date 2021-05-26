@@ -205,6 +205,15 @@ export default class MainScreen extends Component {
     this.playerSelector?.removeUser(user);
   }
 
+  routeOpenQueueRequest = () => {
+    this.setState((state) => {
+      return {
+        ...state,
+        showPlayerSelectModal: true
+      }
+    })
+  }
+
   routeClearQueueRequest = () => {
     this.playerSelector?.clearQueue();
   }
@@ -238,6 +247,7 @@ export default class MainScreen extends Component {
           upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
           caniplayHandler={this.routePlayRequest}
           playerExitHandler={this.routeLeaveRequest}
+          openQueueHandler={this.routeOpenQueueRequest}
           clearQueueHandler={this.routeClearQueueRequest}
           ref={(mh) => this.messageHandler = mh}
         />
