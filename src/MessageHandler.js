@@ -132,6 +132,13 @@ export default class MessageHandler extends Component {
       }
       return true;
     }
+
+    if(message === "!close") {
+      if(this.props.channel === username || this.props.modList.includes(username.toLowerCase())){
+        this.props?.closeQueueHandler();
+      }
+      return true;
+    }
   }
 
   findGame = (requestedGame, username) => {

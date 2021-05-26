@@ -11,7 +11,8 @@ export default class PlayerSelectModal extends Component {
       interested: [],
       playing: [],
       joined: [],
-      streamerSeat: true
+      streamerSeat: true,
+      isQueueOpen: true
     }
   }
 
@@ -33,9 +34,16 @@ export default class PlayerSelectModal extends Component {
     if(this.state?.interested?.includes(username)
     || this.state?.playing?.includes(username)
     || this.state?.joined?.includes(username)) {
-      return false;
+      return 'you are already in the lobby.';
     }
-    return this.updateColumnForUser(username, 'interested');
+
+    if(!this.state.isQueueOpen) {
+      return 'the queue is currently closed; users have already been selected for this game.';
+    }
+
+    return this.updateColumnForUser(username, 'interested')
+      ? 'you have successfully joined the lobby.'
+      : 'there was an error adding you to the lobby.';
   }
 
   updateColumnForUser = (username, newColumn) => {
@@ -72,6 +80,24 @@ export default class PlayerSelectModal extends Component {
         interested: [],
         playing: [],
         joined: []
+      }
+    })
+  }
+
+  openQueue = () => {
+    return this.setState((state) => {
+      return {
+        ...state,
+        isQueueOpen: true
+      }
+    })
+  }
+
+  closeQueue = () => {
+    return this.setState((state) => {
+      return {
+        ...state,
+        isQueueOpen: false
       }
     })
   }

@@ -187,17 +187,12 @@ export default class MainScreen extends Component {
   }
 
   routePlayRequest = (user, sendConfirmationMsg=true) => {
-    let msg = null;
-    if(this.state.showPlayerSelectModal){
-      const success = this.playerSelector?.handleNewPlayerRequest(user);
-      msg = (success ? `/me @${user}, you have successfully joined the lobby.`
-                     : `/me @${user}, you had already joined the lobby.`);
-    } else {
-      msg = `/me @${user}, sign-up is currently closed; try again after this game wraps up!`
-    }
+    const msg = this.state.showPlayerSelectModal
+                  ? this.playerSelector?.handleNewPlayerRequest(user)
+                  : 'sign-ups are currently closed; try again after this game wraps up!'
 
     if(sendConfirmationMsg) {
-      this.messageHandler?.sendMessage(msg);
+      this.messageHandler?.sendMessage(`/me @${user}, ${msg}`);
     }
   }
 
@@ -212,6 +207,11 @@ export default class MainScreen extends Component {
         showPlayerSelectModal: true
       }
     })
+    this.playerSelector?.openQueue();
+  }
+
+  routeCloseQueueRequest = () => {
+    this.playerSelector?.closeQueue();
   }
 
   routeClearQueueRequest = () => {
@@ -248,6 +248,7 @@ export default class MainScreen extends Component {
           caniplayHandler={this.routePlayRequest}
           playerExitHandler={this.routeLeaveRequest}
           openQueueHandler={this.routeOpenQueueRequest}
+          closeQueueHandler={this.routeCloseQueueRequest}
           clearQueueHandler={this.routeClearQueueRequest}
           ref={(mh) => this.messageHandler = mh}
         />
