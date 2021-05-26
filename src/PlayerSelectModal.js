@@ -89,24 +89,24 @@ export default class PlayerSelectModal extends Component {
     }
 
     return (
-      <div style={{backgroundColor: 'red'}}>
+      <div className='playerSelectContainer'>
         <div className="header">
           <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '14px', fontWeight: 'bold'}}>{this.playerCount()} of {this.props.game['Max players']} seats claimed</p>
           <button className={startGameClass}>Start Game</button>
         </div>
 
         <div className='playerCardContainer'>
-          <div ref={this.firstColumn} className='playerCardColumn' style={{backgroundColor: 'blue'}}>
+          <div ref={this.firstColumn} className='playerCardColumn interested'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Interested</p>
             {this.state.interested.map((username, i) => this.basicPlayerCard(username, i, 'interested') )}
           </div>
 
-          <div className='playerCardColumn' style={{backgroundColor: 'green'}}>
+          <div className='playerCardColumn playing'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Playing</p>
             {this.state.playing.map((username, i) => this.basicPlayerCard(username, i, 'playing') )}
           </div>
 
-          <div className='playerCardColumn' style={{backgroundColor: 'green'}}>
+          <div className='playerCardColumn joined'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Joined</p>
             {this.state.joined.map((username, i) => this.basicPlayerCard(username, i, 'joined') )}
           </div>
