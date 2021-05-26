@@ -9,7 +9,8 @@ export default class PlayerSelectModal extends Component {
     this.state = {
       interested: ['CrunchyButtMD', 'thelongestallowedusername', 'test3', 'test4', 'test5', 'test6', 'test7', 'test8', 'test9', 'test10', 'test11', 'test12', 'test13', 'test14'],
       playing: [],
-      joined: []
+      joined: [],
+      streamerSeat: true
     }
   }
 
@@ -63,8 +64,21 @@ export default class PlayerSelectModal extends Component {
     });
   }
 
+  playerCount = () => {
+    return this.state.playing.length + this.state.joined.length +
+            (this.state.streamerSeat ? 1 : 0);
+  }
 
-  basicPlayerCard = (username, id, curColumn) => {
+  toggleStreamerSeat = () => {
+    this.setState((state) => {
+      return {
+        ...state,
+        streamerSeat: !state.streamerSeat
+      }
+    });
+  }
+
+  renderPlayerCard = (username, id, curColumn) => {
     return (
       <div key={id} className='playerCard'>
         <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{username}</p>
@@ -78,8 +92,18 @@ export default class PlayerSelectModal extends Component {
     );
   }
 
-  playerCount = () => {
-    return this.state.playing.length + this.state.joined.length;
+  renderStreamerSeatToggle = () => {
+    return (
+      <div class='my-toggle-group'>
+      <p class='toggle-label'> Reserve seat for streamer? </p>
+        <div class='my-toggle'>
+            <input type="checkbox" onChange={this.toggleStreamerSeat}/>
+            <div class='my-toggle-text no' aria-hidden="true">No</div>
+            <div class='my-toggle-text yes' aria-hidden="true">Yes</div>
+            <div class='my-toggle-orb'></div>
+        </div>
+      </div>
+    )
   }
 
   render() {
@@ -91,24 +115,24 @@ export default class PlayerSelectModal extends Component {
     return (
       <div className='playerSelectContainer'>
         <div className="header">
-          <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '14px', fontWeight: 'bold'}}>{this.playerCount()} of {this.props.game['Max players']} seats claimed</p>
+          {this.renderStreamerSeatToggle()}
+          <p style={{fontSize: '16px', fontWeight: 'bold'}}>{this.playerCount()} of {this.props.game['Max players']} seats claimed</p>
           <button className={startGameClass}>Start Game</button>
         </div>
-
         <div className='playerCardContainer'>
           <div ref={this.firstColumn} className='playerCardColumn interested'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Interested</p>
-            {this.state.interested.map((username, i) => this.basicPlayerCard(username, i, 'interested') )}
+            {this.state.interested.map((username, i) => this.renderPlayerCard(username, i, 'interested') )}
           </div>
 
           <div className='playerCardColumn playing'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Playing</p>
-            {this.state.playing.map((username, i) => this.basicPlayerCard(username, i, 'playing') )}
+            {this.state.playing.map((username, i) => this.renderPlayerCard(username, i, 'playing') )}
           </div>
 
           <div className='playerCardColumn joined'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Joined</p>
-            {this.state.joined.map((username, i) => this.basicPlayerCard(username, i, 'joined') )}
+            {this.state.joined.map((username, i) => this.renderPlayerCard(username, i, 'joined') )}
           </div>
         </div>
       </div>

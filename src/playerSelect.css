@@ -29,8 +29,9 @@ div.changeColButtonsContainer:hover {
 div.header {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   padding-top: 5px;
+  margin: 0px 15px;
 }
 
 button.startGame {
@@ -93,3 +94,123 @@ button.disabled {
   word-wrap: break-word;
   text-align: left;
 }
+
+
+/* // ---------------------- Variables */
+
+:root {
+  --my-toggle-background: #e5e7eb;
+  --my-toggle-label-color: #1f2937;
+  --my-toggle-sublabel-color: #6b7280;
+  --my-toggle-width: 50px;
+  --my-toggle-height: calc(var(--my-toggle-width) / 2);
+  --my-toggle-gap-size: 4px;
+  --my-toggle-text-color: #ffffff;
+  --my-toggle-orb-background-color: #ffffff;
+  --my-toggle-orb-size: calc(
+    var(--my-toggle-height) - (var(--my-toggle-gap-size) * 2)
+  );
+  --my-toggle-active-background-color: #34d399;
+  --my-toggle-inactive-background-color: #f87171;
+}
+
+/* // ---------------------- The toggle group */
+.my-toggle-group {
+  display: flex;
+  align-items: center;
+}
+
+.my-toggle {
+  background: var(--my-toggle-background);
+  width: var(--my-toggle-width);
+  height: var(--my-toggle-height);
+  border-radius: var(--my-toggle-height);
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.toggle-label {
+  font-size: 12px;
+  max-width: 80px;
+  overflow-wrap: break-word;
+  text-align: right;
+  margin-right: 8px;
+}
+
+
+/* // ------ On off texts */
+
+.my-toggle-text {
+  width: calc(var(--my-toggle-width) / 2);
+  position: absolute;
+  height: var(--my-toggle-height);
+  font-size: 0.6rem;
+  color: var(--my-toggle-text-color);
+  top: 0;
+  display: flex;
+  line-height: var(--my-toggle-orb-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  left: var(--my-toggle-gap-size);
+  font-weight: 500;
+}
+
+.my-toggle-text:nth-child(2) {
+  left: calc(50% - var(--my-toggle-gap-size));
+  right: var(--my-toggle-gap-size);
+}
+
+/* // ------ Toggle orb */
+
+.my-toggle-orb {
+  width: var(--my-toggle-orb-size);
+  height: var(--my-toggle-orb-size);
+  display: block;
+  border-radius: var(--my-toggle-orb-size);
+  top: var(--my-toggle-gap-size);
+  right: var(--my-toggle-gap-size);
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  position: absolute;
+  background: var(--my-toggle-orb-background-color);
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+
+
+  /* // ------ The checkbox */
+
+  input[type="checkbox"] {
+    height: var(--my-toggle-width);
+    width: var(--my-toggle-width);
+    margin: 0;
+    background: var(--my-toggle-active-background-color);
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  input[type="checkbox"]:checked {
+    background: var(--my-toggle-inactive-background-color);
+  }
+
+  input[type="checkbox"]:checked ~ .my-toggle-orb {
+    transform: translateX(
+      calc(
+        -1 * (calc(var(--my-toggle-width) - var(--my-toggle-orb-size))) + calc(var(
+                --my-toggle-gap-size
+              ) * 2)
+      )
+    );
+  }
+
+  input[type="checkbox"]:checked ~ .my-toggle-text.yes {
+    visibility: hidden;
+  }
+  input[type="checkbox"]:not(:checked) ~ .my-toggle-text.no {
+    visibility: hidden;
+  }
