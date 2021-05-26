@@ -1,0 +1,374 @@
+# Here's a list of all Jackbox games (as of April 2021),
+# and all the different ways you can !request them.
+# (Any capitalization is fine.)
+#
+# If you tried to write a real Jackbox game in a different
+# and the bot didn't recognize it, message @asukii314 on
+# twitch to get that variant added!
+
+
+Any Version:
+  Quiplash:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - quiplash
+      - ql
+  Trivia Murder Party:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - tmp
+      - trivia murder party
+  Fibbage:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - fibbage
+  You Don't Know Jack:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - ydkj
+      - you dont know jack
+      - you don't know jack
+  Drawful:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - drawful
+
+
+Party Pack 1:
+  You Don't Know Jack:
+    Min players: 1
+    Max players: 4
+    Variants:
+      - ydkj 1
+      - ydkj 2015
+      - you dont know jack 1
+      - you dont know jack 2015
+      - you don't know jack 1
+      - you don't know jack 2015
+      - "you don't know jack: 2015"
+  Drawful:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - drawful 1
+  Word Spud:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - word spud
+      - wordspud
+  Lie Swatter:
+    Min players: 1
+    Max players: 100
+    Variants:
+      - lie swatter
+      - lieswatter
+  Fibbage:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - fibbage 1
+      - fibbage xl
+
+
+Party Pack 2:
+  Quiplash 1:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - quiplash 1
+      - quiplash1
+      - ql1
+      - ql 1
+      - quiplash xl
+      - ql xl
+      - qlxl
+  Fibbage 2:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - fibbage 2
+  Bidiots:
+    Min players: 3
+    Max players: 6
+    Variants:
+      - bidiots
+  Bomb Corp:
+    Min players: 1
+    Max players: 4
+    Variants:
+      - bomb
+      - bomb corp
+      - bombcorp
+  Earwax:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - earwax
+      - ear wax
+
+
+Party Pack 3:
+  Fakin' It:
+    Min players: 3
+    Max players: 6
+    Variants:
+      - fakin
+      - fakin it
+      - fakin' it
+      - faking it
+      - fake it
+  Guesspionage:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - guesspionage
+  Tee K.O.:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - tko
+      - t ko
+      - tee ko
+      - tee k.o
+      - tee k.o.
+      - t.k.o.
+  Trivia Murder Party 1:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - tmp1
+      - tmp 1
+      - trivia murder party 1
+  Quiplash 2:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - quiplash 2
+      - quiplash2
+      - ql2
+      - ql 2
+
+
+Party Pack 4:
+  "Fibbage: Enough About You":
+    Min players: 2
+    Max players: 8
+    Variants:
+      - eay
+      - enough about you
+      - feay
+      - fibbage eay
+      - "fibbage: eay"
+      - fibbage enough about you
+      - "fibbage: enough about you"
+  Fibbage 3:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - fibbage 3
+  Survive The Internet:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - survive
+      - survive the internet
+      - sti
+  Monster Seeking Monster:
+    Min players: 3
+    Max players: 7
+    Variants:
+      - msm
+      - monster seeking monster
+      - monster seeking monsters
+      - monsters seeking monsters
+  Bracketeering:
+    Min players: 3
+    Max players: 16
+    Variants:
+      - bracketeering
+      - bracketeer
+      - bracket
+  Civic Doodle:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - civic doodle
+      - civicdoodle
+      - civic
+
+
+Party Pack 5:
+  You Don't Know Jack:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - ydkj 2
+      - ydkj fs
+      - ydkjfs
+      - you dont know jack 2
+      - you don't know jack 2
+      - you don't know jack full stream
+      - you don't know jack full steam
+      - "you don't know jack: full stream"
+  Mad Verse City:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - mvc
+      - madverse
+      - mad verse
+      - madversecity
+      - mad verse city
+  Patently Stupid:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - patently stupid
+      - patentlystupid
+      - patently
+      - patent
+  Zeeple Dome:
+    Min players: 1
+    Max players: 6
+    Variants:
+      - zeeple
+      - zeeple dome
+  Split the Room:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - split the room
+      - split room
+      - room split
+      - split
+      - str
+
+
+Party Pack 6:
+  Trivia Murder Party 2:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - tmp2
+      - tmp 2
+      - trivia murder party 2
+  Push The Button:
+    Min players: 4
+    Max players: 10
+    Variants:
+      - ptb
+      - push the button
+      - push da button
+  Dictionarium:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - dictionarium
+      - dictionary
+  Role Models:
+    Min players: 3
+    Max players: 6
+    Variants:
+      - role models
+      - rolemodels
+  Joke Boat:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - joke boat
+      - jokeboat
+
+
+Party Pack 7:
+  Quiplash 3:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - ql3
+      - ql 3
+      - quiplash 3
+      - quiplash3
+  Champ'd Up:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - champd
+      - champd up
+      - champ'd
+      - champ'd up
+      - champed up
+  Blather 'Round:
+    Min players: 2
+    Max players: 6
+    Variants:
+      - blather
+      - blather round
+      - blather 'round
+      - blatherround
+      - blatheround
+  Talking Points:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - talking points
+  The Devils and the Details:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - devils
+      - devils in details
+      - devils and details
+      - devils & details
+      - devil's in details
+      - devil's and details
+      - devil's & details
+      - devils in the details
+      - devils and the details
+      - devils & the details
+      - devil's in the details
+      - devil's and the details
+      - devil's & the details
+      - the devils in the details
+      - the devils and the details
+      - the devils & the details
+      - the devil's in the details
+      - the devil's and the details
+      - the devil's & the details
+
+
+Standalone:
+  Drawful 2:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - drawful 2
+
+  What the Dub?!:
+    Min players: 2
+    Max players: 6
+    Variants:
+      - what the dub
+      - wtd
+
+  Gartic Phone:
+    Min players: 4
+    Max players: 30
+    Variants:
+      - gartic phone
+      - garlic phone
+      - gartic
+      - garlic
+
+  Among Us:
+    Min players: 4
+    Max players: 10
+    Variants:
+      - among us
+      - amongus
+      - amogus
