@@ -88,19 +88,19 @@ export default class MessageHandler extends Component {
     }
 
     //========= set next game =========
-    if(message.startsWith("!setnextgame") || message.startsWith("!redeem")) {
+    if(message.startsWith("!setnextgame") || message.startsWith("!redeemgame")) {
       if(!this.isModOrBroadcaster(username)){
-        this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!s") ? "!setNextGame" : "!redeem"} command.`);
+        this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!s") ? "!setNextGame" : "!redeemgame"} command.`);
         return true;
       }
 
-      const requestedGame = message.replace("!setnextgame", "").replace("!redeem", "").trim();
+      const requestedGame = message.replace("!setnextgame", "").replace("!redeemgame", "").trim();
       if(requestedGame === "") {
-        this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, ${message.startsWith("!s") ? "!setNextGame" : "!redeem"} TMP 2`);
+        this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, ${message.startsWith("!s") ? "!setNextGame" : "!redeemgame"} TMP 2`);
         return true;
       }
 
-      const gameObj = this.findGame(requestedGame);
+      const gameObj = this.findGame(requestedGame, username);
       if(gameObj) {
         const numGamesAhead = this.props.setNextGame(gameObj);
         if(numGamesAhead === 0) {
@@ -121,12 +121,16 @@ export default class MessageHandler extends Component {
       return true;
     }
 
-    if(message.startsWith("!priorityseat")) {
+    if(message.startsWith("!priorityseat") || message.startsWith("!redeemseat")) {
       if(!this.isModOrBroadcaster(username)){
         this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
         return true;
       }
-      const redeemingUser = message.replace("!priorityseat", "").replace("@", "").trim();
+      const redeemingUser = message.replace("!priorityseat", "").replace("!redeemseat", "").replace("@", "").trim();
+      if(redeemingUser === "") {
+        this.sendMessage(`/me @${username}, please specify the user who has redeemed a priority seat in the next game: for example, ${message.startsWith("!p") ? "!priorityseat" : "!redeemseat"} @asukii314`);
+        return true;
+      }
       this.props?.caniplayHandler(redeemingUser, {
         sendConfirmationMsg: true,
         isPrioritySeat: true
@@ -158,6 +162,10 @@ export default class MessageHandler extends Component {
         this.props?.closeQueueHandler();
       }
       return true;
+    }
+
+    if(message.startsWith("!redeem")) {
+      this.sendMessage(`/me @${username}, this command is no longer supported: please specify either !redeemgame or !redeemseat.`);
     }
   }
 
