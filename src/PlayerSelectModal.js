@@ -150,7 +150,7 @@ export default class PlayerSelectModal extends Component {
     );
 
     let randIdx, randUsername;
-    let randIdxArray = [];
+    let randIdxArray = [], randUsernameArray = [];
     let interested = this.state.interested;
     let playing = this.state.playing;
 
@@ -159,7 +159,7 @@ export default class PlayerSelectModal extends Component {
       if(!randIdxArray.includes(randIdx)) {
         randIdxArray.push(randIdx);
         randUsername = this.state.interested[randIdx].username;
-        interested = interested.map((uObj) => uObj.username)?.filter((rName) => rName !== randUsername);
+        randUsernameArray.push(randUsername);
         playing = [
           ...playing,
           this.state.interested[randIdx]
@@ -169,7 +169,7 @@ export default class PlayerSelectModal extends Component {
     this.setState((state) => {
       return {
         ...state,
-        interested,
+        interested: state.interested.filter((uObj) => !randUsernameArray.includes(uObj.username)),
         playing
       }
     })
