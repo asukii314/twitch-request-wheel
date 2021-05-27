@@ -115,7 +115,22 @@ export default class MessageHandler extends Component {
 
     //========= player queue management =========
     if(message === "!caniplay" || message === "!new") {
-      this.props?.caniplayHandler(username, message !== "!new")
+      this.props?.caniplayHandler(username, {
+        sendConfirmationMsg: message !== "!new"
+      });
+      return true;
+    }
+
+    if(message.startsWith("!priorityseat")) {
+      if(!this.isModOrBroadcaster(username)){
+        this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+        return true;
+      }
+      const redeemingUser = message.replace("!priorityseat", "").replace("@", "").trim();
+      this.props?.caniplayHandler(redeemingUser, {
+        sendConfirmationMsg: true,
+        isGuaranteedSeat: true
+      });
       return true;
     }
 

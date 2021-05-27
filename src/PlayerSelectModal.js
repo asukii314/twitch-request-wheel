@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './playerSelect.css';
 import dice from './dice.svg';
+import star from './star.svg';
 
 // yes, I know it's not actually a modal, I changed my mind and I can't be arsed to change the class name
 export default class PlayerSelectModal extends Component {
@@ -30,7 +31,16 @@ export default class PlayerSelectModal extends Component {
     })
   }
 
-  handleNewPlayerRequest = (username, column='interested') => {
+  handleNewPlayerRequest = (username, {isGuaranteedSeat=false}) => {
+    if(isGuaranteedSeat) {
+      // even if the queue is closed, still add them to the interested column for consideration
+      const column = (this.state.isQueueOpen ? 'playing' : 'interested');
+
+      return this.updateColumnForUser({username, isGuaranteedSeat}, column)
+        ? 'you have been successfully added to the lobby.'
+        : 'there was an error adding you to the lobby.';
+    }
+
     if(this.state?.interested?.map((uObj) => uObj.username)?.includes(username)
     || this.state?.playing?.map((uObj) => uObj.username)?.includes(username)
     || this.state?.joined?.map((uObj) => uObj.username)?.includes(username)) {
@@ -40,15 +50,13 @@ export default class PlayerSelectModal extends Component {
     if(!this.state.isQueueOpen) {
       return 'the queue is currently closed; users have already been selected for this game.';
     }
-
-    return this.updateColumnForUser({username}, column)
+    return this.updateColumnForUser({username}, 'interested')
       ? 'you have successfully joined the lobby.'
       : 'there was an error adding you to the lobby.';
   }
 
   updateColumnForUser = (userObj, newColumn) => {
-    if(!this.state || !this.state[newColumn]
-      || this.state[newColumn]?.map((uObj) => uObj.username)?.includes(userObj.username)) return false;
+    if(!this.state || !this.state[newColumn]) return false;
 
     this.removeUser(userObj.username);
     this.setState((state) => {
@@ -164,7 +172,10 @@ export default class PlayerSelectModal extends Component {
   renderPlayerCard = (userObj, id, curColumn) => {
     return (
       <div key={id} className='playerCard'>
-        <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{userObj.username}</p>
+        <div style={{display: 'flex'}}>
+          {userObj.isGuaranteedSeat === true && <img src={star} alt="Priority seat redemption" style={{width: '16px', marginLeft: '3px'}}/>}
+          <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{userObj.username}</p>
+        </div>
         <div className='changeColButtonsContainer'>
         {curColumn !== 'interested' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
         {curColumn !== 'playing' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
