@@ -12,7 +12,7 @@ export default class PlayerSelectModal extends Component {
       interested: [],
       playing: [],
       joined: [],
-      streamerSeat: true,
+      streamerSeat: false,
       isQueueOpen: true
     }
   }
@@ -197,7 +197,7 @@ export default class PlayerSelectModal extends Component {
       <div class='my-toggle-group'>
       <p class='toggle-label'> Reserve seat for streamer? </p>
         <div class='my-toggle'>
-            <input type="checkbox" onChange={this.toggleStreamerSeat}/>
+            <input type="checkbox" defaultChecked={true} onChange={this.toggleStreamerSeat}/>
             <div class='my-toggle-text no' aria-hidden="true">No</div>
             <div class='my-toggle-text yes' aria-hidden="true">Yes</div>
             <div class='my-toggle-orb'></div>
