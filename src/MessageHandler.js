@@ -129,7 +129,7 @@ export default class MessageHandler extends Component {
       const redeemingUser = message.replace("!priorityseat", "").replace("@", "").trim();
       this.props?.caniplayHandler(redeemingUser, {
         sendConfirmationMsg: true,
-        isGuaranteedSeat: true
+        isPrioritySeat: true
       });
       return true;
     }

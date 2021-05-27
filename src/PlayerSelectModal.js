@@ -31,12 +31,12 @@ export default class PlayerSelectModal extends Component {
     })
   }
 
-  handleNewPlayerRequest = (username, {isGuaranteedSeat=false}) => {
-    if(isGuaranteedSeat) {
+  handleNewPlayerRequest = (username, {isPrioritySeat=false}) => {
+    if(isPrioritySeat) {
       // even if the queue is closed, still add them to the interested column for consideration
       const column = (this.state.isQueueOpen ? 'playing' : 'interested');
 
-      return this.updateColumnForUser({username, isGuaranteedSeat}, column)
+      return this.updateColumnForUser({username, isPrioritySeat}, column)
         ? 'you have been successfully added to the lobby.'
         : 'there was an error adding you to the lobby.';
     }
@@ -173,7 +173,7 @@ export default class PlayerSelectModal extends Component {
     return (
       <div key={id} className='playerCard'>
         <div style={{display: 'flex'}}>
-          {userObj.isGuaranteedSeat === true && <img src={star} alt="Priority seat redemption" style={{width: '16px', marginLeft: '3px'}}/>}
+          {userObj.isPrioritySeat === true && <img src={star} alt="Priority seat redemption" style={{width: '16px', marginLeft: '3px'}}/>}
           <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{userObj.username}</p>
         </div>
         <div className='changeColButtonsContainer'>
@@ -223,7 +223,8 @@ export default class PlayerSelectModal extends Component {
         <div className='playerCardContainer'>
           <div ref={this.firstColumn} className='playerCardColumn interested'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Interested</p>
-            {this.state.interested.map((userObj, i) => this.renderPlayerCard(userObj, i, 'interested') )}
+            {this.state.interested.filter((iObj) => iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'interested') )}
+            {this.state.interested.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'interested') )}
           </div>
 
           <div className='playerCardColumn playing'>
@@ -232,12 +233,14 @@ export default class PlayerSelectModal extends Component {
               <img src={dice} style={{width:'100%', height: '100%'}}/>
             </button>
             </p>
-            {this.state.playing.map((userObj, i) => this.renderPlayerCard(userObj, i, 'playing') )}
+            {this.state.playing.filter((iObj) => iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'playing') )}
+            {this.state.playing.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'playing') )}
           </div>
 
           <div className='playerCardColumn joined'>
             <p style={{marginTop: '0', paddingTop: '10px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold'}}>Joined</p>
-            {this.state.joined.map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
+            {this.state.joined.filter((iObj) => iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
+            {this.state.joined.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
           </div>
         </div>
       </div>

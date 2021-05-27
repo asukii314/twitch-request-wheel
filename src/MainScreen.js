@@ -186,9 +186,9 @@ export default class MainScreen extends Component {
     })
   }
 
-  routePlayRequest = (user, {sendConfirmationMsg = true, isGuaranteedSeat = false}) => {
+  routePlayRequest = (user, {sendConfirmationMsg = true, isPrioritySeat = false}) => {
     const msg = this.state.showPlayerSelectModal
-                  ? this.playerSelector?.handleNewPlayerRequest(user, {isGuaranteedSeat})
+                  ? this.playerSelector?.handleNewPlayerRequest(user, {isPrioritySeat})
                   : 'sign-ups are currently closed; try again after this game wraps up!'
 
     if(sendConfirmationMsg) {
