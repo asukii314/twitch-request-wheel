@@ -37,6 +37,8 @@ Any Version:
     Max players: 8
     Variants:
       - drawful
+      - drawfull
+      - draw full
 
 
 Party Pack 1:
@@ -56,6 +58,8 @@ Party Pack 1:
     Max players: 8
     Variants:
       - drawful 1
+      - drawfull 1
+      - draw full 1
   Word Spud:
     Min players: 2
     Max players: 8
@@ -348,6 +352,8 @@ Standalone:
     Max players: 8
     Variants:
       - drawful 2
+      - drawfull 2
+      - draw full 2
 
   What the Dub?!:
     Min players: 2

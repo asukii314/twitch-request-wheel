@@ -144,7 +144,10 @@ export default class PlayerSelectModal extends Component {
   }
 
   randomizePlayers = () => {
-    const numPlayersToAdd = Math.min(this.props.game['Max players'] - this.playerCount(), this.state.interested.length);
+    const numPlayersToAdd = Math.min(
+      this.props.game['Max players'] - this.playerCount(),
+      this.state.interested.length
+    );
 
     let randIdx, randUsername;
     let randIdxArray = [];
@@ -157,7 +160,10 @@ export default class PlayerSelectModal extends Component {
         randIdxArray.push(randIdx);
         randUsername = this.state.interested[randIdx].username;
         interested = interested.map((uObj) => uObj.username)?.filter((rName) => rName !== randUsername);
-        playing = [...playing, randUsername];
+        playing = [
+          ...playing,
+          this.state.interested[randIdx]
+        ];
       }
     }
     this.setState((state) => {
