@@ -55,7 +55,22 @@ export default class MessageHandler extends Component {
     }
 
     if(message === "!wheelcommands") {
-      `/me @${username}, click here to read about all supported commands: https://github.com/asukii314/twitch-request-wheel/blob/master/src/Commands.yaml`
+      this.sendMessage(`/me @${username}, click here to read about all supported commands: https://github.com/asukii314/twitch-request-wheel/blob/master/src/Commands.yaml`);
+      return true;
+    }
+
+    if(message.startsWith("!whichpack")) {
+      const requestedGame = message.replace("!whichpack", "").trim();
+      if(requestedGame === "") {
+        this.sendMessage(`/me @${username}, please specify the game you would like to look up the party pack for: e.g. !whichpack TMP 2`);
+        return true;
+      }
+
+      const gameObj = this.findGame(requestedGame, username);
+      if(gameObj) {
+        this.sendMessage(`/me @${username}, ${gameObj.name} is a ${gameObj.partyPack} game.`);
+      }
+      return true;
     }
 
     //========= advance next game =========

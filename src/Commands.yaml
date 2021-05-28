@@ -10,13 +10,6 @@
   - On-screen equivalent: n/a
   - Variants: n/a
 
-!gamelist
-  - Example: !gamelist
-  - Available to: Everyone
-  - What it does: Responds with a URL to a page displaying all requestable games, and the "short-forms" you can use to request them (e.g. "MSM" for Monster Seeking Monster).
-  - On-screen equivalent: n/a
-  - Variants: !gameslist
-
 !nextgame
   - Example: !nextgame
   - Available to: Everyone
@@ -101,6 +94,20 @@
 ###
 ### Other / misc
 ###
+
+!gamelist
+  - Example: !gamelist
+  - Available to: Everyone
+  - What it does: Responds with a URL to a page displaying all requestable games, and the "short-forms" you can use to request them (e.g. "MSM" for Monster Seeking Monster).
+  - On-screen equivalent: n/a
+  - Variants: !gameslist
+
+!whichpack
+  - Example: !whichpack TMP 2
+  - Available to: Everyone
+  - What it does: Looks up the specified game and responds with which party pack (if any) it's in.
+  - On-screen equivalent: n/a
+  - Variants: n/a
 
 !wheelcommands
   - Example: !wheelcommands
