@@ -48,10 +48,14 @@ export default class MessageHandler extends Component {
 
   // returns true iff a known command was found & responded to
   checkForMiscCommands = (message, username) => {
-    //========= game list =========
+    //========= general =========
     if(message.startsWith("!gamelist") || message.startsWith("!gameslist")) {
       this.sendMessage(`/me @${username}, click here for a list of valid Jackbox games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
       return true;
+    }
+
+    if(message === "!wheelcommands") {
+      `/me @${username}, click here to read about all supported commands: https://github.com/asukii314/twitch-request-wheel/blob/master/src/Commands.yaml`
     }
 
     //========= advance next game =========

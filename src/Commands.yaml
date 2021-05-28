@@ -97,3 +97,14 @@
   - What it does: Removes all users from the board.
   - On-screen equivalent: n/a
   - Variants: n/a
+
+###
+### Other / misc
+###
+
+!wheelcommands
+  - Example: !wheelcommands
+  - Available to: Everyone
+  - What it does: Responds with a link to this documentation page.
+  - On-screen equivalent: n/a
+  - Variants: n/a
