@@ -234,7 +234,7 @@ export default class MessageHandler extends Component {
     let prevRequestedGameName = null;
     for(const [gameName, metadata] of Object.entries(this.props.messages)) {
       if(metadata.username === tags.username){
-        prevRequestedGameName = metadata.name;
+        prevRequestedGameName = metadata.longName;
         break;
       }
     }
