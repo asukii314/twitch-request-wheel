@@ -224,7 +224,7 @@ export default class PlayerSelectModal extends Component {
         <div className="header">
           {this.renderStreamerSeatToggle()}
           <div style={{marginTop: '10px'}}>
-          <b>{this.props.game.name}</b>
+          <b>{this.props.game?.name ?? "TBD"}</b>
           {this.renderPlayerCount()}
           </div>
           <button className={startGameClass} onClick={this.startGame} disabled={!this.canStartGame()}>Start Game</button>
