@@ -91,6 +91,13 @@
   - On-screen equivalent: n/a
   - Variants: n/a
 
+!startgame
+  - Example: !startgame
+  - Available to: Mods + broadcaster
+  - What it does: Closes the player select screen and moves the next game counter forward by one. (Does nothing if the player select screen was already closed.)
+  - On-screen equivalent: The "Start Game" button in the top right hand corner of the seat request screen.
+  - Variants: n/a
+
 ###
 ### Other / misc
 ###

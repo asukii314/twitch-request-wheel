@@ -221,8 +221,12 @@ export default class MainScreen extends Component {
   startGame = () => {
     // I know this is a big ol' React sin, but I can't for the life of me
     //   figure out why this.togglePlayerSelect() isn't working... sooo...
-    this.state.showPlayerSelectModal = false;
-    this.moveNextGameFwd();
+    if(this.state.showPlayerSelectModal) {
+      this.state.showPlayerSelectModal = false;
+      this.moveNextGameFwd();
+      return true;
+    }
+    return false;
   }
 
   render() {
@@ -238,6 +242,7 @@ export default class MainScreen extends Component {
           addGameRequest={this.addGameRequest}
           setNextGame={this.setNextGame}
           changeNextGameIdx={this.changeNextGameIdx}
+          startGame={this.startGame}
           messages={this.state.messages}
           channel={this.props.channel}
           modList={this.props.modList}

@@ -183,6 +183,18 @@ export default class MessageHandler extends Component {
       return true;
     }
 
+    if(message === "!startgame") {
+      if(!this.isModOrBroadcaster(username)){
+        this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+        return true;
+      }
+      if(this.props.startGame()) {
+        this.sendMessage(`/me @${username}, the game has been started.`);
+      } else {
+        this.sendMessage(`/me @${username}, the game was already started.`);
+      }
+    }
+
     if(message.startsWith("!redeem")) {
       this.sendMessage(`/me @${username}, this command is no longer supported: please specify either !redeemgame or !redeemseat.`);
     }
