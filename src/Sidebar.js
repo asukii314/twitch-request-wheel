@@ -47,10 +47,13 @@ export default class Sidebar extends Component {
           <p style={{fontSize: "14px", fontWeight: "700", padding: '8px'}}> Up Next:
             <p style={{marginBottom: '5px'}}>{this.getNextGameName()}</p>
             <p style={{fontSize: "11px", fontWeight: "400", marginTop: '0px', color: "lightgray"}}><i>{this.getNextGamePartyPack()}</i></p>
-            {this.props.requestMode === 'game' && <button disabled={!this.hasNextGame()} onClick={this.props.selectPlayers} style={{fontSize: "12px", padding: "5px", backgroundColor: "aquamarine", color: "black", borderRadius: "5px", width: "90%"}}>
+            {this.props.requestMode === 'game' && <button disabled={!this.hasNextGame()} onClick={this.props.togglePlayerSelect} style={{fontSize: "12px", padding: "5px", backgroundColor: "aquamarine", color: "black", borderRadius: "5px", width: "90%"}}>
               {this.hasNextGame()
                   ? <b>OPEN SEAT REQUESTS</b>
                   : <i style={{color: "gray"}}>OPEN SEAT REQUESTS</i>}
+            </button>}
+            {this.props.requestMode === 'seat' && <button onClick={this.props.togglePlayerSelect} style={{fontSize: "12px", padding: "5px", backgroundColor: "aquamarine", color: "black", borderRadius: "5px", width: "90%"}}>
+              <b>RETURN TO WHEEL</b>
             </button>}
           </p>
         </div>

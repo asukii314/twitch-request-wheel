@@ -264,7 +264,7 @@ export default class MainScreen extends Component {
             changeNextGameIdx={this.changeNextGameIdx}
             moveNextGameFwd={this.moveNextGameFwd}
             moveNextGameBack={this.moveNextGameBack}
-            selectPlayers={this.togglePlayerSelect}
+            togglePlayerSelect={this.togglePlayerSelect}
             requestMode={this.state.showPlayerSelectModal ? 'seat' : 'game'}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
