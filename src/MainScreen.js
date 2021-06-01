@@ -299,6 +299,7 @@ export default class MainScreen extends Component {
               downDuration={1000}
               primaryColor={"white"}
               contrastColor={"black"}
+              fontFamily={"Arial"}
             />
           {/*  <Modal/>*/}
           </div>
