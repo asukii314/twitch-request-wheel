@@ -13,6 +13,7 @@ Any Version:
     Max players: 8
     Variants:
       - quiplash
+      - quip
       - ql
   Trivia Murder Party:
     Min players: 1
@@ -57,6 +58,7 @@ Party Pack 1:
     Min players: 3
     Max players: 8
     Variants:
+      - drawful1
       - drawful 1
       - drawfull 1
       - draw full 1
@@ -76,6 +78,7 @@ Party Pack 1:
     Min players: 2
     Max players: 8
     Variants:
+      - fibbage1
       - fibbage 1
       - fibbage xl
 
@@ -87,6 +90,8 @@ Party Pack 2:
     Variants:
       - quiplash 1
       - quiplash1
+      - quip 1
+      - quip1
       - ql1
       - ql 1
       - quiplash xl
@@ -96,6 +101,7 @@ Party Pack 2:
     Min players: 2
     Max players: 8
     Variants:
+      - fibbage2
       - fibbage 2
   Bidiots:
     Min players: 3
@@ -155,6 +161,8 @@ Party Pack 3:
     Variants:
       - quiplash 2
       - quiplash2
+      - quip 2
+      - quip2
       - ql2
       - ql 2
 
@@ -176,6 +184,7 @@ Party Pack 4:
     Max players: 8
     Variants:
       - fibbage 3
+      - fibbage3
   Survive The Internet:
     Min players: 3
     Max players: 8
@@ -243,11 +252,13 @@ Party Pack 5:
     Variants:
       - zeeple
       - zeeple dome
+      - zeepledome
   Split the Room:
     Min players: 3
     Max players: 8
     Variants:
       - split the room
+      - splittheroom
       - split room
       - room split
       - split
@@ -267,6 +278,7 @@ Party Pack 6:
     Max players: 10
     Variants:
       - ptb
+      - push the b
       - push the button
       - push da button
   Dictionarium:
@@ -280,6 +292,9 @@ Party Pack 6:
     Max players: 6
     Variants:
       - role models
+      - roles models
+      - role model
+      - rolemodel
       - rolemodels
   Joke Boat:
     Min players: 3
@@ -296,6 +311,8 @@ Party Pack 7:
     Variants:
       - ql3
       - ql 3
+      - quip 3
+      - quip3
       - quiplash 3
       - quiplash3
   Champ'd Up:
@@ -303,6 +320,7 @@ Party Pack 7:
     Max players: 8
     Variants:
       - champd
+      - champed
       - champd up
       - champ'd
       - champ'd up
@@ -361,13 +379,16 @@ Standalone:
     Variants:
       - what the dub
       - wtd
+      - what the dub?
 
   Gartic Phone:
     Min players: 4
     Max players: 30
     Variants:
       - gartic phone
+      - garticphone
       - garlic phone
+      - garlicphone
       - gartic
       - garlic
 
