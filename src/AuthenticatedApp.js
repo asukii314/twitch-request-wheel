@@ -40,7 +40,7 @@ class AuthenticatedApp extends Component {
         })
         .then(r => r.json())
         .then(modInfo => {
-          const modList = modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
+          const modList = (!modInfo.data) ? null : modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
           this.setState((state) => {
             return {
               ...state,
@@ -129,7 +129,7 @@ class AuthenticatedApp extends Component {
         })
         .then(r => r.json())
         .then(modInfo => {
-          const modList = modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
+          const modList = (!modInfo.data) ? null : modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
           this.setState((state) => {
             return {
               ...state,
