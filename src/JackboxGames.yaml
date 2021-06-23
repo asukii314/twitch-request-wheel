@@ -399,3 +399,19 @@ Standalone:
       - among us
       - amongus
       - amogus
+
+  Paper Pirates:
+    Min players: 4
+    Max players: 10
+    Variants:
+      - paper pirates
+      - pirates
+      - paper
+      
+  StopotS:
+    Min players: 4
+    Max players: 20
+    Variants: 
+      - stopots
+   
+   
