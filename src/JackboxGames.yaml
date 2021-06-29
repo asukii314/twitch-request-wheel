@@ -405,6 +405,7 @@ Standalone:
     Max players: 10
     Variants:
       - paper pirates
+      - paperpirates
       - pirates
       - paper
       
@@ -414,4 +415,29 @@ Standalone:
     Variants: 
       - stopots
    
+  Use Your Words:
+    Min players: 4
+    Max players: 6
+    Variants:
+      - use your words
+      - useyourwords
+      - uyw
+      - your words
+      
+  Papa's Quiz:
+    Min Players: 4
+    Max players: 8
+    Variants: 
+      - papa's quiz
+      - papas quiz
+      - papa's
+      - papas
+      - pq
    
+  Gartic on Stream:
+    Min Players: 4
+    Max Players: 50
+      - gartic on stream
+      - GOS
+  
+  
