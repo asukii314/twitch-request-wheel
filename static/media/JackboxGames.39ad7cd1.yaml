@@ -339,6 +339,8 @@ Party Pack 7:
     Max players: 8
     Variants:
       - talking points
+      - talkingpoints
+      - talk points
   The Devils and the Details:
     Min players: 3
     Max players: 8
@@ -405,13 +407,53 @@ Standalone:
     Max players: 10
     Variants:
       - paper pirates
+      - paperpirates
       - pirates
       - paper
-      
+
   StopotS:
     Min players: 4
     Max players: 20
-    Variants: 
+    Variants:
       - stopots
-   
-   
+      - stobots
+
+  Use Your Words:
+    Min players: 4
+    Max players: 6
+    Variants:
+      - use your words
+      - useyourwords
+      - uyw
+      - your words
+
+  Papa's Quiz:
+    Min Players: 4
+    Max players: 8
+    Variants:
+      - papa's quiz
+      - papas quiz
+      - papa's
+      - papas
+      - pq
+
+  Gartic on Stream:
+    Min Players: 4
+    Max Players: 50
+    Variants:
+      - gartic on stream
+      - garlic on stream
+      - garlic stream
+      - gartic stream
+      - gos
+
+  Words on Stream:
+    Min Players: 4
+    Max Players: 50
+    Variants:
+      - words on stream
+      - word on stream
+      - words stream
+      - word stream
+      - words
+      - wos
