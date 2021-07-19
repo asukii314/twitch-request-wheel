@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-echo "Cleaning files"
-echo " > .tmp"
-rm -rf .tmp
+echo "Cleaning coverage files"
+rm -rf coverage
 
 echo ""
 echo "Checking files with ESLint"
@@ -15,4 +14,4 @@ echo " done"
 
 echo ""
 echo "Running unit tests with Jest"
-./node_modules/.bin/jest --ci --coverage
+npm run test -- --ci --coverage --watchAll=false
