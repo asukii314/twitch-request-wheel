@@ -18,6 +18,7 @@ class AuthenticatedApp extends Component {
     this.logOut = this.logOut.bind(this);
   }
   componentDidMount() {
+      this._isMounted = true;
       if (!this.state.access_token) {
           return this.getAuth();
       }
@@ -41,16 +42,22 @@ class AuthenticatedApp extends Component {
         .then(r => r.json())
         .then(modInfo => {
           const modList = (!modInfo.data) ? null : modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
-          this.setState((state) => {
-            return {
-              ...state,
-              username: userInfo.data[0].login,
-              modList
-            };
-          })
+          if (this._isMounted) {
+            this.setState((state) => {
+              return {
+                ...state,
+                username: userInfo.data[0].login,
+                modList
+              };
+            });
+          }
         })
       })
       .catch(e => this.getAuth)
+  }
+
+  componentWillUnmount() {
+      this._isMounted = false;
   }
 
   logOut() {
@@ -94,17 +101,19 @@ class AuthenticatedApp extends Component {
     .then((oauth) => {
       //console.log(oauth); // access_token, refresh_token, expires_in, scope ['...']
       if(!oauth.access_token) {
-        this.setState((state) => {
-          return {
-            ...state,
-            failed_login: true
-          };
-        });
+        if (this._isMounted) {
+          this.setState((state) => {
+            return {
+              ...state,
+              failed_login: true
+            };
+          });
+        }
         return;
       }
 
       localStorage.setItem('__access_token', oauth.access_token);
-      this.setState((state) => {
+      if (this._isMounted) this.setState((state) => {
         return {
           ...state,
           access_token: oauth.access_token
@@ -130,13 +139,15 @@ class AuthenticatedApp extends Component {
         .then(r => r.json())
         .then(modInfo => {
           const modList = (!modInfo.data) ? null : modInfo.data.map((modObj) => modObj.user_name.toLowerCase())
-          this.setState((state) => {
-            return {
-              ...state,
-              username: userInfo.data[0].login,
-              modList
-            };
-          })
+          if (this._isMounted) {
+            this.setState((state) => {
+              return {
+                ...state,
+                username: userInfo.data[0].login,
+                modList
+              };
+            });
+          }
         })
       })
     })

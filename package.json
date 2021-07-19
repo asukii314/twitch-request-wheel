@@ -21,9 +21,11 @@
     "yaml": "^1.10.2"
   },
   "scripts": {
+    "postinstall": "chmod +x ./tests/test.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "./tests/test.sh",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -48,5 +50,11 @@
   },
   "devDependencies": {
     "gh-pages": "^3.1.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|yaml)$": "<rootDir>/tests/file-mock.js",
+      "\\.(css|less)$": "<rootDir>/tests/style-mock.js"
+    }
   }
 }
