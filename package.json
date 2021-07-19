@@ -58,8 +58,9 @@
       "text"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|yaml)$": "<rootDir>/tests/file-mock.js",
-      "\\.(css|less)$": "<rootDir>/tests/style-mock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/file-mock.js",
+      "\\.(css|less)$": "<rootDir>/tests/style-mock.js",
+      "\\.(yaml|yml)$": "<rootDir>/tests/yaml-mock.js"
     }
   }
 }

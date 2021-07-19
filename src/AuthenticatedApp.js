@@ -171,4 +171,5 @@ class AuthenticatedApp extends Component {
 }
 
 
+export {AuthenticatedApp};
 export default withRouter(AuthenticatedApp);
