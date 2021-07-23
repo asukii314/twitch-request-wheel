@@ -13,7 +13,7 @@ describe('App', () => {
 describe('LoginScreen', () => {
     test('renders log in link', () => {
       render(<LoginScreen />);
-      const linkElement = screen.getByText(/Log In With Twitch/i);
+      const linkElement = screen.getByText(/Log In With/i);
       expect(linkElement).toBeInTheDocument();
     });
 });
