@@ -28,7 +28,7 @@ const GameCard = function(props) {
     <div>
       <p className="gameName">{props.gameName} </p>
       {props.possibleMatches.map((possibleMatch, i) =>
-        <li className="possibleGameMatch">!request {possibleMatch}</li>
+        <li className="possibleGameMatch" key={`${props.gameName}-${i}`}>!request {possibleMatch}</li>
       )}
     </div>
   );
