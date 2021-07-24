@@ -1,4 +1,4 @@
-import MessageHandler from './MessageHandler';
+import MessageHandler from '../MessageHandler';
 import React from 'react';
 import { render } from '@testing-library/react';
 

@@ -1,15 +1,15 @@
-import {AuthenticatedApp} from './AuthenticatedApp';
+import {AuthenticatedApp} from '../AuthenticatedApp';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-jest.mock('./JackboxGameList', () => {
+jest.mock('../JackboxGameList', () => {
     return {
         __esModule: true,
         default: () => (<>JackboxGameList</>),
         JackboxGameList: 'JackboxGameList'
     };
 });
-jest.mock('./MainScreen', () => {
+jest.mock('../MainScreen', () => {
     return {
         __esModule: true,
         default: () => (<> MainScreen </>),

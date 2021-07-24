@@ -1,5 +1,5 @@
 import * as webVitals from 'web-vitals';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from '../reportWebVitals';
 
 describe('reportWebVitals', () => {
     let getCLSSpy: jest.SpyInstance;

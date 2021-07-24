@@ -1,4 +1,4 @@
-import ChatActivity, {ActivityStatus} from './ChatActivity';
+import ChatActivity, {ActivityStatus} from '../ChatActivity';
 
 describe('ChatActivity', () => {
     describe('getStatusPromise', () => {

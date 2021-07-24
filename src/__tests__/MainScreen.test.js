@@ -1,4 +1,4 @@
-import MainScreen from './MainScreen';
+import MainScreen from '../MainScreen';
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 

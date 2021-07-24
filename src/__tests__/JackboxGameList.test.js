@@ -1,5 +1,5 @@
-import JackboxGameList from './JackboxGameList';
-import yamlGameList from './JackboxGames.yaml';
+import JackboxGameList from '../JackboxGameList';
+import yamlGameList from '../JackboxGames.yaml';
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import fetch from 'node-fetch';

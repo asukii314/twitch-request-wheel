@@ -4,9 +4,6 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
     "node-fetch": "^2.6.1",
     "query-string": "^4.3.4",
     "randomcolor": "^0.6.2",
@@ -49,6 +46,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
     "env-cmd": "^10.1.0",
     "gh-pages": "^3.1.0"
   },

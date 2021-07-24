@@ -1,4 +1,4 @@
-import GameRequest from './GameRequest';
+import GameRequest from '../GameRequest';
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 

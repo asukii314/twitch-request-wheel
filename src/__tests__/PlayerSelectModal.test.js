@@ -1,4 +1,4 @@
-import PlayerSelectModal from './PlayerSelectModal';
+import PlayerSelectModal from '../PlayerSelectModal';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
