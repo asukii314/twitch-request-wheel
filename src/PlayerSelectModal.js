@@ -194,13 +194,13 @@ export default class PlayerSelectModal extends Component {
 
   renderStreamerSeatToggle = () => {
     return (
-      <div class='my-toggle-group'>
-      <p class='toggle-label'> Reserve seat for streamer? </p>
-        <div class='my-toggle'>
+      <div className='my-toggle-group'>
+      <p className='toggle-label'> Reserve seat for streamer? </p>
+        <div className='my-toggle'>
             <input type="checkbox" defaultChecked={true} onChange={this.toggleStreamerSeat}/>
-            <div class='my-toggle-text no' aria-hidden="true">No</div>
-            <div class='my-toggle-text yes' aria-hidden="true">Yes</div>
-            <div class='my-toggle-orb'></div>
+            <div className='my-toggle-text no' aria-hidden="true">No</div>
+            <div className='my-toggle-text yes' aria-hidden="true">Yes</div>
+            <div className='my-toggle-orb'></div>
         </div>
       </div>
     )
