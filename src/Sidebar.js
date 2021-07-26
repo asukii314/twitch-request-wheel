@@ -18,25 +18,17 @@ export default class Sidebar extends Component {
         this.printGame = this.printGame.bind(this);
     }
 
-    printGame = (idx) => {
-        if (idx === this.props.nextGameIdx) {
+    getHistoryList = (history) => {
+        if (history.length === 0) {
             return (
-                <b>{this.props.history[idx].name}</b>
+                <li key='placeholder'>No games yet</li>
             );
         }
-        return this.props.history[idx].name;
-    }
-
-    moveNextGameFwd = () => {
-        return this.props.changeNextGameIdx(1);
-    }
-
-    moveNextGameBack = () => {
-        return this.props.changeNextGameIdx(-1);
-    }
-
-    hasNextGame = () => {
-        return this.props.history.length > this.props.nextGameIdx;
+        return history.map((playedGame, i) => (
+            <li key={i}>
+                {this.printGame(i)}
+            </li>
+        ));
     }
 
     getNextGameName = () => {
@@ -50,17 +42,26 @@ export default class Sidebar extends Component {
             ? this.props.history[this.props.nextGameIdx].partyPack
             : null;
     }
-    getHistoryList = (history) => {
-        if (history.length === 0) {
+
+    hasNextGame = () => {
+        return this.props.history.length > this.props.nextGameIdx;
+    }
+
+    moveNextGameFwd = () => {
+        return this.props.changeNextGameIdx(1);
+    }
+
+    moveNextGameBack = () => {
+        return this.props.changeNextGameIdx(-1);
+    }
+
+    printGame = (idx) => {
+        if (idx === this.props.nextGameIdx) {
             return (
-                <li key='placeholder'>No games yet</li>
+                <b>{this.props.history[idx].name}</b>
             );
         }
-        return history.map((playedGame, i) => (
-            <li key={i}>
-                {this.printGame(i)}
-            </li>
-        ));
+        return this.props.history[idx].name;
     }
 
     render() {
