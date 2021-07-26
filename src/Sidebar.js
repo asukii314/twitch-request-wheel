@@ -1,76 +1,120 @@
 import { Component } from 'react';
 
+import './Sidebar.css';
+
 export default class Sidebar extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      index: 0
+    constructor(props) {
+        super(props);
+        this.state = {
+            index: 0
+        }
+
+        this.getHistoryList = this.getHistoryList.bind(this);
+        this.getNextGameName = this.getNextGameName.bind(this);
+        this.getNextGamePartyPack = this.getNextGamePartyPack.bind(this);
+        this.hasNextGame = this.hasNextGame.bind(this);
+        this.moveNextGameBack = this.moveNextGameBack.bind(this);
+        this.moveNextGameFwd = this.moveNextGameFwd.bind(this);
+        this.printGame = this.printGame.bind(this);
     }
-  }
 
-  printGame = (idx) => {
-    if(idx === this.props.nextGameIdx) {
-      return (<b style={{color:'aquamarine'}}>{this.props.history[idx].name}</b>)
-    } else {
-      return this.props.history[idx].name
+    printGame = (idx) => {
+        if (idx === this.props.nextGameIdx) {
+            return (
+                <b>{this.props.history[idx].name}</b>
+            );
+        }
+        return this.props.history[idx].name;
     }
-  }
 
-  moveNextGameFwd = () => {
-    return this.props.changeNextGameIdx(1);
-  }
+    moveNextGameFwd = () => {
+        return this.props.changeNextGameIdx(1);
+    }
 
-  moveNextGameBack = () => {
-    return this.props.changeNextGameIdx(-1);
-  }
+    moveNextGameBack = () => {
+        return this.props.changeNextGameIdx(-1);
+    }
 
-  hasNextGame = () => {
-    return this.props.history.length > this.props.nextGameIdx;
-  }
+    hasNextGame = () => {
+        return this.props.history.length > this.props.nextGameIdx;
+    }
 
-  getNextGameName = () => {
-    return this.hasNextGame()
-      ? this.props.history[this.props.nextGameIdx].name
-      : "not yet decided"
-  }
+    getNextGameName = () => {
+        return this.hasNextGame()
+            ? this.props.history[this.props.nextGameIdx].name
+            : 'not yet decided';
+    }
 
-  getNextGamePartyPack = () => {
-    return this.hasNextGame()
-      ? this.props.history[this.props.nextGameIdx].partyPack
-      : null
-  }
+    getNextGamePartyPack = () => {
+        return this.hasNextGame()
+            ? this.props.history[this.props.nextGameIdx].partyPack
+            : null;
+    }
+    getHistoryList = (history) => {
+        if (history.length === 0) {
+            return (
+                <li key='placeholder'>No games yet</li>
+            );
+        }
+        return history.map((playedGame, i) => (
+            <li key={i}>
+                {this.printGame(i)}
+            </li>
+        ));
+    }
 
-  render() {
-    return (
-      <div style={{marginLeft: "12px", width: (this.props.requestMode === 'game' ? "33%" : "20%"), textTransform: 'capitalize'}}>
-        <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '1px', marginBottom: '10px'}}>
-          <p style={{fontSize: "14px", fontWeight: "700", padding: '8px'}}> Up Next:
-            <p style={{marginBottom: '5px'}}>{this.getNextGameName()}</p>
-            <p style={{fontSize: "11px", fontWeight: "400", marginTop: '0px', color: "lightgray"}}><i>{this.getNextGamePartyPack()}</i></p>
-            {this.props.requestMode === 'game' && <button disabled={!this.hasNextGame()} onClick={this.props.togglePlayerSelect} style={{fontSize: "12px", padding: "5px", backgroundColor: "aquamarine", color: "black", borderRadius: "5px", width: "90%"}}>
-              {this.hasNextGame()
-                  ? <b>OPEN SEAT REQUESTS</b>
-                  : <i style={{color: "gray"}}>OPEN SEAT REQUESTS</i>}
-            </button>}
-            {this.props.requestMode === 'seat' && <button onClick={this.props.togglePlayerSelect} style={{fontSize: "12px", padding: "5px", backgroundColor: "aquamarine", color: "black", borderRadius: "5px", width: "90%"}}>
-              <b>RETURN TO WHEEL</b>
-            </button>}
-          </p>
-        </div>
+    render() {
+        let nextGame = this.hasNextGame();
 
-        <div style={{display: "flex", justifyContent: "space-between"}}>
-          <button onClick={this.moveNextGameBack} style={{backgroundColor: "darkcyan", borderRadius: "5px", marginTop: 0, width: "50%", marginBottom: '20px', marginRight: '5px'}}> &#8678; </button>
-          <button onClick={this.moveNextGameFwd} style={{backgroundColor: "darkcyan", borderRadius: "5px", marginTop: 0, width: "50%", marginBottom: '20px', marginLeft: '5px'}}> &#8680; </button>
-        </div>
+        let buttonPlayerSelect;
+        switch (this.props.requestMode) {
+            case 'game':
+                buttonPlayerSelect = (
+                    <button className="open-seat-requests" disabled={!nextGame} onClick={this.props.togglePlayerSelect}>
+                        OPEN SEAT REQUESTS
+                    </button>
+                )
+                break;
+            case 'seat':
+                buttonPlayerSelect = (
+                    <button className="return-to-wheel" onClick={this.props.togglePlayerSelect}>
+                        RETURN TO WHEEL
+                    </button>
+                )
+                break;
+            default:
+                break;
+        }
 
-        <div style={{backgroundColor: "darkslategrey", borderRadius: "5px", marginTop: 0, padding: '5px'}}>
-          <p style={{fontSize: "14px", fontWeight: "700"}}> History </p>
-          <p style={{fontSize: "12px"}}>
-            {this.props.history.map((playedGame, i) => <li key={i}>{this.printGame(i)}</li> )}
-            {this.props.history.length === 0 && <li key='0'>No games yet</li> }
-          </p>
-        </div>
-      </div>
-    )
-  }
+        return (
+            <div id="sidebar" className={this.props.requestMode}>
+                <div className="sidebar-panel">
+                    <div className="p sidebar-panel-up-next"> Up Next:
+
+                        <p className="next-game-name">
+                            {this.getNextGameName()}
+                        </p>
+
+                        <p className="next-game-party-pack">
+                            <i>{this.getNextGamePartyPack()}</i>
+                        </p>
+
+                        {buttonPlayerSelect}
+                    </div>
+                </div>
+
+                <div className="nav-wrapper">
+                    <button className="move-next-game-back" onClick={this.moveNextGameBack}> &#8678; </button>
+                    <button className="move-next-game-fwd" onClick={this.moveNextGameFwd}> &#8680; </button>
+                </div>
+
+                <div className="sidebar-panel">
+                    <p className="sidebar-panel-history"> History </p>
+                    <p className="sidebar-panel-history-list">
+                        {this.getHistoryList(this.props.history)}
+                    </p>
+                </div>
+            </div>
+        );
+    }
 }
