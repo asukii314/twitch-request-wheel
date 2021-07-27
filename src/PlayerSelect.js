@@ -252,11 +252,11 @@ export default class PlayerSelect extends Component {
                         {this.state.playing.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'playing') )}
                     </div>
 
-                    <div className='playerCardColumn joined'>
+                    {/*<div className='playerCardColumn joined'>
                         <p className="playerCardColumn-header">Joined</p>
                         {this.state.joined.filter((iObj) => iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
                         {this.state.joined.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         );
