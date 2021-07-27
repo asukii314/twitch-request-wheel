@@ -3,7 +3,7 @@ import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
-import PlayerSelectModal from './PlayerSelectModal';
+import PlayerSelect from './PlayerSelect';
 import ChatActivity, { ActivityStatus } from './ChatActivity';
 const randomColor = require('randomcolor');
 
@@ -18,7 +18,7 @@ export default class MainScreen extends Component {
       counter: 0,
       history: [],
       nextGameIdx: 0,
-      showPlayerSelectModal: false
+      showPlayerSelect: false
     };
   }
 
@@ -181,13 +181,13 @@ export default class MainScreen extends Component {
     this.setState((state) => {
       return {
         ...state,
-        showPlayerSelectModal: !state.showPlayerSelectModal
+        showPlayerSelect: !state.showPlayerSelect
       }
     })
   }
 
   routePlayRequest = (user, {sendConfirmationMsg = true, isPrioritySeat = false}) => {
-    const msg = this.state.showPlayerSelectModal
+    const msg = this.state.showPlayerSelect
                   ? this.playerSelector?.handleNewPlayerRequest(user, {isPrioritySeat})
                   : 'sign-ups are currently closed; try again after this game wraps up!'
 
@@ -204,7 +204,7 @@ export default class MainScreen extends Component {
     this.setState((state) => {
       return {
         ...state,
-        showPlayerSelectModal: true
+        showPlayerSelect: true
       }
     })
     this.playerSelector?.openQueue();
@@ -221,8 +221,8 @@ export default class MainScreen extends Component {
   startGame = () => {
     // I know this is a big ol' React sin, but I can't for the life of me
     //   figure out why this.togglePlayerSelect() isn't working... sooo...
-    if(this.state.showPlayerSelectModal) {
-      this.state.showPlayerSelectModal = false;
+    if(this.state.showPlayerSelect) {
+      this.state.showPlayerSelect = false;
       this.moveNextGameFwd();
       return true;
     }
@@ -257,11 +257,11 @@ export default class MainScreen extends Component {
           clearQueueHandler={this.routeClearQueueRequest}
           ref={(mh) => this.messageHandler = mh}
         />
-        <div style={{width: this.state.showPlayerSelectModal ? "90vw" : "45vw"}}>
+        <div style={{width: this.state.showPlayerSelect ? "90vw" : "45vw"}}>
 
-          <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelectModal ? 'Seat Requests' : 'Game Requests'}</h2>
-          {!this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
-          {this.state.showPlayerSelectModal && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!new</b> in {this.props.channel}'s chat if you want to join the next game</h4>}
+          <h2 style={{marginBottom:"0"}}>{this.state.showPlayerSelect ? 'Seat Requests' : 'Game Requests'}</h2>
+          {!this.state.showPlayerSelect && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add</h4>}
+          {this.state.showPlayerSelect && <h4 style={{fontSize:"20px", color: "yellow", marginTop: "6px", marginBottom:"12px", fontWeight: 400}}>Type <b>!new</b> in {this.props.channel}'s chat if you want to join the next game</h4>}
           <div style={{display:"flex", alignItems: "flex-start", height:"100%"}}>
           <Sidebar
             history={this.state.history}
@@ -270,16 +270,16 @@ export default class MainScreen extends Component {
             moveNextGameFwd={this.moveNextGameFwd}
             moveNextGameBack={this.moveNextGameBack}
             togglePlayerSelect={this.togglePlayerSelect}
-            requestMode={this.state.showPlayerSelectModal ? 'seat' : 'game'}
+            requestMode={this.state.showPlayerSelect ? 'seat' : 'game'}
           />
           <div style={{flexGrow: "2", marginLeft: "15px"}}>
-            {this.state.showPlayerSelectModal &&
-              <PlayerSelectModal
+            {this.state.showPlayerSelect &&
+              <PlayerSelect
                 game={this.state.history?.[this.state.nextGameIdx]}
                 startGame={this.startGame}
                 ref={(ps) => this.playerSelector = ps}
               />}
-            {!this.state.showPlayerSelectModal && gameRequestArray.map((gameName, i) =>
+            {!this.state.showPlayerSelect && gameRequestArray.map((gameName, i) =>
                 <GameRequest
                   key={i}
                   gameName={gameName}
@@ -291,7 +291,7 @@ export default class MainScreen extends Component {
             </div>
           </div>
         </div>
-        {!this.state.showPlayerSelectModal && <div width="50vw" style={{textTransform: 'capitalize'}}>
+        {!this.state.showPlayerSelect && <div width="50vw" style={{textTransform: 'capitalize'}}>
           <div style={{fontSize: "16px", overflow: "hidden", width: "600px"}}>
              <WheelComponent
               key={this.state.counter}

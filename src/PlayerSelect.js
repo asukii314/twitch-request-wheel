@@ -4,7 +4,7 @@ import dice from './dice.svg';
 import star from './star.svg';
 
 // yes, I know it's not actually a modal, I changed my mind and I can't be arsed to change the class name
-export default class PlayerSelectModal extends Component {
+export default class PlayerSelect extends Component {
   constructor(props){
     super(props);
     this.firstColumn = React.createRef();
