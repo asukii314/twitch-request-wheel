@@ -1,15 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthenticatedApp render gamelist 1`] = `
+exports[`AuthenticatedApp render page 1`] = `
 <div>
-  <div>
-    JackboxGameList
-  </div>
+  <div
+    id="authenticated-app"
+  />
 </div>
 `;
 
-exports[`AuthenticatedApp render page 1`] = `
-<div>
-  <div />
+exports[`AuthenticatedApp render with MainScreen 1`] = `
+<div
+  id="authenticated-app"
+>
+  <MainScreen
+    access_token="yadayadayada"
+    channel="sirgoosewell"
+    modList={Array []}
+    onLogout={[Function]}
+  />
 </div>
+`;
+
+exports[`AuthenticatedApp render with Redirect 1`] = `
+<Redirect
+  to="/login"
+/>
 `;
