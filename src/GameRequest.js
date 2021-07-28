@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import ReactTooltip from 'react-tooltip'
 import { ActivityStatus } from './ChatActivity';
-import './messageStyles.css';
+import './GameRequest.css';
 import lock from './lock.svg';
 
 export default class GameRequest extends Component {
