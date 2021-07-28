@@ -203,11 +203,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -242,11 +237,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -303,11 +293,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -346,11 +331,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -385,11 +365,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -424,11 +399,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -463,11 +433,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -502,11 +467,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -541,11 +501,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -663,11 +618,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -702,11 +652,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -763,11 +708,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -806,11 +746,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -845,11 +780,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -884,11 +814,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -923,11 +848,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -962,11 +882,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>
@@ -1001,1027 +916,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           <button
             className="changeCol"
             onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PlayerSelect should render component 1`] = `
-<div
-  className="playerSelectContainer"
->
-  <div
-    className="header"
-  >
-    <div
-      className="my-toggle-group"
-    >
-      <p
-        className="toggle-label"
-      >
-        Reserve seat for streamer?
-      </p>
-      <div
-        className="my-toggle"
-      >
-        <input
-          defaultChecked={true}
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="my-toggle-text no"
-        >
-          No
-        </div>
-        <div
-          aria-hidden="true"
-          className="my-toggle-text yes"
-        >
-          Yes
-        </div>
-        <div
-          className="my-toggle-orb"
-        />
-      </div>
-    </div>
-    <div
-      className="game-name"
-    >
-      <b>
-        TBD
-      </b>
-      <p
-        className="playerCount"
-      >
-        0
-         of 
-         seats claimed
-      </p>
-    </div>
-    <button
-      className="startGame"
-      disabled={true}
-      onClick={[Function]}
-    >
-      Start Game
-    </button>
-  </div>
-  <div
-    className="playerCardContainer"
-  >
-    <div
-      className="playerCardColumn interested"
-    >
-      <p
-        className="playerCardColumn-header"
-      >
-        Interested
-      </p>
-    </div>
-    <div
-      className="playerCardColumn playing"
-    >
-      <p
-        className="playerCardColumn-header"
-      >
-        Playing
-        <button
-          className="dice"
-          onClick={[Function]}
-        >
-          <img
-            alt="dice icon"
-            src="file-stub"
-          />
-        </button>
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PlayerSelect should render component using Blather data 1`] = `
-<div
-  className="playerSelectContainer"
->
-  <div
-    className="header"
-  >
-    <div
-      className="my-toggle-group"
-    >
-      <p
-        className="toggle-label"
-      >
-        Reserve seat for streamer?
-      </p>
-      <div
-        className="my-toggle"
-      >
-        <input
-          defaultChecked={true}
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="my-toggle-text no"
-        >
-          No
-        </div>
-        <div
-          aria-hidden="true"
-          className="my-toggle-text yes"
-        >
-          Yes
-        </div>
-        <div
-          className="my-toggle-orb"
-        />
-      </div>
-    </div>
-    <div
-      className="game-name"
-    >
-      <b>
-        Blather 'Round
-      </b>
-      <p
-        className="playerCount overlimit"
-      >
-        7
-         of 
-        6
-         seats claimed
-      </p>
-    </div>
-    <button
-      className="startGame"
-      disabled={true}
-      onClick={[Function]}
-    >
-      Start Game
-    </button>
-  </div>
-  <div
-    className="playerCardContainer"
-  >
-    <div
-      className="playerCardColumn interested"
-    >
-      <p
-        className="playerCardColumn-header"
-      >
-        Interested
-      </p>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <img
-            alt="Priority seat redemption"
-            src="file-stub"
-          />
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player5
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Playing
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player4
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Playing
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      className="playerCardColumn playing"
-    >
-      <p
-        className="playerCardColumn-header"
-      >
-        Playing
-        <button
-          className="dice"
-          onClick={[Function]}
-        >
-          <img
-            alt="dice icon"
-            src="file-stub"
-          />
-        </button>
-      </p>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <img
-            alt="Priority seat redemption"
-            src="file-stub"
-          />
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player1
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <img
-            alt="Priority seat redemption"
-            src="file-stub"
-          />
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player2
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player3
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player6
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player7
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player8
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player9
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PlayerSelect should render component using TMP2 data 1`] = `
-<div
-  className="playerSelectContainer"
->
-  <div
-    className="header"
-  >
-    <div
-      className="my-toggle-group"
-    >
-      <p
-        className="toggle-label"
-      >
-        Reserve seat for streamer?
-      </p>
-      <div
-        className="my-toggle"
-      >
-        <input
-          defaultChecked={true}
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="my-toggle-text no"
-        >
-          No
-        </div>
-        <div
-          aria-hidden="true"
-          className="my-toggle-text yes"
-        >
-          Yes
-        </div>
-        <div
-          className="my-toggle-orb"
-        />
-      </div>
-    </div>
-    <div
-      className="game-name"
-    >
-      <b>
-        Trivia Murder Party 2
-      </b>
-      <p
-        className="playerCount"
-      >
-        7
-         of 
-        8
-         seats claimed
-      </p>
-    </div>
-    <button
-      className="startGame"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Start Game
-    </button>
-  </div>
-  <div
-    className="playerCardContainer"
-  >
-    <div
-      className="playerCardColumn interested"
-    >
-      <p
-        className="playerCardColumn-header"
-      >
-        Interested
-      </p>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <img
-            alt="Priority seat redemption"
-            src="file-stub"
-          />
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player5
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Playing
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player4
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Playing
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      className="playerCardColumn playing"
-    >
-      <p
-        className="playerCardColumn-header"
-      >
-        Playing
-        <button
-          className="dice"
-          onClick={[Function]}
-        >
-          <img
-            alt="dice icon"
-            src="file-stub"
-          />
-        </button>
-      </p>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <img
-            alt="Priority seat redemption"
-            src="file-stub"
-          />
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player1
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <img
-            alt="Priority seat redemption"
-            src="file-stub"
-          />
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player2
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player3
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player6
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player7
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player8
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div
-        className="playerCard"
-      >
-        <div
-          className="playerCard-username"
-        >
-          <p
-            className="playerName"
-            style={
-              Object {
-                "maxWidth": 499,
-              }
-            }
-          >
-            player9
-          </p>
-        </div>
-        <div
-          className="changeColButtonsContainer"
-        >
-          <button
-            className="changeCol"
-            onClick={[Function]}
-          >
-            Interested
-          </button>
-          <button
-            className="changeCol"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "indianred",
-              }
-            }
           >
             X
           </button>

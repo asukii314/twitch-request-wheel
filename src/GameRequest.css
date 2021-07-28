@@ -1,56 +1,76 @@
-
-
-#baseDiv {
-  box-shadow: inset 1px 1px 40px 0 rgba(0, 0, 0, 0.45);
-  background-size: cover;
-  border-radius: 5px;
-  text-align: left;
-  text-transform: capitalize;
+.game-request {
+    box-shadow: inset 1px 1px 40px 0 rgba(0, 0, 0, 0.45);
+    background-size: cover;
+    border-radius: 5px;
+    text-align: left;
+    text-transform: capitalize;
 }
 
-#baseDiv.chosen {
-  background-color: greenyellow;
-  color: black;
+.game-request.chosen {
+    background-color: greenyellow;
+    color: black;
 }
 
-#baseDiv.pending {
-  background-color: steelblue;
+.game-request.pending {
+    background-color: steelblue;
 }
 
-.deleteButton {
-  background-color: red;
-  float: right;
-  height: 50%;
-  color: white;
-  font-size: 11px;
-  padding: 3px 5px;
+.game-request-body {
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-between;
+    margin: 0px 15px 7px;
+    padding: 4px;
 }
 
-.tooltip {
-  display: flex;
-  align-items: center;
+.game-request-body .options {
+    display: flex;
 }
 
-.tooltipText {
-  margin: 0;
+.game-request .lock {
+    width: 16px;
+    opacity:  0.2;
+    padding-right: 8px;
+}
+.game-request .lock.locked {
+    opacity: 1;
 }
 
-.status {
-  width: 8px;
-  height: 8px;
-  border-radius: 5px;
-  margin-left: 6px;
-  margin-top: 3px;
+.game-request .deleteButton {
+    background-color: red;
+    float: right;
+    height: 50%;
+    color: white;
+    font-size: 11px;
+    padding: 3px 5px;
 }
 
-.status.active {
+.game-request .tooltip {
+    display: flex;
+    align-items: center;
+}
+
+.game-request .tooltipText {
+    margin: 0;
+}
+
+.game-request .status {
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    margin-left: 6px;
+    margin-top: 3px;
+}
+
+.game-request .status.active {
     background-color: green;
 }
 
-.status.idle {
+.game-request .status.idle {
     background-color: yellow;
 }
 
-.status.disconnected {
-  background-color: darkgrey;
+.game-request .status.disconnected {
+    background-color: darkgrey;
 }
