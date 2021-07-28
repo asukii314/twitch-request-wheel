@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar render renders page with content 1`] = `
+<div>
+  <div
+    class="game"
+    id="sidebar"
+  >
+    <div
+      class="sidebar-panel"
+    >
+      <div
+        class="p sidebar-panel-up-next"
+      >
+         Up Next:
+        <p
+          class="next-game-name"
+        >
+          Trivia Murder Party 2
+        </p>
+        <p
+          class="next-game-party-pack"
+        >
+          <i>
+            Party Pack 6
+          </i>
+        </p>
+        <button
+          class="open-seat-requests"
+        >
+          OPEN SEAT REQUESTS
+        </button>
+      </div>
+    </div>
+    <div
+      class="nav-wrapper"
+    >
+      <button
+        class="move-next-game-back"
+      >
+         ⇦ 
+      </button>
+      <button
+        class="move-next-game-fwd"
+      >
+         ⇨ 
+      </button>
+    </div>
+    <div
+      class="sidebar-panel"
+    >
+      <p
+        class="sidebar-panel-history"
+      >
+         History 
+      </p>
+      <p
+        class="sidebar-panel-history-list"
+      >
+        <li>
+          Blather 'Round
+        </li>
+        <li>
+          <b>
+            Trivia Murder Party 2
+          </b>
+        </li>
+        <li>
+          Survive The Internet
+        </li>
+      </p>
+    </div>
+  </div>
+</div>
+`;

@@ -20,6 +20,7 @@ describe('MessageHandler', () => {
             const username = 'mrscootscoot';
             expect(component.checkForMiscCommands(message, username)).toBeTruthy();
             expect(component.sendMessage).toHaveBeenCalledTimes(1);
+            expect(component).toMatchSnapshot();
         });
     });
 });

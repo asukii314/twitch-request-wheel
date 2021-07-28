@@ -100,6 +100,7 @@ describe('Sidebar', () => {
             userEvent.click(container.querySelector('button.move-next-game-back'));
             expect(props.changeNextGameIdx).toHaveBeenCalledWith(-1);
             expect(props.changeNextGameIdx).toHaveBeenCalledTimes(2);
+            expect(container).toMatchSnapshot();
         });
     });
 });

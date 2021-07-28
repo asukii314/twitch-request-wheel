@@ -20,7 +20,8 @@ describe('MainScreen', () => {
             modList: [],
             onLogout: jest.fn()
         };
-        render(<MainScreen {...props}/>);
+        let {container} = render(<MainScreen {...props}/>);
+        expect(container).toMatchSnapshot();
         expect(screen.getByText(/OPEN SEAT REQUESTS/i)).toBeInTheDocument();
     });
 });

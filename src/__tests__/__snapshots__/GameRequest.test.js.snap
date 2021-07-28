@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameRequest render should render component using quiplash data 1`] = `
+<div>
+  <div
+    class="game-request-wrapper"
+  >
+    <div>
+      React Tooltip Mock
+    </div>
+    <div
+      class="game-request chosen"
+      data-html="true"
+      data-tip="
+            <div class=\\"tooltip\\">
+                <p class=\\"tooltipText\\">
+                    Requested 0 by Sir Goosewell
+                </p>
+                <div class=\\"status \\" />
+            </div>"
+      id="baseDiv"
+    >
+      <div
+        class="game-request-body"
+      >
+        Quiplash
+        <div
+          class="options"
+        >
+          <img
+            alt="lock"
+            class="lock locked"
+            src="file-stub"
+          />
+          <button
+            class="deleteButton"
+            type="button"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GameRequest render should render component using survive the internet data 1`] = `
+<div
+  className="game-request-wrapper"
+>
+  <Unknown
+    effect="solid"
+    place="right"
+  />
+  <div
+    className="game-request pending"
+    data-html={true}
+    data-tip="
+            <div class=\\"tooltip\\">
+                <p class=\\"tooltipText\\">
+                    Requested 2 minutes ago by dcpesses
+                </p>
+                <div class=\\"status active\\" />
+            </div>"
+    id="baseDiv"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="game-request-body"
+    >
+      Survive The Internet (Party Pack 4)
+      <div
+        className="options"
+      >
+        <img
+          alt="lock"
+          className="lock unlocked"
+          onClick={[Function]}
+          src="file-stub"
+        />
+        <button
+          className="deleteButton"
+          onClick={[Function]}
+          type="button"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GameRequest render should render component using survive the internet data 2`] = `
+<div
+  className="game-request-wrapper"
+>
+  <Unknown
+    effect="solid"
+    place="right"
+  />
+  <div
+    className="game-request pending"
+    data-html={true}
+    data-tip="
+            <div class=\\"tooltip\\">
+                <p class=\\"tooltipText\\">
+                    Requested 3 minutes ago by dcpesses
+                </p>
+                <div class=\\"status idle\\" />
+            </div>"
+    id="baseDiv"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="game-request-body"
+    >
+      Survive The Internet (Party Pack 4)
+      <div
+        className="options"
+      >
+        <img
+          alt="lock"
+          className="lock unlocked"
+          onClick={[Function]}
+          src="file-stub"
+        />
+        <button
+          className="deleteButton"
+          onClick={[Function]}
+          type="button"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GameRequest render should render component using survive the internet data 3`] = `
+<div
+  className="game-request-wrapper"
+>
+  <Unknown
+    effect="solid"
+    place="right"
+  />
+  <div
+    className="game-request pending"
+    data-html={true}
+    data-tip="
+            <div class=\\"tooltip\\">
+                <p class=\\"tooltipText\\">
+                    Requested 4 minutes ago by dcpesses
+                </p>
+                <div class=\\"status disconnected\\" />
+            </div>"
+    id="baseDiv"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="game-request-body"
+    >
+      Survive The Internet (Party Pack 4)
+      <div
+        className="options"
+      >
+        <img
+          alt="lock"
+          className="lock unlocked"
+          onClick={[Function]}
+          src="file-stub"
+        />
+        <button
+          className="deleteButton"
+          onClick={[Function]}
+          type="button"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

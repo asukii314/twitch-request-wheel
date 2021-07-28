@@ -29,6 +29,7 @@ describe('AuthenticatedApp', () => {
             username: 'dewinblack'
         };
         let {container} = render(<AuthenticatedApp {...props} />);
+        expect(container).toMatchSnapshot();
         expect(container.querySelector('div > div')).toBeDefined();
     });
     test('render gamelist', () => {
@@ -38,7 +39,8 @@ describe('AuthenticatedApp', () => {
             },
             failed_login: false
         };
-        render(<AuthenticatedApp {...props} />);
+        let {container} = render(<AuthenticatedApp {...props} />);
+        expect(container).toMatchSnapshot();
         expect(screen.getByText(/JackboxGameList/i)).toBeDefined();
     });
 });

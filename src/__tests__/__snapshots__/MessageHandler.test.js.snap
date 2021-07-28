@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageHandler checkForMiscCommands renders component 1`] = `
+MessageHandler {
+  "checkForGameCommand": [Function],
+  "checkForMiscCommands": [Function],
+  "context": undefined,
+  "findGame": [Function],
+  "isModOrBroadcaster": [Function],
+  "onMessage": [Function],
+  "props": Object {
+    "access_token": "foo",
+    "channel": "user_xyz",
+  },
+  "refs": Object {},
+  "sendMessage": [MockFunction] {
+    "calls": Array [
+      Array [
+        "/me @mrscootscoot, click here for a list of valid Jackbox games: http://localhost:3000/#/gamelist",
+      ],
+    ],
+    "results": Array [
+      Object {
+        "type": "return",
+        "value": undefined,
+      },
+    ],
+  },
+  "state": Object {
+    "client": null,
+    "validGames": Array [],
+  },
+  "updater": Object {
+    "enqueueForceUpdate": [Function],
+    "enqueueReplaceState": [Function],
+    "enqueueSetState": [Function],
+    "isMounted": [Function],
+  },
+}
+`;
