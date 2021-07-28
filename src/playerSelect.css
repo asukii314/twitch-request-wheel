@@ -18,6 +18,10 @@ div.changeColButtonsContainer:hover {
     flex-direction: row;
 }
 
+div.changeColButtonsContainer .changeCol {
+    background-color: indianred;
+}
+
 .playerCard:hover {
     background-color: dimgray;
 }

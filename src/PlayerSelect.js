@@ -182,10 +182,10 @@ export default class PlayerSelect extends Component {
                     <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{userObj.username}</p>
                 </div>
                 <div className='changeColButtonsContainer'>
-                {curColumn !== 'interested' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
-                {curColumn !== 'playing' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
-                {/*curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
-                <button className='changeCol' style={{backgroundColor: 'indianred'}} onClick={this.removeUser.bind(this, userObj.username)}>X</button>
+                    {curColumn !== 'interested' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
+                    {curColumn !== 'playing' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
+                    {/*curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
+                    <button className='changeCol' onClick={this.removeUser.bind(this, userObj.username)}>X</button>
                 </div>
             </div>
         );
