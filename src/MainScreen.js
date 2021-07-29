@@ -22,6 +22,29 @@ export default class MainScreen extends Component {
             nextGameIdx: 0,
             showPlayerSelect: false
         };
+
+        this.playerSelector = null;
+        this.messageHandler = null;
+
+        this.changeNextGameIdx = this.changeNextGameIdx.bind(this);
+        this.moveNextGameFwd = this.moveNextGameFwd.bind(this);
+        this.moveNextGameBack = this.moveNextGameBack.bind(this);
+        this.addGameRequest = this.addGameRequest.bind(this);
+        this.toggleLock = this.toggleLock.bind(this);
+        this.setNextGame = this.setNextGame.bind(this);
+        this.addGameToQueue = this.addGameToQueue.bind(this);
+        this.onWheelSpun = this.onWheelSpun.bind(this);
+        this.removeGame = this.removeGame.bind(this);
+        this.onMessage = this.onMessage.bind(this);
+        this.togglePlayerSelect = this.togglePlayerSelect.bind(this);
+        this.routePlayRequest = this.routePlayRequest.bind(this);
+        this.routeLeaveRequest = this.routeLeaveRequest.bind(this);
+        this.routeOpenQueueRequest = this.routeOpenQueueRequest.bind(this);
+        this.routeCloseQueueRequest = this.routeCloseQueueRequest.bind(this);
+        this.routeClearQueueRequest = this.routeClearQueueRequest.bind(this);
+        this.startGame = this.startGame.bind(this);
+        this.setMessageHandlerRef = this.setMessageHandlerRef.bind(this);
+        this.setPlayerSelectRef = this.setPlayerSelectRef.bind(this);
     }
 
     changeNextGameIdx = (delta = 1) => {
@@ -135,7 +158,17 @@ export default class MainScreen extends Component {
 
         // send confirmation message in chat
         const requester = gameRequestObj.username;
-        this.chatActivity.getStatusPromise(requester).then((status) => {
+
+        this.addGameToQueue(gameRequestObj);
+
+        // remove card unless it's locked
+        if (!this.state.messages[gameLongName].locked) {
+            setTimeout(() => {
+                this.removeGame(gameLongName);
+            }, 2500);
+        }
+
+        return this.chatActivity.getStatusPromise(requester).then((status) => {
             let msg = "";
             switch(status) {
                 case ActivityStatus.DISCONNECTED:
@@ -148,19 +181,11 @@ export default class MainScreen extends Component {
 
                 case ActivityStatus.IDLE:
                 default:
-                    msg += `/me @${requester}, good news - ${gameRequestObj.name} just won the spin! (I hope you're still around!)`;
-                }
-                this.messageHandler.sendMessage(msg);
+                    msg = `/me @${requester}, good news - ${gameRequestObj.name} just won the spin! (I hope you're still around!)`;
+            }
+            return this.messageHandler.sendMessage(msg);
         })
 
-        this.addGameToQueue(gameRequestObj);
-
-        // remove card unless it's locked
-        if (!this.state.messages[gameLongName].locked) {
-            setTimeout(() => {
-                this.removeGame(gameLongName, true);
-            }, 2500);
-        }
     }
 
     removeGame = (gameLongName) => {
@@ -231,6 +256,14 @@ export default class MainScreen extends Component {
         return false;
     }
 
+    setMessageHandlerRef = (ps) => {
+        this.messageHandler = ps;
+    };
+
+    setPlayerSelectRef = (mh) => {
+        this.playerSelector = mh;
+    };
+
     render() {
         const gameRequestArray = Object.keys(this.state.messages);
 
@@ -261,7 +294,7 @@ export default class MainScreen extends Component {
                 <PlayerSelect
                     game={this.state.history?.[this.state.nextGameIdx]}
                     startGame={this.startGame}
-                    ref={(ps) => this.playerSelector = ps}
+                    ref={this.setPlayerSelectRef}
                 />
             );
         } else {
@@ -316,7 +349,7 @@ export default class MainScreen extends Component {
                     openQueueHandler={this.routeOpenQueueRequest}
                     closeQueueHandler={this.routeCloseQueueRequest}
                     clearQueueHandler={this.routeClearQueueRequest}
-                    ref={(mh) => this.messageHandler = mh}
+                    ref={this.setMessageHandlerRef}
                 />
                 <div className="left-column">
                     <h2>{this.state.showPlayerSelect ? 'Seat Requests' : 'Game Requests'}</h2>

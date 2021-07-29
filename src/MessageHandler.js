@@ -13,6 +13,12 @@ export default class MessageHandler extends Component {
             client: null,
             validGames: []
         };
+        this.isModOrBroadcaster = this.isModOrBroadcaster.bind(this);
+        this.checkForMiscCommands = this.checkForMiscCommands.bind(this);
+        this.findGame = this.findGame.bind(this);
+        this.checkForGameCommand = this.checkForGameCommand.bind(this);
+        this.onMessage = this.onMessage.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
     }
 
     componentDidMount(props) {
