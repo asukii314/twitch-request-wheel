@@ -52,7 +52,7 @@ export default class MessageHandler extends Component {
         return (this.props.channel === username || this.props.modList.includes(username.toLowerCase()));
     }
 
-    // returns true if a known command was found & responded to
+    // returns true iff a known command was found & responded to
     checkForMiscCommands = (message, username) => {
         //========= general =========
         if (message.startsWith("!gamelist") || message.startsWith("!gameslist")) {

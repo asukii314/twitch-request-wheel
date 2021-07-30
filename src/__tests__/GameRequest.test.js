@@ -104,6 +104,7 @@ describe('GameRequest', () => {
             await component.props.children[1].props.onMouseEnter();
             expect(props.getActivity).toHaveBeenCalledTimes(1);
 
+            // Get the children of the element div.options
             let optionsChildren = component.props.children[1].props.children.props.children[1].props.children;
             optionsChildren[0].props.onClick();
             optionsChildren[0].props.onClick();
