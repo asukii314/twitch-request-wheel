@@ -13,6 +13,8 @@
     "react-scripts": "4.0.3",
     "react-tooltip": "^4.2.17",
     "react-wheel-of-prizes": "git+https://github.com/dcpesses/react-wheel-of-prizes.git",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9",
     "tmi.js": "^1.8.2",
     "web-vitals": "^1.1.1",
     "yaml": "^1.10.2"
