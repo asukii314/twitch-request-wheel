@@ -20,6 +20,7 @@
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
     "start": "env-cmd --fallback -f .env.local react-scripts start",
+    "prebuild": "npm run test:ci",
     "build": "react-scripts build",
     "test": "env-cmd --fallback -f .env.local react-scripts test",
     "test:ci": "./tests/test.sh",
