@@ -1,5 +1,5 @@
 import AuthenticatedApp from './AuthenticatedApp';
-import {HashRouter, Route} from "react-router-dom";
+import {HashRouter, Route, Switch} from "react-router-dom";
 import JackboxGameList from './JackboxGameList';
 import React, {Component} from 'react';
 import {version} from '../package.json';
@@ -33,11 +33,13 @@ class App extends Component {
             <HashRouter basename='/'>
                 <div className="App">
                     <header className="App-header">
-                        <Route exact path="/login">
-                            {loginScreen()}
-                        </Route>
-                        <Route path="/" component={AuthenticatedApp}/>
-                        <Route path="/gamelist" component={JackboxGameList}/>
+                        <Switch>
+                            <Route exact path="/login">
+                                {loginScreen()}
+                            </Route>
+                            <Route exact path="/gamelist" component={JackboxGameList}/>
+                            <Route path="/" component={AuthenticatedApp}/>
+                        </Switch>
                     </header>
                 </div>
             </HashRouter>

@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JackboxGameList renders component with yaml content 1`] = `
+<div>
+  <div
+    class="partyPackList"
+  >
+    <div
+      class="partyPackCard"
+    >
+      <p
+        class="partyPackName"
+      >
+        Any Version
+         
+      </p>
+      <div>
+        <p
+          class="gameName"
+        >
+          Quiplash
+           
+        </p>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          quiplash
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          quip
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          ql
+        </li>
+      </div>
+      <div>
+        <p
+          class="gameName"
+        >
+          Trivia Murder Party
+           
+        </p>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          tmp
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          trivia murder party
+        </li>
+      </div>
+    </div>
+    <div
+      class="partyPackCard"
+    >
+      <p
+        class="partyPackName"
+      >
+        Party Pack 1
+         
+      </p>
+      <div>
+        <p
+          class="gameName"
+        >
+          You Don't Know Jack
+           
+        </p>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          ydkj 1
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          ydkj 2015
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          you dont know jack 1
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          you dont know jack 2015
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          you don't know jack 1
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          you don't know jack 2015
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          you don't know jack: 2015
+        </li>
+      </div>
+      <div>
+        <p
+          class="gameName"
+        >
+          Drawful
+           
+        </p>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          drawful1
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          drawful 1
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          drawfull 1
+        </li>
+        <li
+          class="possibleGameMatch"
+        >
+          !request 
+          draw full 1
+        </li>
+      </div>
+    </div>
+  </div>
+</div>
+`;

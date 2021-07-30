@@ -14,9 +14,10 @@ describe('JackboxGameList', () => {
         });
 
         let props = {};
-        render(<JackboxGameList {...props} />);
+        let {container} = render(<JackboxGameList {...props} />);
 
         await waitFor(() => screen.getByText(/you don't know jack: 2015/i));
         expect(screen.getByText(/you don't know jack: 2015/i)).toBeInTheDocument();
+        expect(container).toMatchSnapshot();
     });
 });
