@@ -52,7 +52,7 @@ export default class MessageHandler extends Component {
         return (this.props.channel === username || this.props.modList.includes(username.toLowerCase()));
     }
 
-    // returns true iff a known command was found & responded to
+    // returns true if a known command was found & responded to
     checkForMiscCommands = (message, username) => {
         //========= general =========
         if (message.startsWith("!gamelist") || message.startsWith("!gameslist")) {
@@ -87,7 +87,7 @@ export default class MessageHandler extends Component {
             }
             if (this.props.changeNextGameIdx(1)) {
                 if (this.props.upcomingGames.length > 0) {
-                    console.log(this.props.upcomingGames)
+                    // console.log(this.props.upcomingGames)
                     this.sendMessage(`/me @${username}, the next game has been changed to ${this.props.upcomingGames[0].name}.`);
                 } else {
                     this.sendMessage(`/me @${username}, the next game has been marked as "TBD".`);
@@ -98,7 +98,7 @@ export default class MessageHandler extends Component {
             return true;
         }
 
-        //========= advance next game =========
+        //========= advance prev game =========
         if (message === "!nextgameback" || message === "!nextgamebackward") {
             if (!this.isModOrBroadcaster(username)) {
                 this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
@@ -199,11 +199,14 @@ export default class MessageHandler extends Component {
             } else {
                 this.sendMessage(`/me @${username}, the game was already started.`);
             }
+            return true;
         }
 
         if (message.startsWith("!redeem")) {
             this.sendMessage(`/me @${username}, this command is no longer supported: please specify either !redeemgame or !redeemseat.`);
+            return true;
         }
+        return;
     }
 
     findGame = (requestedGame, username) => {
@@ -221,7 +224,7 @@ export default class MessageHandler extends Component {
             }
         }
         this.sendMessage(`/me @${username}, ${requestedGame} could not be found in the list of valid Jackbox games. Click here for a list of valid games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
-        return null;
+        return;
     }
 
     checkForGameCommand = (message, username) => {
@@ -238,7 +241,7 @@ export default class MessageHandler extends Component {
     }
 
     onMessage = (target, tags, msg, self) => {
-        if (self)return;
+        if (self) return;
         this.props.onMessage(msg, tags.username, tags)
 
         if (msg.trim() === "!nextgame") {

@@ -177,10 +177,8 @@ describe('MainScreen', () => {
             instance.setState(state);
             let component = shallowRenderer.getRenderOutput();
             expect(component).toMatchSnapshot();
-            // console.log(component.props.children.filter(p => p.type === 'button'));
             let logoutBtn = component.props.children.find(p => p.type === 'button');
             logoutBtn.props.onClick();
-            // userEvent.click(logoutBtn);
             expect(props.onLogout).toHaveBeenCalledTimes(1);
             shallowRenderer.unmount();
         });

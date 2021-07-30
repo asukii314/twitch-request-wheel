@@ -4,7 +4,11 @@ import GameRequest from '../GameRequest';
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 
-jest.mock('react-tooltip', () => () => (<div>React Tooltip Mock</div>));
+// forces react-tooltip to reuse the same uuids
+// to avoid breaking snapshots each time :P
+jest.mock('crypto', () => ({
+    randomBytes: (num: number) => new Array(num).fill(0),
+}));
 
 describe('GameRequest', () => {
     const propsQuip = {
@@ -50,9 +54,13 @@ describe('GameRequest', () => {
     describe('render', () => {
         test('should render component using quiplash data', async () => {
             let {container} = render(<GameRequest {...propsQuip} />);
-            await waitFor(() => screen.getByText(/Quiplash/i));
-            const element = screen.getByText(/Quiplash/i);
-            expect(element).toBeInTheDocument();
+            try {
+                await waitFor(() => screen.getByText(/Quiplash/i));
+                const element = screen.getByText(/Quiplash/i);
+                expect(element).toBeInTheDocument();
+            } catch (e) {
+                throw e;
+            }
             expect(container).toMatchSnapshot();
         });
         test('should render component using survive the internet data', () => {
@@ -79,9 +87,9 @@ describe('GameRequest', () => {
         test('should render component using survive the internet data and updated status info', async () => {
             let props = Object.assign({}, propsSTI, {
                 getActivity: jest.fn()
-                    .mockImplementationOnce(async () => 3)
-                    .mockImplementationOnce(async () => 2)
-                    .mockImplementationOnce(async () => 1),
+                    .mockResolvedValueOnce(3)
+                    .mockResolvedValueOnce(2)
+                    .mockResolvedValueOnce(1),
                 onDelete: jest.fn(),
                 toggleLock: jest.fn()
             })
@@ -93,7 +101,7 @@ describe('GameRequest', () => {
                 timeDiff: '2 minutes ago'
             });
             let component = shallowRenderer.getRenderOutput();
-            component.props.children[1].props.onMouseEnter();
+            await component.props.children[1].props.onMouseEnter();
             expect(props.getActivity).toHaveBeenCalledTimes(1);
 
             let optionsChildren = component.props.children[1].props.children.props.children[1].props.children;
@@ -104,37 +112,5 @@ describe('GameRequest', () => {
             expect(props.onDelete).toHaveBeenCalledTimes(1);
             shallowRenderer.unmount();
         });
-        // test('should render component witht data and test time formatting', async () => {
-        //     let props = Object.assign({}, propsSTI, {
-        //         getActivity: jest.fn()
-        //             .mockImplementationOnce(async () => 3)
-        //             .mockImplementationOnce(async () => 2)
-        //             .mockImplementationOnce(async () => 1),
-        //         metadata: Object.assign({}, propsSTI.metadata, {
-        //             time: Date.now()
-        //         }),
-        //         onDelete: jest.fn(),
-        //         toggleLock: jest.fn()
-        //     })
-        //     const shallowRenderer = createRenderer();
-        //     shallowRenderer.render(<GameRequest {...props} />);
-        //     let instance = shallowRenderer.getMountedInstance();
-        //     console.log('instance:', instance);
-        //     // jest.spyOn(instance, 'setState').mockImplementation(() => {});
-        //     let component = shallowRenderer.getRenderOutput();
-        //     component.props.children[1].props.onMouseEnter();
-        //     console.log('instance.state:', instance.state);
-        //     component = shallowRenderer.getRenderOutput()
-        //     instance.props.metadata.time = Date.now()-30000;
-        //     component.props.children[1].props.onMouseEnter();
-        //     console.log('instance.state:', instance.state);
-        //
-        //     console.log('props.getActivity.mock.calls:', props.getActivity.mock.calls);
-        //     // console.log('instance.setState.mock.calls:', instance.setState.mock.calls);
-        //     expect(props.getActivity).toHaveBeenCalledTimes(2);
-        //     // expect(instance.setState).toHaveBeenCalledTimes(2);
-        //
-        //     shallowRenderer.unmount();
-        // });
     });
 });
