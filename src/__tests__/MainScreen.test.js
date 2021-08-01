@@ -21,6 +21,24 @@ describe('MainScreen', () => {
         onLogout: jest.fn()
     };
 
+    describe('changeGameOrder', () => {
+        test('should call setState', () => {
+            const component = new MainScreen(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            expect(component.changeGameOrder([{}], 1)).toBeTruthy();
+            expect(component.setState).toHaveBeenCalledWith({
+                history: [{}],
+                nextGameIdx: 1
+            });
+        });
+        test('should return false', () => {
+            const component = new MainScreen(props);
+
+            expect(component.changeGameOrder([{}], 2)).toBeFalsy();
+        });
+    });
+
     describe('onWheelSpun', () => {
         const state = {
             messages: {
