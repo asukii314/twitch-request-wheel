@@ -76,3 +76,6 @@
 #sidebar .sidebar-panel-history-list li b {
     color: aquamarine;
 }
+#sidebar .sidebar-panel-history-list li:not([tabindex="0"]) {
+    list-style: none;
+}
