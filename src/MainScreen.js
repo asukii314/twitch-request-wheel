@@ -15,6 +15,7 @@ export default class MainScreen extends Component {
         super(props);
         this.chatActivity = new ChatActivity(this.props.channel)
         this.state = {
+            gameSelected: null,
             messages: {},
             colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
             counter: 0,
@@ -141,9 +142,11 @@ export default class MainScreen extends Component {
 
     addGameToQueue = (gameObj) => {
         // update history + game card highlight color
+        console.log('gameObj.name:', gameObj.name);
         this.setState((state) => {
             return {
                 ...state,
+                gameSelected: gameObj.name,
                 history: [
                     ...this.state.history,
                     {
@@ -159,7 +162,14 @@ export default class MainScreen extends Component {
                     }
                 }
             }
-        })
+        });
+    }
+
+    clearModal = () => {
+        console.log('clearModal');
+        this.setState({
+            gameSelected: null
+        });
     }
 
     onWheelSpun = (gameLongName) => {
@@ -175,6 +185,7 @@ export default class MainScreen extends Component {
         if (!this.state.messages[gameLongName].locked) {
             setTimeout(() => {
                 this.removeGame(gameLongName);
+                this.clearModal();
             }, 2500);
         }
 
@@ -276,6 +287,19 @@ export default class MainScreen extends Component {
 
     render() {
         const gameRequestArray = Object.keys(this.state.messages);
+
+
+        let gameSelectedModal;
+        if (this.state.gameSelected) {
+            gameSelectedModal = (
+                <>
+                    <div className="overlay fade-in"></div>
+                    <div className="modal fade-in" onClick={()=>this.removeGame(this.state.gameSelected)}>
+                        <h1>{this.state.gameSelected}</h1>
+                    </div>
+                </>
+            )
+        }
 
         let logOutBtn;
         if (typeof this.props.onLogout === 'function') {
@@ -382,6 +406,7 @@ export default class MainScreen extends Component {
                 </div>
                 {rightColumn}
                 {logOutBtn}
+                {gameSelectedModal}
             </div>
         )
     }
