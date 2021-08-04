@@ -143,7 +143,6 @@ export default class MainScreen extends Component {
 
     addGameToQueue = (gameObj) => {
         // update history + game card highlight color
-        console.log('gameObj.name:', gameObj.name);
         this.setState((state) => {
             return {
                 ...state,
@@ -167,7 +166,6 @@ export default class MainScreen extends Component {
     }
 
     clearModal = () => {
-        console.log('clearModal');
         this.setState({
             gameSelected: null
         });
