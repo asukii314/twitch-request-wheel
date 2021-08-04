@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import ConfettiExplosion from '@reonomy/react-confetti-explosion';
 import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
@@ -146,7 +147,7 @@ export default class MainScreen extends Component {
         this.setState((state) => {
             return {
                 ...state,
-                gameSelected: gameObj.name,
+                gameSelected: gameObj,
                 history: [
                     ...this.state.history,
                     {
@@ -186,7 +187,7 @@ export default class MainScreen extends Component {
             setTimeout(() => {
                 this.removeGame(gameLongName);
                 this.clearModal();
-            }, 2500);
+            }, 4000);
         }
 
         return this.chatActivity.getStatusPromise(requester).then((status) => {
@@ -285,20 +286,40 @@ export default class MainScreen extends Component {
         this.playerSelector = mh;
     };
 
+    renderGameChosenModal(gameObj) {
+        let confettiProps = {
+            force: 0.6,
+            duration: 3500,
+            particleCount: 100,
+            floorHeight: Math.max(window.outerWidth, window.outerHeight),
+            floorWidth: Math.max(window.outerWidth, window.outerHeight)
+        };
+        let requestedBy;
+        if (gameObj.username) {
+            requestedBy = (<h4>requested by @{gameObj.username}</h4>);
+        }
+        return (
+            <>
+                <div className="overlay fade-in-out">
+                    <div className="confetti-wrapper">
+                        <ConfettiExplosion {...confettiProps} />
+                    </div>
+                </div>
+                <div className="modal fade-in-out" onClick={()=>this.removeGame(gameObj.longName)}>
+                    <h1>{gameObj.name}</h1>
+                    {requestedBy}
+                </div>
+            </>
+        );
+    }
+
     render() {
         const gameRequestArray = Object.keys(this.state.messages);
 
 
         let gameSelectedModal;
         if (this.state.gameSelected) {
-            gameSelectedModal = (
-                <>
-                    <div className="overlay fade-in"></div>
-                    <div className="modal fade-in" onClick={()=>this.removeGame(this.state.gameSelected)}>
-                        <h1>{this.state.gameSelected}</h1>
-                    </div>
-                </>
-            )
+            gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
         }
 
         let logOutBtn;
