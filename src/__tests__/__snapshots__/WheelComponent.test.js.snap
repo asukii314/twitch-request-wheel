@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WheelComponent should render the wheel 1`] = `
+<div
+  id="wheel"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <canvas
+    height={720}
+    id="canvas"
+    style={
+      Object {
+        "pointerEvents": "auto",
+      }
+    }
+    width={600}
+  />
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "borderRadius": "50%",
+        "cursor": "pointer",
+        "height": "580px",
+        "left": 10,
+        "position": "absolute",
+        "right": 10,
+        "top": -2,
+        "width": "580px",
+      }
+    }
+  />
+</div>
+`;

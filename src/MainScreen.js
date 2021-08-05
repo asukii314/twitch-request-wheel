@@ -1,11 +1,13 @@
 import { Component } from 'react';
 import ConfettiExplosion from '@reonomy/react-confetti-explosion';
-import WheelComponent from 'react-wheel-of-prizes'
+// import WheelComponent from 'react-wheel-of-prizes'
 import GameRequest from './GameRequest'
 import MessageHandler from './MessageHandler';
 import Sidebar from './Sidebar'
 import PlayerSelect from './PlayerSelect';
 import ChatActivity, { ActivityStatus } from './ChatActivity';
+import WheelComponent from './WheelComponent';
+
 
 import './MainScreen.css';
 const randomColor = require('randomcolor');
@@ -172,6 +174,8 @@ export default class MainScreen extends Component {
     }
 
     onWheelSpun = (gameLongName) => {
+        if (!gameLongName) return;
+        gameLongName = gameLongName.replace(" \n(", ' (');
         const gameRequestObj = this.state.messages?.[gameLongName];
         if (!gameRequestObj) return;
 
@@ -313,6 +317,7 @@ export default class MainScreen extends Component {
 
     render() {
         const gameRequestArray = Object.keys(this.state.messages);
+        const gameRequestWheelArray = gameRequestArray.map(game => game.replace(' (', " \n("));
 
 
         let gameSelectedModal;
@@ -361,22 +366,23 @@ export default class MainScreen extends Component {
                     getActivity={this.chatActivity.getStatusPromise}
                 />
             );
+
             rightColumn = (
                 <div className="right-column" width="50px">
                     <div className="wheel-wrapper">
-                         <WheelComponent
-                            key={this.state.counter}
-                            segments={gameRequestArray}
-                            segColors={this.state.colors}
-                            onFinished={this.onWheelSpun}
-                            isOnlyOnce={false}
-                            size={250}
-                            upDuration={100}
-                            downDuration={1000}
-                            primaryColor={"white"}
-                            contrastColor={"black"}
-                            fontFamily={"Arial"}
-                        />
+                        <WheelComponent
+                           key={this.state.counter}
+                           segments={gameRequestWheelArray}
+                           segColors={this.state.colors}
+                           onFinished={this.onWheelSpun}
+                           isOnlyOnce={false}
+                           size={250}
+                           upDuration={100}
+                           downDuration={1000}
+                           primaryColor={"white"}
+                           contrastColor={"black"}
+                           fontFamily={"Arial"}
+                         />
                     </div>
                 </div>
             );

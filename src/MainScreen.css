@@ -43,9 +43,9 @@
     overflow: hidden;
     width: 600px;
 }
-.wheel-wrapper canvas {
+/* .wheel-wrapper canvas {
     cursor: pointer;
-}
+} */
 
 #main-screen .logout {
     position: absolute;
