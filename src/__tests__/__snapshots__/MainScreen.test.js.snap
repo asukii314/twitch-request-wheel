@@ -415,38 +415,6 @@ exports[`MainScreen render should render the player selection screen 1`] = `
 </div>
 `;
 
-exports[`MainScreen renderGameChosenModal should return a modal with confetti 1`] = `
-<React.Fragment>
-  <div
-    className="overlay fade-in-out"
-  >
-    <div
-      className="confetti-wrapper"
-    >
-      <ConfettiExplosion
-        duration={3500}
-        floorHeight={1024}
-        floorWidth={1024}
-        force={0.6}
-        particleCount={100}
-      />
-    </div>
-  </div>
-  <div
-    className="modal fade-in-out"
-    onClick={[Function]}
-  >
-    <h1>
-      Survive The Internet
-    </h1>
-    <h4>
-      requested by @
-      dcpesses
-    </h4>
-  </div>
-</React.Fragment>
-`;
-
 exports[`MainScreen renderGameChosenModal should return a modal with confetti and call removeGame when clicked 1`] = `
 <React.Fragment>
   <div
