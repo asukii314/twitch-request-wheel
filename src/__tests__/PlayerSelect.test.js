@@ -177,10 +177,6 @@ describe('PlayerSelect', () => {
 
         });
     });
-    xdescribe('updateColumnForUser', () => {
-        test.skip('should', () => {
-        });
-    });
 
     describe('removeUser', () => {
         test('should call setState', () => {
@@ -261,8 +257,6 @@ describe('PlayerSelect', () => {
         });
     });
 
-    // return this.state.playing.length + this.state.joined.length + (this.state.streamerSeat ? 1 : 0);
-
     describe('playerCount', () => {
         const component = new PlayerSelect(propsTMP2);
         component.state = state;
@@ -315,11 +309,41 @@ describe('PlayerSelect', () => {
         });
     });
 
-    xdescribe('randomizePlayers', () => {
-        test.skip('should', () => {
+    describe('randomizePlayers', () => {
+        test('should test all cases and branches', () => {
+            // const mockMath = Object.create(global.Math);
+            jest.spyOn(global.Math, 'floor')
+                .mockImplementationOnce(()=>4)
+                .mockImplementationOnce(()=>0)
+                .mockImplementationOnce(()=>4)
+                .mockImplementation(()=>2);
+
+            const component = new PlayerSelect(propsBlather);
+            component.state = {
+                ...state,
+                interested: [
+                    {username: 'player4'},
+                    {username: 'player5'},
+                    {username: 'player6'},
+                    {username: 'player7'},
+                    {username: 'player8'}
+                ],
+                playing: [
+                    {username: 'player1', isPrioritySeat: true},
+                    {username: 'player2', isPrioritySeat: true},
+                    {username: 'player3'}
+                ],
+            };
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            component.randomizePlayers();
+
+            expect(component.setState).toHaveBeenCalledTimes(1);
+
+            expect(component.setState.mock.calls[0][0](component.state).interested.length).toBe(2);
+            expect(component.setState.mock.calls[0][0](component.state).playing.length).toBe(6);
         });
     });
-
 
     describe('render', () => {
         test('should render component', () => {
