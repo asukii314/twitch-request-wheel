@@ -54,7 +54,6 @@ export default class MainScreen extends Component {
         if (this.state.nextGameIdx + delta < 0) return false;
         this.setState((state) => {
             return {
-                ...this.state,
                 nextGameIdx: state.nextGameIdx + delta
             }
         });
@@ -227,7 +226,6 @@ export default class MainScreen extends Component {
     togglePlayerSelect = () => {
         this.setState((state) => {
             return {
-                ...state,
                 showPlayerSelect: !state.showPlayerSelect
             }
         })
@@ -266,10 +264,8 @@ export default class MainScreen extends Component {
     }
 
     startGame = () => {
-        // I know this is a big ol' React sin, but I can't for the life of me
-        //   figure out why this.togglePlayerSelect() isn't working... sooo...
         if (this.state.showPlayerSelect) {
-            this.state.showPlayerSelect = false;
+            this.togglePlayerSelect();
             this.moveNextGameFwd();
             return true;
         }
