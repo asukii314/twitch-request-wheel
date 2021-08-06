@@ -51,9 +51,14 @@ class AuthenticatedApp extends Component {
                         };
                     });
                 }
+                return;
             });
         })
-        .catch(e => this.getAuth);
+        .catch(e => {
+            console.error(e);
+            this.getAuth(e);
+            return;
+        });
     }
 
     componentWillUnmount() {
@@ -95,7 +100,7 @@ class AuthenticatedApp extends Component {
             client_secret: process.env.REACT_APP_TWITCH_CLIENT_SECRET,
             redirect_uri: process.env.REACT_APP_REDIRECT_URI_NOENCODE
         });
-        await fetch(`https://id.twitch.tv/oauth2/token?${requestParams}`, {
+        return await fetch(`https://id.twitch.tv/oauth2/token?${requestParams}`, {
             method: 'POST',
             headers: {
                 Accept: 'application/vnd.twitchtv.v5+json'
@@ -159,6 +164,17 @@ class AuthenticatedApp extends Component {
                     return;
                 });
             });
+        }).catch(e => {
+            if (this._isMounted) {
+                this.setState((state) => {
+                    return {
+                        ...state,
+                        failed_login: true
+                    };
+                });
+            }
+            console.error(e);
+            return;
         });
     }
 
