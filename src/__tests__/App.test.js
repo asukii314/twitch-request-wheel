@@ -1,13 +1,13 @@
+import App from '../App';
 import {createRenderer} from 'react-test-renderer/shallow';
-import LoginScreen from '../LoginScreen';
 import React from 'react';
 
-describe('LoginScreen', () => {
+describe('App', () => {
 
     describe('render', () => {
         test('should render without error', () => {
             const shallowRenderer = createRenderer();
-            shallowRenderer.render(<LoginScreen />);
+            shallowRenderer.render(<App />);
 
             let component = shallowRenderer.getRenderOutput();
             expect(component).not.toBe(null);
