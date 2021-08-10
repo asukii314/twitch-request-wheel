@@ -116,6 +116,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
         downDuration={1000}
         fontFamily="Arial"
         isOnlyOnce={false}
+        multilineDelimiter=" ("
         onFinished={[Function]}
         primaryColor="white"
         segColors={
@@ -263,6 +264,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
         downDuration={1000}
         fontFamily="Arial"
         isOnlyOnce={false}
+        multilineDelimiter=" ("
         onFinished={[Function]}
         primaryColor="white"
         segColors={

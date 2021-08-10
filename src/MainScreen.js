@@ -372,6 +372,7 @@ export default class MainScreen extends Component {
                             primaryColor={"white"}
                             contrastColor={"black"}
                             fontFamily={"Arial"}
+                            multilineDelimiter={' ('}
                         />
                     </div>
                 </div>

@@ -22,7 +22,7 @@
 
 #sidebar .sidebar-panel-up-next,
 #sidebar .sidebar-panel-history {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
 }
 #sidebar .sidebar-panel-up-next {
@@ -71,10 +71,12 @@
 }
 
 #sidebar .sidebar-panel-history-list {
-    font-size: 12px;
+    font-size: 13px;
+    list-style: none;
 }
 #sidebar .sidebar-panel-history-list li b {
     color: aquamarine;
+    font-size: 14px;
 }
 #sidebar .sidebar-panel-history-list li:not([tabindex="0"]) {
     list-style: none;
