@@ -77,7 +77,7 @@
 }
 #main-screen .fade-in-out {
     opacity: 0;
-    animation: 3.5s linear 0s fade;
+    animation: 3.5s linear 0s main-modal-fade;
     animation-fill-mode: forwards;
 }
 #main-screen .modal {
@@ -89,7 +89,7 @@
     padding: 2vh 4vw;
     color: #fff;
 }
-@keyframes fade {
+@keyframes main-modal-fade {
     0%,100% { opacity: 0 }
     5%,95% { opacity: 1 }
 }

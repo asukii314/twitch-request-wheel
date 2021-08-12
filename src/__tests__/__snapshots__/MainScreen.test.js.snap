@@ -43,14 +43,14 @@ exports[`MainScreen render should render the game request screen 1`] = `
     upcomingGames={Array []}
   />
   <div
-    className="left-column"
+    className="left-column fade-in"
   >
     <h2>
       Game Requests
     </h2>
     <h4>
       <span
-        className="subheading-game"
+        className="subheading-game fade-in-delay"
       >
         Type e.g. 
         <b>
@@ -109,7 +109,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
     width="50px"
   >
     <div
-      className="wheel-wrapper"
+      className="wheel-wrapper fade-in"
     >
       <default
         contrastColor="black"
@@ -191,14 +191,14 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     upcomingGames={Array []}
   />
   <div
-    className="left-column"
+    className="left-column fade-in"
   >
     <h2>
       Game Requests
     </h2>
     <h4>
       <span
-        className="subheading-game"
+        className="subheading-game fade-in-delay"
       >
         Type e.g. 
         <b>
@@ -257,7 +257,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     width="50px"
   >
     <div
-      className="wheel-wrapper"
+      className="wheel-wrapper fade-in"
     >
       <default
         contrastColor="black"
@@ -368,14 +368,14 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     upcomingGames={Array []}
   />
   <div
-    className="left-column"
+    className="left-column fade-in"
   >
     <h2>
       Seat Requests
     </h2>
     <h4>
       <span
-        className="subheading-player"
+        className="subheading-player fade-in-delay"
       >
         Type 
         <b>
