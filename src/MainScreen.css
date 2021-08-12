@@ -1,5 +1,7 @@
 #main-screen {
     display: flex;
+    --scrollbarBG: #23272e;
+    --thumbBG: #6b7280;
 }
 #main-screen.game-select .left-column {
     width: 45vw;
@@ -26,11 +28,31 @@
 .left-column .left-column-body {
     display: flex;
     align-items: flex-start;
-    height: 100%;
+    height: calc(100% - 100px - 3vmin);
+
 }
 .left-column .left-column-inner-body {
     flex-grow: 2;
     margin-left: 15px;
+}
+
+#main-screen.game-select .left-column .left-column-inner-body {
+    overflow-y: auto;
+    height: calc(100vh - 3.5vmin - 100px);
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+#main-screen.game-select .left-column-inner-body::-webkit-scrollbar {
+  width: 12px;
+}
+#main-screen.game-select .left-column-inner-body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+#main-screen.game-select .left-column-inner-body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
 }
 
 #main-screen .right-column {
