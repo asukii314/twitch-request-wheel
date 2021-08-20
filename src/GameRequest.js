@@ -95,7 +95,7 @@ export default class GameRequest extends Component {
 
         return (
             <div className="game-request-wrapper fade-in">
-            	<ReactTooltip effect="solid" place="right" />
+            	<ReactTooltip effect="solid" place="left" />
             	<div id="baseDiv"
             		className={`game-request ${cardStatus}`}
             		data-tip={this.getTooltipContents()}

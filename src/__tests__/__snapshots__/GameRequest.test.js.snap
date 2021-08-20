@@ -6,7 +6,7 @@ exports[`GameRequest render should render component using quiplash data 1`] = `
     class="game-request-wrapper fade-in"
   >
     <div
-      class="__react_component_tooltip t00000000-0000-4000-8000-000000000000 place-right type-dark"
+      class="__react_component_tooltip t00000000-0000-4000-8000-000000000000 place-left type-dark"
       data-id="tooltip"
       id="t00000000-0000-4000-8000-000000000000"
     >
@@ -136,7 +136,7 @@ exports[`GameRequest render should render component using survive the internet d
     clickable={false}
     effect="solid"
     insecure={true}
-    place="right"
+    place="left"
     resizeHide={true}
     wrapper="div"
   />
@@ -187,7 +187,7 @@ exports[`GameRequest render should render component using survive the internet d
     clickable={false}
     effect="solid"
     insecure={true}
-    place="right"
+    place="left"
     resizeHide={true}
     wrapper="div"
   />
@@ -238,7 +238,7 @@ exports[`GameRequest render should render component using survive the internet d
     clickable={false}
     effect="solid"
     insecure={true}
-    place="right"
+    place="left"
     resizeHide={true}
     wrapper="div"
   />
