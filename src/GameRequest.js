@@ -77,12 +77,9 @@ export default class GameRequest extends Component {
         let activityStatus;
         try {
             activityStatus = await this.props.getActivity(this.props.metadata.username);
-            this.setState(() => {
-                return {
-                    ...this.state,
-                    timeDiff: this.getFormattedTimeDiff(this.props.metadata.time),
-                    activityStatus
-                };
+            return this.setState({
+                timeDiff: this.getFormattedTimeDiff(this.props.metadata.time),
+                activityStatus
             });
         } catch(err) {
             throw err;
