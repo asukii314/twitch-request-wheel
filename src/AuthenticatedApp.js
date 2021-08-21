@@ -13,76 +13,23 @@ class AuthenticatedApp extends Component {
             failed_login: false
         }
         this.getAuth = this.getAuth.bind(this);
+        this.getUsers = this.getUsers.bind(this);
         this.logOut = this.logOut.bind(this);
     }
+
     componentDidMount() {
         this._isMounted = true;
         if (!this.state.access_token) {
             return this.getAuth();
         }
-        return fetch('https://api.twitch.tv/helix/users', {
-            headers: {
-                'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
-                Authorization: `Bearer ${this.state.access_token}`
-            }
-        })
-        .then(r => r.json())
-        .then(userInfo => {
-            //console.log(userInfo); login [aka lowercase username?], display_name, profile_image_url, description
-            localStorage.setItem('__username', userInfo.data[0].login);
-            return fetch(`https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=${userInfo.data[0].id}`, {
-                headers: {
-                    'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
-                    Authorization: `Bearer ${this.state.access_token}`
-                }
-            })
-            .then(r => r.json())
-            .then(modInfo => {
-                const modList = (!modInfo.data)
-                    ? null
-                    : modInfo.data.map((modObj) => modObj.user_name.toLowerCase());
-
-                if (this._isMounted) {
-                    this.setState((state) => {
-                        return {
-                            ...state,
-                            username: userInfo.data[0].login,
-                            modList
-                        };
-                    });
-                }
-                return;
-            });
-        })
-        .catch(e => {
+        return this.getUsers(this.state.access_token).catch(e => {
             console.error(e);
-            this.getAuth(e);
-            return;
+            return this.getAuth(e);
         });
     }
 
     componentWillUnmount() {
         this._isMounted = false;
-    }
-
-    logOut() {
-        localStorage.removeItem('__username');
-        localStorage.removeItem('__access_token');
-
-        const requestParams = new URLSearchParams({
-            client_id: process.env.REACT_APP_TWITCH_CLIENT_ID,
-            token: this.state.access_token,
-            redirect_uri: process.env.REACT_APP_REDIRECT_URI_NOENCODE
-        });
-
-        fetch(`https://id.twitch.tv/oauth2/revoke?${requestParams}`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/vnd.twitchtv.v5+json'
-            }
-        }).then(() => {
-            window.location.reload();
-        });
     }
 
     async getAuth(e) {
@@ -109,72 +56,84 @@ class AuthenticatedApp extends Component {
         .then(r => r.json())
         .then((oauth) => {
             //console.log(oauth);  access_token, refresh_token, expires_in, scope ['...']
-            if (!oauth.access_token) {
-                if (this._isMounted) {
-                    this.setState((state) => {
-                        return {
-                            ...state,
-                            failed_login: true
-                        };
+            if (this._isMounted) {
+                if (!oauth.access_token) {
+                    return this.setState({
+                        failed_login: true
                     });
                 }
-                return;
-            }
 
-            localStorage.setItem('__access_token', oauth.access_token);
+                localStorage.setItem('__access_token', oauth.access_token);
+
+                this.setState({
+                    access_token: oauth.access_token
+                });
+
+                return this.getUsers(oauth.access_token);
+            }
+            return;
+        })
+        .catch(e => {
+            console.error(e);
             if (this._isMounted) {
-                this.setState((state) => {
-                    return {
-                        ...state,
-                        access_token: oauth.access_token
-                    };
+                return this.setState({
+                    failed_login: true
                 });
             }
+            return;
+        });
+    }
 
-            return fetch('https://api.twitch.tv/helix/users', {
+    getUsers(access_token) {
+        return fetch('https://api.twitch.tv/helix/users', {
+            headers: {
+                'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
+                Authorization: `Bearer ${this.state.access_token}`
+            }
+        })
+        .then(r => r.json())
+        .then(userInfo => {
+            //console.log(userInfo); login [aka lowercase username?], display_name, profile_image_url, description
+            localStorage.setItem('__username', userInfo.data[0].login);
+            return fetch(`https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=${userInfo.data[0].id}`, {
                 headers: {
                     'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
-                    Authorization: `Bearer ${oauth.access_token}`
+                    Authorization: `Bearer ${this.state.access_token}`
                 }
             })
             .then(r => r.json())
-            .then(userInfo => {
-                //console.log(userInfo); login [aka lowercase username?], display_name, profile_image_url, description
-                localStorage.setItem('__username', userInfo.data[0].login);
-                return fetch(`https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=${userInfo.data[0].id}`, {
-                    headers: {
-                        'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
-                        Authorization: `Bearer ${this.state.access_token}`
-                    }
-                })
-                .then(r => r.json())
-                .then(modInfo => {
-                    const modList = (!modInfo.data)
-                        ? null
-                        : modInfo.data.map((modObj) => modObj.user_name.toLowerCase());
-                    if (this._isMounted) {
-                        this.setState((state) => {
-                            return {
-                                ...state,
-                                username: userInfo.data[0].login,
-                                modList
-                            };
-                        });
-                    }
-                    return;
-                });
+            .then(modInfo => {
+                const modList = (!modInfo.data)
+                    ? null
+                    : modInfo.data.map((modObj) => (!modObj.user_name) ? null : modObj.user_name.toLowerCase()).filter(user => user);
+                if (this._isMounted) {
+                    return this.setState({
+                        username: userInfo.data[0].login,
+                        modList
+                    });
+                }
+                return;
             });
-        }).catch(e => {
-            if (this._isMounted) {
-                this.setState((state) => {
-                    return {
-                        ...state,
-                        failed_login: true
-                    };
-                });
+        });
+    }
+
+    logOut() {
+        localStorage.removeItem('__username');
+        localStorage.removeItem('__access_token');
+
+        const requestParams = new URLSearchParams({
+            client_id: process.env.REACT_APP_TWITCH_CLIENT_ID,
+            token: this.state.access_token,
+            redirect_uri: process.env.REACT_APP_REDIRECT_URI_NOENCODE
+        });
+
+        return fetch(`https://id.twitch.tv/oauth2/revoke?${requestParams}`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/vnd.twitchtv.v5+json'
             }
-            console.error(e);
-            return;
+        }).then(() => {
+            return window.location.reload();
         });
     }
 

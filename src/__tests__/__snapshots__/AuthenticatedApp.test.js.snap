@@ -1,14 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthenticatedApp render page 1`] = `
-<div>
-  <div
-    id="authenticated-app"
-  />
-</div>
-`;
-
-exports[`AuthenticatedApp render with MainScreen 1`] = `
+exports[`AuthenticatedApp render should render with MainScreen 1`] = `
 <div
   id="authenticated-app"
 >
@@ -21,8 +13,14 @@ exports[`AuthenticatedApp render with MainScreen 1`] = `
 </div>
 `;
 
-exports[`AuthenticatedApp render with Redirect 1`] = `
+exports[`AuthenticatedApp render should render with Redirect on failed login 1`] = `
 <Redirect
   to="/login"
+/>
+`;
+
+exports[`AuthenticatedApp render should render with null 1`] = `
+<div
+  id="authenticated-app"
 />
 `;
