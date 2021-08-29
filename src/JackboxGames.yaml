@@ -457,3 +457,10 @@ Standalone:
       - word stream
       - words
       - wos
+
+  Codenames:
+    Min Players: 4
+    Max Players: 64
+    Variants:
+      - code names
+      - codename
