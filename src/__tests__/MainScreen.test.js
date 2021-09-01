@@ -578,7 +578,7 @@ describe('MainScreen', () => {
             instance.setState(state);
             let component = shallowRenderer.getRenderOutput();
             expect(component).toMatchSnapshot();
-            let logoutBtn = component.props.children.find(p => p.type === 'button');
+            let logoutBtn = component.props.children.find(p => p.props.className === 'btn logout');
             logoutBtn.props.onClick();
             expect(props.onLogout).toHaveBeenCalledTimes(1);
             shallowRenderer.unmount();
@@ -623,7 +623,7 @@ describe('MainScreen', () => {
             instance.setState(state);
             let component = shallowRenderer.getRenderOutput();
             expect(component).toMatchSnapshot();
-            let logoutBtn = component.props.children.find(p => p.type === 'button');
+            let logoutBtn = component.props.children.find(p => p.props.className === 'btn logout');
             logoutBtn.props.onClick();
             expect(props.onLogout).toHaveBeenCalledTimes(1);
             shallowRenderer.unmount();

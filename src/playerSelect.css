@@ -160,12 +160,12 @@ button.dice>img {
 }
 
 /* // ---------------------- The toggle group */
-.my-toggle-group {
+.playerSelectContainer .my-toggle-group {
     display: flex;
     align-items: center;
 }
 
-.my-toggle {
+.playerSelectContainer .my-toggle {
     background: var(--my-toggle-background);
     width: var(--my-toggle-width);
     height: var(--my-toggle-height);
@@ -175,7 +175,7 @@ button.dice>img {
     position: relative;
 }
 
-.toggle-label {
+.playerSelectContainer .toggle-label {
     font-size: 12px;
     max-width: 80px;
     overflow-wrap: break-word;
@@ -184,7 +184,7 @@ button.dice>img {
 }
 
 /* // ------ On off texts */
-.my-toggle-text {
+.playerSelectContainer .my-toggle-text {
     width: calc(var(--my-toggle-width) / 2);
     position: absolute;
     height: var(--my-toggle-height);
@@ -201,13 +201,13 @@ button.dice>img {
     font-weight: 500;
 }
 
-.my-toggle-text:nth-child(2) {
+.playerSelectContainer .my-toggle-text:nth-child(2) {
     left: calc(50% - var(--my-toggle-gap-size));
     right: var(--my-toggle-gap-size);
 }
 
 /* // ------ Toggle orb */
-.my-toggle-orb {
+.playerSelectContainer .my-toggle-orb {
     width: var(--my-toggle-orb-size);
     height: var(--my-toggle-orb-size);
     display: block;
@@ -222,7 +222,7 @@ button.dice>img {
 }
 
 /* // ------ The checkbox */
-input[type="checkbox"] {
+.playerSelectContainer input[type="checkbox"] {
     height: var(--my-toggle-width);
     width: var(--my-toggle-width);
     margin: 0;
@@ -232,18 +232,18 @@ input[type="checkbox"] {
     appearance: none;
 }
 
-input[type="checkbox"]:checked {
+.playerSelectContainer input[type="checkbox"]:checked {
     background: var(--my-toggle-inactive-background-color);
 }
 
-input[type="checkbox"]:checked~.my-toggle-orb {
+.playerSelectContainer input[type="checkbox"]:checked~.my-toggle-orb {
     transform: translateX(calc(-1 * (calc(var(--my-toggle-width) - var(--my-toggle-orb-size))) + calc(var(--my-toggle-gap-size) * 2)));
 }
 
-input[type="checkbox"]:checked~.my-toggle-text.yes {
+.playerSelectContainer input[type="checkbox"]:checked~.my-toggle-text.yes {
     visibility: hidden;
 }
 
-input[type="checkbox"]:not(:checked)~.my-toggle-text.no {
+.playerSelectContainer input[type="checkbox"]:not(:checked)~.my-toggle-text.no {
     visibility: hidden;
 }

@@ -47,10 +47,9 @@
     cursor: pointer;
 }
 
-#main-screen .logout {
+#main-screen .btn {
     position: absolute;
     top:  0;
-    right:  0;
     background-color: darkcyan;
     border-radius: 5px;
     margin-top:  0;
@@ -58,7 +57,13 @@
     padding-top: 5px;
     color: #fff;
 }
+#main-screen .options {
+    left:  0;
+}
 
+#main-screen .logout {
+    right:  0;
+}
 
 
 #main-screen .overlay {
@@ -82,14 +87,53 @@
 }
 #main-screen .modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    backface-visibility: hidden;
     background: rgba(0,0,0,0.5);
     padding: 2vh 4vw;
     color: #fff;
 }
+#main-screen .modal.modal-game-chosen {
+    top: 0;
+    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#main-screen .modal.modal-options {
+    height: 70vh;
+    margin: auto;
+    width: 70%;
+}
 @keyframes main-modal-fade {
     0%,100% { opacity: 0 }
     5%,95% { opacity: 1 }
+}
+
+#main-screen .modal .options-list {
+    overflow-y: auto;
+    height: 56vh;
+}
+#main-screen .modal .options-list ul {
+    font-size: 18px;
+    text-align: left;
+    text-rendering: optimizeLegibility;
+    list-style-type: none;
+}
+/* // ------ The checkbox */
+#main-screen .modal .options-list input[type="checkbox"] {
+    height: 18px;
+    width: 18px;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #fff;
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+}
+#main-screen .modal .options-list input[type="checkbox"]:checked {
+    background-color: #333;
+    border: 1px solid #fff;
+}
+#main-screen .modal .options-list input[type="checkbox"]:checked ~ label {
+    color:#888;
 }
