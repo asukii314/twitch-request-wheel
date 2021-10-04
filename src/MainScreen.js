@@ -59,6 +59,15 @@ export default class MainScreen extends Component {
         return true;
     }
 
+    changeGameOrder = (history, nextGameIdx) => {
+        if (nextGameIdx > history.length) return false;
+        this.setState({
+            history,
+            nextGameIdx
+        });
+        return true;
+    }
+
     moveNextGameFwd = () => {
         return this.changeNextGameIdx();
     }
@@ -119,7 +128,8 @@ export default class MainScreen extends Component {
                     ...state.history.slice(0, Math.max(0, idx)),
                     {
                         ...gameObj,
-                        override: true
+                        override: true,
+                        time: Date.now()
                     },
                     ...state.history.slice(idx)
                 ]
@@ -356,6 +366,7 @@ export default class MainScreen extends Component {
                     <h4>{subheading}</h4>
                     <div className="left-column-body">
                         <Sidebar
+                            changeGameOrder={this.changeGameOrder}
                             history={this.state.history}
                             nextGameIdx={this.state.nextGameIdx}
                             changeNextGameIdx={this.changeNextGameIdx}

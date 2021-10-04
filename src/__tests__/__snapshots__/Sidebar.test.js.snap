@@ -57,17 +57,50 @@ exports[`Sidebar render renders page with content 1`] = `
       <p
         class="sidebar-panel-history-list"
       >
-        <li>
-          Blather 'Round
-        </li>
-        <li>
-          <b>
-            Trivia Murder Party 2
-          </b>
-        </li>
-        <li>
-          Survive The Internet
-        </li>
+        <span
+          class="historyList"
+          data-rbd-droppable-context-id="3"
+          data-rbd-droppable-id="historyList"
+        >
+          <li
+            aria-describedby="rbd-hidden-text-3-hidden-text-3"
+            data-rbd-drag-handle-context-id="3"
+            data-rbd-drag-handle-draggable-id="100"
+            data-rbd-draggable-context-id="3"
+            data-rbd-draggable-id="100"
+            draggable="false"
+            role="button"
+            tabindex="0"
+          >
+            Blather 'Round
+          </li>
+          <li
+            aria-describedby="rbd-hidden-text-3-hidden-text-3"
+            data-rbd-drag-handle-context-id="3"
+            data-rbd-drag-handle-draggable-id="101"
+            data-rbd-draggable-context-id="3"
+            data-rbd-draggable-id="101"
+            draggable="false"
+            role="button"
+            tabindex="0"
+          >
+            <b>
+              Trivia Murder Party 2
+            </b>
+          </li>
+          <li
+            aria-describedby="rbd-hidden-text-3-hidden-text-3"
+            data-rbd-drag-handle-context-id="3"
+            data-rbd-drag-handle-draggable-id="102"
+            data-rbd-draggable-context-id="3"
+            data-rbd-draggable-id="102"
+            draggable="false"
+            role="button"
+            tabindex="0"
+          >
+            Survive The Internet
+          </li>
+        </span>
       </p>
     </div>
   </div>

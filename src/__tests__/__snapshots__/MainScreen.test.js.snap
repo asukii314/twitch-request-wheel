@@ -65,6 +65,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
       className="left-column-body"
     >
       <Sidebar
+        changeGameOrder={[Function]}
         changeNextGameIdx={[Function]}
         history={Array []}
         moveNextGameBack={[Function]}
@@ -211,6 +212,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       className="left-column-body"
     >
       <Sidebar
+        changeGameOrder={[Function]}
         changeNextGameIdx={[Function]}
         history={Array []}
         moveNextGameBack={[Function]}

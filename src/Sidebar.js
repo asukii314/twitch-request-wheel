@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import './Sidebar.css';
 
@@ -24,11 +25,26 @@ export default class Sidebar extends Component {
                 <li key='placeholder'>No games yet</li>
             );
         }
-        return history.map((playedGame, i) => (
-            <li key={i}>
-                {this.printGame(i)}
-            </li>
-        ));
+        return (
+            <Droppable droppableId="historyList">
+                {(provided) => (
+                    <span className="historyList" {...provided.droppableProps} ref={provided.innerRef}>
+                        {history.map(({name, time}, index) => {
+                            return (
+                                <Draggable key={`${time}`} draggableId={`${time}`} index={index}>
+                                    {(provided) => (
+                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                            {this.printGame(index)}
+                                        </li>
+                                    )}
+                                </Draggable>
+                            );
+                        })}
+                        {provided.placeholder}
+                    </span>
+                )}
+            </Droppable>
+        );
     }
 
     getNextGameName = () => {
@@ -41,6 +57,23 @@ export default class Sidebar extends Component {
         return this.hasNextGame()
             ? this.props.history[this.props.nextGameIdx].partyPack
             : null;
+    }
+
+    handleOnDragEnd = (result) => {
+        if (!result.destination) return;
+
+        const _items = Array.from(this.props.history).fill();
+        _items[this.props.nextGameIdx] = true;
+        const [_reorderedItem] = _items.splice(result.source.index, 1);
+        _items.splice(result.destination.index, 0, _reorderedItem);
+
+        const newNextGameIdx = _items.findIndex(i => i);
+
+        const items = Array.from(this.props.history);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        this.props.changeGameOrder(items, newNextGameIdx);
     }
 
     hasNextGame = () => {
@@ -110,10 +143,12 @@ export default class Sidebar extends Component {
                 </div>
 
                 <div className="sidebar-panel">
-                    <p className="sidebar-panel-history"> History </p>
-                    <p className="sidebar-panel-history-list">
-                        {this.getHistoryList(this.props.history)}
-                    </p>
+                    <DragDropContext onDragEnd={this.handleOnDragEnd}>
+                        <p className="sidebar-panel-history"> History </p>
+                        <p className="sidebar-panel-history-list">
+                            {this.getHistoryList(this.props.history)}
+                        </p>
+                    </DragDropContext>
                 </div>
             </div>
         );
