@@ -19,6 +19,12 @@ export default class PlayerSelect extends Component {
     componentDidMount() {
         this.updateColumnSizes();
         window.addEventListener("resize", this.updateColumnSizes);
+        return;
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateColumnSizes);
+        return;
     }
 
     updateColumnSizes = () => {

@@ -1,9 +1,10 @@
 {
   "name": "twitch-bot",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "@reonomy/react-confetti-explosion": "^1.0.3",
     "node-fetch": "^2.6.1",
     "query-string": "^4.3.4",
     "randomcolor": "^0.6.2",

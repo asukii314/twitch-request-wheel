@@ -217,6 +217,26 @@ describe('MainScreen', () => {
         });
     });
 
+    describe('clearModal', () => {
+        test('should clear the gameSelected object used for the modal', () => {
+            const component = new MainScreen(props);
+            component.state.gameSelected = {
+                name: 'Survive The Internet',
+                longName: 'Survive The Internet (Party Pack 4)',
+                partyPack: 'Party Pack 4',
+                'Min players': 3,
+                'Max players': 8,
+                Variants: ['survive', 'survive the internet', 'sti'],
+                username: 'dcpesses',
+                time: 1627509347466,
+                locked: false,
+                chosen: false
+            };
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+            component.clearModal();
+            expect(component.setState).toHaveBeenCalledTimes(1);
+        });
+    });
 
     describe('onWheelSpun', () => {
         test('should respond to ActivityStatus when game found in state', async () => {
@@ -238,6 +258,7 @@ describe('MainScreen', () => {
             jest.spyOn(component, 'addGameToQueue').mockImplementation(() => {});
             // jest.spyOn(component, 'removeGame').mockImplementation(() => {});
             jest.spyOn(component, 'setState').mockImplementation(() => {});
+            jest.spyOn(component, 'clearModal').mockImplementation(() => {});
 
             await component.onWheelSpun('Trivia Murder Party 2');
             await component.onWheelSpun('Quiplash 3');
@@ -286,6 +307,70 @@ describe('MainScreen', () => {
             expect(component.messageHandler.sendMessage).toHaveBeenNthCalledWith(3,
                 expect.stringContaining('/me Survive The Internet just won the spin')
             );
+            expect(component.clearModal).toHaveBeenCalledTimes(2);
+        });
+    });
+
+    describe('removeGame', () => {
+        test('should remove the game specified from the messages array', () => {
+            const component = new MainScreen(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+            component.state = {
+                counter: 1,
+                messages: {
+                    'Trivia Murder Party 2': {
+                        name: 'Trivia Murder Party 2',
+                        longName: 'Trivia Murder Party 2',
+                        username: 'aurora88877',
+                        locked: false
+                    },
+                    'Quiplash 3': {
+                        name: 'Quiplash 3',
+                        longName: 'Quiplash 3',
+                        username: 'johnell75',
+                        locked: false
+                    },
+                    'Survive The Internet (Party Pack 4)': {
+                        name: 'Survive The Internet',
+                        longName: 'Survive The Internet (Party Pack 4)',
+                        partyPack: 'Party Pack 4',
+                        'Min players': 3,
+                        'Max players': 8,
+                        Variants: ['survive', 'survive the internet', 'sti'],
+                        username: 'aurora88877',
+                        time: 1627509347466,
+                        locked: true,
+                        chosen: false
+                    }
+                }
+            };
+            component.removeGame('Quiplash 3');
+
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState.mock.calls[0][0](component.state)).toEqual({
+                ...component.state,
+                counter: 2,
+                messages: {
+                    'Trivia Murder Party 2': {
+                        name: 'Trivia Murder Party 2',
+                        longName: 'Trivia Murder Party 2',
+                        username: 'aurora88877',
+                        locked: false
+                    },
+                    'Survive The Internet (Party Pack 4)': {
+                        name: 'Survive The Internet',
+                        longName: 'Survive The Internet (Party Pack 4)',
+                        partyPack: 'Party Pack 4',
+                        'Min players': 3,
+                        'Max players': 8,
+                        Variants: ['survive', 'survive the internet', 'sti'],
+                        username: 'aurora88877',
+                        time: 1627509347466,
+                        locked: true,
+                        chosen: false
+                    }
+                }
+            });
         });
     });
 
@@ -428,6 +513,34 @@ describe('MainScreen', () => {
             expect(component.playerSelector).toBe(ref);
         });
     });
+
+    describe('renderGameChosenModal', () => {
+        test('should return a modal with confetti and call removeGame when clicked', () => {
+            const component = new MainScreen(props);
+            component.state = state;
+            jest.spyOn(component, 'removeGame').mockImplementation(() => {});
+
+            let output = component.renderGameChosenModal({
+                longName: 'Survive The Internet (Party Pack 4)',
+                name: 'Survive The Internet',
+                partyPack: 'Party Pack 4'
+            });
+            expect(output).toMatchSnapshot();
+
+            output = component.renderGameChosenModal({
+                longName: 'Survive The Internet (Party Pack 4)',
+                name: 'Survive The Internet',
+                partyPack: 'Party Pack 4',
+                username: 'dcpesses'
+            });
+            expect(output).toMatchSnapshot();
+
+            output.props.children[1].props.onClick();
+            expect(component.removeGame).toHaveBeenCalledTimes(1);
+        });
+    });
+
+
     describe('render', () => {
         test('renders page', () => {
             const shallowRenderer = createRenderer();
@@ -457,6 +570,51 @@ describe('MainScreen', () => {
             	history: [],
             	nextGameIdx: 0,
             	showPlayerSelect: false
+            };
+            const shallowRenderer = createRenderer();
+            shallowRenderer.render(<MainScreen {...props}/>);
+            let instance = shallowRenderer.getMountedInstance();
+            instance.setState(state);
+            let component = shallowRenderer.getRenderOutput();
+            expect(component).toMatchSnapshot();
+            let logoutBtn = component.props.children.find(p => p.type === 'button');
+            logoutBtn.props.onClick();
+            expect(props.onLogout).toHaveBeenCalledTimes(1);
+            shallowRenderer.unmount();
+        });
+        test('should render the game request screen with modal', () => {
+            let state = {
+                gameSelected: {
+                    name: 'Survive The Internet',
+                    longName: 'Survive The Internet (Party Pack 4)',
+                    partyPack: 'Party Pack 4',
+                    'Min players': 3,
+                    'Max players': 8,
+                    Variants: ['survive', 'survive the internet', 'sti'],
+                    username: 'dcpesses',
+                    time: 1627509347466,
+                    locked: false,
+                    chosen: false
+                },
+                messages: {
+                    'Survive The Internet (Party Pack 4)': {
+                        name: 'Survive The Internet',
+                        longName: 'Survive The Internet (Party Pack 4)',
+                        partyPack: 'Party Pack 4',
+                        'Min players': 3,
+                        'Max players': 8,
+                        Variants: ['survive', 'survive the internet', 'sti'],
+                        username: 'dcpesses',
+                        time: 1627509347466,
+                        locked: false,
+                        chosen: false
+                    }
+                },
+                colors: ['#99b0fc', '#b4a7f2', '#beb4f7', '#cdc2f9', '#aec2f9', '#a4d6f9'],
+                counter: 1,
+                history: [],
+                nextGameIdx: 0,
+                showPlayerSelect: false
             };
             const shallowRenderer = createRenderer();
             shallowRenderer.render(<MainScreen {...props}/>);

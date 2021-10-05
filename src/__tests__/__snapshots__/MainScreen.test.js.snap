@@ -147,6 +147,182 @@ exports[`MainScreen render should render the game request screen 1`] = `
 </div>
 `;
 
+exports[`MainScreen render should render the game request screen with modal 1`] = `
+<div
+  className="game-select"
+  id="main-screen"
+>
+  <MessageHandler
+    access_token="foo"
+    addGameRequest={[Function]}
+    caniplayHandler={[Function]}
+    changeNextGameIdx={[Function]}
+    channel="sirgoosewell"
+    clearQueueHandler={[Function]}
+    closeQueueHandler={[Function]}
+    messages={
+      Object {
+        "Survive The Internet (Party Pack 4)": Object {
+          "Max players": 8,
+          "Min players": 3,
+          "Variants": Array [
+            "survive",
+            "survive the internet",
+            "sti",
+          ],
+          "chosen": false,
+          "locked": false,
+          "longName": "Survive The Internet (Party Pack 4)",
+          "name": "Survive The Internet",
+          "partyPack": "Party Pack 4",
+          "time": 1627509347466,
+          "username": "dcpesses",
+        },
+      }
+    }
+    modList={Array []}
+    onDelete={[Function]}
+    onMessage={[Function]}
+    openQueueHandler={[Function]}
+    playerExitHandler={[Function]}
+    setNextGame={[Function]}
+    startGame={[Function]}
+    upcomingGames={Array []}
+  />
+  <div
+    className="left-column"
+  >
+    <h2>
+      Game Requests
+    </h2>
+    <h4>
+      <span
+        className="subheading-game"
+      >
+        Type e.g. 
+        <b>
+          "!request Blather Round"
+        </b>
+         in 
+        sirgoosewell
+        's chat to add
+      </span>
+    </h4>
+    <div
+      className="left-column-body"
+    >
+      <Sidebar
+        changeGameOrder={[Function]}
+        changeNextGameIdx={[Function]}
+        history={Array []}
+        moveNextGameBack={[Function]}
+        moveNextGameFwd={[Function]}
+        nextGameIdx={0}
+        requestMode="game"
+        togglePlayerSelect={[Function]}
+      />
+      <div
+        className="left-column-inner-body"
+      >
+        <GameRequest
+          gameName="Survive The Internet (Party Pack 4)"
+          getActivity={[Function]}
+          metadata={
+            Object {
+              "Max players": 8,
+              "Min players": 3,
+              "Variants": Array [
+                "survive",
+                "survive the internet",
+                "sti",
+              ],
+              "chosen": false,
+              "locked": false,
+              "longName": "Survive The Internet (Party Pack 4)",
+              "name": "Survive The Internet",
+              "partyPack": "Party Pack 4",
+              "time": 1627509347466,
+              "username": "dcpesses",
+            }
+          }
+          onDelete={[Function]}
+          toggleLock={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="right-column"
+    width="50px"
+  >
+    <div
+      className="wheel-wrapper"
+    >
+      <default
+        contrastColor="black"
+        downDuration={1000}
+        fontFamily="Arial"
+        isOnlyOnce={false}
+        onFinished={[Function]}
+        primaryColor="white"
+        segColors={
+          Array [
+            "#99b0fc",
+            "#b4a7f2",
+            "#beb4f7",
+            "#cdc2f9",
+            "#aec2f9",
+            "#a4d6f9",
+          ]
+        }
+        segments={
+          Array [
+            "Survive The Internet (Party Pack 4)",
+          ]
+        }
+        size={250}
+        upDuration={100}
+      />
+    </div>
+  </div>
+  <button
+    className="logout"
+    onClick={[MockFunction]}
+  >
+    Logout ➧
+  </button>
+  <React.Fragment>
+    <div
+      className="overlay fade-in-out"
+    >
+      <div
+        className="confetti-wrapper"
+      >
+        <ConfettiExplosion
+          duration={3500}
+          floorHeight={1024}
+          floorWidth={1024}
+          force={0.6}
+          particleCount={100}
+        />
+      </div>
+    </div>
+    <div
+      className="modal fade-in-out"
+      onClick={[Function]}
+    >
+      <h1>
+        Survive The Internet
+      </h1>
+      <h4>
+        requested by @
+        dcpesses
+      </h4>
+    </div>
+  </React.Fragment>
+</div>
+`;
+
 exports[`MainScreen render should render the player selection screen 1`] = `
 <div
   className="player-select"
@@ -237,4 +413,64 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     Logout ➧
   </button>
 </div>
+`;
+
+exports[`MainScreen renderGameChosenModal should return a modal with confetti and call removeGame when clicked 1`] = `
+<React.Fragment>
+  <div
+    className="overlay fade-in-out"
+  >
+    <div
+      className="confetti-wrapper"
+    >
+      <ConfettiExplosion
+        duration={3500}
+        floorHeight={1024}
+        floorWidth={1024}
+        force={0.6}
+        particleCount={100}
+      />
+    </div>
+  </div>
+  <div
+    className="modal fade-in-out"
+    onClick={[Function]}
+  >
+    <h1>
+      Survive The Internet
+    </h1>
+  </div>
+</React.Fragment>
+`;
+
+exports[`MainScreen renderGameChosenModal should return a modal with confetti and call removeGame when clicked 2`] = `
+<React.Fragment>
+  <div
+    className="overlay fade-in-out"
+  >
+    <div
+      className="confetti-wrapper"
+    >
+      <ConfettiExplosion
+        duration={3500}
+        floorHeight={1024}
+        floorWidth={1024}
+        force={0.6}
+        particleCount={100}
+      />
+    </div>
+  </div>
+  <div
+    className="modal fade-in-out"
+    onClick={[Function]}
+  >
+    <h1>
+      Survive The Internet
+    </h1>
+    <h4>
+      requested by @
+      dcpesses
+    </h4>
+  </div>
+</React.Fragment>
 `;
