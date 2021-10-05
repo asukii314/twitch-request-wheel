@@ -51,6 +51,29 @@ describe('GameRequest', () => {
             expect(component.getFormattedTimeDiff(Date.now()-(24 * 60 * 60000))).toBe('1 day ago');
         });
     });
+
+    describe('updateStatus', () => {
+        test('should throw an error if caught', async () => { // part of a new "catch and release" program
+            let component = new GameRequest({
+                getActivity: jest.fn().mockRejectedValue(new Error('error stub')),
+                metadata: {
+                    chosen: true,
+                    locked: true,
+                    time: Date.now(),
+                    username: 'Sir Goosewell'
+                }
+            });
+            jest.spyOn(component, 'setState').mockImplementation(() => {});
+            try {
+                await component.updateStatus();
+            } catch (e) {
+                expect(e.message).toBe('error stub'); //eslint-disable-line jest/no-conditional-expect
+            }
+
+            expect(component.setState).not.toHaveBeenCalled();
+        });
+    });
+
     describe('render', () => {
         test('should render component using quiplash data', async () => {
             let {container} = render(<GameRequest {...propsQuip} />);

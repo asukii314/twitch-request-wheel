@@ -54,7 +54,6 @@ export default class MainScreen extends Component {
         if (this.state.nextGameIdx + delta < 0) return false;
         this.setState((state) => {
             return {
-                ...this.state,
                 nextGameIdx: state.nextGameIdx + delta
             }
         });
@@ -227,7 +226,6 @@ export default class MainScreen extends Component {
     togglePlayerSelect = () => {
         this.setState((state) => {
             return {
-                ...state,
                 showPlayerSelect: !state.showPlayerSelect
             }
         })
@@ -266,10 +264,8 @@ export default class MainScreen extends Component {
     }
 
     startGame = () => {
-        // I know this is a big ol' React sin, but I can't for the life of me
-        //   figure out why this.togglePlayerSelect() isn't working... sooo...
         if (this.state.showPlayerSelect) {
-            this.state.showPlayerSelect = false;
+            this.togglePlayerSelect();
             this.moveNextGameFwd();
             return true;
         }
@@ -330,11 +326,11 @@ export default class MainScreen extends Component {
         let mainClassName = this.state.showPlayerSelect ? 'player-select' : 'game-select';
 
         let subheading = this.state.showPlayerSelect ? (
-            <span className="subheading-player">
+            <span className="subheading-player fade-in-delay">
                 Type <b>!new</b> in {this.props.channel}'s chat if you want to join the next game
             </span>
         ) : (
-            <span className="subheading-game">
+            <span className="subheading-game fade-in-delay">
                 Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add
             </span>
         );
@@ -363,7 +359,7 @@ export default class MainScreen extends Component {
             );
             rightColumn = (
                 <div className="right-column" width="50px">
-                    <div className="wheel-wrapper">
+                    <div className="wheel-wrapper fade-in">
                          <WheelComponent
                             key={this.state.counter}
                             segments={gameRequestArray}
@@ -376,6 +372,7 @@ export default class MainScreen extends Component {
                             primaryColor={"white"}
                             contrastColor={"black"}
                             fontFamily={"Arial"}
+                            multilineDelimiter={' ('}
                         />
                     </div>
                 </div>
@@ -404,7 +401,7 @@ export default class MainScreen extends Component {
                     clearQueueHandler={this.routeClearQueueRequest}
                     ref={this.setMessageHandlerRef}
                 />
-                <div className="left-column">
+                <div className="left-column fade-in">
                     <h2>{this.state.showPlayerSelect ? 'Seat Requests' : 'Game Requests'}</h2>
                     <h4>{subheading}</h4>
                     <div className="left-column-body">

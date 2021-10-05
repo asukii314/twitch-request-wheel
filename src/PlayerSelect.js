@@ -173,7 +173,6 @@ export default class PlayerSelect extends Component {
         }
         this.setState((state) => {
             return {
-                ...state,
                 interested: state.interested.filter((uObj) => !randUsernameArray.includes(uObj.username)),
                 playing
             }

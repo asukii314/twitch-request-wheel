@@ -1,6 +1,6 @@
 import {Component} from 'react';
-import YAML from 'yaml'
 import rawJackboxGameList from './JackboxGames.yaml';
+import YAML from 'yaml'
 const fetch = require('node-fetch');
 const tmi = require('tmi.js');
 
@@ -13,6 +13,7 @@ export default class MessageHandler extends Component {
             client: null,
             validGames: []
         };
+        this.getTwitchClient = this.getTwitchClient.bind(this);
         this.isModOrBroadcaster = this.isModOrBroadcaster.bind(this);
         this.checkForMiscCommands = this.checkForMiscCommands.bind(this);
         this.findGame = this.findGame.bind(this);
@@ -21,31 +22,38 @@ export default class MessageHandler extends Component {
         this.sendMessage = this.sendMessage.bind(this);
     }
 
-    componentDidMount(props) {
-        const client = new tmi.client({
-            identity: {
-                username: this.props.channel,
-                password: this.props.access_token
-            },
-            channels: [
-                this.props.channel
-            ]
-        });
+    componentDidMount = (props) => {
+        const client = this.getTwitchClient(this.props);
 
         client.on('message', this.onMessage);
         client.connect();
 
-        fetch(rawJackboxGameList)
+        return this.getGameList(rawJackboxGameList, client);
+    }
+
+    getGameList = async (yamlGameList, client) => {
+        return await fetch(yamlGameList)
             .then(r => r.text())
             .then(text => {
-                this.setState((state) => {
-                    return {
-                        ...state,
-                        client,
-                        validGames: YAML.parse(text)
-                    };
+                return this.setState({
+                    client,
+                    validGames: YAML.parse(text)
                 });
-            })
+            }).catch(e => {
+                console.warn(e);
+            });
+    }
+
+    getTwitchClient = (props) => {
+        return new tmi.client({
+            identity: {
+                username: props.channel,
+                password: props.access_token
+            },
+            channels: [
+                props.channel
+            ]
+        });
     }
 
     isModOrBroadcaster = (username) => {
@@ -250,7 +258,7 @@ export default class MessageHandler extends Component {
                 if (this.props.upcomingGames.length > 1) {
                     upcoming += `, followed by ${this.props.upcomingGames[1].name}`
                     for (let i = 2; i < this.props.upcomingGames.length; i++) {
-                        upcoming += ` and ${this.props.upcomingGames[i].name}`
+                        upcoming += `, and ${this.props.upcomingGames[i].name}`
                     }
                 }
                 this.sendMessage(`/me @${tags.username}, the next game up is ${upcoming}!`)
@@ -291,6 +299,7 @@ export default class MessageHandler extends Component {
         }
 
         this.props.addGameRequest(gameObj, tags.username);
+        return;
     }
 
     sendMessage = (msg) => {

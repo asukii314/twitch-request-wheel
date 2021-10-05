@@ -71,7 +71,6 @@ describe('MainScreen', () => {
 
             expect(component.changeNextGameIdx()).toBeTruthy();
             expect(component.setState.mock.calls[0][0](component.state)).toEqual({
-                ...component.state,
                 nextGameIdx: 1
             });
         });
@@ -394,7 +393,6 @@ describe('MainScreen', () => {
 
             expect(component.setState).toHaveBeenCalledTimes(1);
             expect(component.setState.mock.calls[0][0](component.state)).toEqual({
-                ...component.state,
                 showPlayerSelect: false
             });
         });
@@ -483,18 +481,21 @@ describe('MainScreen', () => {
 
     describe('startGame', () => {
         test('should call moveNextGameFwd only in the Player Select view', () => {
-            const component = new MainScreen(props);
-            component.state = Object.assign({}, state, {
-                showPlayerSelect: true
-            });
+            const shallowRenderer = createRenderer();
+            shallowRenderer.render(<MainScreen {...props}/>);
+
+            let component = shallowRenderer.getMountedInstance();
             jest.spyOn(component, 'moveNextGameFwd').mockImplementation(() => {});
 
+            component.setState({showPlayerSelect: true});
             expect(component.startGame()).toBeTruthy();
 
-            component.state.showPlayerSelect = false;
+            component.setState({showPlayerSelect: false});
             expect(component.startGame()).toBeFalsy();
 
             expect(component.moveNextGameFwd).toHaveBeenCalledTimes(1);
+
+            shallowRenderer.unmount();
         });
     });
     describe('setMessageHandlerRef', () => {

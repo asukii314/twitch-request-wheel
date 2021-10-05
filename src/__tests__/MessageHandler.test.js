@@ -1,6 +1,13 @@
 import {createRenderer} from 'react-test-renderer/shallow';
 import MessageHandler from '../MessageHandler';
+import rawJackboxGameList from './JackboxGames.yaml';
 import React from 'react';
+import YAML from 'yaml'
+
+jest.mock('node-fetch', () => require('fetch-mock-jest').sandbox());
+const fetch = require('node-fetch');
+
+jest.mock('tmi.js');
 
 describe('MessageHandler', () => {
     const props = {
@@ -9,8 +16,376 @@ describe('MessageHandler', () => {
         modList: [
             'asukii314',
             'dcpesses'
-        ]
+        ],
+        messages: {
+            'Trivia Murder Party 2 (Party Pack 6)': {
+                name: 'Trivia Murder Party 2',
+                longName: 'Trivia Murder Party 2 (Party Pack 6)',
+                partyPack: 'Party Pack 6',
+                Variants: [
+                    "tmp2",
+                    "tmp 2",
+                    "trivia murder party 2"
+                ],
+                "Min players": 3,
+                "Max players": 8,
+                username: 'aurora88877',
+                locked: false
+            },
+            'Quiplash 3 (Party Pack 7)': {
+                name: 'Quiplash 3',
+                longName: 'Quiplash 3 (Party Pack 7)',
+                partyPack: 'Party Pack 7',
+                "Min players": 3,
+                "Max players": 8,
+                Variants: [
+                    "ql3",
+                    "ql 3",
+                    "quip 3",
+                    "quip3",
+                    "quiplash 3",
+                    "quiplash3"
+                ],
+                username: 'johnell75',
+                locked: false
+            },
+            'Survive The Internet (Party Pack 4)': {
+                name: 'Survive The Internet',
+                longName: 'Survive The Internet (Party Pack 4)',
+                partyPack: 'Party Pack 4',
+                'Min players': 3,
+                'Max players': 8,
+                Variants: ['survive', 'survive the internet', 'sti'],
+                username: 'dcpesses',
+                time: 1627509347466,
+                locked: true,
+                chosen: false
+            }
+        },
+        upcomingGames: []
     };
+    const upcomingGames = [
+        {
+            "name": "Split the Room",
+            "longName": "Split the Room (Party Pack 5)",
+            "partyPack": "Party Pack 5",
+            "Min players": 3,
+            "Max players": 8,
+            "Variants": [
+                "split the room",
+                "splittheroom",
+                "split room",
+                "room split",
+                "split",
+                "str"
+            ],
+            "username": "dcpesses",
+            "time": 1628114989864,
+            "locked": false,
+            "chosen": false,
+            "override": false
+        },
+        {
+            "name": "Fibbage 3",
+            "longName": "Fibbage 3 (Party Pack 4)",
+            "partyPack": "Party Pack 4",
+            "Min players": 2,
+            "Max players": 8,
+            "Variants": [
+                "fibbage 3",
+                "fibbage3"
+            ],
+            "username": "dcpesses",
+            "time": 1628114666823,
+            "locked": false,
+            "chosen": true,
+            "override": false
+        },
+        {
+            "name": "You Don't Know Jack",
+            "longName": "You Don't Know Jack (Party Pack 5)",
+            "partyPack": "Party Pack 5",
+            "Min players": 1,
+            "Max players": 8,
+            "Variants": [
+                "ydkj 2",
+                "ydkj fs",
+                "ydkjfs",
+                "you dont know jack 2",
+                "you don't know jack 2",
+                "you don't know jack full stream",
+                "you don't know jack full steam",
+                "you don't know jack: full stream"
+            ],
+            "username": "dcpesses",
+            "time": 1628114634007,
+            "locked": false,
+            "chosen": false
+        }
+    ];
+    const validGames = {
+        "Any Version": {
+            "Quiplash": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "quiplash",
+                    "quip",
+                    "ql"
+                ]
+            },
+            "Trivia Murder Party": {
+                "Min players": 1,
+                "Max players": 8,
+                "Variants": [
+                    "tmp",
+                    "trivia murder party"
+                ]
+            },
+            "Fibbage": {
+                "Min players": 2,
+                "Max players": 8,
+                "Variants": [
+                    "fibbage"
+                ]
+            },
+            "You Don't Know Jack": {
+                "Min players": 1,
+                "Max players": 8,
+                "Variants": [
+                    "ydkj",
+                    "you dont know jack",
+                    "you don't know jack"
+                ]
+            },
+            "Drawful": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "drawful",
+                    "drawfull",
+                    "draw full"
+                ]
+            }
+        },
+        "Party Pack 4": {
+            "Fibbage: Enough About You": {
+                "Min players": 2,
+                "Max players": 8,
+                "Variants": [
+                    "eay",
+                    "enough about you",
+                    "feay",
+                    "fibbage eay",
+                    "fibbage: eay",
+                    "fibbage enough about you",
+                    "fibbage: enough about you"
+                ]
+            },
+            "Fibbage 3": {
+                "Min players": 2,
+                "Max players": 8,
+                "Variants": [
+                    "fibbage 3",
+                    "fibbage3"
+                ]
+            },
+            "Survive The Internet": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "survive",
+                    "survive the internet",
+                    "sti"
+                ]
+            },
+        },
+        "Party Pack 6": {
+            "Trivia Murder Party 2": {
+                "Min players": 1,
+                "Max players": 8,
+                "Variants": [
+                    "tmp2",
+                    "tmp 2",
+                    "trivia murder party 2"
+                ]
+            },
+            "Push The Button": {
+                "Min players": 4,
+                "Max players": 10,
+                "Variants": [
+                    "ptb",
+                    "push the b",
+                    "push the button",
+                    "push da button"
+                ]
+            },
+            "Dictionarium": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "dictionarium",
+                    "dictionary"
+                ]
+            },
+            "Role Models": {
+                "Min players": 3,
+                "Max players": 6,
+                "Variants": [
+                    "role models",
+                    "roles models",
+                    "role model",
+                    "rolemodel",
+                    "rolemodels"
+                ]
+            },
+            "Joke Boat": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "joke boat",
+                    "jokeboat"
+                ]
+            }
+        },
+        "Party Pack 7": {
+            "Quiplash 3": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "ql3",
+                    "ql 3",
+                    "quip 3",
+                    "quip3",
+                    "quiplash 3",
+                    "quiplash3"
+                ]
+            },
+            "Champ'd Up": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "champd",
+                    "champed",
+                    "champd up",
+                    "champ'd",
+                    "champ'd up",
+                    "champed up"
+                ]
+            },
+            "Blather 'Round": {
+                "Min players": 2,
+                "Max players": 6,
+                "Variants": [
+                    "blather",
+                    "blather round",
+                    "blather 'round",
+                    "blatherround",
+                    "blatheround"
+                ]
+            },
+            "Talking Points": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "talking points",
+                    "talkingpoints",
+                    "talk points"
+                ]
+            },
+            "The Devils and the Details": {
+                "Min players": 3,
+                "Max players": 8,
+                "Variants": [
+                    "devils",
+                    "devils in details",
+                    "devils and details",
+                    "devils & details",
+                    "devil's in details",
+                    "devil's and details",
+                    "devil's & details",
+                    "devils in the details",
+                    "devils and the details",
+                    "devils & the details",
+                    "devil's in the details",
+                    "devil's and the details",
+                    "devil's & the details",
+                    "the devils in the details",
+                    "the devils and the details",
+                    "the devils & the details",
+                    "the devil's in the details",
+                    "the devil's and the details",
+                    "the devil's & the details"
+                ]
+            }
+        }
+    };
+
+    describe('componentDidMount', () => {
+        test('should create a new Twitch client and call getGameList', () => {
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'getGameList').mockImplementation(()=>{});
+            let _Client = {
+                connect: jest.fn(),
+                on: jest.fn()
+            };
+            jest.spyOn(component, 'getTwitchClient').mockImplementation(()=>{
+                return _Client;
+            });
+
+            component.componentDidMount(props);
+
+            expect(component.getTwitchClient).toHaveBeenCalledTimes(1);
+            expect(_Client.on).toHaveBeenCalledTimes(1);
+            expect(_Client.connect).toHaveBeenCalledTimes(1);
+            expect(component.getGameList).toHaveBeenCalledTimes(1);
+            expect(component.getGameList).toHaveBeenCalledWith(rawJackboxGameList, _Client);
+        });
+    });
+    describe('getGameList', () => {
+        test('should call setState with valid game list and client object', async () => {
+    		fetch.mock('/gamelist', {
+                status: 200,
+                body: rawJackboxGameList
+            });
+
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            await component.getGameList('/gamelist', {});
+
+            expect(fetch).toHaveFetched('/gamelist');
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState).toHaveBeenCalledWith({
+                client: {},
+                validGames: YAML.parse(rawJackboxGameList)
+            });
+    		fetch.reset();
+        });
+        test('should log a warning to the console', async () => {
+            jest.spyOn(console, 'warn').mockImplementation(()=>{});
+            fetch.mock('/gamelist', {
+                status: 404,
+                throws: 'network error'
+            });
+
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            await component.getGameList('/gamelist', {});
+
+            expect(console.warn).toHaveBeenCalledWith('network error');
+            expect(component.setState).not.toHaveBeenCalled();
+        });
+    });
+    describe('getTwitchClient', () => {
+        test('should return a new client', () => {
+            let component = new MessageHandler(props);
+
+            let output = component.getTwitchClient(props);
+            expect(output).toBeDefined();
+        });
+    });
     describe('isModOrBroadcaster', () => {
         test('returns true only if the user is the channel host or mod', () => {
             let component = new MessageHandler(props);
@@ -19,7 +394,7 @@ describe('MessageHandler', () => {
             expect(component.isModOrBroadcaster('DCPesses')).toBeTruthy();
             expect(component.isModOrBroadcaster('mrscootscoot')).toBeFalsy();
         });
-    })
+    });
     describe('checkForMiscCommands', () => {
         test('calls user commands without error', () => {
             let component = new MessageHandler(props);
@@ -88,6 +463,9 @@ describe('MessageHandler', () => {
             expect(component.sendMessage.mock.calls[3][0]).toEqual(
                 expect.stringContaining('please specify the game you would like to look up'),
             );
+            expect(component.sendMessage.mock.calls[3][0]).toEqual(
+                expect.stringContaining('please specify the game you would like to look up'),
+            );
             expect(component.sendMessage.mock.calls[4][0]).toEqual(
                 expect.stringContaining('Quiplash 3 is a Party Pack 7 game'),
             );
@@ -115,7 +493,8 @@ describe('MessageHandler', () => {
                         .mockReturnValue(false),
                     setNextGame: jest.fn()
                         .mockReturnValueOnce(0)
-                        .mockReturnValueOnce(1),
+                        .mockReturnValueOnce(1)
+                        .mockReturnValueOnce(2),
                     upcomingGames: []
                 })
             );
@@ -144,16 +523,18 @@ describe('MessageHandler', () => {
 
             //========= set next game =========
             expect(component.checkForMiscCommands('!setnextgame', username)).toBeTruthy();
+            expect(component.checkForMiscCommands('!redeemgame', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!setnextgame quiplash3', username)).toBeTruthy();
+            expect(component.checkForMiscCommands('!redeemgame quiplash3', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!redeemgame quiplash3', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!redeemgame quiplash3', username)).toBeTruthy();
 
             expect(component.checkForMiscCommands('!undefinedcommand', username)).not.toBeDefined();
 
             // console.log(component.sendMessage.mock.calls);
-            expect(component.props.setNextGame).toHaveBeenCalledTimes(2);
+            expect(component.props.setNextGame).toHaveBeenCalledTimes(3);
 
-            expect(component.sendMessage).toHaveBeenCalledTimes(8);
+            expect(component.sendMessage).toHaveBeenCalledTimes(10);
 
             expect(component.sendMessage.mock.calls[0][0]).toEqual(
                 expect.stringContaining('the next game has been changed to Joke Boat'),
@@ -174,10 +555,16 @@ describe('MessageHandler', () => {
                 expect.stringContaining('please specify the game you would like to insert'),
             );
             expect(component.sendMessage.mock.calls[6][0]).toEqual(
-                expect.stringContaining('Quiplash 3 has been inserted as the next game'),
+                expect.stringContaining('please specify the game you would like to insert'),
             );
             expect(component.sendMessage.mock.calls[7][0]).toEqual(
+                expect.stringContaining('Quiplash 3 has been inserted as the next game'),
+            );
+            expect(component.sendMessage.mock.calls[8][0]).toEqual(
                 expect.stringContaining('Quiplash 3 has been inserted in the queue following 1 other manual game request'),
+            );
+            expect(component.sendMessage.mock.calls[9][0]).toEqual(
+                expect.stringContaining('Quiplash 3 has been inserted in the queue following 2 other manual game requests'),
             );
         });
         test('calls player-related admin/mod commands without error', () => {
@@ -201,6 +588,7 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!caniplay', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!new', username)).toBeTruthy();
 
+            expect(component.checkForMiscCommands('!redeemseat', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!priorityseat', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!redeemseat @jenn_kitty', username)).toBeTruthy();
 
@@ -227,25 +615,24 @@ describe('MessageHandler', () => {
             expect(component.props.openQueueHandler).toHaveBeenCalledTimes(1);
             expect(component.props.closeQueueHandler).toHaveBeenCalledTimes(1);
 
-            // console.log(component.sendMessage.mock.calls);
-            expect(component.sendMessage).toHaveBeenCalledTimes(4);
+
+            expect(component.sendMessage).toHaveBeenCalledTimes(5);
             expect(component.sendMessage.mock.calls[0][0]).toEqual(
                 expect.stringContaining('please specify the user who has redeemed a priority seat'),
             );
             expect(component.sendMessage.mock.calls[1][0]).toEqual(
-                expect.stringContaining('the game has been started'),
+                expect.stringContaining('please specify the user who has redeemed a priority seat'),
             );
             expect(component.sendMessage.mock.calls[2][0]).toEqual(
-                expect.stringContaining('the game was already started'),
+                expect.stringContaining('the game has been started'),
             );
             expect(component.sendMessage.mock.calls[3][0]).toEqual(
+                expect.stringContaining('the game was already started'),
+            );
+            expect(component.sendMessage.mock.calls[4][0]).toEqual(
                 expect.stringContaining('this command is no longer supported'),
             );
         });
-    });
-    describe('findGame', () => {
-        test.todo('calls sendMessage when no valid game found and returns');
-        test.todo('returns valid game metadata if found');
     });
     describe('checkForGameCommand', () => {
         test('returns if no valid game request command is detected', () => {
@@ -277,7 +664,132 @@ describe('MessageHandler', () => {
         });
     });
     describe('onMessage', () => {
-        test.todo('handles messages');
+        const target = 'dcpesses';
+        const tags = {
+            "badge-info": null,
+            "badge-info-raw": null,
+            "badges": {
+                broadcaster: "1"
+            },
+            "badges-raw": "broadcaster/1",
+            "client-nonce": "d406c6013cdc662d4a4726fe55c25943",
+            "color": "#1E90FF",
+            "display-name": "dcpesses",
+            "emotes": null,
+            "emotes-raw": null,
+            "flags": null,
+            "id": "dea09d13-50d8-4eec-9729-6299c988bf1e",
+            "message-type": "chat",
+            "mod": false,
+            "room-id": "473294395",
+            "subscriber": false,
+            "tmi-sent-ts": "1628284838590",
+            "turbo": false,
+            "user-id": "473294395",
+            "user-type": null,
+            "username": target
+        };
+        test('handles !nextgame messages without error', () => {
+            let component = new MessageHandler({
+                ...props,
+                onMessage: jest.fn(),
+                addGameRequest: jest.fn(),
+                onDelete: jest.fn(),
+                sendMessage: jest.fn()
+            });
+            jest.spyOn(component, 'checkForMiscCommands')
+                .mockReturnValueOnce(false)
+                .mockReturnValue(true);
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            expect(component.onMessage(target, tags, '!nextgame', true)).toBeUndefined();
+            expect(component.onMessage(target, tags, '!nextgame', false)).toBeUndefined();
+            component.props.upcomingGames = upcomingGames.slice(0, 1);
+            expect(component.onMessage(target, tags, '!nextgame', false)).toBeUndefined();
+            component.props.upcomingGames = upcomingGames.slice(0, 2);
+            expect(component.onMessage(target, tags, '!nextgame', false)).toBeUndefined();
+            component.props.upcomingGames = upcomingGames.slice(0, 3);
+            expect(component.onMessage(target, tags, '!nextgame', false)).toBeUndefined();
+
+
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('the next game hasn\'t been decided yet'),
+            );
+            expect(component.sendMessage.mock.calls[1][0]).toEqual(
+                expect.stringContaining('the next game up is'),
+            );
+            expect(component.sendMessage.mock.calls[2][0]).toEqual(
+                expect.stringContaining('followed by'),
+            );
+            expect(component.sendMessage.mock.calls[3][0]).toEqual(
+                expect.stringContaining(' and '),
+            );
+
+        });
+        test('handles !request messages without error', () => {
+            let component = new MessageHandler({
+                ...props,
+                onMessage: jest.fn(),
+                addGameRequest: jest.fn(),
+                onDelete: jest.fn(),
+                sendMessage: jest.fn(),
+                upcomingGames
+            });
+            component.state.validGames = validGames;
+
+            jest.spyOn(component, 'checkForMiscCommands').mockReturnValue(false);
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            let tagsAlt = {
+                ...tags,
+                username: 'jenn_kitty'
+            }
+
+            expect(component.onMessage(target, tags, '!request no game', false)).toBeUndefined();
+            expect(component.onMessage(target, tags, '!request quip3', false)).toBeUndefined();
+            expect(component.onMessage(target, tags, '!request devils', false)).toBeUndefined();
+            component.props.channel = target;
+            expect(component.onMessage(target, tags, '!request devils', false)).toBeUndefined();
+            expect(component.onMessage(tagsAlt.username, tagsAlt, '!request devils', false)).toBeUndefined();
+
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('no game could not be found in the list'),
+            );
+            expect(component.sendMessage.mock.calls[1][0]).toEqual(
+                expect.stringContaining('has already been requested!'),
+            );
+            expect(component.sendMessage.mock.calls[2][0]).toEqual(
+                expect.stringContaining('has been replaced with'),
+            );
+            expect(component.sendMessage.mock.calls[3][0]).toEqual(
+                expect.stringContaining('since you have special broadcaster'),
+            );
+            expect(component.sendMessage.mock.calls[4][0]).toEqual(
+                expect.stringContaining('has been added to the request queue'),
+            );
+        });
+        test('handles !gamelist messages without error', () => {
+            let component = new MessageHandler({
+                ...props,
+                onMessage: jest.fn(),
+                addGameRequest: jest.fn(),
+                onDelete: jest.fn(),
+                sendMessage: jest.fn(),
+                upcomingGames
+            });
+            component.state.validGames = validGames;
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            expect(component.onMessage(target, tags, '!gamelist', false)).toBeUndefined();
+
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('list of valid Jackbox games'),
+            );
+
+        });
+
     });
     describe('sendMessage', () => {
         test('calls state.client.say with channel and message', () => {

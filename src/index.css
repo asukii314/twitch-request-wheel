@@ -17,3 +17,25 @@ code {
     margin-block-start: 1em;
     margin-block-end: 1em;
 }
+
+.fade-in {
+    opacity: 0;
+    animation: 0.25s linear 0s fadein;
+    animation-fill-mode: forwards;
+}
+.fade-in-delay {
+    opacity: 0;
+    animation: 0.25s linear 0.75s fadein;
+    animation-fill-mode: forwards;
+}
+@keyframes fadein {
+    from    { opacity:0; }
+    to      { opacity:1; }
+}
+
+button:not(:disabled) {
+    cursor: pointer;
+}
+button:disabled {
+    cursor: not-allowed;
+}

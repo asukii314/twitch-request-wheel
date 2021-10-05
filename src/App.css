@@ -37,18 +37,3 @@
         transform: rotate(360deg);
     }
 }
-
-#login-screen a {
-    background-color: rebeccapurple;
-    border-radius: 5px;
-    padding: 10px;
-    color: white;
-}
-#login-screen a:not(:hover) {
-    text-decoration: none;
-}
-
-#login-screen small {
-    font-size: calc(6px + 0.75vmin);
-    color: rgba(255, 255, 255, 0.2);
-}

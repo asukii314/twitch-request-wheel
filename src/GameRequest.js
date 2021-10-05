@@ -1,5 +1,5 @@
 import {ActivityStatus} from './ChatActivity';
-import {Component} from 'react';
+import React, {Component} from 'react';
 import './GameRequest.css';
 import ReactTooltip from 'react-tooltip'
 import lock from './lock.svg';
@@ -72,17 +72,18 @@ export default class GameRequest extends Component {
         this.props.toggleLock(this.props.gameName)
     }
 
-    updateStatus = () => {
+    updateStatus = async () => {
         // return Date.now();
-        this.props.getActivity(this.props.metadata.username).then((activityStatus) => {
-            this.setState(() => {
-                return {
-                    ...this.state,
-                    timeDiff: this.getFormattedTimeDiff(this.props.metadata.time),
-                    activityStatus
-                };
+        let activityStatus;
+        try {
+            activityStatus = await this.props.getActivity(this.props.metadata.username);
+            return this.setState({
+                timeDiff: this.getFormattedTimeDiff(this.props.metadata.time),
+                activityStatus
             });
-        })
+        } catch(err) {
+            throw err;
+        }
     }
 
     render() {
@@ -90,8 +91,8 @@ export default class GameRequest extends Component {
         const cardStatus = this.props.metadata.chosen ? 'chosen' : 'pending';
 
         return (
-            <div className="game-request-wrapper">
-            	<ReactTooltip effect="solid" place="right" />
+            <div className="game-request-wrapper fade-in">
+            	<ReactTooltip effect="solid" place="left" />
             	<div id="baseDiv"
             		className={`game-request ${cardStatus}`}
             		data-tip={this.getTooltipContents()}
