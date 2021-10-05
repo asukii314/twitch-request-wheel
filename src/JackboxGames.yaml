@@ -385,7 +385,7 @@ Standalone:
 
   Gartic Phone:
     Min players: 4
-    Max players: 30
+    Max players: 12
     Variants:
       - gartic phone
       - garticphone
@@ -464,3 +464,10 @@ Standalone:
     Variants:
       - code names
       - codename
+
+  Bomb Party:
+    Min Players: 3
+    Max Players: 16
+    Variants:
+      - bomb party
+      - bombparty
