@@ -365,6 +365,57 @@ Party Pack 7:
       - the devil's and the details
       - the devil's & the details
 
+Party Pack 8:
+  Job Job:
+    Min players: 3
+    Max players: 10
+    Variants:
+      - job job
+      - jobjob
+      - job
+      - jj
+  The Poll Mine:
+    Min players: 2
+    Max players: 10
+    Variants:
+      - the poll mine
+      - the pole mine
+      - poll mine
+      - pole mine
+      - pollmine
+      - pm
+  "Drawful: Animate":
+    Min players: 3
+    Max players: 10
+    Variants:
+      - drawful animated
+      - drawful animate
+      - draw full animate
+      - drawfull animate
+      - drawful 3
+  The Wheel of Enormous Proportions:
+    Min players: 4
+    Max players: 8
+    Variants:
+      - wheel of enormous proportions
+      - wheel o enormous proportions
+      - wheel o enormus proportions
+      - wheel of giant proportions
+      - enormous proportions wheel
+      - wheel of proportions
+      - wep
+      - wheel
+  Weapons Drawn:
+    Min players: 4
+    Max players: 8
+    Variants:
+      - weapons drawn
+      - weapon drawn
+      - weaponsdrawn
+      - weapondrawn
+      - weapons
+      - drawn weapons
+      - wd
 
 Standalone:
   Drawful 2:
