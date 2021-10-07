@@ -32,6 +32,27 @@ export default class OptionsList extends Component {
         let __allowedGames = localStorage.getItem('__allowedGames');
         let allowedGames = (__allowedGames) ? JSON.parse(__allowedGames) : {};
 
+
+        // let output = {};
+        //
+        // // return list of valid games merged with existing allowedGames
+        // Object.entries(validGames).forEach(([pack, packGames]) => {
+        //     // get valid games within each pack
+        //     Object.keys(packGames).forEach(game => {
+        //         let gameId = `${pack} ${game}`.replace(/\W/ig, '_');
+        //         output[gameId] = (allowedGames[gameId])
+        //             ? allowedGames[gameId]
+        //             : {
+        //                 id: gameId,
+        //                 game,
+        //                 pack,
+        //                 enabled: true
+        //             };
+        //         output[gameId] = allowedGames[gameId];
+        //     });
+        // });
+        // return output;
+
         // return list of valid games merged with existing allowedGames
         return Object.assign({},
             ...[].concat(
@@ -40,21 +61,21 @@ export default class OptionsList extends Component {
                     return Object.assign({},
                         ...Object.keys(packGames).map(game => {
                             let gameId = `${pack} ${game}`.replace(/\W/ig, '_');
-                            if (!allowedGames[gameId]) {
-                                // add entry with default value
-                                console.log(`Adding ${gameId}`);
+                            if (gameId in allowedGames && allowedGames[gameId].id !== undefined) {
                                 return {
-                                    [gameId]: {
-                                        id: gameId,
-                                        game,
-                                        pack,
-                                        enabled: true
-                                    }
+                                    [gameId]: allowedGames[gameId]
+                                };
+                            }
+                            // add entry with default value
+                            // console.log(`Adding ${gameId}`);
+                            return {
+                                [gameId]: {
+                                    id: gameId,
+                                    game,
+                                    pack,
+                                    enabled: true
                                 }
                             }
-                            return {
-                                [gameId]: allowedGames[gameId]
-                            };
                         })
                     );
                 })
@@ -106,7 +127,7 @@ export default class OptionsList extends Component {
     renderGameCard = function(props) {
         let {id, game, pack} = props;
         let {allowedGames} = this.state;
-        let checked = allowedGames[id]?.enabled || false;
+        let checked = allowedGames[id]?.enabled || null;
         return (
             <li className="gameName" key={id}>
                 <input type="checkbox" id={id} name={id} value={id} checked={checked} onChange={this.onCheckHandler} />

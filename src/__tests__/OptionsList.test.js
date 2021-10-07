@@ -62,6 +62,21 @@ describe('OptionsList', () => {
             expect(component.props.className).toBe('partyPackList');
             shallowRenderer.unmount();
         });
+        test('should render using validGames in state', () => {
+            const shallowRenderer = createRenderer();
+            shallowRenderer.render(<OptionsList />);
+
+            let instance = shallowRenderer.getMountedInstance();
+            instance.setState({
+                allowedGames: ALLOWED_GAMES,
+                validGames: VALID_GAMES
+            });
+
+            let component = shallowRenderer.getRenderOutput();
+            expect(component.props.className).toBe('partyPackList');
+            expect(component).toMatchSnapshot();
+            shallowRenderer.unmount();
+        });
         test('renders component with yaml content', async () => {
             fetch.mockImplementation(() => {
                 return Promise.resolve({
@@ -74,7 +89,7 @@ describe('OptionsList', () => {
 
             await waitFor(() => screen.getByText(/Trivia Murder Party/i));
             expect(screen.getByText(/Trivia Murder Party/i)).toBeInTheDocument();
-            expect(container).toMatchSnapshot();
+            expect(container).toMatchSnapshot(); // TODO: fix incorrect checkbox values
         });
     });
 });
