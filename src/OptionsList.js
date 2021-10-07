@@ -18,42 +18,57 @@ export default class OptionsList extends Component {
             .then(r => r.text())
             .then(text => {
                 let validGames = YAML.parse(text);
-                this.setState({
-                    validGames
-                });
+                // this.setState({validGames});
                 this.setAllowedGames(validGames);
             });
     }
 
     componentDidUpdate() {
-        if (!this.state.allowedGames || this.state.allowedGames.length === 0) return;
+        if (!this.state.allowedGames || this.state.validGames.length === 0 || this.state.allowedGames.length === 0) return;
         localStorage.setItem('__allowedGames', JSON.stringify(this.state.allowedGames));
     }
 
-    setAllowedGames = function(validGames) {
-        let allowedGames = localStorage.getItem('__allowedGames');
-        if (allowedGames) {
-            allowedGames = JSON.parse(allowedGames);
-        } else {
-            allowedGames = Object.assign({},
-                ...[].concat(...Object.entries(validGames).map((packData, idx) => {
-                    return Object.assign({}, ...Object.keys(packData[1]).map(gameData => {
-                        let gameId = `${packData[0]} ${gameData}`.replace(/\W/ig, '_');
-                        return {
-                            [gameId]: {
-                                id: gameId,
-                                game: gameData,
-                                pack: packData[0],
-                                enabled: true
+    getAllowedGames = function(validGames) {
+        let __allowedGames = localStorage.getItem('__allowedGames');
+        let allowedGames = (__allowedGames) ? JSON.parse(__allowedGames) : {};
+
+        // return list of valid games merged with existing allowedGames
+        return Object.assign({},
+            ...[].concat(
+                ...Object.entries(validGames).map(([pack, packGames]) => {
+                    // get valid games within each pack
+                    return Object.assign({},
+                        ...Object.keys(packGames).map(game => {
+                            let gameId = `${pack} ${game}`.replace(/\W/ig, '_');
+                            if (!allowedGames[gameId]) {
+                                // add entry with default value
+                                console.log(`Adding ${gameId}`);
+                                return {
+                                    [gameId]: {
+                                        id: gameId,
+                                        game,
+                                        pack,
+                                        enabled: true
+                                    }
+                                }
                             }
-                        }
-                    }));
-                }))
+                            return {
+                                [gameId]: allowedGames[gameId]
+                            };
+                        })
+                    );
+                })
             )
-        }
+        )
+    }
+
+    setAllowedGames = function(validGames) {
+        let allowedGames = this.getAllowedGames(validGames);
         this.setState({
-            allowedGames
+            allowedGames,
+            validGames
         });
+        localStorage.setItem('__allowedGames', JSON.stringify(allowedGames));
     }
 
     onCheckHandler = ({target}) => {
