@@ -634,6 +634,64 @@ describe('MessageHandler', () => {
             );
         });
     });
+    describe('findGame', () => {
+        const easterEggRequests = [
+            {
+                RequestName: 'Jackbox Party Pack 8',
+                Response: 'Jackbox Party Pack 8 games are not available to play yet! Please come back after it\'s released on October 14th.',
+                Variants: [
+                    'jackbox party pack 8',
+                    'job job'
+                ]
+            }, {
+                RequestName: 'Goose',
+                Response: 'please don\'t taunt the wheel. Honk.',
+                Variants: [
+                    'goose'
+                ]
+            }
+        ];
+        test('should handle "goose" requests', () => {
+            let component = new MessageHandler(props);
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            component.findGame('goose', 'username');
+            expect(component.sendMessage).toBeCalledTimes(1);
+            expect(component.sendMessage).toBeCalledWith(`/me @username ${easterEggRequests[1].Response}`);
+        });
+        test('should handle date-related requests before event date', () => {
+            jest.spyOn(Date.prototype, 'getTime').mockReturnValueOnce(10).mockReturnValueOnce(5);
+            let component = new MessageHandler(props);
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            component.findGame('jackbox party pack 8', 'username');
+            expect(component.sendMessage).toBeCalledTimes(1);
+            expect(component.sendMessage).toBeCalledWith(`/me @username ${easterEggRequests[0].Response}`);
+        });
+        test('should handle date-related requests after event date', () => {
+            jest.spyOn(Date.prototype, 'getTime').mockReturnValueOnce(10).mockReturnValueOnce(15);
+            let component = new MessageHandler(props);
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            component.findGame('job job', 'username');
+            expect(component.sendMessage).toBeCalledTimes(1);
+            expect(component.sendMessage).not.toBeCalledWith(`/me @username ${easterEggRequests[0].Response}`);
+        });
+        test('should handle existing requests', () => {
+            let component = new MessageHandler(props);
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            component.findGame('i am bread', 'username');
+            expect(component.sendMessage).toBeCalledTimes(1);
+            expect(component.sendMessage).toBeCalledWith(
+                expect.stringContaining('could not be found in the list'),
+            );
+        });
+    });
     describe('checkForGameCommand', () => {
         test('returns if no valid game request command is detected', () => {
             let component = new MessageHandler(props);
