@@ -660,26 +660,6 @@ describe('MessageHandler', () => {
             expect(component.sendMessage).toBeCalledTimes(1);
             expect(component.sendMessage).toBeCalledWith(`/me @username ${easterEggRequests[1].Response}`);
         });
-        test('should handle date-related requests before event date', () => {
-            jest.spyOn(Date.prototype, 'getTime').mockReturnValueOnce(10).mockReturnValueOnce(5);
-            let component = new MessageHandler(props);
-
-            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
-
-            component.findGame('jackbox party pack 8', 'username');
-            expect(component.sendMessage).toBeCalledTimes(1);
-            expect(component.sendMessage).toBeCalledWith(`/me @username ${easterEggRequests[0].Response}`);
-        });
-        test('should handle date-related requests after event date', () => {
-            jest.spyOn(Date.prototype, 'getTime').mockReturnValueOnce(10).mockReturnValueOnce(15);
-            let component = new MessageHandler(props);
-
-            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
-
-            component.findGame('job job', 'username');
-            expect(component.sendMessage).toBeCalledTimes(1);
-            expect(component.sendMessage).not.toBeCalledWith(`/me @username ${easterEggRequests[0].Response}`);
-        });
         test('should handle existing requests', () => {
             let component = new MessageHandler(props);
 
