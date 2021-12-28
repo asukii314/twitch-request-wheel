@@ -532,3 +532,22 @@ Standalone:
       - wordeos
       - wordeus
       - wordius
+
+  CityGuesser:
+    Min Players: 2
+    Max Players: 50
+    Variants:
+      - cityguess
+      - city guess
+      - city guesser
+      - guesser
+
+  Make It Meme:
+    Min Players: 2
+    Max Players: 15
+    Variants:
+      - making memes
+      - makeitmeme
+      - make memes
+      - meme
+      - meme maker
