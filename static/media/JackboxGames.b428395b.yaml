@@ -557,6 +557,7 @@ Standalone:
     Min Players: 2
     Max Players: 50
     Variants:
+      - kukoro
       - kuroko
       - kokoro
       - kuruko
