@@ -529,6 +529,7 @@ Standalone:
     Min Players: 2
     Max Players: 50
     Variants:
+      - wordeous
       - wordious
       - wordeos
       - wordeus
@@ -538,6 +539,7 @@ Standalone:
     Min Players: 2
     Max Players: 50
     Variants:
+      - cityguesser
       - cityguess
       - city guess
       - city guesser
@@ -547,6 +549,7 @@ Standalone:
     Min Players: 2
     Max Players: 15
     Variants:
+      - make it meme
       - making memes
       - makeitmeme
       - make memes
