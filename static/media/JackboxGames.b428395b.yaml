@@ -404,6 +404,7 @@ Party Pack 8:
       - enormous proportions wheel
       - wheel of proportions
       - wep
+      - woep
       - wheel
   Weapons Drawn:
     Min players: 4
@@ -551,3 +552,13 @@ Standalone:
       - make memes
       - meme
       - meme maker
+
+  Kukoro:
+    Min Players: 2
+    Max Players: 50
+    Variants:
+      - kuroko
+      - kokoro
+      - kuruko
+      - kukuro
+      - kucoro
