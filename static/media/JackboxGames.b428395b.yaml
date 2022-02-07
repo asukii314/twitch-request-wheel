@@ -514,6 +514,7 @@ Standalone:
     Min Players: 4
     Max Players: 64
     Variants:
+      - codenames
       - code names
       - codename
 
