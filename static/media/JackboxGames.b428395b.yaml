@@ -567,3 +567,11 @@ Standalone:
       - kuruko
       - kukuro
       - kucoro
+
+  Draw Battle:
+    Min Players: 2
+    Max Players: 16
+    Variants:
+      - draw battle
+      - battle draw
+      - drawing battle
