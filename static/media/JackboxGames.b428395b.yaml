@@ -575,3 +575,12 @@ Standalone:
       - draw battle
       - battle draw
       - drawing battle
+
+  ChefSquad:
+    Min Players: 2
+    Max Players: 30
+    Variants:
+      - chefsquad
+      - chef squad
+      - chefs squad
+      - chef's squad
