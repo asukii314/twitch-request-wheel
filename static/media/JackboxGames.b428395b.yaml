@@ -525,7 +525,6 @@ Standalone:
       - bomb party
       - bombparty
 
-
   Wordeous:
     Min Players: 2
     Max Players: 50
@@ -544,7 +543,7 @@ Standalone:
       - cityguess
       - city guess
       - city guesser
-      - guesser
+      - cs
 
   Make It Meme:
     Min Players: 2
@@ -595,3 +594,14 @@ Standalone:
       - act naturally
       - natural
       - jan
+
+  GeoGuesser:
+    Min Players: 2
+    Max Players: 50
+    Variants:
+      - geoguesser
+      - geoguess
+      - geo guess
+      - geo guesser
+      - guesser
+      - gg
