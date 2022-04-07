@@ -127,7 +127,7 @@ export default class OptionsList extends Component {
     renderGameCard = function(props) {
         let {id, game, pack} = props;
         let {allowedGames} = this.state;
-        let checked = allowedGames[id]?.enabled || null;
+        let checked = allowedGames[id]?.enabled || false;
         return (
             <li className="gameName" key={id}>
                 <input type="checkbox" id={id} name={id} value={id} checked={checked} onChange={this.onCheckHandler} />
