@@ -1,11 +1,10 @@
-# Here's a list of all Jackbox games (as of February 2022),
-# along with some other popular Twitch stream party games,
+# Here's a list of all Jackbox games (as of April 2021),
 # and all the different ways you can !request them.
 # (Any capitalization is fine.)
 #
-# If you tried to request a game listed here in a different
-# way and the bot didn't recognize it, message either
-# @dcpesses or @asukii314 on twitch to get that variant added!
+# If you tried to write a real Jackbox game in a different
+# and the bot didn't recognize it, message @asukii314 on
+# twitch to get that variant added!
 
 
 Any Version:
@@ -526,7 +525,6 @@ Standalone:
       - bomb party
       - bombparty
 
-
   Wordeous:
     Min Players: 2
     Max Players: 50
@@ -545,7 +543,7 @@ Standalone:
       - cityguess
       - city guess
       - city guesser
-      - guesser
+      - cs
 
   Make It Meme:
     Min Players: 2
@@ -568,3 +566,41 @@ Standalone:
       - kuruko
       - kukuro
       - kucoro
+
+  Draw Battle:
+    Min Players: 2
+    Max Players: 16
+    Variants:
+      - draw battle
+      - battle draw
+      - drawing battle
+
+  ChefSquad:
+    Min Players: 2
+    Max Players: 30
+    Variants:
+      - chefsquad
+      - chef squad
+      - chefs squad
+      - chef's squad
+
+  Just Act Natural:
+    Min Players: 2
+    Max Players: 8
+    Variants:
+      - just act natural
+      - just act naturally
+      - act natural
+      - act naturally
+      - natural
+      - jan
+
+  GeoGuesser:
+    Min Players: 2
+    Max Players: 50
+    Variants:
+      - geoguesser
+      - geoguess
+      - geo guess
+      - geo guesser
+      - gg
