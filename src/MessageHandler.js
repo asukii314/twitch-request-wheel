@@ -8,46 +8,6 @@ const GAME_REQUEST_COMMAND = "!request";
 
 const easterEggRequests = [
     {
-        RequestName: 'Jackbox Party Pack 8',
-        Response: 'Jackbox Party Pack 8 games are not available to play yet! Please come back after it\'s released on October 14th.',
-        Variants: [
-            'jackbox party pack 8',
-            'jackbox pack 8',
-            'jackbox 8',
-            'party pack 8',
-            'pack 8',
-            'job job',
-            'jobjob',
-            'job',
-            'jj',
-            'the poll mine',
-            'the pole mine',
-            'poll mine',
-            'pole mine',
-            'pollmine',
-            'pm',
-            'drawful animated',
-            'drawful animate',
-            'draw full animate',
-            'drawfull animate',
-            'drawful 3',
-            'wheel of enormous proportions',
-            'wheel o enormous proportions',
-            'wheel o enormus proportions',
-            'wheel of giant proportions',
-            'enormous proportions wheel',
-            'wheel of proportions',
-            'wep',
-            'wheel',
-            'weapons drawn',
-            'weapon drawn',
-            'weaponsdrawn',
-            'weapondrawn',
-            'weapons',
-            'drawn weapons',
-            'wd'
-        ]
-    }, {
         RequestName: 'Affection',
         Response: 'there there, it\'s going to be okay. VirtualHug',
         Variants: [
@@ -300,12 +260,8 @@ export default class MessageHandler extends Component {
         // easter egg responses
         for (let requestEntry of easterEggRequests) {
             if (requestEntry?.Variants?.includes(requestedGame)) {
-                if (requestEntry.RequestName !== 'Jackbox Party Pack 8' ||
-                    new Date('10/14/2021 00:00').getTime() > new Date().getTime() // jb8 date based response
-                ) {
-                    this.sendMessage(`/me @${username} ${requestEntry.Response}`);
-                    return null;
-                }
+                this.sendMessage(`/me @${username} ${requestEntry.Response}`);
+                return null;
             }
         }
         // check against games
