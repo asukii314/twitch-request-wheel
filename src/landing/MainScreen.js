@@ -3,7 +3,7 @@ import ChatActivity, { ActivityStatus } from '../ChatActivity';
 import ConfettiExplosion from '@reonomy/react-confetti-explosion';
 import GameRequest from '../components/GameRequest'
 import MessageHandler from '../MessageHandler';
-import PlayerSelect from '../PlayerSelect';
+import PlayerSelect from '../components/PlayerSelect';
 import Sidebar from './Sidebar'
 import WheelComponent from 'react-wheel-of-prizes'
 import * as fakeStates from '../example-states';
@@ -57,7 +57,15 @@ export default class MainScreen extends Component {
         // require('bootstrap/dist/css/bootstrap-grid.css');
         // require('bootstrap/dist/css/bootstrap-utilities.css');
         if (window.location.hash.indexOf('fakestate=true') !== -1) {
-            this.setState(fakeStates.MainScreen);
+            if (window.location.hash.indexOf('playerselect=true') !== -1) {
+                this.setState(
+                    Object.assign({}, fakeStates.MainScreen, {
+                        showPlayerSelect: true
+                    })
+                );
+            } else {
+                this.setState(fakeStates.MainScreen);
+            }
         }
     }
 

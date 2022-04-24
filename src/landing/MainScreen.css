@@ -41,6 +41,9 @@
 .left-column .left-column-inner-body {
     flex-grow: 2;
     margin-left: 15px;
+}
+
+.game-select .left-column .left-column-inner-body {
     overflow-y: auto;
     max-height: calc(100vh - 200px);
 }

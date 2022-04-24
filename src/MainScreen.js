@@ -52,7 +52,15 @@ export default class MainScreen extends Component {
 
     componentDidMount() {
         if (window.location.hash.indexOf('fakestate=true') !== -1) {
-            this.setState(fakeStates.MainScreen);
+            if (window.location.hash.indexOf('playerselect=true') !== -1) {
+                this.setState(
+                    Object.assign({}, fakeStates.MainScreen, {
+                        showPlayerSelect: true
+                    })
+                );
+            } else {
+                this.setState(fakeStates.MainScreen);
+            }
         }
     }
 

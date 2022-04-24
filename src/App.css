@@ -71,6 +71,10 @@
     color: #61dafb;
 }
 
+.App .card {
+    background-color: darkslategrey;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

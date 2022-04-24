@@ -1,11 +1,11 @@
-button.changeCol {
+.legacy button.changeCol {
     text-transform: uppercase;
     margin: 3px;
     font-size: 11px;
     background-color: lightgray;
 }
 
-div.changeColButtonsContainer {
+.legacy div.changeColButtonsContainer {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -13,24 +13,24 @@ div.changeColButtonsContainer {
     margin-top: -25px;
 }
 
-div.changeColButtonsContainer:hover {
+.legacy div.changeColButtonsContainer:hover {
     display: flex;
     flex-direction: row;
 }
 
-div.changeColButtonsContainer .changeCol {
+.legacy div.changeColButtonsContainer .changeCol {
     background-color: indianred;
 }
 
-.playerCard:hover {
+.legacy .playerCard:hover {
     background-color: dimgray;
 }
 
-.playerCard:hover>.changeColButtonsContainer {
+.legacy .playerCard:hover>.changeColButtonsContainer {
     visibility: visible;
 }
 
-div.header {
+.legacy div.header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -38,30 +38,30 @@ div.header {
     margin: 0px 15px;
 }
 
-.playerCount {
+.legacy .playerCount {
     font-size: 16px;
     margin-top: 5px;
 }
 
-.playerCount.overlimit {
+.legacy .playerCount.overlimit {
     font-weight: bold;
     color: darkorange;
 }
 
-button.startGame {
+.legacy button.startGame {
     margin: 15px;
 }
 
-.playerSelectContainer {
+.legacy .playerSelectContainer {
     background-color: darkslategrey;
     border-radius: 5px;
 }
 
-.playerSelectContainer .game-name {
+.legacy .playerSelectContainer .game-name {
     margin-top: 10px;
 }
 
-.playerCardContainer {
+.legacy .playerCardContainer {
     margin: 5px 10px 7px;
     height: 700px;
     font-size: 16px;
@@ -70,27 +70,27 @@ button.startGame {
     align-items: center;
 }
 
-.playerCardColumn {
+.legacy .playerCardColumn {
     width: 50%;
     height: 100%;
     margin: 5px;
     border-radius: 5px;
 }
 
-.playerCardColumn.interested {
+.legacy .playerCardColumn.interested {
     background-color: slategrey;
 }
 
-.playerCardColumn.playing {
+.legacy .playerCardColumn.playing {
     background-color: teal;
 }
 
-.playerCardColumn.joined {
+.legacy .playerCardColumn.joined {
     background-color: seagreen;
     display: none;
 }
 
-.playerCardColumn>p {
+.legacy .playerCardColumn>p {
     margin-top: 0;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -98,7 +98,7 @@ button.startGame {
     font-weight: bold;
 }
 
-.playerCard {
+.legacy .playerCard {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -111,16 +111,16 @@ button.startGame {
     border-color: cadetblue;
 }
 
-.playerCard-username {
+.legacy .playerCard-username {
     display: flex;
 }
 
-.playerCard-username>img {
+.legacy .playerCard-username>img {
     width: 16px;
     margin-left: 3px;
 }
 
-.playerName {
+.legacy .playerName {
     margin: 3px 5px;
     font-size: 14px;
     font-weight: 500;
@@ -128,7 +128,7 @@ button.startGame {
     text-align: left;
 }
 
-button.dice {
+.legacy button.dice {
     width: 25px;
     height: 25px;
     background-color: greenyellow;
@@ -139,7 +139,7 @@ button.dice {
     cursor: pointer;
 }
 
-button.dice>img {
+.legacy button.dice>img {
     width: 100%;
     height: 100%;
 }
@@ -160,12 +160,12 @@ button.dice>img {
 }
 
 /* // ---------------------- The toggle group */
-.my-toggle-group {
+.legacy .my-toggle-group {
     display: flex;
     align-items: center;
 }
 
-.my-toggle {
+.legacy .my-toggle {
     background: var(--my-toggle-background);
     width: var(--my-toggle-width);
     height: var(--my-toggle-height);
@@ -175,7 +175,7 @@ button.dice>img {
     position: relative;
 }
 
-.toggle-label {
+.legacy .toggle-label {
     font-size: 12px;
     max-width: 80px;
     overflow-wrap: break-word;
@@ -184,7 +184,7 @@ button.dice>img {
 }
 
 /* // ------ On off texts */
-.my-toggle-text {
+.legacy .my-toggle-text {
     width: calc(var(--my-toggle-width) / 2);
     position: absolute;
     height: var(--my-toggle-height);
@@ -207,7 +207,7 @@ button.dice>img {
 }
 
 /* // ------ Toggle orb */
-.my-toggle-orb {
+.legacy .my-toggle-orb {
     width: var(--my-toggle-orb-size);
     height: var(--my-toggle-orb-size);
     display: block;
@@ -222,7 +222,7 @@ button.dice>img {
 }
 
 /* // ------ The checkbox */
-input[type="checkbox"] {
+.legacy input[type="checkbox"] {
     height: var(--my-toggle-width);
     width: var(--my-toggle-width);
     margin: 0;
@@ -232,18 +232,18 @@ input[type="checkbox"] {
     appearance: none;
 }
 
-input[type="checkbox"]:checked {
+.legacy input[type="checkbox"]:checked {
     background: var(--my-toggle-inactive-background-color);
 }
 
-input[type="checkbox"]:checked~.my-toggle-orb {
+.legacy input[type="checkbox"]:checked~.my-toggle-orb {
     transform: translateX(calc(-1 * (calc(var(--my-toggle-width) - var(--my-toggle-orb-size))) + calc(var(--my-toggle-gap-size) * 2)));
 }
 
-input[type="checkbox"]:checked~.my-toggle-text.yes {
+.legacy input[type="checkbox"]:checked~.my-toggle-text.yes {
     visibility: hidden;
 }
 
-input[type="checkbox"]:not(:checked)~.my-toggle-text.no {
+.legacy input[type="checkbox"]:not(:checked)~.my-toggle-text.no {
     visibility: hidden;
 }
