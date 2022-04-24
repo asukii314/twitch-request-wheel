@@ -18,7 +18,7 @@ div.change-col-buttons-container:hover {
     flex-direction: row;
 }
 
-div.change-col-buttons-container .changeCol {
+div.change-col-buttons-container .change-col {
     background-color: indianred;
 }
 
@@ -26,7 +26,7 @@ div.change-col-buttons-container .changeCol {
     background-color: dimgray;
 }
 
-.player-card:hover > .changeColButtonsContainer {
+.player-card:hover > .change-col-buttons-container {
     visibility: visible;
 }
 

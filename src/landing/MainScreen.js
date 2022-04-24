@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import {Button, Modal} from 'react-bootstrap';
 import ChatActivity, { ActivityStatus } from '../ChatActivity';
 import ConfettiExplosion from '@reonomy/react-confetti-explosion';
 import GameRequest from '../components/GameRequest'
@@ -334,7 +335,7 @@ export default class MainScreen extends Component {
                         <ConfettiExplosion {...confettiProps} />
                     </div>
                 </div>
-                <div className="modal modal-game-chosen fade-in-out" onClick={()=>this.removeGame(gameObj.longName)}>
+                <div className="confetti-modal modal-game-chosen fade-in-out" onClick={()=>this.removeGame(gameObj.longName)}>
                     <h1>{gameObj.name}</h1>
                     {requestedBy}
                 </div>
@@ -342,7 +343,7 @@ export default class MainScreen extends Component {
         );
     }
 
-    renderOptionsModal() {
+    renderOptionsModal = () => {
         let {allowedGames, validGames} = this.messageHandler.state;
         let gamePackList = [].concat(...Object.entries(validGames).map((packData, idx) => {
             return Object.keys(packData[1]).map(gameData => {
@@ -357,11 +358,41 @@ export default class MainScreen extends Component {
         // let gamesList = gamePackList.map(g => g.game);
         console.log('gamePackList:', gamePackList, allowedGames);
 
+        // return (
+        //     <>
+        //         <div className="overlay fade-in" onClick={this.toggleOptionsModal}></div>
+        //         <div className="modal modal-options fade-in">
+        //             <h2>Options</h2>
+        //             <div className="options-list">
+        //                 <ul>
+        //                     {gamePackList.map(({id, game, pack}, idx) => {
+        //                         // let gameId = `${g.pack} ${g.game}`.replace(/\W/ig, '_');
+        //                         return (
+        //                             <li key={id}>
+        //                                 <input type="checkbox" id={id} name={id} value={id} /> <label htmlFor={id}>{pack}: {game}</label>
+        //                             </li>
+        //                         )}
+        //                     )}
+        //                 </ul>
+        //             </div>
+        //         </div>
+        //     </>
+        // );
         return (
-            <>
-                <div className="overlay fade-in" onClick={this.toggleOptionsModal}></div>
-                <div className="modal modal-options fade-in">
-                    <h2>Options</h2>
+
+            <Modal
+                show={this.state.showOptionsModal}
+                onHide={this.toggleOptionsModal}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Modal heading
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>Options</h4>
                     <div className="options-list">
                         <ul>
                             {gamePackList.map(({id, game, pack}, idx) => {
@@ -374,8 +405,12 @@ export default class MainScreen extends Component {
                             )}
                         </ul>
                     </div>
-                </div>
-            </>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.toggleOptionsModal}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
         );
     }
 

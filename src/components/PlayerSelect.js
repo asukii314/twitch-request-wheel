@@ -197,7 +197,7 @@ export default class PlayerSelect extends Component {
                 <div className="change-col-buttons-container">
                     {curColumn !== 'interested' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
                     {curColumn !== 'playing' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
-                    {/*curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
+                    {/*curColumn !== 'joined' && <button className='change-col' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
                     <button className="change-col" onClick={this.removeUser.bind(this, userObj.username)}>X</button>
                 </div>
             </div>

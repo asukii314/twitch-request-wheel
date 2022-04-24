@@ -17,7 +17,6 @@
 }
 
 #main-screen .left-column h1 {
-    margin-top: 0.83em;
     margin-bottom: 0;
     font-weight: bold;
 }
@@ -36,7 +35,7 @@
 .left-column .left-column-body {
     display: flex;
     align-items: flex-start;
-    /* height: 100vh; */ /* this adds scrollbar to the page! */
+    /* height: 100vh; */ /* this adds a scrollbar to the entire page! */
 }
 .left-column .left-column-inner-body {
     flex-grow: 2;
@@ -45,7 +44,7 @@
 
 .game-select .left-column .left-column-inner-body {
     overflow-y: auto;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 150px);
 }
 
 #main-screen .right-column {
@@ -96,21 +95,21 @@
     animation: 3.5s linear 0s main-modal-fade;
     animation-fill-mode: forwards;
 }
-#main-screen .modal {
+#main-screen .confetti-modal {
     position: fixed;
     backface-visibility: hidden;
     background: rgba(0,0,0,0.5);
     padding: 2vh 4vw;
     color: #fff;
 }
-#main-screen .modal.modal-game-chosen {
+#main-screen .confetti-modal.modal-game-chosen {
     top: 0;
     left: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#main-screen .modal.modal-options {
+#main-screen .confetti-modal.modal-options {
     height: 70vh;
     margin: auto;
     width: 70%;
@@ -120,18 +119,18 @@
     5%,95% { opacity: 1 }
 }
 
-#main-screen .modal .options-list {
+#main-screen .confetti-modal .options-list {
     overflow-y: auto;
     height: 56vh;
 }
-#main-screen .modal .options-list ul {
+#main-screen .confetti-modal .options-list ul {
     font-size: 18px;
     text-align: left;
     text-rendering: optimizeLegibility;
     list-style-type: none;
 }
 /* // ------ The checkbox */
-#main-screen .modal .options-list input[type="checkbox"] {
+#main-screen .confetti-modal .options-list input[type="checkbox"] {
     height: 18px;
     width: 18px;
     margin: 0;
@@ -141,10 +140,10 @@
     cursor: pointer;
     appearance: none;
 }
-#main-screen .modal .options-list input[type="checkbox"]:checked {
+#main-screen .confetti-modal .options-list input[type="checkbox"]:checked {
     background-color: #333;
     border: 1px solid #fff;
 }
-#main-screen .modal .options-list input[type="checkbox"]:checked ~ label {
+#main-screen .confetti-modal .options-list input[type="checkbox"]:checked ~ label {
     color:#888;
 }
