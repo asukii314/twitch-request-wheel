@@ -25,7 +25,7 @@ const PartyPackCard = function (props) {
 
 const GameCard = function(props) {
   return (
-    <div>
+    <div className="mt-2 lh-sm">
       <p className="gameName">{props.gameName} </p>
       {props.possibleMatches.map((possibleMatch, i) =>
         <li className="possibleGameMatch" key={`${props.gameName}-${i}`}>!request {possibleMatch}</li>
