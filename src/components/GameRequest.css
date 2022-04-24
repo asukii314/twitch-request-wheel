@@ -1,4 +1,4 @@
-.legacy .game-request {
+.game-request {
     box-shadow: inset 1px 1px 40px 0 rgba(0, 0, 0, 0.45);
     background-size: cover;
     border-radius: 5px;
@@ -6,35 +6,35 @@
     text-transform: capitalize;
 }
 
-.legacy .game-request.chosen {
+.game-request.chosen {
     background-color: greenyellow;
     color: black;
 }
 
-.legacy .game-request.pending {
+.game-request.pending {
     background-color: steelblue;
 }
 
-.legacy .game-request-body {
+.game-request-body {
     align-items: center;
     display: flex;
     font-size: 16px;
     justify-content: space-between;
     margin: 0px 15px 7px;
-    padding: 4px;
+    padding: 2px;
 }
 
-.legacy .game-request-body .options {
+.game-request-body .options {
     display: flex;
 }
 
-.legacy .game-request .lock {
-    width: 16px;
+.game-request .lock {
+    width: 24px;
     opacity:  0.2;
     padding-right: 8px;
 }
 
-.legacy .game-request .deleteButton {
+.game-request .deleteButton {
     background-color: red;
     float: right;
     height: 50%;
@@ -43,30 +43,33 @@
     padding: 3px 5px;
     opacity: 0.5;
 }
-.legacy .game-request .lock,
-.legacy .game-request .deleteButton {
+.game-request .lock,
+.game-request .deleteButton {
     cursor: pointer;
 }
-.legacy .game-request .lock:hover,
-.legacy .game-request .lock:active,
-.legacy .game-request .lock.locked,
-.legacy .game-request .deleteButton:hover,
-.legacy .game-request .deleteButton:active {
+.game-request .lock:hover,
+.game-request .lock:active,
+.game-request .lock.locked,
+.game-request .deleteButton:hover,
+.game-request .deleteButton:active {
     opacity: 1;
 }
 
 
+#game-request-tooltip .tooltip-inner {
+    max-width: 500px;
+}
 
-.legacy .game-request .tooltip {
+.game-request .tooltip {
     display: flex;
     align-items: center;
 }
 
-.legacy .game-request .tooltipText {
+.game-request .tooltipText {
     margin: 0;
 }
 
-.legacy .game-request .status {
+.game-request .status {
     width: 8px;
     height: 8px;
     border-radius: 5px;
@@ -74,14 +77,14 @@
     margin-top: 3px;
 }
 
-.legacy .game-request .status.active {
+.game-request .status.active {
     background-color: green;
 }
 
-.legacy .game-request .status.idle {
+.game-request .status.idle {
     background-color: yellow;
 }
 
-.legacy .game-request .status.disconnected {
+.game-request .status.disconnected {
     background-color: darkgrey;
 }

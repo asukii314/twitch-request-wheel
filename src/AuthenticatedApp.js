@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import MainScreen from './MainScreen';
+import LegacyMainScreen from './MainScreen';
+import MainScreen from './landing/MainScreen';
 import {Redirect, withRouter} from "react-router-dom";
 import queryString from 'query-string'
 const fetch = require('node-fetch');
@@ -142,19 +143,33 @@ class AuthenticatedApp extends Component {
             return (<Redirect to="/login"/>);
         }
         let mainContent;
+        let classNames = ['authenticated-app'];
         if (this.state.username) {
-            mainContent = (
-                <MainScreen
-                    channel={this.state.username}
-                    modList={this.state.modList}
-                    access_token={this.state.access_token}
-                    onLogout={this.logOut}
-                />
-            );
+            if (window.location.hash.indexOf('dev=true') === -1) {
+                classNames.push('legacy');
+                mainContent = (
+                    <LegacyMainScreen
+                        channel={this.state.username}
+                        modList={this.state.modList}
+                        access_token={this.state.access_token}
+                        onLogout={this.logOut}
+                    />
+                );
+            } else {
+                classNames.push('beta');
+                mainContent = (
+                    <MainScreen
+                        channel={this.state.username}
+                        modList={this.state.modList}
+                        access_token={this.state.access_token}
+                        onLogout={this.logOut}
+                    />
+                );
+            }
         }
 
         return (
-            <div id="authenticated-app">
+            <div id={classNames.join(' ')}>
                 {mainContent}
             </div>
         );
