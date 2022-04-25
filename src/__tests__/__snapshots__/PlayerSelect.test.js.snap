@@ -1,0 +1,894 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerSelect render should render component 1`] = `
+<div
+  className="card player-select-container"
+>
+  <div
+    className="card-header d-flex justify-content-between"
+  >
+    <div
+      className="toggle-streamer-seat"
+    >
+      <label
+        className="toggle-label form-check-label"
+        for="reserve-seat-for-streamer"
+      >
+        Reserve seat for streamer?
+      </label>
+      <div
+        className="form-check form-switch"
+      >
+        <input
+          className="form-check-input"
+          defaultChecked={true}
+          id="reserve-seat-for-streamer"
+          onChange={[Function]}
+          role="switch"
+          type="checkbox"
+        />
+      </div>
+    </div>
+    <div
+      className="fs-2 lh-sm game-name"
+    >
+      <b>
+        TBD
+      </b>
+      <div
+        className="player-count"
+      >
+        0
+         of 
+         seats claimed
+      </div>
+    </div>
+    <button
+      className="btn btn-sm start-game"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Start Game
+    </button>
+  </div>
+  <div
+    className="card-body player-card-container"
+  >
+    <div
+      className="player-card-column interested"
+    >
+      <p
+        className="player-card-column-header"
+      >
+        Interested
+      </p>
+    </div>
+    <div
+      className="player-card-column playing"
+    >
+      <p
+        className="player-card-column-header"
+      >
+        Playing
+        <button
+          className="dice"
+          onClick={[Function]}
+        >
+          <img
+            alt="dice icon"
+            src="file-stub"
+          />
+        </button>
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PlayerSelect render should render component using Blather data 1`] = `
+<div
+  className="card player-select-container"
+>
+  <div
+    className="card-header d-flex justify-content-between"
+  >
+    <div
+      className="toggle-streamer-seat"
+    >
+      <label
+        className="toggle-label form-check-label"
+        for="reserve-seat-for-streamer"
+      >
+        Reserve seat for streamer?
+      </label>
+      <div
+        className="form-check form-switch"
+      >
+        <input
+          className="form-check-input"
+          defaultChecked={true}
+          id="reserve-seat-for-streamer"
+          onChange={[Function]}
+          role="switch"
+          type="checkbox"
+        />
+      </div>
+    </div>
+    <div
+      className="fs-2 lh-sm game-name"
+    >
+      <b>
+        Blather 'Round
+      </b>
+      <div
+        className="player-count overlimit"
+      >
+        7
+         of 
+        6
+         seats claimed
+      </div>
+    </div>
+    <button
+      className="btn btn-sm start-game"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Start Game
+    </button>
+  </div>
+  <div
+    className="card-body player-card-container"
+  >
+    <div
+      className="player-card-column interested"
+    >
+      <p
+        className="player-card-column-header"
+      >
+        Interested
+      </p>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <img
+            alt="Priority seat redemption"
+            src="file-stub"
+          />
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player5
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Playing
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player4
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Playing
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="player-card-column playing"
+    >
+      <p
+        className="player-card-column-header"
+      >
+        Playing
+        <button
+          className="dice"
+          onClick={[Function]}
+        >
+          <img
+            alt="dice icon"
+            src="file-stub"
+          />
+        </button>
+      </p>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <img
+            alt="Priority seat redemption"
+            src="file-stub"
+          />
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player1
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <img
+            alt="Priority seat redemption"
+            src="file-stub"
+          />
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player2
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player3
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player6
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player7
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player8
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player9
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PlayerSelect render should render component using TMP2 data 1`] = `
+<div
+  className="card player-select-container"
+>
+  <div
+    className="card-header d-flex justify-content-between"
+  >
+    <div
+      className="toggle-streamer-seat"
+    >
+      <label
+        className="toggle-label form-check-label"
+        for="reserve-seat-for-streamer"
+      >
+        Reserve seat for streamer?
+      </label>
+      <div
+        className="form-check form-switch"
+      >
+        <input
+          className="form-check-input"
+          defaultChecked={true}
+          id="reserve-seat-for-streamer"
+          onChange={[Function]}
+          role="switch"
+          type="checkbox"
+        />
+      </div>
+    </div>
+    <div
+      className="fs-2 lh-sm game-name"
+    >
+      <b>
+        Trivia Murder Party 2
+      </b>
+      <div
+        className="player-count"
+      >
+        7
+         of 
+        8
+         seats claimed
+      </div>
+    </div>
+    <button
+      className="btn btn-sm start-game"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Start Game
+    </button>
+  </div>
+  <div
+    className="card-body player-card-container"
+  >
+    <div
+      className="player-card-column interested"
+    >
+      <p
+        className="player-card-column-header"
+      >
+        Interested
+      </p>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <img
+            alt="Priority seat redemption"
+            src="file-stub"
+          />
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player5
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Playing
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player4
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Playing
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="player-card-column playing"
+    >
+      <p
+        className="player-card-column-header"
+      >
+        Playing
+        <button
+          className="dice"
+          onClick={[Function]}
+        >
+          <img
+            alt="dice icon"
+            src="file-stub"
+          />
+        </button>
+      </p>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <img
+            alt="Priority seat redemption"
+            src="file-stub"
+          />
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player1
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <img
+            alt="Priority seat redemption"
+            src="file-stub"
+          />
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player2
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player3
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player6
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player7
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player8
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div
+        className="player-card lh-sm fs-6"
+      >
+        <div
+          className="player-card-username"
+        >
+          <p
+            className="player-name"
+            style={
+              Object {
+                "maxWidth": 499,
+              }
+            }
+          >
+            player9
+          </p>
+        </div>
+        <div
+          className="change-col-buttons-container"
+        >
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            Interested
+          </button>
+          <button
+            className="change-col"
+            onClick={[Function]}
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

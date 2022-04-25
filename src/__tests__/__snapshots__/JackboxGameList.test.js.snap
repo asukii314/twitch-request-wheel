@@ -14,7 +14,9 @@ exports[`JackboxGameList renders component with yaml content 1`] = `
         Any Version
          
       </p>
-      <div>
+      <div
+        class="mt-2 lh-sm"
+      >
         <p
           class="gameName"
         >
@@ -40,7 +42,9 @@ exports[`JackboxGameList renders component with yaml content 1`] = `
           ql
         </li>
       </div>
-      <div>
+      <div
+        class="mt-2 lh-sm"
+      >
         <p
           class="gameName"
         >
@@ -70,7 +74,9 @@ exports[`JackboxGameList renders component with yaml content 1`] = `
         Party Pack 1
          
       </p>
-      <div>
+      <div
+        class="mt-2 lh-sm"
+      >
         <p
           class="gameName"
         >
@@ -120,7 +126,9 @@ exports[`JackboxGameList renders component with yaml content 1`] = `
           you don't know jack: 2015
         </li>
       </div>
-      <div>
+      <div
+        class="mt-2 lh-sm"
+      >
         <p
           class="gameName"
         >

@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameRequest render should render component using quiplash data 1`] = `
+<div>
+  <div
+    class="game-request-wrapper fade-in"
+  >
+    <div
+      class="game-request chosen"
+      id="baseDiv"
+    >
+      <div
+        class="game-request-body"
+      >
+        Quiplash
+        <div
+          class="options"
+        >
+          <img
+            alt="lock"
+            class="lock locked"
+            src="file-stub"
+          />
+          <button
+            class="deleteButton"
+            type="button"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GameRequest render should render component using survive the internet data 1`] = `
+<OverlayTrigger
+  defaultShow={false}
+  onEnter={[Function]}
+  overlay={[Function]}
+  placement="left"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <div
+    className="game-request-wrapper fade-in"
+  >
+    <div
+      className="game-request pending"
+      id="baseDiv"
+    >
+      <div
+        className="game-request-body"
+      >
+        Survive The Internet (Party Pack 4)
+        <div
+          className="options"
+        >
+          <img
+            alt="lock"
+            className="lock unlocked"
+            onClick={[Function]}
+            src="file-stub"
+          />
+          <button
+            className="deleteButton"
+            onClick={[Function]}
+            type="button"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</OverlayTrigger>
+`;
+
+exports[`GameRequest render should render component using survive the internet data 2`] = `
+<OverlayTrigger
+  defaultShow={false}
+  onEnter={[Function]}
+  overlay={[Function]}
+  placement="left"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <div
+    className="game-request-wrapper fade-in"
+  >
+    <div
+      className="game-request pending"
+      id="baseDiv"
+    >
+      <div
+        className="game-request-body"
+      >
+        Survive The Internet (Party Pack 4)
+        <div
+          className="options"
+        >
+          <img
+            alt="lock"
+            className="lock unlocked"
+            onClick={[Function]}
+            src="file-stub"
+          />
+          <button
+            className="deleteButton"
+            onClick={[Function]}
+            type="button"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</OverlayTrigger>
+`;
+
+exports[`GameRequest render should render component using survive the internet data 3`] = `
+<OverlayTrigger
+  defaultShow={false}
+  onEnter={[Function]}
+  overlay={[Function]}
+  placement="left"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <div
+    className="game-request-wrapper fade-in"
+  >
+    <div
+      className="game-request pending"
+      id="baseDiv"
+    >
+      <div
+        className="game-request-body"
+      >
+        Survive The Internet (Party Pack 4)
+        <div
+          className="options"
+        >
+          <img
+            alt="lock"
+            className="lock unlocked"
+            onClick={[Function]}
+            src="file-stub"
+          />
+          <button
+            className="deleteButton"
+            onClick={[Function]}
+            type="button"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</OverlayTrigger>
+`;
