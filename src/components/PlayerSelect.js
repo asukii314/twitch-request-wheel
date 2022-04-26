@@ -211,7 +211,7 @@ export default class PlayerSelect extends Component {
                     Reserve seat for streamer?
                 </label>
                 <div className="form-check form-switch">
-                    <input className="form-check-input" type="checkbox" role="switch" id="reserve-seat-for-streamer" defaultChecked={true} onChange={this.toggleStreamerSeat} />
+                    <input className="form-check-input" type="checkbox" role="switch" id="reserve-seat-for-streamer" defaultChecked={this.state.streamerSeat} onChange={this.toggleStreamerSeat} />
                 </div>
             </div>
         );
