@@ -269,11 +269,12 @@ describe('AuthenticatedApp', () => {
     });
 
     describe('render', () => {
-        test('should render with LegacyMainScreen', () => {
+        // DISABLED FOR BOOTSTRAP TRANSITION
+        test.skip('should render with LegacyMainScreen', () => {
 
             let location = {
                 pathname: '/',
-                search: '?dev=true&code=foobar&scope=chat:read chat:edit moderation:read',
+                search: '?legacy=true&code=foobar&scope=chat:read chat:edit moderation:read',
                 hash: ""
             };
             let legacy_props = Object.assign({}, props, {location});
@@ -291,8 +292,7 @@ describe('AuthenticatedApp', () => {
             expect(component).toMatchSnapshot();
             shallowRenderer.unmount();
         });
-        // DISABLED FOR BOOTSTRAP TRANSITION
-        test.skip('should render with MainScreen', () => {
+        test('should render with MainScreen', () => {
             const shallowRenderer = createRenderer();
             shallowRenderer.render(<AuthenticatedApp {...props} />);
             let instance = shallowRenderer.getMountedInstance();

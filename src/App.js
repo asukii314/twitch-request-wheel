@@ -10,7 +10,7 @@ class App extends Component {
     render() {
 
         let classNames = ['App'];
-        if (window.location.hash.indexOf('dev=true') === -1) {
+        if (window.location.hash.indexOf('legacy=true') !== -1) {
             classNames.push('legacy');
         }
 

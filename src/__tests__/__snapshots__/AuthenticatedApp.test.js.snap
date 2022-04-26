@@ -15,7 +15,7 @@ exports[`AuthenticatedApp render should render with LegacyMainScreen 1`] = `
 
 exports[`AuthenticatedApp render should render with MainScreen 1`] = `
 <div
-  id="authenticated-app"
+  id="authenticated-app beta"
 >
   <MainScreen
     access_token="yadayadayada"

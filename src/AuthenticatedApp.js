@@ -145,7 +145,7 @@ class AuthenticatedApp extends Component {
         let mainContent;
         let classNames = ['authenticated-app'];
         if (this.state.username) {
-            if (window.location.hash.indexOf('dev=true') === -1) {
+            if (window.location.hash.indexOf('legacy=true') !== -1) {
                 classNames.push('legacy');
                 mainContent = (
                     <LegacyMainScreen
