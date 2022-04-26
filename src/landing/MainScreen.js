@@ -6,7 +6,7 @@ import GameRequest from '../components/GameRequest'
 import MessageHandler from '../MessageHandler';
 import PlayerSelect from '../components/PlayerSelect';
 import Sidebar from './Sidebar'
-import WheelComponent from 'react-wheel-of-prizes'
+import WheelComponent from '../WheelComponent'; //'react-wheel-of-prizes'
 import * as fakeStates from '../example-states';
 
 import './MainScreen.css';

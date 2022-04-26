@@ -9,12 +9,6 @@ exports[`MainScreen render should render the game request screen 1`] = `
     className="main-screen-nav"
   >
     <button
-      className="btn btn-sm float-start options"
-      onClick={[Function]}
-    >
-      Options
-    </button>
-    <button
       className="btn btn-sm float-end logout"
       onClick={[MockFunction]}
     >
@@ -127,7 +121,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
     <div
       className="wheel-wrapper fade-in"
     >
-      <default
+      <WheelComponent
         contrastColor="black"
         downDuration={1000}
         fontFamily="Arial"
@@ -167,12 +161,6 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     className="main-screen-nav"
   >
     <button
-      className="btn btn-sm float-start options"
-      onClick={[Function]}
-    >
-      Options
-    </button>
-    <button
       className="btn btn-sm float-end logout"
       onClick={[MockFunction]}
     >
@@ -285,7 +273,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     <div
       className="wheel-wrapper fade-in"
     >
-      <default
+      <WheelComponent
         contrastColor="black"
         downDuration={1000}
         fontFamily="Arial"
@@ -353,12 +341,6 @@ exports[`MainScreen render should render the player selection screen 1`] = `
   <nav
     className="main-screen-nav"
   >
-    <button
-      className="btn btn-sm float-start options"
-      onClick={[Function]}
-    >
-      Options
-    </button>
     <button
       className="btn btn-sm float-end logout"
       onClick={[MockFunction]}
