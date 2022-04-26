@@ -431,7 +431,9 @@ export default class MainScreen extends Component {
                 <button className="btn btn-sm float-end logout" onClick={this.props.onLogout}>Logout &#10151;</button>
             );
         }
-        let optionsBtn = (
+        let optionsBtn;
+        if (window.location.hash.indexOf('options=true') !== -1)
+        optionsBtn = (
             <button className="btn btn-sm float-start options" onClick={this.toggleOptionsModal}>Options</button>
         );
 
