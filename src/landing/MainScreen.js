@@ -54,9 +54,6 @@ export default class MainScreen extends Component {
     }
 
     componentDidMount() {
-        require('bootstrap/dist/css/bootstrap.css');
-        // require('bootstrap/dist/css/bootstrap-grid.css');
-        // require('bootstrap/dist/css/bootstrap-utilities.css');
         if (window.location.hash.indexOf('fakestate=true') !== -1) {
             if (window.location.hash.indexOf('playerselect=true') !== -1) {
                 this.setState(

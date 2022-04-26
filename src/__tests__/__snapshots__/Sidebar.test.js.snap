@@ -37,7 +37,7 @@ exports[`Sidebar render renders page with content 1`] = `
       </div>
     </div>
     <div
-      class="nav-wrapper"
+      class="nav-wrapper py-2"
     >
       <button
         class="btn-sm move-next-game-back"

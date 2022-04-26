@@ -139,7 +139,7 @@ export default class Sidebar extends Component {
                     </div>
                 </div>
 
-                <div className="nav-wrapper">
+                <div className="nav-wrapper py-2">
                     <button className="btn-sm move-next-game-back" onClick={this.moveNextGameBack}> &#8678; </button>
                     <button className="btn-sm move-next-game-fwd" onClick={this.moveNextGameFwd}> &#8680; </button>
                 </div>

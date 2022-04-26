@@ -4,6 +4,7 @@ import JackboxGameList from './JackboxGameList';
 import LoginScreen from './LoginScreen';
 import React, {Component} from 'react';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 class App extends Component {

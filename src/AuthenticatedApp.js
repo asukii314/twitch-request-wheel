@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import LegacyMainScreen from './MainScreen';
 import MainScreen from './landing/MainScreen';
 import {Redirect, withRouter} from "react-router-dom";
 import queryString from 'query-string'
@@ -145,27 +144,14 @@ class AuthenticatedApp extends Component {
         let mainContent;
         let classNames = ['authenticated-app'];
         if (this.state.username) {
-            if (window.location.hash.indexOf('legacy=true') !== -1) {
-                classNames.push('legacy');
-                mainContent = (
-                    <LegacyMainScreen
-                        channel={this.state.username}
-                        modList={this.state.modList}
-                        access_token={this.state.access_token}
-                        onLogout={this.logOut}
-                    />
-                );
-            } else {
-                classNames.push('beta');
-                mainContent = (
-                    <MainScreen
-                        channel={this.state.username}
-                        modList={this.state.modList}
-                        access_token={this.state.access_token}
-                        onLogout={this.logOut}
-                    />
-                );
-            }
+            mainContent = (
+                <MainScreen
+                    channel={this.state.username}
+                    modList={this.state.modList}
+                    access_token={this.state.access_token}
+                    onLogout={this.logOut}
+                />
+            );
         }
 
         return (

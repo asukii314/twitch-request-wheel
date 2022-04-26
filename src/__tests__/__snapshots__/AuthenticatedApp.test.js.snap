@@ -1,21 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthenticatedApp render should render with LegacyMainScreen 1`] = `
-<div
-  id="authenticated-app legacy"
->
-  <MainScreen
-    access_token="yadayadayada"
-    channel="sirgoosewell"
-    modList={Array []}
-    onLogout={[Function]}
-  />
-</div>
-`;
-
 exports[`AuthenticatedApp render should render with MainScreen 1`] = `
 <div
-  id="authenticated-app beta"
+  id="authenticated-app"
 >
   <MainScreen
     access_token="yadayadayada"
