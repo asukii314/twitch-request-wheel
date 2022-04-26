@@ -9,27 +9,8 @@
 #sidebar.seat {
     width: 20%;
 }
-#sidebar .sidebar-panel {
+#sidebar .card {
     background-color: darkslategrey;
-    border-radius: 5px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    padding: 1px;
-}
-#sidebar .sidebar-panel:last-child {
-    padding: 5px;
-}
-
-#sidebar .sidebar-panel-up-next,
-#sidebar .sidebar-panel-history {
-    font-size: 16px;
-    font-weight: 700;
-}
-#sidebar .sidebar-panel-up-next {
-    padding: 8px;
-}
-#sidebar .next-game-name {
-    margin-bottom: 5px;
 }
 #sidebar .next-game-party-pack {
     font-size: 11px;
@@ -37,7 +18,7 @@
     margin-top: 0px;
     color: lightgray;
 }
-#sidebar .sidebar-panel-up-next button {
+button#sidebar-up-next {
     font-weight: bold;
     font-size: 12px;
     padding: 5px;
@@ -46,7 +27,7 @@
     border-radius: 5px;
     width: 90%;
 }
-#sidebar .sidebar-panel-up-next button:disabled {
+button#sidebar-up-next:disabled {
     color: gray;
     font-weight: inherit;
     font-style: italic;
@@ -70,14 +51,12 @@
     margin-left: 5px;
 }
 
-#sidebar .sidebar-panel-history-list {
+#sidebar .sidebar-history-list-panel li {
+    line-height: 1.25;
     font-size: 13px;
     list-style: none;
 }
-#sidebar .sidebar-panel-history-list li b {
+#sidebar .sidebar-history-list-panel li b {
     color: aquamarine;
     font-size: 14px;
-}
-#sidebar .sidebar-panel-history-list li:not([tabindex="0"]) {
-    list-style: none;
 }

@@ -1,11 +1,11 @@
 import {AuthenticatedApp} from '../AuthenticatedApp';
 import {createRenderer} from 'react-test-renderer/shallow';
 import fetch from 'node-fetch';
-import MainScreen from '../MainScreen';
+import MainScreen from '../landing/MainScreen';
 import React from 'react';
 import {Redirect} from "react-router-dom";
 
-jest.mock('../MainScreen');
+jest.mock('../landing/MainScreen');
 jest.mock('node-fetch');
 jest.mock('react-router-dom', () => {
     const reactRouterDom = jest.requireActual('react-router-dom');

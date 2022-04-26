@@ -21,7 +21,7 @@
     font-size: 16px;
     justify-content: space-between;
     margin: 0px 15px 7px;
-    padding: 4px;
+    padding: 2px;
 }
 
 .game-request-body .options {
@@ -29,7 +29,7 @@
 }
 
 .game-request .lock {
-    width: 16px;
+    width: 24px;
     opacity:  0.2;
     padding-right: 8px;
 }
@@ -56,6 +56,9 @@
 }
 
 
+#game-request-tooltip .tooltip-inner {
+    max-width: 500px;
+}
 
 .game-request .tooltip {
     display: flex;

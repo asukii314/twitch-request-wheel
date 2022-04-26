@@ -604,3 +604,13 @@ Standalone:
       - geo guess
       - geo guesser
       - gg
+
+  Marbles on Stream:
+    Min Players: 2
+    Max Players: 50
+    Variants:
+      - marbles on stream
+      - marbles stream
+      - marbles
+      - marble
+      - mos

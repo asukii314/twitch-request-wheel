@@ -1,5 +1,5 @@
 import {createRenderer} from 'react-test-renderer/shallow';
-import PlayerSelect from '../PlayerSelect';
+import PlayerSelect from '../components/PlayerSelect';
 import React from 'react';
 
 describe('PlayerSelect', () => {

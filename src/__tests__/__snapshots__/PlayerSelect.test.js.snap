@@ -2,60 +2,49 @@
 
 exports[`PlayerSelect render should render component 1`] = `
 <div
-  className="playerSelectContainer"
+  className="card player-select-container"
 >
   <div
-    className="header"
+    className="card-header d-flex justify-content-between"
   >
     <div
-      className="my-toggle-group"
+      className="toggle-streamer-seat"
     >
-      <p
-        className="toggle-label"
+      <label
+        className="toggle-label form-check-label"
+        for="reserve-seat-for-streamer"
       >
         Reserve seat for streamer?
-      </p>
+      </label>
       <div
-        className="my-toggle"
+        className="form-check form-switch"
       >
         <input
+          className="form-check-input"
           defaultChecked={true}
+          id="reserve-seat-for-streamer"
           onChange={[Function]}
+          role="switch"
           type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="my-toggle-text no"
-        >
-          No
-        </div>
-        <div
-          aria-hidden="true"
-          className="my-toggle-text yes"
-        >
-          Yes
-        </div>
-        <div
-          className="my-toggle-orb"
         />
       </div>
     </div>
     <div
-      className="game-name"
+      className="fs-2 lh-sm game-name"
     >
       <b>
         TBD
       </b>
-      <p
-        className="playerCount"
+      <div
+        className="player-count"
       >
         0
          of 
          seats claimed
-      </p>
+      </div>
     </div>
     <button
-      className="startGame"
+      className="btn btn-sm start-game"
       disabled={true}
       onClick={[Function]}
     >
@@ -63,22 +52,22 @@ exports[`PlayerSelect render should render component 1`] = `
     </button>
   </div>
   <div
-    className="playerCardContainer"
+    className="card-body player-card-container"
   >
     <div
-      className="playerCardColumn interested"
+      className="player-card-column interested"
     >
       <p
-        className="playerCardColumn-header"
+        className="player-card-column-header"
       >
         Interested
       </p>
     </div>
     <div
-      className="playerCardColumn playing"
+      className="player-card-column playing"
     >
       <p
-        className="playerCardColumn-header"
+        className="player-card-column-header"
       >
         Playing
         <button
@@ -98,61 +87,50 @@ exports[`PlayerSelect render should render component 1`] = `
 
 exports[`PlayerSelect render should render component using Blather data 1`] = `
 <div
-  className="playerSelectContainer"
+  className="card player-select-container"
 >
   <div
-    className="header"
+    className="card-header d-flex justify-content-between"
   >
     <div
-      className="my-toggle-group"
+      className="toggle-streamer-seat"
     >
-      <p
-        className="toggle-label"
+      <label
+        className="toggle-label form-check-label"
+        for="reserve-seat-for-streamer"
       >
         Reserve seat for streamer?
-      </p>
+      </label>
       <div
-        className="my-toggle"
+        className="form-check form-switch"
       >
         <input
+          className="form-check-input"
           defaultChecked={true}
+          id="reserve-seat-for-streamer"
           onChange={[Function]}
+          role="switch"
           type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="my-toggle-text no"
-        >
-          No
-        </div>
-        <div
-          aria-hidden="true"
-          className="my-toggle-text yes"
-        >
-          Yes
-        </div>
-        <div
-          className="my-toggle-orb"
         />
       </div>
     </div>
     <div
-      className="game-name"
+      className="fs-2 lh-sm game-name"
     >
       <b>
         Blather 'Round
       </b>
-      <p
-        className="playerCount overlimit"
+      <div
+        className="player-count overlimit"
       >
         7
          of 
         6
          seats claimed
-      </p>
+      </div>
     </div>
     <button
-      className="startGame"
+      className="btn btn-sm start-game"
       disabled={true}
       onClick={[Function]}
     >
@@ -160,28 +138,28 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
     </button>
   </div>
   <div
-    className="playerCardContainer"
+    className="card-body player-card-container"
   >
     <div
-      className="playerCardColumn interested"
+      className="player-card-column interested"
     >
       <p
-        className="playerCardColumn-header"
+        className="player-card-column-header"
       >
         Interested
       </p>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <img
             alt="Priority seat redemption"
             src="file-stub"
           />
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -192,16 +170,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Playing
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -209,13 +187,13 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -226,16 +204,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Playing
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -244,10 +222,10 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
       </div>
     </div>
     <div
-      className="playerCardColumn playing"
+      className="player-card-column playing"
     >
       <p
-        className="playerCardColumn-header"
+        className="player-card-column-header"
       >
         Playing
         <button
@@ -261,17 +239,17 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </button>
       </p>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <img
             alt="Priority seat redemption"
             src="file-stub"
           />
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -282,16 +260,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -299,17 +277,17 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <img
             alt="Priority seat redemption"
             src="file-stub"
           />
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -320,16 +298,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -337,13 +315,13 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -354,16 +332,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -371,13 +349,13 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -388,16 +366,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -405,13 +383,13 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -422,16 +400,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -439,13 +417,13 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -456,16 +434,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -473,13 +451,13 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -490,16 +468,16 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -513,61 +491,50 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
 
 exports[`PlayerSelect render should render component using TMP2 data 1`] = `
 <div
-  className="playerSelectContainer"
+  className="card player-select-container"
 >
   <div
-    className="header"
+    className="card-header d-flex justify-content-between"
   >
     <div
-      className="my-toggle-group"
+      className="toggle-streamer-seat"
     >
-      <p
-        className="toggle-label"
+      <label
+        className="toggle-label form-check-label"
+        for="reserve-seat-for-streamer"
       >
         Reserve seat for streamer?
-      </p>
+      </label>
       <div
-        className="my-toggle"
+        className="form-check form-switch"
       >
         <input
+          className="form-check-input"
           defaultChecked={true}
+          id="reserve-seat-for-streamer"
           onChange={[Function]}
+          role="switch"
           type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="my-toggle-text no"
-        >
-          No
-        </div>
-        <div
-          aria-hidden="true"
-          className="my-toggle-text yes"
-        >
-          Yes
-        </div>
-        <div
-          className="my-toggle-orb"
         />
       </div>
     </div>
     <div
-      className="game-name"
+      className="fs-2 lh-sm game-name"
     >
       <b>
         Trivia Murder Party 2
       </b>
-      <p
-        className="playerCount"
+      <div
+        className="player-count"
       >
         7
          of 
         8
          seats claimed
-      </p>
+      </div>
     </div>
     <button
-      className="startGame"
+      className="btn btn-sm start-game"
       disabled={false}
       onClick={[Function]}
     >
@@ -575,28 +542,28 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
     </button>
   </div>
   <div
-    className="playerCardContainer"
+    className="card-body player-card-container"
   >
     <div
-      className="playerCardColumn interested"
+      className="player-card-column interested"
     >
       <p
-        className="playerCardColumn-header"
+        className="player-card-column-header"
       >
         Interested
       </p>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <img
             alt="Priority seat redemption"
             src="file-stub"
           />
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -607,16 +574,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Playing
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -624,13 +591,13 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -641,16 +608,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Playing
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -659,10 +626,10 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
       </div>
     </div>
     <div
-      className="playerCardColumn playing"
+      className="player-card-column playing"
     >
       <p
-        className="playerCardColumn-header"
+        className="player-card-column-header"
       >
         Playing
         <button
@@ -676,17 +643,17 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </button>
       </p>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <img
             alt="Priority seat redemption"
             src="file-stub"
           />
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -697,16 +664,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -714,17 +681,17 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <img
             alt="Priority seat redemption"
             src="file-stub"
           />
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -735,16 +702,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -752,13 +719,13 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -769,16 +736,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -786,13 +753,13 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -803,16 +770,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -820,13 +787,13 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -837,16 +804,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -854,13 +821,13 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -871,16 +838,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X
@@ -888,13 +855,13 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
         </div>
       </div>
       <div
-        className="playerCard"
+        className="player-card lh-sm fs-6"
       >
         <div
-          className="playerCard-username"
+          className="player-card-username"
         >
           <p
-            className="playerName"
+            className="player-name"
             style={
               Object {
                 "maxWidth": 499,
@@ -905,16 +872,16 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
           </p>
         </div>
         <div
-          className="changeColButtonsContainer"
+          className="change-col-buttons-container"
         >
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             Interested
           </button>
           <button
-            className="changeCol"
+            className="change-col"
             onClick={[Function]}
           >
             X

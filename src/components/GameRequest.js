@@ -1,10 +1,11 @@
-import {ActivityStatus} from './ChatActivity';
+import {ActivityStatus} from '../ChatActivity';
 import React, {Component} from 'react';
-import './GameRequest.css';
-import ReactTooltip from 'react-tooltip'
-import lock from './lock.svg';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap'
+import lock from '../images/lock.svg';
 
-export default class GameRequest extends Component {
+import './GameRequest.css';
+
+class GameRequest extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,13 +59,21 @@ export default class GameRequest extends Component {
                 break;
         }
 
-        return (`
-            <div class="tooltip">
-                <p class="tooltipText">
-                    Requested ${this.state.timeDiff} by ${this.props.metadata.username}
+        // return (`
+        //     <div class="tooltip">
+        //         <p class="tooltipText">
+        //             Requested ${this.state.timeDiff} by ${this.props.metadata.username}
+        //         </p>
+        //         <div class="status ${statusClass}" />
+        //     </div>`
+        // );
+        return (
+            <div className="tooltip">
+                <p className="tooltipText">
+                    Requested {this.state.timeDiff} by {this.props.metadata.username}
                 </p>
-                <div class="status ${statusClass}" />
-            </div>`
+                <div className={`status ${statusClass}`} />
+            </div>
         );
     }
 
@@ -90,24 +99,30 @@ export default class GameRequest extends Component {
         const lockClassName = this.props.metadata.locked ? 'lock locked' : 'lock unlocked';
         const cardStatus = this.props.metadata.chosen ? 'chosen' : 'pending';
 
+        const renderTooltip = (props) => (
+            <Tooltip id="game-request-tooltip" {...props}>
+                <span className="tooltipText">Requested {this.state.timeDiff} by {this.props.metadata.username}</span>
+            </Tooltip>
+        );
+
         return (
-            <div className="game-request-wrapper fade-in">
-            	<ReactTooltip effect="solid" place="left" />
-            	<div id="baseDiv"
-            		className={`game-request ${cardStatus}`}
-            		data-tip={this.getTooltipContents()}
-            		data-html={true}
-            		onMouseEnter={this.updateStatus}
-            	>
-            		<div className="game-request-body">
-            		    {this.props.gameName}
-            			<div className="options">
-            				<img src={lock} alt="lock" className={lockClassName} onClick={this.toggleLock} />
-            				<button type='button' className="deleteButton" onClick={this.deleteRequest}>X</button>
-            			</div>
-            		</div>
-            	</div>
-            </div>
+            <OverlayTrigger
+                placement="left"
+                overlay={renderTooltip}
+                onEnter={this.updateStatus}>
+                <div className="game-request-wrapper fade-in">
+                	<div id="baseDiv" className={`game-request ${cardStatus}`}>
+                		<div className="game-request-body">
+                		    {this.props.gameName}
+                			<div className="options">
+                				<img src={lock} alt="lock" className={lockClassName} onClick={this.toggleLock} />
+                				<button type='button' className="deleteButton" onClick={this.deleteRequest}>X</button>
+                			</div>
+                		</div>
+                	</div>
+                </div>
+            </OverlayTrigger>
         );
     }
 }
+export default GameRequest;

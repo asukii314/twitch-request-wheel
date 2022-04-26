@@ -1,13 +1,16 @@
-import { Component } from 'react';
+import {Component} from 'react';
+import {Button, Modal} from 'react-bootstrap';
+import ChatActivity, { ActivityStatus } from '../ChatActivity';
 import ConfettiExplosion from '@reonomy/react-confetti-explosion';
-import WheelComponent from 'react-wheel-of-prizes'
-import GameRequest from './GameRequest'
-import MessageHandler from './MessageHandler';
+import GameRequest from '../components/GameRequest'
+import MessageHandler from '../MessageHandler';
+import PlayerSelect from '../components/PlayerSelect';
 import Sidebar from './Sidebar'
-import PlayerSelect from './PlayerSelect';
-import ChatActivity, { ActivityStatus } from './ChatActivity';
+import WheelComponent from '../WheelComponent'; //'react-wheel-of-prizes'
+import * as fakeStates from '../example-states';
 
 import './MainScreen.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 const randomColor = require('randomcolor');
 
 
@@ -22,7 +25,8 @@ export default class MainScreen extends Component {
             counter: 0,
             history: [],
             nextGameIdx: 0,
-            showPlayerSelect: false
+            showPlayerSelect: false,
+            showOptionsModal: false
         };
 
         this.playerSelector = null;
@@ -47,6 +51,20 @@ export default class MainScreen extends Component {
         this.startGame = this.startGame.bind(this);
         this.setMessageHandlerRef = this.setMessageHandlerRef.bind(this);
         this.setPlayerSelectRef = this.setPlayerSelectRef.bind(this);
+    }
+
+    componentDidMount() {
+        if (window.location.hash.indexOf('fakestate=true') !== -1) {
+            if (window.location.hash.indexOf('playerselect=true') !== -1) {
+                this.setState(
+                    Object.assign({}, fakeStates.MainScreen, {
+                        showPlayerSelect: true
+                    })
+                );
+            } else {
+                this.setState(fakeStates.MainScreen);
+            }
+        }
     }
 
     changeNextGameIdx = (delta = 1) => {
@@ -170,6 +188,13 @@ export default class MainScreen extends Component {
         });
     }
 
+    getGamesList = () => {
+        return {
+            allowedGames: this.messageHandler?.state.allowedGames,
+            validGames: this.messageHandler?.state.validGames
+        }
+    }
+
     onWheelSpun = (gameLongName) => {
         const gameRequestObj = this.state.messages?.[gameLongName];
         if (!gameRequestObj) return;
@@ -221,6 +246,14 @@ export default class MainScreen extends Component {
 
     onMessage = (message, user, metadata) => {
         this.chatActivity.updateLastMessageTime(user);
+    }
+
+    toggleOptionsModal = () => {
+        this.setState((state) => {
+            return {
+                showOptionsModal: !state.showOptionsModal
+            }
+        })
     }
 
     togglePlayerSelect = () => {
@@ -299,11 +332,82 @@ export default class MainScreen extends Component {
                         <ConfettiExplosion {...confettiProps} />
                     </div>
                 </div>
-                <div className="modal fade-in-out" onClick={()=>this.removeGame(gameObj.longName)}>
+                <div className="confetti-modal modal-game-chosen fade-in-out" onClick={()=>this.removeGame(gameObj.longName)}>
                     <h1>{gameObj.name}</h1>
                     {requestedBy}
                 </div>
             </>
+        );
+    }
+
+    renderOptionsModal = () => {
+        let {allowedGames, validGames} = this.messageHandler.state;
+        let gamePackList = [].concat(...Object.entries(validGames).map((packData, idx) => {
+            return Object.keys(packData[1]).map(gameData => {
+                let gameId = `${packData[0]} ${gameData}`.replace(/\W/ig, '_');
+                return {
+                    id: gameId,
+                    game: gameData,
+                    pack: packData[0]
+                }
+            })
+        }))
+        // let gamesList = gamePackList.map(g => g.game);
+        console.log('gamePackList:', gamePackList, allowedGames);
+
+        // return (
+        //     <>
+        //         <div className="overlay fade-in" onClick={this.toggleOptionsModal}></div>
+        //         <div className="modal modal-options fade-in">
+        //             <h2>Options</h2>
+        //             <div className="options-list">
+        //                 <ul>
+        //                     {gamePackList.map(({id, game, pack}, idx) => {
+        //                         // let gameId = `${g.pack} ${g.game}`.replace(/\W/ig, '_');
+        //                         return (
+        //                             <li key={id}>
+        //                                 <input type="checkbox" id={id} name={id} value={id} /> <label htmlFor={id}>{pack}: {game}</label>
+        //                             </li>
+        //                         )}
+        //                     )}
+        //                 </ul>
+        //             </div>
+        //         </div>
+        //     </>
+        // );
+        return (
+
+            <Modal
+                show={this.state.showOptionsModal}
+                onHide={this.toggleOptionsModal}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Modal heading
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>Options</h4>
+                    <div className="options-list">
+                        <ul>
+                            {gamePackList.map(({id, game, pack}, idx) => {
+                                // let gameId = `${g.pack} ${g.game}`.replace(/\W/ig, '_');
+                                return (
+                                    <li key={id}>
+                                        <input type="checkbox" id={id} name={id} value={id} /> <label htmlFor={id}>{pack}: {game}</label>
+                                    </li>
+                                )}
+                            )}
+                        </ul>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.toggleOptionsModal}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
         );
     }
 
@@ -314,14 +418,21 @@ export default class MainScreen extends Component {
         let gameSelectedModal;
         if (this.state.gameSelected) {
             gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
+        } else if (this.state.showOptionsModal) {
+            gameSelectedModal = this.renderOptionsModal();
         }
 
         let logOutBtn;
         if (typeof this.props.onLogout === 'function') {
             logOutBtn = (
-                <button className="logout" onClick={this.props.onLogout}>Logout &#10151;</button>
+                <button className="btn btn-sm float-end logout" onClick={this.props.onLogout}>Logout &#10151;</button>
             );
         }
+        let optionsBtn;
+        if (window.location.hash.indexOf('options=true') !== -1)
+        optionsBtn = (
+            <button className="btn btn-sm float-start options" onClick={this.toggleOptionsModal}>Options</button>
+        );
 
         let mainClassName = this.state.showPlayerSelect ? 'player-select' : 'game-select';
 
@@ -382,6 +493,10 @@ export default class MainScreen extends Component {
 
         return (
             <div id="main-screen" className={mainClassName}>
+                <nav className="main-screen-nav">
+                    {optionsBtn}
+                    {logOutBtn}
+                </nav>
                 <MessageHandler
                     addGameRequest={this.addGameRequest}
                     setNextGame={this.setNextGame}
@@ -402,8 +517,10 @@ export default class MainScreen extends Component {
                     ref={this.setMessageHandlerRef}
                 />
                 <div className="left-column fade-in">
-                    <h2>{this.state.showPlayerSelect ? 'Seat Requests' : 'Game Requests'}</h2>
+
+                    <h1>{this.state.showPlayerSelect ? 'Seat Requests' : 'Game Requests'}</h1>
                     <h4>{subheading}</h4>
+
                     <div className="left-column-body">
                         <Sidebar
                             changeGameOrder={this.changeGameOrder}
@@ -421,7 +538,6 @@ export default class MainScreen extends Component {
                     </div>
                 </div>
                 {rightColumn}
-                {logOutBtn}
                 {gameSelectedModal}
             </div>
         )

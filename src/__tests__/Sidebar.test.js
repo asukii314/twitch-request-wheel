@@ -1,4 +1,4 @@
-import Sidebar from '../Sidebar';
+import Sidebar from '../landing/Sidebar';
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -90,7 +90,7 @@ describe('Sidebar', () => {
                 requestMode: null,    // valid responses: 'seat', 'game'
             }
             render(<Sidebar {...props} />);
-            const headerUpNext = screen.getByText(/Up Next:/i);
+            const headerUpNext = screen.getByText(/Up Next/i);
             expect(headerUpNext).toBeInTheDocument();
         });
         test('renders empty game page', () => {
@@ -102,7 +102,7 @@ describe('Sidebar', () => {
                 requestMode: 'game',
             }
             render(<Sidebar {...props} />);
-            const headerUpNext = screen.getByText(/Up Next:/i);
+            const headerUpNext = screen.getByText(/Up Next/i);
             expect(headerUpNext).toBeInTheDocument();
         });
         test('renders empty seat page', () => {
@@ -114,7 +114,7 @@ describe('Sidebar', () => {
                 requestMode: 'seat',
             }
             render(<Sidebar {...props} />);
-            const headerUpNext = screen.getByText(/Up Next:/i);
+            const headerUpNext = screen.getByText(/Up Next/i);
             expect(headerUpNext).toBeInTheDocument();
         });
         test('renders page with content', () => {
@@ -140,7 +140,7 @@ describe('Sidebar', () => {
                 requestMode: 'game',    // valid responses: 'seat', 'game'
             };
             const {container} = render(<Sidebar {...props} />);
-            const headerUpNext = screen.getByText(/Up Next:/i);
+            const headerUpNext = screen.getByText(/Up Next/i);
             expect(headerUpNext).toBeInTheDocument();
             userEvent.click(container.querySelector('button.move-next-game-fwd'));
             expect(props.changeNextGameIdx).toHaveBeenCalledWith(1);

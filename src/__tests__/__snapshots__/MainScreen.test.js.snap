@@ -5,6 +5,16 @@ exports[`MainScreen render should render the game request screen 1`] = `
   className="game-select"
   id="main-screen"
 >
+  <nav
+    className="main-screen-nav"
+  >
+    <button
+      className="btn btn-sm float-end logout"
+      onClick={[MockFunction]}
+    >
+      Logout ➧
+    </button>
+  </nav>
   <MessageHandler
     access_token="foo"
     addGameRequest={[Function]}
@@ -45,9 +55,9 @@ exports[`MainScreen render should render the game request screen 1`] = `
   <div
     className="left-column fade-in"
   >
-    <h2>
+    <h1>
       Game Requests
-    </h2>
+    </h1>
     <h4>
       <span
         className="subheading-game fade-in-delay"
@@ -111,7 +121,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
     <div
       className="wheel-wrapper fade-in"
     >
-      <default
+      <WheelComponent
         contrastColor="black"
         downDuration={1000}
         fontFamily="Arial"
@@ -139,12 +149,6 @@ exports[`MainScreen render should render the game request screen 1`] = `
       />
     </div>
   </div>
-  <button
-    className="logout"
-    onClick={[MockFunction]}
-  >
-    Logout ➧
-  </button>
 </div>
 `;
 
@@ -153,6 +157,16 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
   className="game-select"
   id="main-screen"
 >
+  <nav
+    className="main-screen-nav"
+  >
+    <button
+      className="btn btn-sm float-end logout"
+      onClick={[MockFunction]}
+    >
+      Logout ➧
+    </button>
+  </nav>
   <MessageHandler
     access_token="foo"
     addGameRequest={[Function]}
@@ -193,9 +207,9 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
   <div
     className="left-column fade-in"
   >
-    <h2>
+    <h1>
       Game Requests
-    </h2>
+    </h1>
     <h4>
       <span
         className="subheading-game fade-in-delay"
@@ -259,7 +273,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     <div
       className="wheel-wrapper fade-in"
     >
-      <default
+      <WheelComponent
         contrastColor="black"
         downDuration={1000}
         fontFamily="Arial"
@@ -287,12 +301,6 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       />
     </div>
   </div>
-  <button
-    className="logout"
-    onClick={[MockFunction]}
-  >
-    Logout ➧
-  </button>
   <React.Fragment>
     <div
       className="overlay fade-in-out"
@@ -310,7 +318,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       </div>
     </div>
     <div
-      className="modal fade-in-out"
+      className="confetti-modal modal-game-chosen fade-in-out"
       onClick={[Function]}
     >
       <h1>
@@ -330,6 +338,16 @@ exports[`MainScreen render should render the player selection screen 1`] = `
   className="player-select"
   id="main-screen"
 >
+  <nav
+    className="main-screen-nav"
+  >
+    <button
+      className="btn btn-sm float-end logout"
+      onClick={[MockFunction]}
+    >
+      Logout ➧
+    </button>
+  </nav>
   <MessageHandler
     access_token="foo"
     addGameRequest={[Function]}
@@ -370,9 +388,9 @@ exports[`MainScreen render should render the player selection screen 1`] = `
   <div
     className="left-column fade-in"
   >
-    <h2>
+    <h1>
       Seat Requests
-    </h2>
+    </h1>
     <h4>
       <span
         className="subheading-player fade-in-delay"
@@ -408,12 +426,6 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       </div>
     </div>
   </div>
-  <button
-    className="logout"
-    onClick={[MockFunction]}
-  >
-    Logout ➧
-  </button>
 </div>
 `;
 
@@ -435,7 +447,7 @@ exports[`MainScreen renderGameChosenModal should return a modal with confetti an
     </div>
   </div>
   <div
-    className="modal fade-in-out"
+    className="confetti-modal modal-game-chosen fade-in-out"
     onClick={[Function]}
   >
     <h1>
@@ -463,7 +475,7 @@ exports[`MainScreen renderGameChosenModal should return a modal with confetti an
     </div>
   </div>
   <div
-    className="modal fade-in-out"
+    className="confetti-modal modal-game-chosen fade-in-out"
     onClick={[Function]}
   >
     <h1>

@@ -4,21 +4,25 @@ import JackboxGameList from './JackboxGameList';
 import LoginScreen from './LoginScreen';
 import React, {Component} from 'react';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 class App extends Component {
     render() {
 
+        let classNames = ['App'];
+        if (window.location.hash.indexOf('legacy=true') !== -1) {
+            classNames.push('legacy');
+        }
+
         return (
             <HashRouter basename='/'>
-                <div className="App">
-                    <header className="App-header">
-                        <Switch>
-                            <Route exact path="/login" component={LoginScreen} />
-                            <Route exact path="/gamelist" component={JackboxGameList}/>
-                            <Route path="/" component={AuthenticatedApp}/>
-                        </Switch>
-                    </header>
+                <div className={classNames.join(' ')}>
+                    <Switch>
+                        <Route exact path="/login" component={LoginScreen} />
+                        <Route exact path="/gamelist" component={JackboxGameList}/>
+                        <Route path="/" component={AuthenticatedApp}/>
+                    </Switch>
                 </div>
             </HashRouter>
         );

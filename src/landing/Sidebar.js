@@ -22,7 +22,7 @@ export default class Sidebar extends Component {
     getHistoryList = (history) => {
         if (history.length === 0) {
             return (
-                <li key='placeholder'>No games yet</li>
+                <span className="history-placeholder" key='placeholder'>No games yet</span>
             );
         }
         return (
@@ -104,14 +104,14 @@ export default class Sidebar extends Component {
         switch (this.props.requestMode) {
             case 'game':
                 buttonPlayerSelect = (
-                    <button className="open-seat-requests" disabled={!nextGame} onClick={this.props.togglePlayerSelect}>
+                    <button id="sidebar-up-next" className="open-seat-requests" disabled={!nextGame} onClick={this.props.togglePlayerSelect}>
                         OPEN SEAT REQUESTS
                     </button>
                 )
                 break;
             case 'seat':
                 buttonPlayerSelect = (
-                    <button className="return-to-wheel" onClick={this.props.togglePlayerSelect}>
+                    <button id="sidebar-up-next" className="return-to-wheel" onClick={this.props.togglePlayerSelect}>
                         RETURN TO WHEEL
                     </button>
                 )
@@ -122,32 +122,36 @@ export default class Sidebar extends Component {
 
         return (
             <div id="sidebar" className={this.props.requestMode}>
-                <div className="sidebar-panel">
-                    <div className="p sidebar-panel-up-next"> Up Next:
-
-                        <p className="next-game-name">
+                <div className="card sidebar-panel">
+                    <div className="card-header fw-bolder">
+                        Up Next
+                    </div>
+                    <div className="card-body sidebar-up-next-panel">
+                        <h6 className="card-title mb-2 fw-bolder">
                             {this.getNextGameName()}
-                        </p>
-
-                        <p className="next-game-party-pack">
-                            <i>{this.getNextGamePartyPack()}</i>
-                        </p>
+                        </h6>
+                        <div className="card-subtitle mb-2 fs-7 fst-italic text-light"
+                            style={{'--bs-text-opacity': '0.75'}}>
+                            {this.getNextGamePartyPack()}
+                        </div>
 
                         {buttonPlayerSelect}
                     </div>
                 </div>
 
-                <div className="nav-wrapper">
-                    <button className="move-next-game-back" onClick={this.moveNextGameBack}> &#8678; </button>
-                    <button className="move-next-game-fwd" onClick={this.moveNextGameFwd}> &#8680; </button>
+                <div className="nav-wrapper py-2">
+                    <button className="btn-sm move-next-game-back" onClick={this.moveNextGameBack}> &#8678; </button>
+                    <button className="btn-sm move-next-game-fwd" onClick={this.moveNextGameFwd}> &#8680; </button>
                 </div>
 
-                <div className="sidebar-panel">
+                <div className="card sidebar-panel">
                     <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                        <p className="sidebar-panel-history"> History </p>
-                        <p className="sidebar-panel-history-list">
+                        <div className="card-header fw-bolder">
+                            History
+                        </div>
+                        <div className="card-body sidebar-history-list-panel">
                             {this.getHistoryList(this.props.history)}
-                        </p>
+                        </div>
                     </DragDropContext>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MainScreen from './MainScreen';
+import MainScreen from './landing/MainScreen';
 import {Redirect, withRouter} from "react-router-dom";
 import queryString from 'query-string'
 const fetch = require('node-fetch');
@@ -142,6 +142,7 @@ class AuthenticatedApp extends Component {
             return (<Redirect to="/login"/>);
         }
         let mainContent;
+        let classNames = ['authenticated-app'];
         if (this.state.username) {
             mainContent = (
                 <MainScreen
@@ -154,7 +155,7 @@ class AuthenticatedApp extends Component {
         }
 
         return (
-            <div id="authenticated-app">
+            <div id={classNames.join(' ')}>
                 {mainContent}
             </div>
         );

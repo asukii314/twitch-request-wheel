@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WheelComponent should render the wheel 1`] = `
+<div
+  id="wheel"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <canvas
+    height={720}
+    id="canvas"
+    style={
+      Object {
+        "pointerEvents": "auto",
+      }
+    }
+    width={600}
+  />
+</div>
+`;
+
+exports[`WheelComponent should render the wheel with data 1`] = `
+<div
+  id="wheel"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <canvas
+    height={720}
+    id="canvas"
+    style={
+      Object {
+        "pointerEvents": "auto",
+      }
+    }
+    width={600}
+  />
+</div>
+`;

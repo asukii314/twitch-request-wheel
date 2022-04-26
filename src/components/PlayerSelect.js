@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import './playerSelect.css';
-import dice from './dice.svg';
-import star from './star.svg';
+import * as fakeStates from '../example-states';
+
+import dice from '../images/dice.svg';
+import star from '../images/star.svg';
+
+import './PlayerSelect.css';
 
 export default class PlayerSelect extends Component {
     constructor(props){
@@ -17,6 +20,9 @@ export default class PlayerSelect extends Component {
     }
 
     componentDidMount() {
+        if (window.location.hash.indexOf('fakestate=true') !== -1) {
+            this.setState(fakeStates.PlayerSelect);
+        }
         this.updateColumnSizes();
         window.addEventListener("resize", this.updateColumnSizes);
         return;
@@ -181,16 +187,18 @@ export default class PlayerSelect extends Component {
 
     renderPlayerCard = (userObj, id, curColumn) => {
         return (
-            <div key={id} className='playerCard'>
-                <div className="playerCard-username">
+            <div key={id} className="player-card lh-sm fs-6">
+                <div className="player-card-username">
                     {userObj.isPrioritySeat === true && <img src={star} alt="Priority seat redemption"/>}
-                    <p className='playerName' style={{maxWidth: this.state.columnWidth - 25}}>{userObj.username}</p>
+                    <p className='player-name' style={{
+                        maxWidth: this.state.columnWidth - 25
+                    }}>{userObj.username}</p>
                 </div>
-                <div className='changeColButtonsContainer'>
-                    {curColumn !== 'interested' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
-                    {curColumn !== 'playing' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
-                    {/*curColumn !== 'joined' && <button className='changeCol' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
-                    <button className='changeCol' onClick={this.removeUser.bind(this, userObj.username)}>X</button>
+                <div className="change-col-buttons-container">
+                    {curColumn !== 'interested' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
+                    {curColumn !== 'playing' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
+                    {/*curColumn !== 'joined' && <button className='change-col' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
+                    <button className="change-col" onClick={this.removeUser.bind(this, userObj.username)}>X</button>
                 </div>
             </div>
         );
@@ -198,57 +206,54 @@ export default class PlayerSelect extends Component {
 
     renderStreamerSeatToggle = () => {
         return (
-            <div className='my-toggle-group'>
-                <p className='toggle-label'>
+            <div className="toggle-streamer-seat">
+                <label className="toggle-label form-check-label" for="reserve-seat-for-streamer">
                     Reserve seat for streamer?
-                </p>
-                <div className='my-toggle'>
-                    <input type="checkbox" defaultChecked={true} onChange={this.toggleStreamerSeat}/>
-                    <div className='my-toggle-text no' aria-hidden="true">No</div>
-                    <div className='my-toggle-text yes' aria-hidden="true">Yes</div>
-                    <div className='my-toggle-orb'></div>
+                </label>
+                <div className="form-check form-switch">
+                    <input className="form-check-input" type="checkbox" role="switch" id="reserve-seat-for-streamer" defaultChecked={true} onChange={this.toggleStreamerSeat} />
                 </div>
             </div>
         );
     }
 
     renderPlayerCount = () => {
-        let className = 'playerCount';
+        let className = 'player-count';
         if (this.props.game?.['Max players'] < this.playerCount()) {
             className += ' overlimit';
         }
         return (
-            <p className={className}>
+            <div className={className}>
                 {this.playerCount()} of {this.props.game?.['Max players']} seats claimed
-            </p>
+            </div>
         );
     }
 
     render() {
-        let startGameClass = 'startGame';
+        let startGameClass = 'btn btn-sm start-game';
         if (this.playerCount() < this.props.game?.['Min players']){
             startGameClass += ' disabled';
         }
 
         return (
-            <div className='playerSelectContainer'>
-                <div className="header">
+            <div className="card player-select-container">
+                <div className="card-header d-flex justify-content-between">
                     {this.renderStreamerSeatToggle()}
-                    <div className="game-name">
+                    <div className="fs-2 lh-sm game-name">
                         <b>{this.props.game?.name ?? "TBD"}</b>
                         {this.renderPlayerCount()}
                     </div>
                     <button className={startGameClass} onClick={this.startGame} disabled={!this.canStartGame()}>Start Game</button>
                 </div>
-                <div className='playerCardContainer'>
-                    <div ref={this.firstColumn} className='playerCardColumn interested'>
-                        <p className="playerCardColumn-header">Interested</p>
+                <div className="card-body player-card-container">
+                    <div ref={this.firstColumn} className='player-card-column interested'>
+                        <p className="player-card-column-header">Interested</p>
                         {this.state.interested.filter((iObj) => iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'interested') )}
                         {this.state.interested.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'interested') )}
                     </div>
 
-                    <div className='playerCardColumn playing'>
-                        <p className="playerCardColumn-header">Playing
+                    <div className='player-card-column playing'>
+                        <p className="player-card-column-header">Playing
                         <button className="dice" onClick={this.randomizePlayers}>
                             <img src={dice} alt="dice icon"/>
                         </button>
@@ -257,8 +262,8 @@ export default class PlayerSelect extends Component {
                         {this.state.playing.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'playing') )}
                     </div>
 
-                    {/*<div className='playerCardColumn joined'>
-                        <p className="playerCardColumn-header">Joined</p>
+                    {/*<div className='player-card-column joined'>
+                        <p className="player-card-column-header">Joined</p>
                         {this.state.joined.filter((iObj) => iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
                         {this.state.joined.filter((iObj) => !iObj.isPrioritySeat).map((userObj, i) => this.renderPlayerCard(userObj, i, 'joined') )}
                     </div>*/}
