@@ -21,7 +21,7 @@ exports[`PlayerSelect render should render component 1`] = `
       >
         <input
           className="form-check-input"
-          defaultChecked={true}
+          defaultChecked={false}
           id="reserve-seat-for-streamer"
           onChange={[Function]}
           role="switch"
@@ -106,7 +106,7 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
       >
         <input
           className="form-check-input"
-          defaultChecked={true}
+          defaultChecked={false}
           id="reserve-seat-for-streamer"
           onChange={[Function]}
           role="switch"
@@ -510,7 +510,7 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
       >
         <input
           className="form-check-input"
-          defaultChecked={true}
+          defaultChecked={false}
           id="reserve-seat-for-streamer"
           onChange={[Function]}
           role="switch"
