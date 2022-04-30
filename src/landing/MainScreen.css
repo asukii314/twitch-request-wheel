@@ -75,6 +75,20 @@
     right:  0;
 }
 
+#main-screen .btn.btn-toggle-options {
+    padding: 0.375rem 0.75rem;
+    background-color: transparent;
+    border: 2px solid #ddd;
+    opacity: 0.125;
+    margin: 5px;
+    transition: opacity 0.15s linear;
+}
+#main-screen .btn.btn-toggle-options:hover {
+    opacity: 0.8;
+}
+#main-screen .btn.btn-toggle-options:focus {
+    box-shadow: 0 0 0 0.05rem;
+}
 
 #main-screen .overlay {
     position: fixed;

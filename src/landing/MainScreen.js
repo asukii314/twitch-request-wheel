@@ -4,6 +4,7 @@ import ChatActivity, { ActivityStatus } from '../ChatActivity';
 import ConfettiExplosion from '@reonomy/react-confetti-explosion';
 import GameRequest from '../components/GameRequest'
 import MessageHandler from '../MessageHandler';
+import OptionsMenu from './OptionsMenu';
 import PlayerSelect from '../components/PlayerSelect';
 import Sidebar from './Sidebar'
 import WheelComponent from '../WheelComponent'; //'react-wheel-of-prizes'
@@ -26,7 +27,7 @@ export default class MainScreen extends Component {
             history: [],
             nextGameIdx: 0,
             showPlayerSelect: false,
-            showOptionsModal: false
+            showOptionsMenu: false
         };
 
         this.playerSelector = null;
@@ -251,7 +252,7 @@ export default class MainScreen extends Component {
     toggleOptionsModal = () => {
         this.setState((state) => {
             return {
-                showOptionsModal: !state.showOptionsModal
+                showOptionsMenu: !state.showOptionsMenu
             }
         })
     }
@@ -378,7 +379,7 @@ export default class MainScreen extends Component {
         return (
 
             <Modal
-                show={this.state.showOptionsModal}
+                show={this.state.showOptionsMenu}
                 onHide={this.toggleOptionsModal}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
@@ -418,21 +419,7 @@ export default class MainScreen extends Component {
         let gameSelectedModal;
         if (this.state.gameSelected) {
             gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
-        } else if (this.state.showOptionsModal) {
-            gameSelectedModal = this.renderOptionsModal();
         }
-
-        let logOutBtn;
-        if (typeof this.props.onLogout === 'function') {
-            logOutBtn = (
-                <button className="btn btn-sm float-end logout" onClick={this.props.onLogout}>Logout &#10151;</button>
-            );
-        }
-        let optionsBtn;
-        if (window.location.hash.indexOf('options=true') !== -1)
-        optionsBtn = (
-            <button className="btn btn-sm float-start options" onClick={this.toggleOptionsModal}>Options</button>
-        );
 
         let mainClassName = this.state.showPlayerSelect ? 'player-select' : 'game-select';
 
@@ -493,9 +480,10 @@ export default class MainScreen extends Component {
 
         return (
             <div id="main-screen" className={mainClassName}>
-                <nav className="main-screen-nav">
-                    {optionsBtn}
-                    {logOutBtn}
+                <nav className="main-screen-nav navbar-dark">
+                    <button className="btn btn-toggle-options float-end navbar-toggler" type="button" onClick={this.toggleOptionsModal}>
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
                 </nav>
                 <MessageHandler
                     addGameRequest={this.addGameRequest}
@@ -539,6 +527,10 @@ export default class MainScreen extends Component {
                 </div>
                 {rightColumn}
                 {gameSelectedModal}
+                <OptionsMenu
+                    onHide={this.toggleOptionsModal}
+                    onLogout={this.props.onLogout}
+                    showOptionsMenu={this.state.showOptionsMenu} />
             </div>
         )
     }

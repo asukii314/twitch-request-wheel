@@ -1,0 +1,13 @@
+#options-menu {}
+
+#options-menu .options-menu-items .btn {
+    display: block;
+    text-align: left !important;
+    font-size: calc(1.275rem + 0.3vw) !important;
+    font-weight: 500 !important;
+    opacity:0.8;
+    transition: opacity 0.125s linear;
+}
+#options-menu .options-menu-items .btn:hover {
+    opacity:1;
+}

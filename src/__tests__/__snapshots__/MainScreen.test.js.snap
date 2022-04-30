@@ -6,13 +6,16 @@ exports[`MainScreen render should render the game request screen 1`] = `
   id="main-screen"
 >
   <nav
-    className="main-screen-nav"
+    className="main-screen-nav navbar-dark"
   >
     <button
-      className="btn btn-sm float-end logout"
-      onClick={[MockFunction]}
+      className="btn btn-toggle-options float-end navbar-toggler"
+      onClick={[Function]}
+      type="button"
     >
-      Logout ➧
+      <span
+        className="navbar-toggler-icon"
+      />
     </button>
   </nav>
   <MessageHandler
@@ -149,6 +152,11 @@ exports[`MainScreen render should render the game request screen 1`] = `
       />
     </div>
   </div>
+  <OptionsMenu
+    onHide={[Function]}
+    onLogout={[MockFunction]}
+    showOptionsMenu={false}
+  />
 </div>
 `;
 
@@ -158,13 +166,16 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
   id="main-screen"
 >
   <nav
-    className="main-screen-nav"
+    className="main-screen-nav navbar-dark"
   >
     <button
-      className="btn btn-sm float-end logout"
-      onClick={[MockFunction]}
+      className="btn btn-toggle-options float-end navbar-toggler"
+      onClick={[Function]}
+      type="button"
     >
-      Logout ➧
+      <span
+        className="navbar-toggler-icon"
+      />
     </button>
   </nav>
   <MessageHandler
@@ -330,6 +341,11 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       </h4>
     </div>
   </React.Fragment>
+  <OptionsMenu
+    onHide={[Function]}
+    onLogout={[MockFunction]}
+    showOptionsMenu={false}
+  />
 </div>
 `;
 
@@ -339,13 +355,16 @@ exports[`MainScreen render should render the player selection screen 1`] = `
   id="main-screen"
 >
   <nav
-    className="main-screen-nav"
+    className="main-screen-nav navbar-dark"
   >
     <button
-      className="btn btn-sm float-end logout"
-      onClick={[MockFunction]}
+      className="btn btn-toggle-options float-end navbar-toggler"
+      onClick={[Function]}
+      type="button"
     >
-      Logout ➧
+      <span
+        className="navbar-toggler-icon"
+      />
     </button>
   </nav>
   <MessageHandler
@@ -426,6 +445,11 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       </div>
     </div>
   </div>
+  <OptionsMenu
+    onHide={[Function]}
+    onLogout={[MockFunction]}
+    showOptionsMenu={false}
+  />
 </div>
 `;
 

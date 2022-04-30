@@ -75,6 +75,14 @@
     background-color: darkslategrey;
 }
 
+.offcanvas {
+    background-color: black;
+
+}
+.offcanvas, .offcanvas .btn {
+    color:white;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
