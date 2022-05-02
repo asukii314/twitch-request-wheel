@@ -1,0 +1,251 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OptionsList render renders component with yaml content 1`] = `
+<div>
+  <div
+    class="partyPackList"
+  >
+    <div
+      class="partyPackCard"
+    >
+      <p
+        class="partyPackName"
+      >
+        Any Version
+         
+        <input
+          checked=""
+          id="Any Version"
+          name="Any Version"
+          type="checkbox"
+          value="Any Version"
+        />
+      </p>
+      <ul
+        class="partyPackGameList"
+      >
+        <li
+          class="gameName"
+        >
+          <input
+            checked=""
+            id="Any_Version_Quiplash"
+            name="Any_Version_Quiplash"
+            type="checkbox"
+            value="Any_Version_Quiplash"
+          />
+           
+          <label
+            for="Any_Version_Quiplash"
+            title="Any Version: Quiplash"
+          >
+            Quiplash
+          </label>
+        </li>
+        <li
+          class="gameName"
+        >
+          <input
+            checked=""
+            id="Any_Version_Trivia_Murder_Party"
+            name="Any_Version_Trivia_Murder_Party"
+            type="checkbox"
+            value="Any_Version_Trivia_Murder_Party"
+          />
+           
+          <label
+            for="Any_Version_Trivia_Murder_Party"
+            title="Any Version: Trivia Murder Party"
+          >
+            Trivia Murder Party
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="partyPackCard"
+    >
+      <p
+        class="partyPackName"
+      >
+        Party Pack 1
+         
+        <input
+          checked=""
+          id="Party Pack 1"
+          name="Party Pack 1"
+          type="checkbox"
+          value="Party Pack 1"
+        />
+      </p>
+      <ul
+        class="partyPackGameList"
+      >
+        <li
+          class="gameName"
+        >
+          <input
+            checked=""
+            id="Party_Pack_1_You_Don_t_Know_Jack"
+            name="Party_Pack_1_You_Don_t_Know_Jack"
+            type="checkbox"
+            value="Party_Pack_1_You_Don_t_Know_Jack"
+          />
+           
+          <label
+            for="Party_Pack_1_You_Don_t_Know_Jack"
+            title="Party Pack 1: You Don't Know Jack"
+          >
+            You Don't Know Jack
+          </label>
+        </li>
+        <li
+          class="gameName"
+        >
+          <input
+            checked=""
+            id="Party_Pack_1_Drawful"
+            name="Party_Pack_1_Drawful"
+            type="checkbox"
+            value="Party_Pack_1_Drawful"
+          />
+           
+          <label
+            for="Party_Pack_1_Drawful"
+            title="Party Pack 1: Drawful"
+          >
+            Drawful
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`OptionsList render should render using validGames in state 1`] = `
+<div
+  className="partyPackList"
+>
+  <div
+    className="partyPackCard"
+  >
+    <p
+      className="partyPackName"
+    >
+      Any Version
+       
+      <input
+        checked={true}
+        id="Any Version"
+        name="Any Version"
+        onChange={[Function]}
+        type="checkbox"
+        value="Any Version"
+      />
+    </p>
+    <ul
+      className="partyPackGameList"
+    >
+      <li
+        className="gameName"
+      >
+        <input
+          checked={true}
+          id="Any_Version_Quiplash"
+          name="Any_Version_Quiplash"
+          onChange={[Function]}
+          type="checkbox"
+          value="Any_Version_Quiplash"
+        />
+         
+        <label
+          htmlFor="Any_Version_Quiplash"
+          title="Any Version: Quiplash"
+        >
+          Quiplash
+        </label>
+      </li>
+      <li
+        className="gameName"
+      >
+        <input
+          checked={true}
+          id="Any_Version_Trivia_Murder_Party"
+          name="Any_Version_Trivia_Murder_Party"
+          onChange={[Function]}
+          type="checkbox"
+          value="Any_Version_Trivia_Murder_Party"
+        />
+         
+        <label
+          htmlFor="Any_Version_Trivia_Murder_Party"
+          title="Any Version: Trivia Murder Party"
+        >
+          Trivia Murder Party
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="partyPackCard"
+  >
+    <p
+      className="partyPackName"
+    >
+      Party Pack 1
+       
+      <input
+        checked={true}
+        id="Party Pack 1"
+        name="Party Pack 1"
+        onChange={[Function]}
+        type="checkbox"
+        value="Party Pack 1"
+      />
+    </p>
+    <ul
+      className="partyPackGameList"
+    >
+      <li
+        className="gameName"
+      >
+        <input
+          checked={true}
+          id="Party_Pack_1_You_Don_t_Know_Jack"
+          name="Party_Pack_1_You_Don_t_Know_Jack"
+          onChange={[Function]}
+          type="checkbox"
+          value="Party_Pack_1_You_Don_t_Know_Jack"
+        />
+         
+        <label
+          htmlFor="Party_Pack_1_You_Don_t_Know_Jack"
+          title="Party Pack 1: You Don't Know Jack"
+        >
+          You Don't Know Jack
+        </label>
+      </li>
+      <li
+        className="gameName"
+      >
+        <input
+          checked={null}
+          id="Party_Pack_1_Drawful"
+          name="Party_Pack_1_Drawful"
+          onChange={[Function]}
+          type="checkbox"
+          value="Party_Pack_1_Drawful"
+        />
+         
+        <label
+          htmlFor="Party_Pack_1_Drawful"
+          title="Party Pack 1: Drawful"
+        >
+          Drawful
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
