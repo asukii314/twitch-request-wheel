@@ -30,8 +30,10 @@
     background-color: var(--scrollbar-thumb-active);
 }
 
-/* bootstrap 5 additions */
-
+/* bootstrap 5 related additions */
+:root {
+    --bs-gray-950: rgb(16, 17, 18)
+}
 .fs-7 {
     font-size: 0.75rem !important;
 }

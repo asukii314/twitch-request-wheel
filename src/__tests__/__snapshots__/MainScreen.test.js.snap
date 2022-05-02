@@ -152,18 +152,17 @@ exports[`MainScreen render should render the game request screen 1`] = `
       />
     </div>
   </div>
-  <button
-    className="btn options"
-    onClick={[Function]}
-  >
-    Options
-  </button>
-  <button
-    className="btn logout"
-    onClick={[MockFunction]}
-  >
-    Logout ➧
-  </button>
+  <OptionsMenu
+    gamesList={
+      Object {
+        "allowedGames": undefined,
+        "validGames": undefined,
+      }
+    }
+    onHide={[Function]}
+    onLogout={[MockFunction]}
+    showOptionsMenu={false}
+  />
 </div>
 `;
 
@@ -319,18 +318,6 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       />
     </div>
   </div>
-  <button
-    className="btn options"
-    onClick={[Function]}
-  >
-    Options
-  </button>
-  <button
-    className="btn logout"
-    onClick={[MockFunction]}
-  >
-    Logout ➧
-  </button>
   <React.Fragment>
     <div
       className="overlay fade-in-out"
@@ -348,7 +335,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       </div>
     </div>
     <div
-      className="modal modal-game-chosen fade-in-out"
+      className="confetti-modal modal-game-chosen fade-in-out"
       onClick={[Function]}
     >
       <h1>
@@ -361,6 +348,12 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     </div>
   </React.Fragment>
   <OptionsMenu
+    gamesList={
+      Object {
+        "allowedGames": undefined,
+        "validGames": undefined,
+      }
+    }
     onHide={[Function]}
     onLogout={[MockFunction]}
     showOptionsMenu={false}
@@ -464,18 +457,17 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       </div>
     </div>
   </div>
-  <button
-    className="btn options"
-    onClick={[Function]}
-  >
-    Options
-  </button>
-  <button
-    className="btn logout"
-    onClick={[MockFunction]}
-  >
-    Logout ➧
-  </button>
+  <OptionsMenu
+    gamesList={
+      Object {
+        "allowedGames": undefined,
+        "validGames": undefined,
+      }
+    }
+    onHide={[Function]}
+    onLogout={[MockFunction]}
+    showOptionsMenu={false}
+  />
 </div>
 `;
 
@@ -497,7 +489,7 @@ exports[`MainScreen renderGameChosenModal should return a modal with confetti an
     </div>
   </div>
   <div
-    className="modal modal-game-chosen fade-in-out"
+    className="confetti-modal modal-game-chosen fade-in-out"
     onClick={[Function]}
   >
     <h1>
@@ -525,7 +517,7 @@ exports[`MainScreen renderGameChosenModal should return a modal with confetti an
     </div>
   </div>
   <div
-    className="modal modal-game-chosen fade-in-out"
+    className="confetti-modal modal-game-chosen fade-in-out"
     onClick={[Function]}
   >
     <h1>

@@ -230,7 +230,7 @@ exports[`OptionsList render should render using validGames in state 1`] = `
         className="gameName"
       >
         <input
-          checked={null}
+          checked={false}
           id="Party_Pack_1_Drawful"
           name="Party_Pack_1_Drawful"
           onChange={[Function]}

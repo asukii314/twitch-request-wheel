@@ -26,9 +26,9 @@ export default class MainScreen extends Component {
             counter: 0,
             history: [],
             nextGameIdx: 0,
-            showPlayerSelect: false,
             showOptionsMenu: false,
-            showOptionsModal: false
+            showOptionsModal: false,
+            showPlayerSelect: false
         };
 
         this.playerSelector = null;
@@ -258,10 +258,10 @@ export default class MainScreen extends Component {
         })
     }
 
-    toggleOptionsModal = () => {
+    toggleOptionsModal = (value=null) => {
         this.setState((state) => {
             return {
-                showOptionsModal: !state.showOptionsModal
+                showOptionsModal: (value===null) ? !state.showOptionsModal : value
             }
         })
     }
@@ -366,10 +366,18 @@ export default class MainScreen extends Component {
         console.log('gamePackList:', gamePackList, allowedGames);
 
         return (
-            <>
-                <div className="overlay fade-in" onClick={this.toggleOptionsModal}></div>
-                <div className="modal modal-options fade-in">
-                    <h2>Options</h2>
+            <Modal
+                show={this.state.showOptionsModal}
+                onHide={()=>this.toggleOptionsModal(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Options
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <div className="options-list">
                         <ul>
                             {gamePackList.map(({id, game, pack}, idx) => {
@@ -382,8 +390,11 @@ export default class MainScreen extends Component {
                             )}
                         </ul>
                     </div>
-                </div>
-            </>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button data-bs-dismiss="modal">Close</Button>
+                </Modal.Footer>
+            </Modal>
         );
     }
 
@@ -392,10 +403,10 @@ export default class MainScreen extends Component {
 
 
         let gameSelectedModal;
-        if (this.state.gameSelected) {
-            gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
-        } else if (this.state.showOptionsModal) {
+        if (this.state.showOptionsModal) {
             gameSelectedModal = this.renderOptionsModal();
+        } else if (this.state.gameSelected) {
+            gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
         }
 
         let mainClassName = this.state.showPlayerSelect ? 'player-select' : 'game-select';
@@ -454,6 +465,7 @@ export default class MainScreen extends Component {
             );
         }
 
+        let gamesList = this.getGamesList();
 
         return (
             <div id="main-screen" className={mainClassName}>
@@ -505,7 +517,8 @@ export default class MainScreen extends Component {
                 {rightColumn}
                 {gameSelectedModal}
                 <OptionsMenu
-                    onHide={this.toggleOptionsModal}
+                    gamesList={gamesList}
+                    onHide={this.toggleOptionsMenu}
                     onLogout={this.props.onLogout}
                     showOptionsMenu={this.state.showOptionsMenu} />
             </div>
