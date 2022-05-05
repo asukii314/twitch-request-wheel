@@ -614,3 +614,18 @@ Standalone:
       - marbles
       - marble
       - mos
+
+  RiffTrax:
+    Min players: 2
+    Max players: 6
+    Variants:
+      - rifftrax
+      - rifftracks
+      - rifftrack
+      - rifftraxs
+      - riftracks
+      - riftrack
+      - riftrax
+      - riftraxs
+      - riff
+      - rt
