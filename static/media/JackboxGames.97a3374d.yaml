@@ -629,3 +629,14 @@ Standalone:
       - riftraxs
       - riff
       - rt
+
+  "Pwnk: Stream Battle Royale":
+    Min players: 2
+    Max players: 50
+    Variants:
+      - Pwnk Stream Battle Royale
+      - Pwnk Battle Royale
+      - Pwnk Stream Royale
+      - pwnk
+      - pnwk
+
