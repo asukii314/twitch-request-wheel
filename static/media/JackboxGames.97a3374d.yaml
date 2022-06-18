@@ -640,3 +640,13 @@ Standalone:
       - pwnk
       - pnwk
 
+  Sketchful:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - sketchful
+      - skribbl
+      - skribble
+      - sketch
+      - skribbl.io
+
