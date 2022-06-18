@@ -648,5 +648,18 @@ Standalone:
       - skribbl
       - skribble
       - sketch
+      - sketchful.io
       - skribbl.io
+
+  Stream Pairs:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - stream pairs
+      - stream pair
+      - steam pairs
+      - steam pair
+      - stream pars
+      - sp
+
 
