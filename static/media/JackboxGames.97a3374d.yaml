@@ -418,6 +418,42 @@ Party Pack 8:
       - drawn weapons
       - wd
 
+
+Party Pack 9:
+  Junktopia:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - junktopia
+      - junktopea
+      - junk
+  Nonsensory:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - nonsensory
+      - nonsense
+  Quixort:
+    Min players: 1
+    Max players: 10
+    Variants:
+      - quixort
+  Fibbage 4:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - fibbage 4
+      - fibbage4
+  Roomerang:
+    Min players: 4
+    Max players: 9
+    Variants:
+      - roomerang
+      - roommerang
+      - roomerrang
+      - boomerang
+      - room
+
 Standalone:
   Drawful 2:
     Min players: 3
