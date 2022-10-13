@@ -698,4 +698,14 @@ Standalone:
       - stream pars
       - sp
 
+  Songlio:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - songlio
+      - song
+      - songleo
+      - songio
+      - songlo
+      - songeo
 
