@@ -168,17 +168,17 @@ Party Pack 3:
 
 
 Party Pack 4:
-  "Fibbage: Enough About You":
+  "Fibbage 3: Enough About You":
     Min players: 2
     Max players: 8
     Variants:
-      - eay
-      - enough about you
-      - feay
-      - fibbage eay
-      - "fibbage: eay"
-      - fibbage enough about you
-      - "fibbage: enough about you"
+      - 3eay
+      - 3 enough about you
+      - f4eay
+      - fibbage 3 eay
+      - "fibbage 3: eay"
+      - fibbage 3 enough about you
+      - "fibbage 4: enough about you"
   Fibbage 3:
     Min players: 2
     Max players: 8
@@ -444,6 +444,24 @@ Party Pack 9:
     Variants:
       - fibbage 4
       - fibbage4
+  "Fibbage 4: Enough About You":
+    Min players: 2
+    Max players: 8
+    Variants:
+      - eay
+      - 4eay
+      - enough about you
+      - 4 enough about you
+      - feay
+      - f4eay
+      - fibbage eay
+      - fibbage 4 eay
+      - "fibbage: eay"
+      - "fibbage 4: eay"
+      - fibbage enough about you
+      - fibbage 4 enough about you
+      - "fibbage: enough about you"
+      - "fibbage 4: enough about you"
   Roomerang:
     Min players: 4
     Max players: 9
