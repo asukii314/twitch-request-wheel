@@ -63,6 +63,13 @@
   - On-screen equivalent: Hover over the user's name card and click the "X" button that appears on its far right side.
   - Variants: !murd
 
+!clearopen
+  - Example: !clearopen
+  - Available to: Mods + broadcaster
+  - What it does: Switches to the seat selection screen and removes all users from the board. Compatible with the PlayWithViewers bot, for streamers who use that to send multiple room code whispers.
+  - On-screen equivalent: Click the "Open seat requests" button at the bottom of the "Up Next" box in the top left of the screen, and then removing all redeemed users.
+  - Variants: n/a
+
 !open
   - Example: !open
   - Available to: Mods + broadcaster
@@ -82,7 +89,14 @@
   - Available to: Mods + broadcaster
   - What it does: Adds the specified user to the top of the "playing" column on the board, with a star beside their name. (If the queue is closed, they will be added to the top of the "interested" column instead, for consideration.)
   - On-screen equivalent: n/a
-  - Variants: !priorityseat
+  - Variants: !priorityseat, !adduser
+
+!removeseat
+  - Example: !removeseat @dewinblack
+  - Available to: Mods + broadcaster
+  - What it does: Removes the specified user from the "playing" column on the board.
+  - On-screen equivalent: n/a
+  - Variants: n/a
 
 !clear
   - Example: !clear

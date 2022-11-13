@@ -209,6 +209,20 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        if ( message.startsWith("!removeuser")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            const exitingUser = message.replace("!removeuser", "").replace("@", "").trim();
+            if (exitingUser === "") {
+                this.sendMessage(`/me @${username}, please specify the user who will be removed in the next game: for example, !removeuser @dewinblack`);
+                return true;
+            }
+            this.props?.playerExitHandler(exitingUser);
+            return true;
+        }
+
         if (message === "!leave" || message === "!murd") {
             this.props?.playerExitHandler(username);
             return true;
@@ -223,6 +237,14 @@ export default class MessageHandler extends Component {
 
         if (message === "!open") {
             if (this.isModOrBroadcaster(username)) {
+                this.props?.openQueueHandler();
+            }
+            return true;
+        }
+
+        if (message === "!clearopen") {
+            if (this.isModOrBroadcaster(username)) {
+                this.props?.clearQueueHandler();
                 this.props?.openQueueHandler();
             }
             return true;
