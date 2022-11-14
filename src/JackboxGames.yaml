@@ -168,17 +168,17 @@ Party Pack 3:
 
 
 Party Pack 4:
-  "Fibbage: Enough About You":
+  "Fibbage 3: Enough About You":
     Min players: 2
     Max players: 8
     Variants:
-      - eay
-      - enough about you
-      - feay
-      - fibbage eay
-      - "fibbage: eay"
-      - fibbage enough about you
-      - "fibbage: enough about you"
+      - 3eay
+      - 3 enough about you
+      - f3eay
+      - fibbage 3 eay
+      - "fibbage 3: eay"
+      - fibbage 3 enough about you
+      - "fibbage 3: enough about you"
   Fibbage 3:
     Min players: 2
     Max players: 8
@@ -418,6 +418,60 @@ Party Pack 8:
       - drawn weapons
       - wd
 
+
+Party Pack 9:
+  Junktopia:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - junktopia
+      - junktopea
+      - junk
+  Nonsensory:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - nonsensory
+      - nonsense
+  Quixort:
+    Min players: 1
+    Max players: 10
+    Variants:
+      - quixort
+  Fibbage 4:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - fibbage 4
+      - fibbage4
+  "Fibbage 4: Enough About You":
+    Min players: 2
+    Max players: 8
+    Variants:
+      - eay
+      - 4eay
+      - enough about you
+      - 4 enough about you
+      - feay
+      - f4eay
+      - fibbage eay
+      - fibbage 4 eay
+      - "fibbage: eay"
+      - "fibbage 4: eay"
+      - fibbage enough about you
+      - fibbage 4 enough about you
+      - "fibbage: enough about you"
+      - "fibbage 4: enough about you"
+  Roomerang:
+    Min players: 4
+    Max players: 9
+    Variants:
+      - roomerang
+      - roommerang
+      - roomerrang
+      - boomerang
+      - room
+
 Standalone:
   Drawful 2:
     Min players: 3
@@ -614,3 +668,61 @@ Standalone:
       - marbles
       - marble
       - mos
+
+  RiffTrax:
+    Min players: 2
+    Max players: 6
+    Variants:
+      - rifftrax
+      - rifftracks
+      - rifftrack
+      - rifftraxs
+      - riftracks
+      - riftrack
+      - riftrax
+      - riftraxs
+      - riff
+      - rt
+
+  "Pwnk: Stream Battle Royale":
+    Min players: 2
+    Max players: 50
+    Variants:
+      - Pwnk Stream Battle Royale
+      - Pwnk Battle Royale
+      - Pwnk Stream Royale
+      - pwnk
+      - pnwk
+
+  Sketchful:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - sketchful
+      - skribbl
+      - skribble
+      - sketch
+      - sketchful.io
+      - skribbl.io
+
+  Stream Pairs:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - stream pairs
+      - stream pair
+      - steam pairs
+      - steam pair
+      - stream pars
+      - sp
+
+  Songlio:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - songlio
+      - song
+      - songleo
+      - songio
+      - songlo
+      - songeo
