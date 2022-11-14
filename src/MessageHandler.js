@@ -318,12 +318,6 @@ export default class MessageHandler extends Component {
 
     onMessage = (target, tags, msg, self) => {
         if (self) return;
-
-        if (this.props.allowGameRequests !== true) {
-            this.sendMessage(`/me @${tags.username}, game requests are currently paused at the moment, please try again later.`);
-            return;
-        }
-
         this.props.onMessage(msg, tags.username, tags)
 
         if (msg.trim() === "!nextgame") {
@@ -352,6 +346,12 @@ export default class MessageHandler extends Component {
             this.sendMessage(`/me @${tags.username}, ${gameObj.name} has already been requested!`);
             return;
         }
+
+        if (this.props.allowGameRequests !== true) {
+            this.sendMessage(`/me @${tags.username}, game requests are currently paused at the moment, please try again later.`);
+            return;
+        }
+
 
         let prevRequestedGameName = null;
         for (const metadata of Object.values(this.props.messages)) {
