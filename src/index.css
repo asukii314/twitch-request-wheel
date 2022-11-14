@@ -28,6 +28,11 @@ code {
     animation: 0.25s linear 0.75s fadein;
     animation-fill-mode: forwards;
 }
+.fade-out {
+    opacity: 0;
+    animation: 0.25s linear 0s fadein;
+    animation-fill-mode: backwards;
+}
 @keyframes fadein {
     from    { opacity:0; }
     to      { opacity:1; }

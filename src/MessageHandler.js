@@ -318,6 +318,12 @@ export default class MessageHandler extends Component {
 
     onMessage = (target, tags, msg, self) => {
         if (self) return;
+
+        if (this.props.allowGameRequests !== true) {
+            this.sendMessage(`/me @${tags.username}, game requests are currently paused at the moment, please try again later.`);
+            return;
+        }
+
         this.props.onMessage(msg, tags.username, tags)
 
         if (msg.trim() === "!nextgame") {

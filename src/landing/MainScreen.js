@@ -19,6 +19,7 @@ export default class MainScreen extends Component {
         super(props);
         this.chatActivity = new ChatActivity(this.props.channel)
         this.state = {
+            allowGameRequests: true,
             gameSelected: null,
             messages: {},
             colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
@@ -42,6 +43,7 @@ export default class MainScreen extends Component {
         this.onWheelSpun = this.onWheelSpun.bind(this);
         this.removeGame = this.removeGame.bind(this);
         this.onMessage = this.onMessage.bind(this);
+        this.toggleAllowGameRequests = this.toggleAllowGameRequests.bind(this);
         this.togglePlayerSelect = this.togglePlayerSelect.bind(this);
         this.routePlayRequest = this.routePlayRequest.bind(this);
         this.routeLeaveRequest = this.routeLeaveRequest.bind(this);
@@ -248,6 +250,14 @@ export default class MainScreen extends Component {
         this.chatActivity.updateLastMessageTime(user);
     }
 
+    toggleAllowGameRequests = () => {
+        this.setState((state) => {
+            return {
+                allowGameRequests: !state.allowGameRequests
+            }
+        })
+    }
+
     toggleOptionsModal = () => {
         this.setState((state) => {
             return {
@@ -441,7 +451,7 @@ export default class MainScreen extends Component {
                 Type <b>!new</b> in {this.props.channel}'s chat if you want to join the next game
             </span>
         ) : (
-            <span className="subheading-game fade-in-delay">
+            <span className={`subheading-game ${(this.state.allowGameRequests === true ? 'fade-in-delay' : 'fade-out')}`} title={`Click to ${this.state.allowGameRequests === true ? 'disable' : 'enable'} game requests.`} onClick={this.toggleAllowGameRequests}>
                 Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add
             </span>
         );
@@ -499,6 +509,7 @@ export default class MainScreen extends Component {
                 </nav>
                 <MessageHandler
                     addGameRequest={this.addGameRequest}
+                    allowGameRequests={this.state.allowGameRequests}
                     setNextGame={this.setNextGame}
                     changeNextGameIdx={this.changeNextGameIdx}
                     startGame={this.startGame}
