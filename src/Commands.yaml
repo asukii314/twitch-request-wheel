@@ -91,8 +91,8 @@
   - On-screen equivalent: n/a
   - Variants: !priorityseat, !adduser
 
-!removeseat
-  - Example: !removeseat @dewinblack
+!removeuser
+  - Example: !removeuser @dewinblack
   - Available to: Mods + broadcaster
   - What it does: Removes the specified user from the "playing" column on the board.
   - On-screen equivalent: n/a
