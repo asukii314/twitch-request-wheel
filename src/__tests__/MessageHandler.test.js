@@ -62,7 +62,8 @@ describe('MessageHandler', () => {
                 chosen: false
             }
         },
-        upcomingGames: []
+        upcomingGames: [],
+        allowGameRequests: true
     };
     const upcomingGames = [
         {
