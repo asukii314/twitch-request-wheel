@@ -41,6 +41,13 @@ const easterEggRequests = [
             'lewmon',
             'sirfar3lewmon'
         ]
+    }, {
+        RequestName: 'DoTheDew',
+        Response: 'dewinbDTD dewinbDance dewinbGIR dewinbDance dewinbGIR dewinbDance dewinbDTD',
+        Variants: [
+            'dothedew',
+            'dewinblack'
+        ]
     }
 ];
 
@@ -62,11 +69,22 @@ export default class MessageHandler extends Component {
 
     componentDidMount = (props) => {
         const client = this.getTwitchClient(this.props);
+        this.client = client;
 
         client.on('message', this.onMessage);
         client.connect();
 
         return this.getGameList(rawJackboxGameList, client);
+    }
+
+    componentWillUnmount = (props) => {
+        try {
+            if (this.client) {
+                this.client.disconnect();
+            }
+        } catch(e) {
+            console.log('Error', e);
+        }
     }
 
     getGameList = async (yamlGameList, client) => {
@@ -122,6 +140,26 @@ export default class MessageHandler extends Component {
             if (gameObj) {
                 this.sendMessage(`/me @${username}, ${gameObj.name} is a ${gameObj.partyPack} game.`);
             }
+            return true;
+        }
+
+        //========= enable / disable requests =========
+        if ( message.startsWith("!enablerequests")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            this.props?.toggleAllowGameRequests(true);
+            this.sendMessage(`/me @${username}, requests have now been enabled! Type "!request" followed by the game you want to play.`);
+            return true;
+        }
+        if ( message.startsWith("!disablerequests")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            this.props?.toggleAllowGameRequests(false);
+            this.sendMessage(`/me @${username}, requests have now been disabled.`);
             return true;
         }
 
@@ -332,6 +370,23 @@ export default class MessageHandler extends Component {
                 this.sendMessage(`/me @${tags.username}, the next game up is ${upcoming}!`)
             } else {
                 this.sendMessage(`/me @${tags.username}, the next game hasn't been decided yet - feel free to !request one :)`)
+            }
+
+            return;
+        }
+
+        if (msg.trim() === "!lastgame") {
+            if (this.props.previousGames && this.props.previousGames.length > 0) {
+                let previous = this.props.previousGames[0].name;
+                if (this.props.previousGames.length > 1) {
+                    previous += `, followed by ${this.props.previousGames[1].name}`
+                    for (let i = 2; i < this.props.previousGames.length; i++) {
+                        previous += `, and ${this.props.previousGames[i].name}`
+                    }
+                }
+                this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)
+            } else {
+                this.sendMessage(`/me @${tags.username}, no games have been played yet - feel free to !request one :)`)
             }
 
             return;

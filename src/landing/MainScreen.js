@@ -250,10 +250,14 @@ export default class MainScreen extends Component {
         this.chatActivity.updateLastMessageTime(user);
     }
 
-    toggleAllowGameRequests = () => {
+    toggleAllowGameRequests = (allow=null) => {
+        let {allowGameRequests} = this.state;
+        if (allow !== null) {
+            allowGameRequests = !allow;
+        }
         this.setState((state) => {
             return {
-                allowGameRequests: !state.allowGameRequests
+                allowGameRequests: !allowGameRequests
             }
         })
     }
@@ -519,12 +523,14 @@ export default class MainScreen extends Component {
                     access_token={this.props.access_token}
                     onMessage={this.onMessage}
                     onDelete={this.removeGame}
+                    previousGames={this.state.history.slice(0, this.state.nextGameIdx)}
                     upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
                     caniplayHandler={this.routePlayRequest}
                     playerExitHandler={this.routeLeaveRequest}
                     openQueueHandler={this.routeOpenQueueRequest}
                     closeQueueHandler={this.routeCloseQueueRequest}
                     clearQueueHandler={this.routeClearQueueRequest}
+                    toggleAllowGameRequests={this.toggleAllowGameRequests}
                     ref={this.setMessageHandlerRef}
                 />
                 <div className="left-column fade-in">

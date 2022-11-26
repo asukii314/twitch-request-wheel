@@ -49,8 +49,10 @@ exports[`MainScreen render should render the game request screen 1`] = `
     onMessage={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
+    previousGames={Array []}
     setNextGame={[Function]}
     startGame={[Function]}
+    toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
   />
   <div
@@ -204,8 +206,10 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     onMessage={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
+    previousGames={Array []}
     setNextGame={[Function]}
     startGame={[Function]}
+    toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
   />
   <div
@@ -388,8 +392,10 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     onMessage={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
+    previousGames={Array []}
     setNextGame={[Function]}
     startGame={[Function]}
+    toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
   />
   <div
