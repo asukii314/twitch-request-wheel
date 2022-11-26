@@ -796,7 +796,7 @@ describe('MessageHandler', () => {
                 expect.stringContaining('no game could not be found in the list'),
             );
             expect(component.sendMessage.mock.calls[1][0]).toEqual(
-                expect.stringContaining('has already been requested!'),
+                expect.stringContaining('has already been requested'),
             );
             expect(component.sendMessage.mock.calls[2][0]).toEqual(
                 expect.stringContaining('has been replaced with'),

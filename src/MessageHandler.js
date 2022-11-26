@@ -143,6 +143,38 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        //========= list requested games =========
+        if (message === "!onthewheel" || message === "!gamesqueued" || message === "!listrequests") {
+            let pipe = ' ⋆ '; // TODO: allow delimiter to be user configurable
+            let requests = Object.values(this.props.messages).map(m => m.name).sort();
+            try {
+                this.sendMessage(`/me @${username}, Requested: ${requests.join(pipe)}.`);
+            } catch(e) {
+                this.sendMessage(`/me @${username}, Sorry, there are waaaaaaaaay too many games to list and something went wrong. :p`);
+                console.log(e);
+            }
+
+            // TODO: handle if over character count
+            // TODO: determine if this is actually necessary
+            /* this.sendMessage(`/me @${username}, NOTE: There are a loooooot of games to list, but hopefully this next message won't break:`);
+            this.sendMessage(`/me @${username}, Requested: ${requests}.`);
+            requestsArr.reduce((list, str) => {
+                const last = list[list.length-1];
+                if (last && last.total + str.length <= 480) {
+                    last.total += str.length;
+                    last.words.push(str);
+                } else {
+                    list.push({
+                        total: str.length,
+                        words: [str]
+                    });
+                }
+                return list;
+            }, [])
+            .map(({ words }) => words.join(pipe));*/
+            return true;
+        }
+
         //========= enable / disable requests =========
         if ( message.startsWith("!enablerequests")) {
             if (!this.isModOrBroadcaster(username)) {
@@ -223,9 +255,9 @@ export default class MessageHandler extends Component {
         }
 
         //========= player queue management =========
-        if (message === "!caniplay" || message === "!new") {
+        if (message === "!caniplay" || message === "!new" || (message === "!dew" && this.props?.channel?.toLowerCase() === 'dewinblack')) {
             this.props?.caniplayHandler(username, {
-                sendConfirmationMsg: message !== "!new"
+                sendConfirmationMsg: message === "!caniplay"
             });
             return true;
         }
@@ -398,7 +430,8 @@ export default class MessageHandler extends Component {
         if (!gameObj) return;
 
         if (this.props.messages[gameObj.longName]) {
-            this.sendMessage(`/me @${tags.username}, ${gameObj.name} has already been requested!`);
+            let requestedBy = (gameObj.username === tags.username) ? 'yourself, silly' : `@${gameObj.username}`;
+            this.sendMessage(`/me @${tags.username}, ${gameObj.name} has already been requested by ${requestedBy}!`);
             return;
         }
 

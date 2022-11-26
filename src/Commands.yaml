@@ -20,8 +20,8 @@
 !lastgame
   - Example: !lastgame
   - Available to: Everyone
-  - What it does: Responds with a list of all previously played games from the queue.
-  - On-screen equivalent: The previously played games are shown in the History box in the bottom left.
+  - What it does: Responds with a list of the most recently played games.
+  - On-screen equivalent: Previously played games are shown in the History box in the bottom left.
   - Variants: n/a
 
 !nextgamefwd
@@ -56,6 +56,14 @@
   - Available to: Mods + broadcaster
   - What it does: Allows for game requests to be received again after using the !disablerequests command.
   - On-screen equivalent: Click the empty space on the requests screen previously occupied by the yellow subheader.
+
+!gamequeue
+  - Example: !gamequeue
+  - Available to: Everyone
+  - What it does: Lists all of the requested games currently on the wheel.
+  - On-screen equivalent: n/a
+  - Variants: !gamesqueue, !listrequests
+
 
 ###
 ### Seat Requests
