@@ -430,7 +430,7 @@ export default class MessageHandler extends Component {
         if (!gameObj) return;
 
         if (this.props.messages[gameObj.longName]) {
-            let requestedBy = (gameObj.username === tags.username) ? 'yourself, silly' : `@${gameObj.username}`;
+            let requestedBy = (this.props.messages[gameObj.longName].username === tags.username) ? 'yourself, silly' : this.props.messages[gameObj.longName].username;
             this.sendMessage(`/me @${tags.username}, ${gameObj.name} has already been requested by ${requestedBy}!`);
             return;
         }
