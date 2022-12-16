@@ -726,3 +726,13 @@ Standalone:
       - songio
       - songlo
       - songeo
+
+  Whatamusic:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - whatamusic
+      - wam
+      - watamusic
+      - what a music
+      - whatmusic
