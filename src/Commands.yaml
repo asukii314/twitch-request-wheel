@@ -57,12 +57,12 @@
   - What it does: Allows for game requests to be received again after using the !disablerequests command.
   - On-screen equivalent: Click the empty space on the requests screen previously occupied by the yellow subheader.
 
-!gamequeue
-  - Example: !gamequeue
+!onthewheel
+  - Example: !onthewheel
   - Available to: Everyone
   - What it does: Lists all of the requested games currently on the wheel.
   - On-screen equivalent: n/a
-  - Variants: !gamesqueue, !listrequests
+  - Variants: !gamesqueued, !listrequests
 
 
 ###
@@ -149,7 +149,6 @@
   - What it does: Responds with a URL to a page displaying all requestable games, and the "short-forms" you can use to request them (e.g. "MSM" for Monster Seeking Monster).
   - On-screen equivalent: n/a
   - Variants: !gameslist
-
 !whichpack
   - Example: !whichpack TMP 2
   - Available to: Everyone
