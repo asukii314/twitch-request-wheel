@@ -56,6 +56,7 @@ export default class MessageHandler extends Component {
         super(props);
         this.state = {
             client: null,
+            allowedGames: {},
             validGames: []
         };
         this.getTwitchClient = this.getTwitchClient.bind(this);
@@ -456,6 +457,9 @@ export default class MessageHandler extends Component {
                 this.props.onDelete(prevRequestedGameName);
                 this.sendMessage(`/me @${tags.username}, your previous request of ${prevRequestedGameName} has been replaced with ${gameObj.name}.`);
             }
+        } else if (Object.values(this.state.allowedGames).filter(g => g.game === gameObj.name && g.pack === gameObj.partyPack && g.enabled !== true).length === 1) {
+            this.sendMessage(`/me @${tags.username}, ${gameObj.name} is not currently enabled and was not added to the queue.`);
+            return;
         } else {
             this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue.`);
         }
@@ -466,6 +470,12 @@ export default class MessageHandler extends Component {
 
     sendMessage = (msg) => {
         this.state.client.say(this.props.channel, msg)
+    }
+
+    setAllowedGames = (allowedGames) => {
+        this.setState({
+            allowedGames
+        });
     }
 
     render() {

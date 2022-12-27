@@ -4,6 +4,7 @@ import ChatActivity, { ActivityStatus } from '../ChatActivity';
 import ConfettiExplosion from '@reonomy/react-confetti-explosion';
 import GameRequest from '../components/GameRequest'
 import MessageHandler from '../MessageHandler';
+import OptionsMenu from './OptionsMenu';
 import PlayerSelect from '../components/PlayerSelect';
 import Sidebar from './Sidebar'
 import WheelComponent from '../WheelComponent'; //'react-wheel-of-prizes'
@@ -26,8 +27,9 @@ export default class MainScreen extends Component {
             counter: 0,
             history: [],
             nextGameIdx: 0,
-            showPlayerSelect: false,
-            showOptionsModal: false
+            showOptionsMenu: false,
+            showOptionsModal: false,
+            showPlayerSelect: false
         };
 
         this.playerSelector = null;
@@ -252,12 +254,20 @@ export default class MainScreen extends Component {
 
     toggleAllowGameRequests = (allow=null) => {
         let {allowGameRequests} = this.state;
-        if (allow !== null) {
+        if (allow !== null && typeof allow !== 'object') {
             allowGameRequests = !allow;
         }
         this.setState((state) => {
             return {
                 allowGameRequests: !allowGameRequests
+            }
+        })
+    }
+
+    toggleOptionsMenu = () => {
+        this.setState((state) => {
+            return {
+                showOptionsMenu: !state.showOptionsMenu
             }
         })
     }
@@ -354,7 +364,7 @@ export default class MainScreen extends Component {
         );
     }
 
-    renderOptionsModal = () => {
+    renderOptionsModal() {
         let {allowedGames, validGames} = this.messageHandler.state;
         let gamePackList = [].concat(...Object.entries(validGames).map((packData, idx) => {
             return Object.keys(packData[1]).map(gameData => {
@@ -369,37 +379,16 @@ export default class MainScreen extends Component {
         // let gamesList = gamePackList.map(g => g.game);
         console.log('gamePackList:', gamePackList, allowedGames);
 
-        // return (
-        //     <>
-        //         <div className="overlay fade-in" onClick={this.toggleOptionsModal}></div>
-        //         <div className="modal modal-options fade-in">
-        //             <h2>Options</h2>
-        //             <div className="options-list">
-        //                 <ul>
-        //                     {gamePackList.map(({id, game, pack}, idx) => {
-        //                         // let gameId = `${g.pack} ${g.game}`.replace(/\W/ig, '_');
-        //                         return (
-        //                             <li key={id}>
-        //                                 <input type="checkbox" id={id} name={id} value={id} /> <label htmlFor={id}>{pack}: {game}</label>
-        //                             </li>
-        //                         )}
-        //                     )}
-        //                 </ul>
-        //             </div>
-        //         </div>
-        //     </>
-        // );
         return (
-
             <Modal
                 show={this.state.showOptionsModal}
-                onHide={this.toggleOptionsModal}
+                onHide={()=>this.toggleOptionsModal(false)}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Modal heading
+                        Options
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -418,10 +407,9 @@ export default class MainScreen extends Component {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.toggleOptionsModal}>Close</Button>
+                    <Button data-bs-dismiss="modal">Close</Button>
                 </Modal.Footer>
             </Modal>
-
         );
     }
 
@@ -430,23 +418,11 @@ export default class MainScreen extends Component {
 
 
         let gameSelectedModal;
-        if (this.state.gameSelected) {
-            gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
-        } else if (this.state.showOptionsModal) {
+        if (this.state.showOptionsModal) {
             gameSelectedModal = this.renderOptionsModal();
+        } else if (this.state.gameSelected) {
+            gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
         }
-
-        let logOutBtn;
-        if (typeof this.props.onLogout === 'function') {
-            logOutBtn = (
-                <button className="btn btn-sm float-end logout" onClick={this.props.onLogout}>Logout &#10151;</button>
-            );
-        }
-        let optionsBtn;
-        if (window.location.hash.indexOf('options=true') !== -1)
-        optionsBtn = (
-            <button className="btn btn-sm float-start options" onClick={this.toggleOptionsModal}>Options</button>
-        );
 
         let mainClassName = this.state.showPlayerSelect ? 'player-select' : 'game-select';
 
@@ -455,7 +431,10 @@ export default class MainScreen extends Component {
                 Type <b>!new</b> in {this.props.channel}'s chat if you want to join the next game
             </span>
         ) : (
-            <span className={`subheading-game ${(this.state.allowGameRequests === true ? 'fade-in-delay' : 'fade-out')}`} title={`Click to ${this.state.allowGameRequests === true ? 'disable' : 'enable'} game requests.`} onClick={this.toggleAllowGameRequests}>
+            <span
+                className={`subheading-game ${(this.state.allowGameRequests === true ? 'fade-in-delay' : 'fade-out')}`} 
+                title={`Click to ${this.state.allowGameRequests === true ? 'disable' : 'enable'} game requests.`} 
+                onClick={this.toggleAllowGameRequests}>
                 Type e.g. <b>"!request Blather Round"</b> in {this.props.channel}'s chat to add
             </span>
         );
@@ -504,12 +483,14 @@ export default class MainScreen extends Component {
             );
         }
 
+        let gamesList = this.getGamesList();
 
         return (
             <div id="main-screen" className={mainClassName}>
-                <nav className="main-screen-nav">
-                    {optionsBtn}
-                    {logOutBtn}
+                <nav className="main-screen-nav navbar-dark">
+                    <button className="btn btn-toggle-options float-end navbar-toggler" type="button" onClick={this.toggleOptionsMenu}>
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
                 </nav>
                 <MessageHandler
                     addGameRequest={this.addGameRequest}
@@ -556,6 +537,11 @@ export default class MainScreen extends Component {
                 </div>
                 {rightColumn}
                 {gameSelectedModal}
+                <OptionsMenu
+                    gamesList={gamesList}
+                    onHide={this.toggleOptionsMenu}
+                    onLogout={this.props.onLogout}
+                    showOptionsMenu={this.state.showOptionsMenu} />
             </div>
         )
     }

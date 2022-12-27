@@ -1,0 +1,249 @@
+button.changeCol {
+    text-transform: uppercase;
+    margin: 3px;
+    font-size: 11px;
+    background-color: lightgray;
+}
+
+div.changeColButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    visibility: hidden;
+    margin-top: -25px;
+}
+
+div.changeColButtonsContainer:hover {
+    display: flex;
+    flex-direction: row;
+}
+
+div.changeColButtonsContainer .changeCol {
+    background-color: indianred;
+}
+
+.playerCard:hover {
+    background-color: dimgray;
+}
+
+.playerCard:hover>.changeColButtonsContainer {
+    visibility: visible;
+}
+
+div.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    margin: 0px 15px;
+}
+
+.playerCount {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.playerCount.overlimit {
+    font-weight: bold;
+    color: darkorange;
+}
+
+button.startGame {
+    margin: 15px;
+}
+
+.playerSelectContainer {
+    background-color: darkslategrey;
+    border-radius: 5px;
+}
+
+.playerSelectContainer .game-name {
+    margin-top: 10px;
+}
+
+.playerCardContainer {
+    margin: 5px 10px 7px;
+    height: 700px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playerCardColumn {
+    width: 50%;
+    height: 100%;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.playerCardColumn.interested {
+    background-color: slategrey;
+}
+
+.playerCardColumn.playing {
+    background-color: teal;
+}
+
+.playerCardColumn.joined {
+    background-color: seagreen;
+    display: none;
+}
+
+.playerCardColumn>p {
+    margin-top: 0;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.playerCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: gray;
+    margin: 8px;
+    padding: 2px;
+    font-size: 12px;
+    border-radius: 5px;
+    border-style: outset;
+    border-color: cadetblue;
+}
+
+.playerCard-username {
+    display: flex;
+}
+
+.playerCard-username>img {
+    width: 16px;
+    margin-left: 3px;
+}
+
+.playerName {
+    margin: 3px 5px;
+    font-size: 14px;
+    font-weight: 500;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+button.dice {
+    width: 25px;
+    height: 25px;
+    background-color: greenyellow;
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 0px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+button.dice>img {
+    width: 100%;
+    height: 100%;
+}
+
+/* // ---------------------- Variables */
+:root {
+    --my-toggle-background: #e5e7eb;
+    --my-toggle-label-color: #1f2937;
+    --my-toggle-sublabel-color: #6b7280;
+    --my-toggle-width: 50px;
+    --my-toggle-height: calc(var(--my-toggle-width) / 2);
+    --my-toggle-gap-size: 4px;
+    --my-toggle-text-color: #ffffff;
+    --my-toggle-orb-background-color: #ffffff;
+    --my-toggle-orb-size: calc(var(--my-toggle-height) - (var(--my-toggle-gap-size) * 2));
+    --my-toggle-active-background-color: #34d399;
+    --my-toggle-inactive-background-color: #f87171;
+}
+
+/* // ---------------------- The toggle group */
+.playerSelectContainer .my-toggle-group {
+    display: flex;
+    align-items: center;
+}
+
+.playerSelectContainer .my-toggle {
+    background: var(--my-toggle-background);
+    width: var(--my-toggle-width);
+    height: var(--my-toggle-height);
+    border-radius: var(--my-toggle-height);
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+}
+
+.playerSelectContainer .toggle-label {
+    font-size: 12px;
+    max-width: 80px;
+    overflow-wrap: break-word;
+    text-align: right;
+    margin-right: 8px;
+}
+
+/* // ------ On off texts */
+.playerSelectContainer .my-toggle-text {
+    width: calc(var(--my-toggle-width) / 2);
+    position: absolute;
+    height: var(--my-toggle-height);
+    font-size: 0.6rem;
+    color: var(--my-toggle-text-color);
+    top: 0;
+    display: flex;
+    line-height: var(--my-toggle-orb-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    left: var(--my-toggle-gap-size);
+    font-weight: 500;
+}
+
+.playerSelectContainer .my-toggle-text:nth-child(2) {
+    left: calc(50% - var(--my-toggle-gap-size));
+    right: var(--my-toggle-gap-size);
+}
+
+/* // ------ Toggle orb */
+.playerSelectContainer .my-toggle-orb {
+    width: var(--my-toggle-orb-size);
+    height: var(--my-toggle-orb-size);
+    display: block;
+    border-radius: var(--my-toggle-orb-size);
+    top: var(--my-toggle-gap-size);
+    right: var(--my-toggle-gap-size);
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    position: absolute;
+    background: var(--my-toggle-orb-background-color);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* // ------ The checkbox */
+.playerSelectContainer input[type="checkbox"] {
+    height: var(--my-toggle-width);
+    width: var(--my-toggle-width);
+    margin: 0;
+    background: var(--my-toggle-active-background-color);
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+}
+
+.playerSelectContainer input[type="checkbox"]:checked {
+    background: var(--my-toggle-inactive-background-color);
+}
+
+.playerSelectContainer input[type="checkbox"]:checked~.my-toggle-orb {
+    transform: translateX(calc(-1 * (calc(var(--my-toggle-width) - var(--my-toggle-orb-size))) + calc(var(--my-toggle-gap-size) * 2)));
+}
+
+.playerSelectContainer input[type="checkbox"]:checked~.my-toggle-text.yes {
+    visibility: hidden;
+}
+
+.playerSelectContainer input[type="checkbox"]:not(:checked)~.my-toggle-text.no {
+    visibility: hidden;
+}

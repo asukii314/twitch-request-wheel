@@ -2,6 +2,7 @@ import AuthenticatedApp from './AuthenticatedApp';
 import {HashRouter, Route, Switch} from "react-router-dom";
 import JackboxGameList from './JackboxGameList';
 import LoginScreen from './LoginScreen';
+import OptionsList from './OptionsList';
 import React, {Component} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -21,6 +22,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/login" component={LoginScreen} />
                         <Route exact path="/gamelist" component={JackboxGameList}/>
+                        <Route exact path="/options" component={OptionsList}/>
                         <Route path="/" component={AuthenticatedApp}/>
                     </Switch>
                 </div>
