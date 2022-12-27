@@ -21,6 +21,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
   <MessageHandler
     access_token="foo"
     addGameRequest={[Function]}
+    allowGameRequests={true}
     caniplayHandler={[Function]}
     changeNextGameIdx={[Function]}
     channel="sirgoosewell"
@@ -51,8 +52,10 @@ exports[`MainScreen render should render the game request screen 1`] = `
     onMessage={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
+    previousGames={Array []}
     setNextGame={[Function]}
     startGame={[Function]}
+    toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
   />
   <div
@@ -64,6 +67,8 @@ exports[`MainScreen render should render the game request screen 1`] = `
     <h4>
       <span
         className="subheading-game fade-in-delay"
+        onClick={[Function]}
+        title="Click to disable game requests."
       >
         Type e.g. 
         <b>
@@ -187,6 +192,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
   <MessageHandler
     access_token="foo"
     addGameRequest={[Function]}
+    allowGameRequests={true}
     caniplayHandler={[Function]}
     changeNextGameIdx={[Function]}
     channel="sirgoosewell"
@@ -217,8 +223,10 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     onMessage={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
+    previousGames={Array []}
     setNextGame={[Function]}
     startGame={[Function]}
+    toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
   />
   <div
@@ -230,6 +238,8 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     <h4>
       <span
         className="subheading-game fade-in-delay"
+        onClick={[Function]}
+        title="Click to disable game requests."
       >
         Type e.g. 
         <b>
@@ -382,6 +392,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
   <MessageHandler
     access_token="foo"
     addGameRequest={[Function]}
+    allowGameRequests={true}
     caniplayHandler={[Function]}
     changeNextGameIdx={[Function]}
     channel="sirgoosewell"
@@ -412,8 +423,10 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     onMessage={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
+    previousGames={Array []}
     setNextGame={[Function]}
     startGame={[Function]}
+    toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
   />
   <div

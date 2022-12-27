@@ -114,7 +114,7 @@ export default class OptionsMenu extends Component {
                                 Logout
                             </button>
                         </li>
-                        <li className="mb-1 fs-4 d-grid text-start">
+                        <li className="mb-1 fs-4 d-grid text-start d-none">
                             <button className="btn game-list" onClick={this.toggleGameList}>
                                 Game List
                             </button>

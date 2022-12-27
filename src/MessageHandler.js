@@ -41,6 +41,13 @@ const easterEggRequests = [
             'lewmon',
             'sirfar3lewmon'
         ]
+    }, {
+        RequestName: 'DoTheDew',
+        Response: 'dewinbDTD dewinbDance dewinbGIR dewinbDance dewinbGIR dewinbDance dewinbDTD',
+        Variants: [
+            'dothedew',
+            'dewinblack'
+        ]
     }
 ];
 
@@ -63,11 +70,22 @@ export default class MessageHandler extends Component {
 
     componentDidMount = (props) => {
         const client = this.getTwitchClient(this.props);
+        this.client = client;
 
         client.on('message', this.onMessage);
         client.connect();
 
         return this.getGameList(rawJackboxGameList, client);
+    }
+
+    componentWillUnmount = (props) => {
+        try {
+            if (this.client) {
+                this.client.disconnect();
+            }
+        } catch(e) {
+            console.log('Error', e);
+        }
     }
 
     getGameList = async (yamlGameList, client) => {
@@ -123,6 +141,58 @@ export default class MessageHandler extends Component {
             if (gameObj) {
                 this.sendMessage(`/me @${username}, ${gameObj.name} is a ${gameObj.partyPack} game.`);
             }
+            return true;
+        }
+
+        //========= list requested games =========
+        if (message === "!onthewheel" || message === "!gamesqueued" || message === "!listrequests") {
+            let pipe = ' ⋆ '; // TODO: allow delimiter to be user configurable
+            let requests = Object.values(this.props.messages).map(m => m.name).sort();
+            try {
+                this.sendMessage(`/me @${username}, Requested: ${requests.join(pipe)}.`);
+            } catch(e) {
+                this.sendMessage(`/me @${username}, Sorry, there are waaaaaaaaay too many games to list and something went wrong. :p`);
+                console.log(e);
+            }
+
+            // TODO: handle if over character count
+            // TODO: determine if this is actually necessary
+            /* this.sendMessage(`/me @${username}, NOTE: There are a loooooot of games to list, but hopefully this next message won't break:`);
+            this.sendMessage(`/me @${username}, Requested: ${requests}.`);
+            requestsArr.reduce((list, str) => {
+                const last = list[list.length-1];
+                if (last && last.total + str.length <= 480) {
+                    last.total += str.length;
+                    last.words.push(str);
+                } else {
+                    list.push({
+                        total: str.length,
+                        words: [str]
+                    });
+                }
+                return list;
+            }, [])
+            .map(({ words }) => words.join(pipe));*/
+            return true;
+        }
+
+        //========= enable / disable requests =========
+        if ( message.startsWith("!enablerequests")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            this.props?.toggleAllowGameRequests(true);
+            this.sendMessage(`/me @${username}, requests have now been enabled! Type "!request" followed by the game you want to play.`);
+            return true;
+        }
+        if ( message.startsWith("!disablerequests")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            this.props?.toggleAllowGameRequests(false);
+            this.sendMessage(`/me @${username}, requests have now been disabled.`);
             return true;
         }
 
@@ -186,9 +256,9 @@ export default class MessageHandler extends Component {
         }
 
         //========= player queue management =========
-        if (message === "!caniplay" || message === "!new") {
+        if (message === "!caniplay" || message === "!new" || (message === "!dew" && this.props?.channel?.toLowerCase() === 'dewinblack')) {
             this.props?.caniplayHandler(username, {
-                sendConfirmationMsg: message !== "!new"
+                sendConfirmationMsg: message === "!caniplay"
             });
             return true;
         }
@@ -210,6 +280,20 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        if ( message.startsWith("!removeuser")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            const exitingUser = message.replace("!removeuser", "").replace("@", "").trim();
+            if (exitingUser === "") {
+                this.sendMessage(`/me @${username}, please specify the user who will be removed in the next game: for example, !removeuser @dewinblack`);
+                return true;
+            }
+            this.props?.playerExitHandler(exitingUser);
+            return true;
+        }
+
         if (message === "!leave" || message === "!murd") {
             this.props?.playerExitHandler(username);
             return true;
@@ -224,6 +308,14 @@ export default class MessageHandler extends Component {
 
         if (message === "!open") {
             if (this.isModOrBroadcaster(username)) {
+                this.props?.openQueueHandler();
+            }
+            return true;
+        }
+
+        if (message === "!clearopen") {
+            if (this.isModOrBroadcaster(username)) {
+                this.props?.clearQueueHandler();
                 this.props?.openQueueHandler();
             }
             return true;
@@ -316,15 +408,39 @@ export default class MessageHandler extends Component {
             return;
         }
 
+        if (msg.trim() === "!lastgame") {
+            if (this.props.previousGames && this.props.previousGames.length > 0) {
+                let previous = this.props.previousGames[0].name;
+                if (this.props.previousGames.length > 1) {
+                    previous += `, followed by ${this.props.previousGames[1].name}`
+                    for (let i = 2; i < this.props.previousGames.length; i++) {
+                        previous += `, and ${this.props.previousGames[i].name}`
+                    }
+                }
+                this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)
+            } else {
+                this.sendMessage(`/me @${tags.username}, no games have been played yet - feel free to !request one :)`)
+            }
+
+            return;
+        }
+
         const cleanedMsg = msg.trim().toLowerCase();
         if (this.checkForMiscCommands(cleanedMsg, tags.username)) return;
         const gameObj = this.checkForGameCommand(cleanedMsg, tags.username);
         if (!gameObj) return;
 
         if (this.props.messages[gameObj.longName]) {
-            this.sendMessage(`/me @${tags.username}, ${gameObj.name} has already been requested!`);
+            let requestedBy = (this.props.messages[gameObj.longName].username === tags.username) ? 'yourself, silly' : this.props.messages[gameObj.longName].username;
+            this.sendMessage(`/me @${tags.username}, ${gameObj.name} has already been requested by ${requestedBy}!`);
             return;
         }
+
+        if (this.props.allowGameRequests !== true) {
+            this.sendMessage(`/me @${tags.username}, game requests are currently paused at the moment, please try again later.`);
+            return;
+        }
+
 
         let prevRequestedGameName = null;
         for (const metadata of Object.values(this.props.messages)) {

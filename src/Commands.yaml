@@ -17,6 +17,13 @@
   - On-screen equivalent: The very next game is shown in the "Up Next" box in the top left; all other upcoming games are shown in the History box in the bottom left.
   - Variants: n/a
 
+!lastgame
+  - Example: !lastgame
+  - Available to: Everyone
+  - What it does: Responds with a list of the most recently played games.
+  - On-screen equivalent: Previously played games are shown in the History box in the bottom left.
+  - Variants: n/a
+
 !nextgamefwd
   - Example: !nextgamefwd
   - Available to: Mods + broadcaster
@@ -37,6 +44,26 @@
   - What it does: Allows the specified game to "jump the queue", inserting it the queue as the next game to be played ahead of any other games that won the wheel spin. (If other games were previously inserted with this command, however, those will still have priority.)
   - On-screen equivalent: n/a
   - Variants: !setnextgame
+
+!disablerequests
+  - Example: !disablerequests
+  - Available to: Mods + broadcaster
+  - What it does: Prevents game requests from being received and added to the wheel. Existing requests will remain unaffected.
+  - On-screen equivalent: Click the yellow subheader on the requests screen.
+
+!enablerequests
+  - Example: !enablerequests
+  - Available to: Mods + broadcaster
+  - What it does: Allows for game requests to be received again after using the !disablerequests command.
+  - On-screen equivalent: Click the empty space on the requests screen previously occupied by the yellow subheader.
+
+!onthewheel
+  - Example: !onthewheel
+  - Available to: Everyone
+  - What it does: Lists all of the requested games currently on the wheel.
+  - On-screen equivalent: n/a
+  - Variants: !gamesqueued, !listrequests
+
 
 ###
 ### Seat Requests
@@ -63,6 +90,13 @@
   - On-screen equivalent: Hover over the user's name card and click the "X" button that appears on its far right side.
   - Variants: !murd
 
+!clearopen
+  - Example: !clearopen
+  - Available to: Mods + broadcaster
+  - What it does: Switches to the seat selection screen and removes all users from the board. Compatible with the PlayWithViewers bot, for streamers who use that to send multiple room code whispers.
+  - On-screen equivalent: Click the "Open seat requests" button at the bottom of the "Up Next" box in the top left of the screen, and then removing all redeemed users.
+  - Variants: n/a
+
 !open
   - Example: !open
   - Available to: Mods + broadcaster
@@ -82,7 +116,14 @@
   - Available to: Mods + broadcaster
   - What it does: Adds the specified user to the top of the "playing" column on the board, with a star beside their name. (If the queue is closed, they will be added to the top of the "interested" column instead, for consideration.)
   - On-screen equivalent: n/a
-  - Variants: !priorityseat
+  - Variants: !priorityseat, !adduser
+
+!removeuser
+  - Example: !removeuser @dewinblack
+  - Available to: Mods + broadcaster
+  - What it does: Removes the specified user from the "playing" column on the board.
+  - On-screen equivalent: n/a
+  - Variants: n/a
 
 !clear
   - Example: !clear
@@ -108,7 +149,6 @@
   - What it does: Responds with a URL to a page displaying all requestable games, and the "short-forms" you can use to request them (e.g. "MSM" for Monster Seeking Monster).
   - On-screen equivalent: n/a
   - Variants: !gameslist
-
 !whichpack
   - Example: !whichpack TMP 2
   - Available to: Everyone
