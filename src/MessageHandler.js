@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import PropTypes from 'prop-types';
 import rawJackboxGameList from './JackboxGames.yaml';
 import YAML from 'yaml'
 const fetch = require('node-fetch');
@@ -52,6 +53,16 @@ const easterEggRequests = [
 ];
 
 export default class MessageHandler extends Component {
+    static get propTypes() {
+        return {
+            toggleAllowGameRequests: PropTypes.func,
+        };
+    }
+    static get defaultProps() {
+        return {
+            toggleAllowGameRequests: () => void 0,
+        };
+    }
     constructor(props) {
         super(props);
         this.state = {

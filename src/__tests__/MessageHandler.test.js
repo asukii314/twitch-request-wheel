@@ -401,6 +401,7 @@ describe('MessageHandler', () => {
             let component = new MessageHandler(props);
             component.props.caniplayHandler = jest.fn().mockReturnValue(true);
             component.props.playerExitHandler = jest.fn();
+            component.props.toggleAllowGameRequests = jest.fn();
             jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
             jest.spyOn(component, 'findGame')
                 .mockReturnValueOnce(null)
@@ -440,6 +441,7 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!open', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!close', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!startgame', username)).toBeTruthy();
+            expect(component.checkForMiscCommands('!dew', username)).toBeUndefined();
             expect(component.checkForMiscCommands('!undefinedcommand', username)).not.toBeDefined();
 
             expect(component.findGame).toHaveBeenCalledWith('Quiplash 3', username);
@@ -496,6 +498,7 @@ describe('MessageHandler', () => {
                         .mockReturnValueOnce(0)
                         .mockReturnValueOnce(1)
                         .mockReturnValueOnce(2),
+                    toggleAllowGameRequests: jest.fn(),
                     upcomingGames: []
                 })
             );
@@ -578,7 +581,8 @@ describe('MessageHandler', () => {
                     playerExitHandler: jest.fn(),
                     startGame: jest.fn()
                         .mockReturnValueOnce(true)
-                        .mockReturnValueOnce(false)
+                        .mockReturnValueOnce(false),
+                    toggleAllowGameRequests: jest.fn(),
                 })
             );
             jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
@@ -607,17 +611,27 @@ describe('MessageHandler', () => {
 
             expect(component.checkForMiscCommands('!redeem', username)).toBeTruthy();
 
+            expect(component.checkForMiscCommands('!listrequests', username)).toBeTruthy();
+
+            expect(component.checkForMiscCommands('!disablerequests', username)).toBeTruthy();
+            expect(component.checkForMiscCommands('!enablerequests', username)).toBeTruthy();
+
+            expect(component.checkForMiscCommands('!removeuser @jenn_kitty', username)).toBeTruthy();
+
+            expect(component.checkForMiscCommands('!clearopen', username)).toBeTruthy();
+
             expect(component.checkForMiscCommands('!undefinedcommand', username)).not.toBeDefined();
 
 
             expect(component.props.caniplayHandler).toHaveBeenCalledTimes(3);
-            expect(component.props.playerExitHandler).toHaveBeenCalledTimes(2);
-            expect(component.props.clearQueueHandler).toHaveBeenCalledTimes(1);
-            expect(component.props.openQueueHandler).toHaveBeenCalledTimes(1);
+            expect(component.props.playerExitHandler).toHaveBeenCalledTimes(3);
+            expect(component.props.clearQueueHandler).toHaveBeenCalledTimes(2);
+            expect(component.props.openQueueHandler).toHaveBeenCalledTimes(2);
             expect(component.props.closeQueueHandler).toHaveBeenCalledTimes(1);
+            expect(component.props.toggleAllowGameRequests).toHaveBeenCalledTimes(2);
 
 
-            expect(component.sendMessage).toHaveBeenCalledTimes(5);
+            expect(component.sendMessage).toHaveBeenCalledTimes(8);
             expect(component.sendMessage.mock.calls[0][0]).toEqual(
                 expect.stringContaining('please specify the user who has redeemed a priority seat'),
             );
@@ -633,6 +647,27 @@ describe('MessageHandler', () => {
             expect(component.sendMessage.mock.calls[4][0]).toEqual(
                 expect.stringContaining('this command is no longer supported'),
             );
+            expect(component.sendMessage.mock.calls[5][0]).toEqual(
+                expect.stringContaining(`@sirfarewell, Requested:`),
+            );
+            expect(component.sendMessage.mock.calls[6][0]).toEqual(
+                expect.stringContaining('requests have now been disabled'),
+            );
+            expect(component.sendMessage.mock.calls[7][0]).toEqual(
+                expect.stringContaining('requests have now been enabled'),
+            );
+        });
+        test('calls easter eggs', () => {
+            let component = new MessageHandler(
+                Object.assign({}, props, {
+                    caniplayHandler: jest.fn(),
+                    channel: 'dewinblack',
+                })
+            );
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+            const username = 'sirfarewell';
+            expect(component.checkForMiscCommands('!dew', username)).toBeTruthy();
+            expect(component.props.caniplayHandler).toHaveBeenCalledTimes(1);
         });
     });
     describe('findGame', () => {
