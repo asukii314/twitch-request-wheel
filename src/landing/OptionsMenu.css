@@ -11,3 +11,7 @@
 #options-menu .options-menu-items .btn:hover {
     opacity:1;
 }
+#options-menu .options-menu-items .btn.btn-link,
+#options-menu .options-menu-items .btn.btn-link:hover {
+    text-decoration: none;
+}

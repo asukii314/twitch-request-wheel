@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Collapse, Offcanvas} from 'react-bootstrap';
+import {Button, Collapse, Offcanvas} from 'react-bootstrap';
 import OptionsGameList from './OptionsGameList';
 import PropTypes from 'prop-types';
 import {version} from '../../package.json';
@@ -110,20 +110,20 @@ export default class OptionsMenu extends Component {
                 <Offcanvas.Body>
                     <ul className="options-menu-items list-unstyled pb-3 px-4">
                         <li className="mb-1 fs-4 d-grid text-start">
-                            <button className="btn logout" onClick={this.props.onLogout}>
+                            <Button variant="link" className="btn logout" onClick={this.props.onLogout}>
                                 Logout
-                            </button>
+                            </Button>
                         </li>
                         <hr />
                         <li className="mb-1 fs-4 d-grid text-start">
-                            <button className="btn reload-game-list" onClick={this.props.reloadGameList}>
+                            <Button variant="link" className="btn reload-game-list" onClick={this.props.reloadGameList}>
                                 Refresh Game List
-                            </button>
+                            </Button>
                         </li>
                         <li className="mb-1 fs-4 d-grid text-start d-none">
-                            <button className="btn game-list" onClick={this.toggleGameList}>
+                            <Button variant="link" className="btn game-list" onClick={this.toggleGameList}>
                                 Game List
-                            </button>
+                            </Button>
                         </li>
                         <Collapse in={this.state.showGameList}>
                             <div>
