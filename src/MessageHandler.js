@@ -109,7 +109,11 @@ export default class MessageHandler extends Component {
             },
             channels: [
                 props.channel
-            ]
+            ],
+            options: {
+                skipUpdatingEmotesets: true,
+                updateEmotesetsTimer: 0
+            }
         });
     }
 
@@ -476,6 +480,10 @@ export default class MessageHandler extends Component {
         this.setState({
             allowedGames
         });
+    }
+    reloadGameList = () => {
+        let gameList = `${rawJackboxGameList}?${Date.now()}`;
+        return this.getGameList(gameList, this.client);
     }
 
     render() {

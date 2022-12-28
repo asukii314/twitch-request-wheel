@@ -539,6 +539,7 @@ export default class MainScreen extends Component {
                 {gameSelectedModal}
                 <OptionsMenu
                     gamesList={gamesList}
+                    reloadGameList={this.messageHandler?.reloadGameList}
                     onHide={this.toggleOptionsMenu}
                     onLogout={this.props.onLogout}
                     showOptionsMenu={this.state.showOptionsMenu} />
