@@ -17,11 +17,11 @@ exports[`Sidebar render renders page with content 1`] = `
       <div
         class="card-body sidebar-up-next-panel"
       >
-        <h6
+        <h5
           class="card-title mb-2 fw-bolder"
         >
           Trivia Murder Party 2
-        </h6>
+        </h5>
         <div
           class="card-subtitle mb-2 fs-7 fst-italic text-light"
           style="--bs-text-opacity: 0.75;"
