@@ -31,7 +31,9 @@ exports[`GameRequest render should render component using quiplash data 1`] = `
       <div
         class="game-request-body"
       >
-        <div>
+        <div
+          class="text-truncate"
+        >
           <b>
             Quiplash
           </b>
@@ -82,7 +84,9 @@ exports[`GameRequest render should render component using survive the internet d
       <div
         className="game-request-body"
       >
-        <div>
+        <div
+          className="text-truncate"
+        >
           <b>
             Survive The Internet
           </b>
@@ -137,7 +141,9 @@ exports[`GameRequest render should render component using survive the internet d
       <div
         className="game-request-body"
       >
-        <div>
+        <div
+          className="text-truncate"
+        >
           <b>
             Survive The Internet
           </b>
@@ -192,7 +198,9 @@ exports[`GameRequest render should render component using survive the internet d
       <div
         className="game-request-body"
       >
-        <div>
+        <div
+          className="text-truncate"
+        >
           <b>
             Survive The Internet
           </b>

@@ -94,7 +94,7 @@ class GameRequest extends Component {
                 <div className="game-request-wrapper fade-in">
                 	<div id="baseDiv" className={`game-request ${cardStatus}`}>
                 		<div className="game-request-body">
-                		    <div>
+                		    <div className="text-truncate">
                                 <b>
                                     {this.props.metadata.name}
                                 </b>
