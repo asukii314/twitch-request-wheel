@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OptionsMenu createDebugMenuItems should return array of items 1`] = `
+Array [
+  <DropdownItem
+    eventKey="item"
+    href={null}
+    onClick={[MockFunction]}
+  >
+    item
+  </DropdownItem>,
+]
+`;
+
+exports[`OptionsMenu createMenuItems should return array of items 1`] = `
+Array [
+  <li
+    className="mb-1 fs-4 d-grid text-start item"
+  >
+    <Button
+      active={false}
+      className="btn"
+      disabled={false}
+      onClick={[MockFunction]}
+      variant="link"
+    >
+      item
+    </Button>
+  </li>,
+]
+`;
+
+exports[`OptionsMenu render should render with menu items 1`] = `
+<Offcanvas
+  autoFocus={true}
+  backdrop={true}
+  enforceFocus={true}
+  id="options-menu"
+  keyboard={true}
+  onHide={[Function]}
+  placement="end"
+  renderStaticNode={false}
+  restoreFocus={true}
+  scroll={false}
+  show={true}
+>
+  <OffcanvasHeader
+    closeButton={true}
+    closeLabel="Close"
+    closeVariant="white"
+  >
+    <OffcanvasTitle
+      as="h2"
+      className="fw-bold"
+    >
+      Options
+    </OffcanvasTitle>
+  </OffcanvasHeader>
+  <OffcanvasBody>
+    <ul
+      className="options-menu-items list-unstyled pb-3 px-4"
+    >
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn logout"
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          Logout
+        </Button>
+      </li>
+      <hr />
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn reload-game-list"
+          disabled={false}
+          variant="link"
+        >
+          Refresh Game List
+        </Button>
+      </li>
+      <li
+        className="mb-1 fs-4 d-grid text-start d-none"
+      >
+        <Button
+          active={false}
+          className="btn game-list"
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          Game List
+        </Button>
+      </li>
+      <ForwardRef
+        appear={false}
+        getDimensionValue={[Function]}
+        in={true}
+        mountOnEnter={false}
+        timeout={300}
+        unmountOnExit={false}
+      >
+        <div>
+          <OptionsGameList
+            allowedGames={null}
+            validGames={null}
+          />
+        </div>
+      </ForwardRef>
+    </ul>
+    <div
+      className="position-absolute bottom-0 start-0 end-0 pb-3 text-center"
+      id="options-debug-menu-items"
+    >
+      <Dropdown
+        align="start"
+        autoClose={true}
+        drop="up-centered"
+        id="dropdown-debug-menu-items"
+        navbar={false}
+        variant="link"
+      >
+        <DropdownToggle
+          id="dropdown-debug-menu-items-toggle"
+          size="sm"
+          variant="link"
+        >
+          version 0.7.1
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          variant="dark"
+        >
+          <DropdownHeader
+            role="heading"
+          >
+            Debug Options
+          </DropdownHeader>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+  </OffcanvasBody>
+</Offcanvas>
+`;
+
+exports[`OptionsMenu render should render without error 1`] = `
+<Offcanvas
+  autoFocus={true}
+  backdrop={true}
+  enforceFocus={true}
+  id="options-menu"
+  keyboard={true}
+  onHide={[Function]}
+  placement="end"
+  renderStaticNode={false}
+  restoreFocus={true}
+  scroll={false}
+  show={false}
+>
+  <OffcanvasHeader
+    closeButton={true}
+    closeLabel="Close"
+    closeVariant="white"
+  >
+    <OffcanvasTitle
+      as="h2"
+      className="fw-bold"
+    >
+      Options
+    </OffcanvasTitle>
+  </OffcanvasHeader>
+  <OffcanvasBody>
+    <ul
+      className="options-menu-items list-unstyled pb-3 px-4"
+    >
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn logout"
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          Logout
+        </Button>
+      </li>
+      <hr />
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn reload-game-list"
+          disabled={false}
+          variant="link"
+        >
+          Refresh Game List
+        </Button>
+      </li>
+      <li
+        className="mb-1 fs-4 d-grid text-start d-none"
+      >
+        <Button
+          active={false}
+          className="btn game-list"
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          Game List
+        </Button>
+      </li>
+      <ForwardRef
+        appear={false}
+        getDimensionValue={[Function]}
+        in={false}
+        mountOnEnter={false}
+        timeout={300}
+        unmountOnExit={false}
+      >
+        <div>
+          <OptionsGameList
+            allowedGames={null}
+            validGames={null}
+          />
+        </div>
+      </ForwardRef>
+    </ul>
+    <div
+      className="position-absolute bottom-0 start-0 end-0 pb-3 text-center"
+      id="options-debug-menu-items"
+    >
+      <Dropdown
+        align="start"
+        autoClose={true}
+        drop="up-centered"
+        id="dropdown-debug-menu-items"
+        navbar={false}
+        variant="link"
+      >
+        <DropdownToggle
+          id="dropdown-debug-menu-items-toggle"
+          size="sm"
+          variant="link"
+        >
+          version 0.7.1
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          variant="dark"
+        >
+          <DropdownHeader
+            role="heading"
+          >
+            Debug Options
+          </DropdownHeader>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+  </OffcanvasBody>
+</Offcanvas>
+`;

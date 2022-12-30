@@ -198,6 +198,41 @@ export default class MainScreen extends Component {
             validGames: this.messageHandler?.state.validGames
         }
     }
+    getOptionsDebugMenu = () => {
+        return [{
+            label: 'Load Mock Game Requests',
+            onClick: () => {
+                return this.setState(
+                    Object.assign({}, fakeStates.MainScreen)
+                );
+            }
+        },{
+            label: 'Load Mock Game & Player Requests',
+            onClick: () => {
+                return this.setState(
+                    Object.assign({}, fakeStates.MainScreen, {
+                        showPlayerSelect: true
+                    }),
+                    () => {
+                        this.playerSelector?.setState(fakeStates.PlayerSelect);
+                    }
+                );
+            }
+        }, {
+            label: 'Debug Env',
+            onClick: () => {
+                console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
+                console.log('process.env.REACT_APP_REDIRECT_URI:', process.env.REACT_APP_REDIRECT_URI);
+            }
+        }];
+    }
+
+    getOptionsMenu = () => {
+        return [{
+            label: 'Reload Game List',
+            onClick: this.messageHandler?.reloadGameList
+        }];
+    }
 
     onWheelSpun = (gameLongName) => {
         const gameRequestObj = this.state.messages?.[gameLongName];
@@ -461,6 +496,10 @@ export default class MainScreen extends Component {
                     getActivity={this.chatActivity.getStatusPromise}
                 />
             );
+            // reduce spin time for large number of game requests
+            let upDuration = (gameRequestArray.length < 5) ? 100 : (500 / gameRequestArray.length);
+            let downDuration = (gameRequestArray.length < 5) ? 1000 : (5000 / gameRequestArray.length);
+
             rightColumn = (
                 <div className="right-column" width="50px">
                     <div className="wheel-wrapper fade-in">
@@ -471,8 +510,8 @@ export default class MainScreen extends Component {
                             onFinished={this.onWheelSpun}
                             isOnlyOnce={false}
                             size={250}
-                            upDuration={100}
-                            downDuration={1000}
+                            upDuration={upDuration}
+                            downDuration={downDuration}
                             primaryColor={"white"}
                             contrastColor={"black"}
                             fontFamily={"Arial"}
@@ -539,6 +578,8 @@ export default class MainScreen extends Component {
                 {gameSelectedModal}
                 <OptionsMenu
                     gamesList={gamesList}
+                    debugItems={this.getOptionsDebugMenu()}
+                    items={this.getOptionsMenu()}
                     reloadGameList={this.messageHandler?.reloadGameList}
                     onHide={this.toggleOptionsMenu}
                     onLogout={this.props.onLogout}

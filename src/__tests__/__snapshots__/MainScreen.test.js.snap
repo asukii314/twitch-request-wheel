@@ -158,11 +158,35 @@ exports[`MainScreen render should render the game request screen 1`] = `
     </div>
   </div>
   <OptionsMenu
+    debugItems={
+      Array [
+        Object {
+          "label": "Load Mock Game Requests",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Load Mock Game & Player Requests",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Debug Env",
+          "onClick": [Function],
+        },
+      ]
+    }
     gamesList={
       Object {
         "allowedGames": undefined,
         "validGames": undefined,
       }
+    }
+    items={
+      Array [
+        Object {
+          "label": "Reload Game List",
+          "onClick": undefined,
+        },
+      ]
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
@@ -358,11 +382,35 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     </div>
   </React.Fragment>
   <OptionsMenu
+    debugItems={
+      Array [
+        Object {
+          "label": "Load Mock Game Requests",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Load Mock Game & Player Requests",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Debug Env",
+          "onClick": [Function],
+        },
+      ]
+    }
     gamesList={
       Object {
         "allowedGames": undefined,
         "validGames": undefined,
       }
+    }
+    items={
+      Array [
+        Object {
+          "label": "Reload Game List",
+          "onClick": undefined,
+        },
+      ]
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
@@ -471,11 +519,35 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     </div>
   </div>
   <OptionsMenu
+    debugItems={
+      Array [
+        Object {
+          "label": "Load Mock Game Requests",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Load Mock Game & Player Requests",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Debug Env",
+          "onClick": [Function],
+        },
+      ]
+    }
     gamesList={
       Object {
         "allowedGames": undefined,
         "validGames": undefined,
       }
+    }
+    items={
+      Array [
+        Object {
+          "label": "Reload Game List",
+          "onClick": undefined,
+        },
+      ]
     }
     onHide={[Function]}
     onLogout={[MockFunction]}

@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Button, Collapse, Offcanvas} from 'react-bootstrap';
+import {Button, Collapse, Dropdown, Offcanvas} from 'react-bootstrap';
 import OptionsGameList from './OptionsGameList';
 import PropTypes from 'prop-types';
 import {version} from '../../package.json';
@@ -9,7 +9,9 @@ import './OptionsMenu.css';
 export default class OptionsMenu extends Component {
     static get propTypes() {
         return {
+            debugItems: PropTypes.array,
             gamesList: PropTypes.object,
+            items: PropTypes.array,
             onHide: PropTypes.func,
             onLogout: PropTypes.func,
             showOptionsMenu: PropTypes.bool
@@ -17,10 +19,12 @@ export default class OptionsMenu extends Component {
     }
     static get defaultProps() {
         return {
+            debugItems: [],
             gamesList: {
                 allowedGames: null,
                 validGames: null
             },
+            items: [],
             onHide: () => void 0,
             onLogout: () => void 0,
             showOptionsMenu: false
@@ -33,6 +37,67 @@ export default class OptionsMenu extends Component {
             showGameList: false
         }
         this.toggleGameList = this.toggleGameList.bind(this);
+    }
+
+    /*
+
+    Expects the following object schema:
+    {
+        label: string,  // required
+        onClick: func,
+        listItemClassName: string,
+        btnClassName: string
+    }
+
+
+     */
+    createDebugMenuItems = (items) => {
+        if (!items) {
+            return [];
+        }
+        return items.map((i, idx) => {
+            if (!i || !i.label) {
+                return null;
+            }
+            if (/^[-]+$/i.test(i.label)) {
+                return (
+                    <Dropdown.Divider eventKey={i.idx} />
+                );
+            }
+            return (
+                <Dropdown.Item
+                    eventKey={i.label}
+                    href={i.href || null}
+                    key={`${idx} ${i.label}`}
+                    onClick={i.onClick || null}
+                >
+                    {i.label}
+                </Dropdown.Item>
+            );
+        }).filter(i => i);
+    }
+
+    createMenuItems = (items) => {
+        if (!items) {
+            return [];
+        }
+        return items.map(i => {
+            if (!i.label) {
+                return null;
+            }
+            let liClassName = (!i.listItemClassName)
+                ? i.label.trim().toLowerCase().split(' ').join('-')
+                : i.listItemClassName;
+            let listItemClassNames = ['mb-1 fs-4 d-grid text-start', liClassName || null].filter(n => n).join(' ');
+            let btnClassNames = ['btn', i.btnClassName || null].filter(n => n).join(' ');
+            return (
+                <li className={listItemClassNames} key={i.label}>
+                    <Button variant="link" className={btnClassNames} onClick={i.onClick || null}>
+                        {i.label}
+                    </Button>
+                </li>
+            );
+        }).filter(i => i);
     }
 
     toggleGameList = () => {
@@ -95,6 +160,9 @@ export default class OptionsMenu extends Component {
     // }
 
     render() {
+        let {debugItems, items} = this.props;
+        let optionMenuItems = this.createMenuItems(items);
+        let debugMenuItems = this.createDebugMenuItems(debugItems);
 
         return (
             <Offcanvas
@@ -115,6 +183,7 @@ export default class OptionsMenu extends Component {
                             </Button>
                         </li>
                         <hr />
+                        {optionMenuItems}
                         <li className="mb-1 fs-4 d-grid text-start">
                             <Button variant="link" className="btn reload-game-list" onClick={this.props.reloadGameList}>
                                 Refresh Game List
@@ -134,9 +203,18 @@ export default class OptionsMenu extends Component {
                         </Collapse>
                     </ul>
 
-
-                    <div className="position-absolute bottom-0 start-50 translate-middle-x pb-3">
-                        <small>{`version ${version}`}</small>
+                    <div id="options-debug-menu-items" className="position-absolute bottom-0 start-0 end-0 pb-3 text-center">
+                        <Dropdown id="dropdown-debug-menu-items" drop="up-centered" variant="link">
+                            <Dropdown.Toggle id="dropdown-debug-menu-items-toggle" size="sm" variant="link">
+                                {`version ${version}`}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu variant="dark">
+                                <Dropdown.Header>
+                                    Debug Options
+                                </Dropdown.Header>
+                                {debugMenuItems}
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>

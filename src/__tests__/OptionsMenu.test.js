@@ -15,6 +15,36 @@ describe('OptionsMenu', () => {
             expect(props.showOptionsMenu).toBe(false);
         });
     });
+    describe('createDebugMenuItems', () => {
+        test('should return array of items', () => {
+            const component = new OptionsMenu();
+            let items = [{
+                label: 'item',
+                onClick: jest.fn()
+            }];
+            let menuItems = component.createDebugMenuItems(items);
+            expect(menuItems).toMatchSnapshot();
+        });
+        test('should return an empty array', () => {
+            const component = new OptionsMenu();
+            expect(component.createDebugMenuItems()).toEqual([]);
+        });
+    });
+    describe('createMenuItems', () => {
+        test('should return array of items', () => {
+            const component = new OptionsMenu();
+            let items = [{
+                label: 'item',
+                onClick: jest.fn()
+            }];
+            let menuItems = component.createMenuItems(items);
+            expect(menuItems).toMatchSnapshot();
+        });
+        test('should return an empty array', () => {
+            const component = new OptionsMenu();
+            expect(component.createMenuItems()).toEqual([]);
+        });
+    });
     describe('toggleGameList', () => {
         test('should change state.showGameList', () => {
             const component = new OptionsMenu();
@@ -33,6 +63,22 @@ describe('OptionsMenu', () => {
 
             let component = shallowRenderer.getRenderOutput();
             expect(component).not.toBe(null);
+            expect(component).toMatchSnapshot();
+            shallowRenderer.unmount();
+        });
+        test('should render with menu items', () => {
+            const props = {
+                showOptionsMenu: true
+            };
+            const shallowRenderer = createRenderer();
+            shallowRenderer.render(<OptionsMenu {...props} />);
+            let instance = shallowRenderer.getMountedInstance();
+            instance.setState({
+                showGameList: true
+            });
+            let component = shallowRenderer.getRenderOutput();
+            expect(component).not.toBe(null);
+            expect(component).toMatchSnapshot();
             shallowRenderer.unmount();
         });
     });
