@@ -187,7 +187,7 @@ export default class PlayerSelect extends Component {
 
     renderPlayerCard = (userObj, id, curColumn) => {
         return (
-            <div key={id} className="player-card lh-sm fs-6">
+            <div key={id} className="player-card lh-sm fs-5">
                 <div className="player-card-username">
                     {userObj.isPrioritySeat === true && <img src={star} alt="Priority seat redemption"/>}
                     <p className='player-name' style={{
