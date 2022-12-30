@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GameRequest getTooltipContent should call getTooltipActivityStatusClassName 1`] = `
+<Tooltip
+  id="game-request-tooltip"
+  placement="right"
+>
+  <span
+    className="tooltipText"
+  >
+    Requested 
+    0
+     by 
+    Sir Goosewell
+    <span
+      className="status active"
+    />
+  </span>
+</Tooltip>
+`;
+
 exports[`GameRequest render should render component using quiplash data 1`] = `
 <div>
   <div
@@ -12,7 +31,13 @@ exports[`GameRequest render should render component using quiplash data 1`] = `
       <div
         class="game-request-body"
       >
-        Quiplash
+        <div>
+          <b>
+            Quiplash
+          </b>
+           
+          <small />
+        </div>
         <div
           class="options"
         >
@@ -57,7 +82,15 @@ exports[`GameRequest render should render component using survive the internet d
       <div
         className="game-request-body"
       >
-        Survive The Internet (Party Pack 4)
+        <div>
+          <b>
+            Survive The Internet
+          </b>
+           
+          <small>
+            (Pack 4)
+          </small>
+        </div>
         <div
           className="options"
         >
@@ -104,7 +137,15 @@ exports[`GameRequest render should render component using survive the internet d
       <div
         className="game-request-body"
       >
-        Survive The Internet (Party Pack 4)
+        <div>
+          <b>
+            Survive The Internet
+          </b>
+           
+          <small>
+            (Pack 4)
+          </small>
+        </div>
         <div
           className="options"
         >
@@ -151,7 +192,15 @@ exports[`GameRequest render should render component using survive the internet d
       <div
         className="game-request-body"
       >
-        Survive The Internet (Party Pack 4)
+        <div>
+          <b>
+            Survive The Internet
+          </b>
+           
+          <small>
+            (Pack 4)
+          </small>
+        </div>
         <div
           className="options"
         >

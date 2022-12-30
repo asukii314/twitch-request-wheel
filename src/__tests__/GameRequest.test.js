@@ -12,8 +12,9 @@ jest.mock('crypto', () => ({
 
 describe('GameRequest', () => {
     const propsQuip = {
-        gameName: 'Quiplash',
+        gameName: 'Quiplash (Standalone)',
         metadata: {
+            name: 'Quiplash',
             chosen: true,
             locked: true,
             time: Date.now()-300000,
@@ -35,6 +36,16 @@ describe('GameRequest', () => {
     		chosen: false
     	}
     };
+    describe('deleteRequest', () => {
+        test('should call props.onDelete', () => {
+            const component = new GameRequest({
+                onDelete: jest.fn().mockImplementation(()=>{})
+            });
+            jest.spyOn(component.props, 'onDelete').mockImplementation(()=>{});
+            component.deleteRequest();
+            expect(component.props.onDelete).toHaveBeenCalledTimes(1);
+        });
+    });
     describe('getFormattedTimeDiff', () => {
         test('should return the expected response', async () => {
             let component = new GameRequest({
@@ -52,6 +63,45 @@ describe('GameRequest', () => {
         });
     });
 
+    describe('getTooltipContent', () => {
+        test('should call getTooltipActivityStatusClassName', () => {
+            const component = new GameRequest({
+                metadata: {
+                    chosen: true,
+                    locked: true,
+                    time: Date.now(),
+                    username: 'Sir Goosewell'
+                }
+            });
+            jest.spyOn(component, 'getTooltipActivityStatusClassName').mockReturnValue('active');
+            let container = component.getTooltipContent();
+            expect(component.getTooltipActivityStatusClassName).toHaveBeenCalledTimes(1);
+            expect(container).toMatchSnapshot();
+        });
+    });
+    describe('getTooltipActivityStatusClassName', () => {
+        test('should return the correct class names', () => {
+            const component = new GameRequest();
+            expect(component.getTooltipActivityStatusClassName()).toBe('');
+            component.state.activityStatus = ActivityStatus.ACTIVE;
+            expect(component.getTooltipActivityStatusClassName()).toBe('active');
+            component.state.activityStatus = ActivityStatus.DISCONNECTED;
+            expect(component.getTooltipActivityStatusClassName()).toBe('disconnected');
+            component.state.activityStatus = ActivityStatus.IDLE;
+            expect(component.getTooltipActivityStatusClassName()).toBe('idle');
+        });
+    });
+    describe('toggleLock', () => {
+        test('should call props.toggleLock', () => {
+            const component = new GameRequest({
+                toggleLock: jest.fn().mockImplementation(()=>{}),
+                gameName: 'Job Job'
+            });
+            jest.spyOn(component.props, 'toggleLock').mockImplementation(()=>{});
+            component.toggleLock();
+            expect(component.props.toggleLock).toHaveBeenCalledTimes(1);
+        });
+    });
     describe('updateStatus', () => {
         test('should throw an error if caught', async () => { // part of a new "catch and release" program
             let component = new GameRequest({

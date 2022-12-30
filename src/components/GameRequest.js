@@ -15,7 +15,6 @@ class GameRequest extends Component {
 
         this.deleteRequest = this.deleteRequest.bind(this);
         this.getFormattedTimeDiff = this.getFormattedTimeDiff.bind(this);
-        this.getTooltipContents = this.getTooltipContents.bind(this);
         this.toggleLock = this.toggleLock.bind(this);
         this.updateStatus = this.updateStatus.bind(this);
     }
@@ -40,45 +39,33 @@ class GameRequest extends Component {
             }
         }
         return `${timeDiff} ${unit}${timeDiff === 1 ? "" : "s"} ago`;
-    }
+    };
 
-    getTooltipContents = () => {
-        let statusClass = "";
+    getTooltipContent = (props) => (
+        <Tooltip id="game-request-tooltip" {...props}>
+            <span className="tooltipText">
+                Requested {this.state.timeDiff} by {this.props.metadata.username}
+                <span className={`status ${this.getTooltipActivityStatusClassName()}`} />
+            </span>
+        </Tooltip>
+    );
+
+    getTooltipActivityStatusClassName = () => {
         switch (this.state.activityStatus) {
             case ActivityStatus.ACTIVE:
-                statusClass = "active";
-                break;
+                return "active";
             case ActivityStatus.IDLE:
-                statusClass = "idle";
-                break;
+                return "idle";
             case ActivityStatus.DISCONNECTED:
-                statusClass = "disconnected";
-                break;
+                return "disconnected";
             default:
                 // no data back yet; don't show an activity status indicator at all
-                break;
+                return '';
         }
-
-        // return (`
-        //     <div class="tooltip">
-        //         <p class="tooltipText">
-        //             Requested ${this.state.timeDiff} by ${this.props.metadata.username}
-        //         </p>
-        //         <div class="status ${statusClass}" />
-        //     </div>`
-        // );
-        return (
-            <div className="tooltip">
-                <p className="tooltipText">
-                    Requested {this.state.timeDiff} by {this.props.metadata.username}
-                </p>
-                <div className={`status ${statusClass}`} />
-            </div>
-        );
     }
 
     toggleLock = () => {
-        this.props.toggleLock(this.props.gameName)
+        return this.props.toggleLock(this.props.gameName);
     }
 
     updateStatus = async () => {
@@ -99,21 +86,26 @@ class GameRequest extends Component {
         const lockClassName = this.props.metadata.locked ? 'lock locked' : 'lock unlocked';
         const cardStatus = this.props.metadata.chosen ? 'chosen' : 'pending';
 
-        const renderTooltip = (props) => (
-            <Tooltip id="game-request-tooltip" {...props}>
-                <span className="tooltipText">Requested {this.state.timeDiff} by {this.props.metadata.username}</span>
-            </Tooltip>
-        );
-
         return (
             <OverlayTrigger
                 placement="left"
-                overlay={renderTooltip}
+                overlay={this.getTooltipContent}
                 onEnter={this.updateStatus}>
                 <div className="game-request-wrapper fade-in">
                 	<div id="baseDiv" className={`game-request ${cardStatus}`}>
                 		<div className="game-request-body">
-                		    {this.props.gameName}
+                		    <div>
+                                <b>
+                                    {this.props.metadata.name}
+                                </b>
+                                {' '}
+                                <small>
+                                    {
+                                        !!this.props.metadata.partyPack &&
+                                        `(${this.props.metadata.partyPack.replace('Party Pack', 'Pack')})`
+                                    }
+                                </small>
+                            </div>
                 			<div className="options">
                 				<img src={lock} alt="lock" className={lockClassName} onClick={this.toggleLock} />
                 				<button type='button' className="deleteButton" onClick={this.deleteRequest}>X</button>
