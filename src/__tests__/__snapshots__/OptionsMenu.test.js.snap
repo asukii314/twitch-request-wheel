@@ -132,7 +132,7 @@ exports[`OptionsMenu render should render with menu items 1`] = `
           size="sm"
           variant="link"
         >
-          version 0.7.1
+          version 0.0.0
         </DropdownToggle>
         <DropdownMenu
           flip={true}
@@ -252,7 +252,7 @@ exports[`OptionsMenu render should render without error 1`] = `
           size="sm"
           variant="link"
         >
-          version 0.7.1
+          version 0.0.0
         </DropdownToggle>
         <DropdownMenu
           flip={true}

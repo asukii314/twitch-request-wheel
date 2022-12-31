@@ -2,6 +2,13 @@ import OptionsMenu from '../landing/OptionsMenu';
 import {createRenderer} from 'react-test-renderer/shallow';
 import React from 'react';
 
+jest.mock('../../package.json', () => {
+    return {
+        ...jest.requireActual('../../package.json'),
+        version: '0.0.0'
+    };
+});
+
 describe('OptionsMenu', () => {
     describe('initial state', () => {
         test('should return the base state object and default props', () => {
