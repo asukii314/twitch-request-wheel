@@ -88,6 +88,10 @@ export default class Sidebar extends Component {
         return this.props.changeNextGameIdx(-1);
     }
 
+    removeSelectedGameFromHistory = () => {
+        return this.props.removeSelectedGameFromHistory();
+    }
+
     printGame = (idx) => {
         if (idx === this.props.nextGameIdx) {
             return (
@@ -128,6 +132,7 @@ export default class Sidebar extends Component {
                     </div>
                     <div className="card-body sidebar-up-next-panel">
                         <h5 className="card-title mb-2 fw-bolder">
+                            <button className="cancel-game" onClick={this.removeSelectedGameFromHistory}>X</button>
                             {this.getNextGameName()}
                         </h5>
                         <div className="card-subtitle mb-2 fs-7 fst-italic text-light"

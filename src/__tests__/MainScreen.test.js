@@ -3,15 +3,15 @@ import {createRenderer} from 'react-test-renderer/shallow';
 import MainScreen from '../landing/MainScreen';
 import React from 'react';
 
-jest.mock('react-wheel-of-prizes', () => {
-    return {
-        __esModule: true,
-        default: () => {
-            return <></>;
-        },
-        WheelComponent: 'WheelComponent'
-    };
-});
+// jest.mock('react-wheel-of-prizes', () => {
+//     return {
+//         __esModule: true,
+//         default: () => {
+//             return <></>;
+//         },
+//         WheelComponent: 'WheelComponent'
+//     };
+// });
 
 describe('MainScreen', () => {
     const props = {

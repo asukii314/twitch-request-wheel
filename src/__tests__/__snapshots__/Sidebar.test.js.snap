@@ -20,6 +20,11 @@ exports[`Sidebar render renders page with content 1`] = `
         <h5
           class="card-title mb-2 fw-bolder"
         >
+          <button
+            class="cancel-game"
+          >
+            X
+          </button>
           Trivia Murder Party 2
         </h5>
         <div

@@ -53,6 +53,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
     previousGames={Array []}
+    removeSelectedGameFromHistory={[Function]}
     setNextGame={[Function]}
     startGame={[Function]}
     toggleAllowGameRequests={[Function]}
@@ -89,6 +90,45 @@ exports[`MainScreen render should render the game request screen 1`] = `
         moveNextGameBack={[Function]}
         moveNextGameFwd={[Function]}
         nextGameIdx={0}
+        parentState={
+          Object {
+            "allowGameRequests": true,
+            "colors": Array [
+              "#99b0fc",
+              "#b4a7f2",
+              "#beb4f7",
+              "#cdc2f9",
+              "#aec2f9",
+              "#a4d6f9",
+            ],
+            "counter": 1,
+            "gameSelected": null,
+            "history": Array [],
+            "messages": Object {
+              "Survive The Internet (Party Pack 4)": Object {
+                "Max players": 8,
+                "Min players": 3,
+                "Variants": Array [
+                  "survive",
+                  "survive the internet",
+                  "sti",
+                ],
+                "chosen": false,
+                "locked": false,
+                "longName": "Survive The Internet (Party Pack 4)",
+                "name": "Survive The Internet",
+                "partyPack": "Party Pack 4",
+                "time": 1627509347466,
+                "username": "dcpesses",
+              },
+            },
+            "nextGameIdx": 0,
+            "showOptionsMenu": false,
+            "showOptionsModal": false,
+            "showPlayerSelect": false,
+          }
+        }
+        removeSelectedGameFromHistory={[Function]}
         requestMode="game"
         togglePlayerSelect={[Function]}
       />
@@ -190,6 +230,44 @@ exports[`MainScreen render should render the game request screen 1`] = `
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
+    parentState={
+      Object {
+        "allowGameRequests": true,
+        "colors": Array [
+          "#99b0fc",
+          "#b4a7f2",
+          "#beb4f7",
+          "#cdc2f9",
+          "#aec2f9",
+          "#a4d6f9",
+        ],
+        "counter": 1,
+        "gameSelected": null,
+        "history": Array [],
+        "messages": Object {
+          "Survive The Internet (Party Pack 4)": Object {
+            "Max players": 8,
+            "Min players": 3,
+            "Variants": Array [
+              "survive",
+              "survive the internet",
+              "sti",
+            ],
+            "chosen": false,
+            "locked": false,
+            "longName": "Survive The Internet (Party Pack 4)",
+            "name": "Survive The Internet",
+            "partyPack": "Party Pack 4",
+            "time": 1627509347466,
+            "username": "dcpesses",
+          },
+        },
+        "nextGameIdx": 0,
+        "showOptionsMenu": false,
+        "showOptionsModal": false,
+        "showPlayerSelect": false,
+      }
+    }
     showOptionsMenu={false}
   />
 </div>
@@ -248,6 +326,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
     previousGames={Array []}
+    removeSelectedGameFromHistory={[Function]}
     setNextGame={[Function]}
     startGame={[Function]}
     toggleAllowGameRequests={[Function]}
@@ -284,6 +363,60 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
         moveNextGameBack={[Function]}
         moveNextGameFwd={[Function]}
         nextGameIdx={0}
+        parentState={
+          Object {
+            "allowGameRequests": true,
+            "colors": Array [
+              "#99b0fc",
+              "#b4a7f2",
+              "#beb4f7",
+              "#cdc2f9",
+              "#aec2f9",
+              "#a4d6f9",
+            ],
+            "counter": 1,
+            "gameSelected": Object {
+              "Max players": 8,
+              "Min players": 3,
+              "Variants": Array [
+                "survive",
+                "survive the internet",
+                "sti",
+              ],
+              "chosen": false,
+              "locked": false,
+              "longName": "Survive The Internet (Party Pack 4)",
+              "name": "Survive The Internet",
+              "partyPack": "Party Pack 4",
+              "time": 1627509347466,
+              "username": "dcpesses",
+            },
+            "history": Array [],
+            "messages": Object {
+              "Survive The Internet (Party Pack 4)": Object {
+                "Max players": 8,
+                "Min players": 3,
+                "Variants": Array [
+                  "survive",
+                  "survive the internet",
+                  "sti",
+                ],
+                "chosen": false,
+                "locked": false,
+                "longName": "Survive The Internet (Party Pack 4)",
+                "name": "Survive The Internet",
+                "partyPack": "Party Pack 4",
+                "time": 1627509347466,
+                "username": "dcpesses",
+              },
+            },
+            "nextGameIdx": 0,
+            "showOptionsMenu": false,
+            "showOptionsModal": false,
+            "showPlayerSelect": false,
+          }
+        }
+        removeSelectedGameFromHistory={[Function]}
         requestMode="game"
         togglePlayerSelect={[Function]}
       />
@@ -414,6 +547,59 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
+    parentState={
+      Object {
+        "allowGameRequests": true,
+        "colors": Array [
+          "#99b0fc",
+          "#b4a7f2",
+          "#beb4f7",
+          "#cdc2f9",
+          "#aec2f9",
+          "#a4d6f9",
+        ],
+        "counter": 1,
+        "gameSelected": Object {
+          "Max players": 8,
+          "Min players": 3,
+          "Variants": Array [
+            "survive",
+            "survive the internet",
+            "sti",
+          ],
+          "chosen": false,
+          "locked": false,
+          "longName": "Survive The Internet (Party Pack 4)",
+          "name": "Survive The Internet",
+          "partyPack": "Party Pack 4",
+          "time": 1627509347466,
+          "username": "dcpesses",
+        },
+        "history": Array [],
+        "messages": Object {
+          "Survive The Internet (Party Pack 4)": Object {
+            "Max players": 8,
+            "Min players": 3,
+            "Variants": Array [
+              "survive",
+              "survive the internet",
+              "sti",
+            ],
+            "chosen": false,
+            "locked": false,
+            "longName": "Survive The Internet (Party Pack 4)",
+            "name": "Survive The Internet",
+            "partyPack": "Party Pack 4",
+            "time": 1627509347466,
+            "username": "dcpesses",
+          },
+        },
+        "nextGameIdx": 0,
+        "showOptionsMenu": false,
+        "showOptionsModal": false,
+        "showPlayerSelect": false,
+      }
+    }
     showOptionsMenu={false}
   />
 </div>
@@ -472,6 +658,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
     previousGames={Array []}
+    removeSelectedGameFromHistory={[Function]}
     setNextGame={[Function]}
     startGame={[Function]}
     toggleAllowGameRequests={[Function]}
@@ -506,6 +693,45 @@ exports[`MainScreen render should render the player selection screen 1`] = `
         moveNextGameBack={[Function]}
         moveNextGameFwd={[Function]}
         nextGameIdx={0}
+        parentState={
+          Object {
+            "allowGameRequests": true,
+            "colors": Array [
+              "#99b0fc",
+              "#b4a7f2",
+              "#beb4f7",
+              "#cdc2f9",
+              "#aec2f9",
+              "#a4d6f9",
+            ],
+            "counter": 1,
+            "gameSelected": null,
+            "history": Array [],
+            "messages": Object {
+              "Survive The Internet (Party Pack 4)": Object {
+                "Max players": 8,
+                "Min players": 3,
+                "Variants": Array [
+                  "survive",
+                  "survive the internet",
+                  "sti",
+                ],
+                "chosen": false,
+                "locked": false,
+                "longName": "Survive The Internet (Party Pack 4)",
+                "name": "Survive The Internet",
+                "partyPack": "Party Pack 4",
+                "time": 1627509347466,
+                "username": "dcpesses",
+              },
+            },
+            "nextGameIdx": 0,
+            "showOptionsMenu": false,
+            "showOptionsModal": false,
+            "showPlayerSelect": true,
+          }
+        }
+        removeSelectedGameFromHistory={[Function]}
         requestMode="seat"
         togglePlayerSelect={[Function]}
       />
@@ -551,6 +777,44 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
+    parentState={
+      Object {
+        "allowGameRequests": true,
+        "colors": Array [
+          "#99b0fc",
+          "#b4a7f2",
+          "#beb4f7",
+          "#cdc2f9",
+          "#aec2f9",
+          "#a4d6f9",
+        ],
+        "counter": 1,
+        "gameSelected": null,
+        "history": Array [],
+        "messages": Object {
+          "Survive The Internet (Party Pack 4)": Object {
+            "Max players": 8,
+            "Min players": 3,
+            "Variants": Array [
+              "survive",
+              "survive the internet",
+              "sti",
+            ],
+            "chosen": false,
+            "locked": false,
+            "longName": "Survive The Internet (Party Pack 4)",
+            "name": "Survive The Internet",
+            "partyPack": "Party Pack 4",
+            "time": 1627509347466,
+            "username": "dcpesses",
+          },
+        },
+        "nextGameIdx": 0,
+        "showOptionsMenu": false,
+        "showOptionsModal": false,
+        "showPlayerSelect": true,
+      }
+    }
     showOptionsMenu={false}
   />
 </div>

@@ -184,7 +184,7 @@ export default class OptionsMenu extends Component {
                         </li>
                         <hr />
                         {optionMenuItems}
-                        <li className="mb-1 fs-4 d-grid text-start">
+                        <li className="mb-1 fs-4 d-grid text-start d-none">
                             <Button variant="link" className="btn reload-game-list" onClick={this.props.reloadGameList}>
                                 Refresh Game List
                             </Button>

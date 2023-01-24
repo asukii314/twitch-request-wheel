@@ -283,6 +283,15 @@ export default class MainScreen extends Component {
         })
     }
 
+    removeSelectedGameFromHistory = () => {
+        let {history, nextGameIdx} = this.state;
+        delete history[nextGameIdx];
+        this.setState({
+            history: history.filter(h => !!h),
+            nextGameIdx: Math.max(-1, Math.min(nextGameIdx, history.length))
+        });
+    }
+
     onMessage = (message, user, metadata) => {
         this.chatActivity.updateLastMessageTime(user);
     }
@@ -551,6 +560,7 @@ export default class MainScreen extends Component {
                     closeQueueHandler={this.routeCloseQueueRequest}
                     clearQueueHandler={this.routeClearQueueRequest}
                     toggleAllowGameRequests={this.toggleAllowGameRequests}
+                    removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
                     ref={this.setMessageHandlerRef}
                 />
                 <div className="left-column fade-in">
@@ -561,6 +571,7 @@ export default class MainScreen extends Component {
                     <div className="left-column-body">
                         <Sidebar
                             changeGameOrder={this.changeGameOrder}
+                            parentState={this.state}
                             history={this.state.history}
                             nextGameIdx={this.state.nextGameIdx}
                             changeNextGameIdx={this.changeNextGameIdx}
@@ -568,6 +579,7 @@ export default class MainScreen extends Component {
                             moveNextGameBack={this.moveNextGameBack}
                             togglePlayerSelect={this.togglePlayerSelect}
                             requestMode={this.state.showPlayerSelect ? 'seat' : 'game'}
+                            removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
                         />
                         <div className="left-column-inner-body">
                             {innerContent}
@@ -578,6 +590,7 @@ export default class MainScreen extends Component {
                 {gameSelectedModal}
                 <OptionsMenu
                     gamesList={gamesList}
+                    parentState={this.state}
                     debugItems={this.getOptionsDebugMenu()}
                     items={this.getOptionsMenu()}
                     reloadGameList={this.messageHandler?.reloadGameList}

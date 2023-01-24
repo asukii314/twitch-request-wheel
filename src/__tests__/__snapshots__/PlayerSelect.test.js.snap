@@ -12,7 +12,7 @@ exports[`PlayerSelect render should render component 1`] = `
     >
       <label
         className="toggle-label form-check-label"
-        for="reserve-seat-for-streamer"
+        htmlFor="reserve-seat-for-streamer"
       >
         Reserve seat for streamer?
       </label>
@@ -97,7 +97,7 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
     >
       <label
         className="toggle-label form-check-label"
-        for="reserve-seat-for-streamer"
+        htmlFor="reserve-seat-for-streamer"
       >
         Reserve seat for streamer?
       </label>
@@ -501,7 +501,7 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
     >
       <label
         className="toggle-label form-check-label"
-        for="reserve-seat-for-streamer"
+        htmlFor="reserve-seat-for-streamer"
       >
         Reserve seat for streamer?
       </label>

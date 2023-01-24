@@ -207,7 +207,7 @@ export default class PlayerSelect extends Component {
     renderStreamerSeatToggle = () => {
         return (
             <div className="toggle-streamer-seat">
-                <label className="toggle-label form-check-label" for="reserve-seat-for-streamer">
+                <label className="toggle-label form-check-label" htmlFor="reserve-seat-for-streamer">
                     Reserve seat for streamer?
                 </label>
                 <div className="form-check form-switch">
