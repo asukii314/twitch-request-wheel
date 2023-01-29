@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import ChatActivity, { ActivityStatus } from '../ChatActivity';
-import ConfettiExplosion from '@reonomy/react-confetti-explosion';
+import ConfettiExplosion from 'react-confetti-explosion';
 import GameRequest from '../components/GameRequest'
 import MessageHandler from '../MessageHandler';
 import OptionsMenu from './OptionsMenu';
