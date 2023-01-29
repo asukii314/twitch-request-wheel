@@ -64,6 +64,12 @@
   - On-screen equivalent: n/a
   - Variants: !gamesqueued, !listrequests
 
+!removegame
+  - Example: !removegame
+  - Available to: Mods + broadcaster
+  - What it does: Removes the currently selected game from the game history.
+  - On-screen equivalent: Hover over the "Up Next" game and click the "X" to the right of the name.
+
 
 ###
 ### Seat Requests

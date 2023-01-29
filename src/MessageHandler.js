@@ -211,6 +211,22 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        //========= remove selected game =========
+
+        if ( message.startsWith("!removegame")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            let prevSelectedGame = this.props?.removeSelectedGameFromHistory()
+            if (prevSelectedGame === false) {
+                this.sendMessage(`/me @${username}, a game must be selected before you can remove it.`);
+            } else {
+                this.sendMessage(`/me @${username}, the next game, ${prevSelectedGame.name}, has been removed.`);
+            }
+            return true;
+        }
+
         //========= advance next game =========
         if (message === "!advancenextgame" || message === "!nextgamefwd" || message === "!nextgameforward") {
             if (!this.isModOrBroadcaster(username)) {

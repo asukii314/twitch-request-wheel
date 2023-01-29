@@ -285,11 +285,16 @@ export default class MainScreen extends Component {
 
     removeSelectedGameFromHistory = () => {
         let {history, nextGameIdx} = this.state;
+        if (!history[nextGameIdx]) {
+            return false;
+        }
+        let currGame = history[nextGameIdx];
         delete history[nextGameIdx];
         this.setState({
             history: history.filter(h => !!h),
             nextGameIdx: Math.max(-1, Math.min(nextGameIdx, history.length))
         });
+        return currGame;
     }
 
     onMessage = (message, user, metadata) => {
@@ -541,27 +546,27 @@ export default class MainScreen extends Component {
                     </button>
                 </nav>
                 <MessageHandler
+                    access_token={this.props.access_token}
                     addGameRequest={this.addGameRequest}
                     allowGameRequests={this.state.allowGameRequests}
-                    setNextGame={this.setNextGame}
-                    changeNextGameIdx={this.changeNextGameIdx}
-                    startGame={this.startGame}
-                    messages={this.state.messages}
-                    channel={this.props.channel}
-                    modList={this.props.modList}
-                    access_token={this.props.access_token}
-                    onMessage={this.onMessage}
-                    onDelete={this.removeGame}
-                    previousGames={this.state.history.slice(0, this.state.nextGameIdx)}
-                    upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
                     caniplayHandler={this.routePlayRequest}
-                    playerExitHandler={this.routeLeaveRequest}
-                    openQueueHandler={this.routeOpenQueueRequest}
-                    closeQueueHandler={this.routeCloseQueueRequest}
+                    changeNextGameIdx={this.changeNextGameIdx}
+                    channel={this.props.channel}
                     clearQueueHandler={this.routeClearQueueRequest}
-                    toggleAllowGameRequests={this.toggleAllowGameRequests}
-                    removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
+                    closeQueueHandler={this.routeCloseQueueRequest}
+                    messages={this.state.messages}
+                    modList={this.props.modList}
+                    onDelete={this.removeGame}
+                    onMessage={this.onMessage}
+                    openQueueHandler={this.routeOpenQueueRequest}
+                    playerExitHandler={this.routeLeaveRequest}
+                    previousGames={this.state.history.slice(0, this.state.nextGameIdx)}
                     ref={this.setMessageHandlerRef}
+                    removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
+                    setNextGame={this.setNextGame}
+                    startGame={this.startGame}
+                    toggleAllowGameRequests={this.toggleAllowGameRequests}
+                    upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
                 />
                 <div className="left-column fade-in">
 
