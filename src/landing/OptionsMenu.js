@@ -170,9 +170,16 @@ export default class OptionsMenu extends Component {
     // }
 
     render() {
-        let {debugItems, items} = this.props;
+        let {debugItems, items, settings, onSettingsUpdate} = this.props;
         let optionMenuItems = this.createMenuItems(items);
         let debugMenuItems = this.createDebugMenuItems(debugItems);
+
+        let toggleSubRequests = () => {
+            let value = typeof settings?.enableSubRequests === 'boolean'
+                ? !settings?.enableSubRequests
+                : true;
+            onSettingsUpdate({enableSubRequests: value});
+        }
 
         return (
             <Offcanvas
@@ -201,6 +208,12 @@ export default class OptionsMenu extends Component {
                         <Collapse in={this.state.showSettingsMenu}>
                             <div id="settings-menu" className="accordion-dark accordion accordion-flush">
                                 <div className="accordion-body">
+                                    <Button variant="link" className="btn settings-menu"
+                                        onClick={toggleSubRequests}
+                                        title="Allows subscribers to make additional game requests when enabled."
+                                    >
+                                    {(!settings?.enableSubRequests) ? 'Enable' : 'Disable'} Sub Requests
+                                </Button>
                                 </div>
                             </div>
                         </Collapse>

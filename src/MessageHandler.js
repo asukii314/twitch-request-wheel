@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 const tmi = require('tmi.js');
 
 const GAME_REQUEST_COMMAND = "!request";
+const GAME_SUBREQUEST_COMMAND = "!subrequest";
 
 const easterEggRequests = [
     {
@@ -418,7 +419,25 @@ export default class MessageHandler extends Component {
         return this.findGame(requestedGame, username);
     }
 
+    checkForSubrequest = (message, username, subscriber) => {
+        if (!message.startsWith(GAME_SUBREQUEST_COMMAND)) return;
+        if (subscriber !== true) {
+            this.sendMessage(`/me @${username}, you must be a subscriber to use this command.`);
+            return null;
+        }
+        // if subrequests > maxsubrequests
+        const requestedGame = message.replace(GAME_SUBREQUEST_COMMAND, "").trim();
+
+        if (requestedGame === "") {
+            this.sendMessage(`/me @${username}, please specify the game you would like to request: for example, !request TMP 2`);
+            return null;
+        }
+
+        return this.findGame(requestedGame, username);
+    }
+
     onMessage = (target, tags, msg, self) => {
+        console.log({target, tags, msg, self});
         if (self) return;
         this.props.onMessage(msg, tags.username, tags)
 
@@ -458,7 +477,12 @@ export default class MessageHandler extends Component {
 
         const cleanedMsg = msg.trim().toLowerCase();
         if (this.checkForMiscCommands(cleanedMsg, tags.username)) return;
-        const gameObj = this.checkForGameCommand(cleanedMsg, tags.username);
+        let gameObj = this.checkForGameCommand(cleanedMsg, tags.username);
+        let isSubRequest = false;
+        if (!gameObj && this.props.settings?.enableSubRequests) {
+            isSubRequest = true;
+            gameObj = this.checkForSubrequest(cleanedMsg, tags.username, tags.subscriber);
+        }
         if (!gameObj) return;
 
         if (this.props.messages[gameObj.longName]) {
@@ -484,6 +508,8 @@ export default class MessageHandler extends Component {
         if (prevRequestedGameName) {
             if (this.props.channel === tags.username) {
                 this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
+            } else if (isSubRequest /* && requests <= max requests */) {
+                this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue. Your previous game request(s) weren't deleted, since subrequests are enabled. :)`);
             } else {
                 this.props.onDelete(prevRequestedGameName);
                 this.sendMessage(`/me @${tags.username}, your previous request of ${prevRequestedGameName} has been replaced with ${gameObj.name}.`);
