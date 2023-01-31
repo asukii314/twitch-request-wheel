@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import MainScreen from './landing/MainScreen';
+import LoadSpinner from './components/LoadSpinner';
 import {Redirect, withRouter} from "react-router-dom";
 import queryString from 'query-string'
 const fetch = require('node-fetch');
@@ -141,9 +142,15 @@ class AuthenticatedApp extends Component {
         if (this.state.failed_login) {
             return (<Redirect to="/login"/>);
         }
-        let mainContent;
+        let mainContent = (
+            <h2>
+                <LoadSpinner />
+                <br />
+                Loading...
+            </h2>
+        );
         let classNames = ['authenticated-app'];
-        if (this.state.username) {
+        if (this.state.username && this.state.modList) {
             mainContent = (
                 <MainScreen
                     channel={this.state.username}
