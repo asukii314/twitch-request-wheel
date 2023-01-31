@@ -19,6 +19,18 @@ export default class MainScreen extends Component {
     constructor(props){
         super(props);
         this.chatActivity = new ChatActivity(this.props.channel)
+        let settings = {};
+        try {
+            let savedSettings = localStorage.getItem('__settings');
+            if (!!savedSettings) {
+                settings = JSON.parse(savedSettings);
+                console.log('Saved settings loaded!');
+            } else {
+                console.log('No saved settings detected, using defaults.');
+            }
+        } catch (e) {
+            console.log('Unable to load or read saved settings, using defaults.');
+        }
         this.state = {
             allowGameRequests: true,
             gameSelected: null,
@@ -27,6 +39,7 @@ export default class MainScreen extends Component {
             counter: 0,
             history: [],
             nextGameIdx: 0,
+            settings,
             showOptionsMenu: false,
             showOptionsModal: false,
             showPlayerSelect: false
@@ -301,6 +314,17 @@ export default class MainScreen extends Component {
         this.chatActivity.updateLastMessageTime(user);
     }
 
+    onSettingsUpdate = (nextSettings) => {
+        let {settings} = this.state;
+        localStorage.setItem('__settings', JSON.stringify(
+            Object.assign({}, settings, nextSettings)
+        ));
+        console.log('Settings saved:', settings);
+        return this.setState(prevState => ({
+            settings: Object.assign({}, settings, nextSettings)
+        }));
+    }
+
     toggleAllowGameRequests = (allow=null) => {
         let {allowGameRequests} = this.state;
         if (allow !== null && typeof allow !== 'object') {
@@ -564,6 +588,8 @@ export default class MainScreen extends Component {
                     ref={this.setMessageHandlerRef}
                     removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
                     setNextGame={this.setNextGame}
+                    settings={this.state.settings}
+                    onSettingsUpdate={this.onSettingsUpdate}
                     startGame={this.startGame}
                     toggleAllowGameRequests={this.toggleAllowGameRequests}
                     upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
@@ -601,6 +627,8 @@ export default class MainScreen extends Component {
                     reloadGameList={this.messageHandler?.reloadGameList}
                     onHide={this.toggleOptionsMenu}
                     onLogout={this.props.onLogout}
+                    onSettingsUpdate={this.onSettingsUpdate}
+                    settings={this.state.settings}
                     showOptionsMenu={this.state.showOptionsMenu} />
             </div>
         )

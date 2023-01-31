@@ -14,7 +14,8 @@ export default class OptionsMenu extends Component {
             items: PropTypes.array,
             onHide: PropTypes.func,
             onLogout: PropTypes.func,
-            showOptionsMenu: PropTypes.bool
+            showOptionsMenu: PropTypes.bool,
+            showSettingsMenu: PropTypes.bool
         };
     }
     static get defaultProps() {
@@ -27,7 +28,8 @@ export default class OptionsMenu extends Component {
             items: [],
             onHide: () => void 0,
             onLogout: () => void 0,
-            showOptionsMenu: false
+            showOptionsMenu: false,
+            showSettingsMenu: false
         };
     }
 
@@ -37,6 +39,7 @@ export default class OptionsMenu extends Component {
             showGameList: false
         }
         this.toggleGameList = this.toggleGameList.bind(this);
+        this.toggleSettingsMenu = this.toggleSettingsMenu.bind(this);
     }
 
     /*
@@ -108,6 +111,13 @@ export default class OptionsMenu extends Component {
         })
     }
 
+    toggleSettingsMenu = () => {
+        this.setState((state) => {
+            return {
+                showSettingsMenu: !state.showSettingsMenu
+            }
+        })
+    }
     // renderGameOptions() {
     //     let {allowedGames, validGames} = this.props.gamesList;
     //     let gamePackList = [].concat(...Object.entries(validGames).map((packData, idx) => {
@@ -183,6 +193,17 @@ export default class OptionsMenu extends Component {
                             </Button>
                         </li>
                         <hr />
+                        <li className="mb-1 fs-4 d-grid text-start">
+                            <Button variant="link" className="btn settings-menu" onClick={this.toggleSettingsMenu}>
+                                Settings
+                            </Button>
+                        </li>
+                        <Collapse in={this.state.showSettingsMenu}>
+                            <div id="settings-menu" className="accordion-dark accordion accordion-flush">
+                                <div className="accordion-body">
+                                </div>
+                            </div>
+                        </Collapse>
                         {optionMenuItems}
                         <li className="mb-1 fs-4 d-grid text-start d-none">
                             <Button variant="link" className="btn reload-game-list" onClick={this.props.reloadGameList}>
