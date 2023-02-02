@@ -728,12 +728,14 @@ Standalone:
       - songlo
       - songeo
 
-  Whatamusic:
+  Whatsamusic:
     Min players: 2
     Max players: 50
     Variants:
+      - whatsamusic
       - whatamusic
       - wam
+      - watsamusic
       - watamusic
       - what a music
       - whatsmusic
