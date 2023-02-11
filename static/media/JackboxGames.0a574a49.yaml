@@ -751,3 +751,12 @@ Standalone:
       - cashword
       - crashwrd
       - cw
+
+  Nitro Stream Racing:
+    Min players: 2
+    Max players: 100
+    Variants:
+      - nitro stream racing
+      - nitro racing
+      - stream racing
+      - nitro
