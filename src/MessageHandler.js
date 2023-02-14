@@ -287,7 +287,7 @@ export default class MessageHandler extends Component {
         }
 
         //========= player queue management =========
-        if (message === "!caniplay" || message === "!new" || (message === "!dew" && this.props?.channel?.toLowerCase() === 'dewinblack')) {
+        if (message === "!caniplay" || message.startsWith("!new") || (message.toLowerCase().startsWith("!dew") && this.props?.channel?.toLowerCase() === 'dewinblack')) {
             this.props?.caniplayHandler(username, {
                 sendConfirmationMsg: message === "!caniplay"
             });
