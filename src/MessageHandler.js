@@ -56,11 +56,13 @@ const easterEggRequests = [
 export default class MessageHandler extends Component {
     static get propTypes() {
         return {
+            logUserMessages: PropTypes.bool,
             toggleAllowGameRequests: PropTypes.func,
         };
     }
     static get defaultProps() {
         return {
+            logUserMessages: false,
             toggleAllowGameRequests: () => void 0,
         };
     }
@@ -137,7 +139,7 @@ export default class MessageHandler extends Component {
     checkForMiscCommands = (message, username) => {
         //========= general =========
         if (message.startsWith("!gamelist") || message.startsWith("!gameslist")) {
-            this.sendMessage(`/me @${username}, click here for a list of valid Jackbox games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
+            this.sendMessage(`/me @${username}, click here for a list of available games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
             return true;
         }
 
@@ -402,7 +404,7 @@ export default class MessageHandler extends Component {
                 }
             }
         }
-        this.sendMessage(`/me @${username}, ${requestedGame} could not be found in the list of valid Jackbox games. Click here for a list of valid games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
+        this.sendMessage(`/me @${username}, ${requestedGame} could not be found in the list of available games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
         return;
     }
 
@@ -421,7 +423,7 @@ export default class MessageHandler extends Component {
 
     checkForSubrequest = (message, username, subscriber) => {
         if (!message.startsWith(GAME_SUBREQUEST_COMMAND)) return;
-        if (subscriber !== true) {
+        if (subscriber !== true && this.props.channel !== username) { //!this.isModOrBroadcaster(username)
             this.sendMessage(`/me @${username}, you must be a subscriber to use this command.`);
             return null;
         }
@@ -437,7 +439,9 @@ export default class MessageHandler extends Component {
     }
 
     onMessage = (target, tags, msg, self) => {
-        console.log({target, tags, msg, self});
+        if (this.props.logUserMessages) {
+            console.log({target, tags, msg, self});
+        }
         if (self) return;
         this.props.onMessage(msg, tags.username, tags)
 
@@ -521,7 +525,7 @@ export default class MessageHandler extends Component {
             this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue.`);
         }
 
-        this.props.addGameRequest(gameObj, tags.username);
+        this.props.addGameRequest(gameObj, tags.username, isSubRequest);
         return;
     }
 

@@ -212,7 +212,7 @@ export default class OptionsMenu extends Component {
                                         onClick={toggleSubRequests}
                                         title="Allows subscribers to make additional game requests when enabled."
                                     >
-                                    {(!settings?.enableSubRequests) ? 'Enable' : 'Disable'} Sub Requests
+                                    <input type="checkbox" role="switch" checked={(settings?.enableSubRequests)} readOnly /> Enable Sub Requests
                                 </Button>
                                 </div>
                             </div>

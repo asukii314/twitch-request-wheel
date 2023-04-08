@@ -455,10 +455,10 @@ describe('MessageHandler', () => {
             expect(component.sendMessage).toHaveBeenCalledTimes(15);
 
             expect(component.sendMessage.mock.calls[0][0]).toEqual(
-                expect.stringContaining('list of valid Jackbox games'),
+                expect.stringContaining('list of available games'),
             );
             expect(component.sendMessage.mock.calls[1][0]).toEqual(
-                expect.stringContaining('list of valid Jackbox games'),
+                expect.stringContaining('list of available games'),
             );
             expect(component.sendMessage.mock.calls[2][0]).toEqual(
                 expect.stringContaining('all supported commands'),
@@ -859,7 +859,7 @@ describe('MessageHandler', () => {
             expect(component.onMessage(target, tags, '!gamelist', false)).toBeUndefined();
 
             expect(component.sendMessage.mock.calls[0][0]).toEqual(
-                expect.stringContaining('list of valid Jackbox games'),
+                expect.stringContaining('list of available games'),
             );
 
         });
