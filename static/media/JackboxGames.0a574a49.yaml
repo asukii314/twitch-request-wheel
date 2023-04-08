@@ -728,35 +728,13 @@ Standalone:
       - songlo
       - songeo
 
-  Whatsamusic:
+  Whatamusic:
     Min players: 2
     Max players: 50
     Variants:
-      - whatsamusic
       - whatamusic
       - wam
-      - watsamusic
       - watamusic
       - what a music
       - whatsmusic
       - whatmusic
-
-  Crashword:
-    Min players: 2
-    Max players: 50
-    Variants:
-      - crashword
-      - crashwords
-      - crash
-      - cashword
-      - crashwrd
-      - cw
-
-  Nitro Stream Racing:
-    Min players: 2
-    Max players: 100
-    Variants:
-      - nitro stream racing
-      - nitro racing
-      - stream racing
-      - nitro
