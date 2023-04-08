@@ -75,6 +75,52 @@ exports[`OptionsMenu render should render with menu items 1`] = `
       </li>
       <hr />
       <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn settings-menu"
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          Settings
+        </Button>
+      </li>
+      <ForwardRef
+        appear={false}
+        getDimensionValue={[Function]}
+        in={false}
+        mountOnEnter={false}
+        timeout={300}
+        unmountOnExit={false}
+      >
+        <div
+          className="accordion-dark accordion accordion-flush"
+          id="settings-menu"
+        >
+          <div
+            className="accordion-body"
+          >
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              onClick={[Function]}
+              title="Allows subscribers to make additional game requests when enabled."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               Enable Sub Requests
+            </Button>
+          </div>
+        </div>
+      </ForwardRef>
+      <li
         className="mb-1 fs-4 d-grid text-start d-none"
       >
         <Button
@@ -194,6 +240,52 @@ exports[`OptionsMenu render should render without error 1`] = `
         </Button>
       </li>
       <hr />
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn settings-menu"
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          Settings
+        </Button>
+      </li>
+      <ForwardRef
+        appear={false}
+        getDimensionValue={[Function]}
+        in={false}
+        mountOnEnter={false}
+        timeout={300}
+        unmountOnExit={false}
+      >
+        <div
+          className="accordion-dark accordion accordion-flush"
+          id="settings-menu"
+        >
+          <div
+            className="accordion-body"
+          >
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              onClick={[Function]}
+              title="Allows subscribers to make additional game requests when enabled."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               Enable Sub Requests
+            </Button>
+          </div>
+        </div>
+      </ForwardRef>
       <li
         className="mb-1 fs-4 d-grid text-start d-none"
       >

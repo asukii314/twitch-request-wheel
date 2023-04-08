@@ -19,6 +19,23 @@ export default class MainScreen extends Component {
     constructor(props){
         super(props);
         this.chatActivity = new ChatActivity(this.props.channel)
+        let settings = {};
+        let isJestEnv = (process.env.JEST_WORKER_ID !== undefined);
+        try {
+            let savedSettings = localStorage.getItem('__settings');
+            if (!!savedSettings) {
+                settings = JSON.parse(savedSettings);
+                if (!isJestEnv) {
+                    console.log('Saved settings loaded!');
+                }
+            } else {
+                if (!isJestEnv) {
+                    console.log('No saved settings detected, using defaults.');
+                }
+            }
+        } catch (e) {
+            console.log('Unable to load or read saved settings, using defaults.');
+        }
         this.state = {
             allowGameRequests: true,
             gameSelected: null,
@@ -26,7 +43,9 @@ export default class MainScreen extends Component {
             colors: randomColor({count: 99, luminosity: 'light', hue: 'blue'}),
             counter: 0,
             history: [],
+            logUserMessages: false,
             nextGameIdx: 0,
+            settings,
             showOptionsMenu: false,
             showOptionsModal: false,
             showPlayerSelect: false
@@ -99,7 +118,7 @@ export default class MainScreen extends Component {
         return this.changeNextGameIdx(-1);
     }
 
-    addGameRequest = (gameObj, user) => {
+    addGameRequest = (gameObj, user, isSubRequest) => {
         this.setState((state) => {
             return {
                 ...state,
@@ -108,6 +127,7 @@ export default class MainScreen extends Component {
                     [gameObj.longName]: {
                         ...gameObj,
                         username: user,
+                        isSubRequest,
                         time: Date.now(),
                         locked: false,
                         chosen: false
@@ -219,10 +239,17 @@ export default class MainScreen extends Component {
                 );
             }
         }, {
-            label: 'Debug Env',
+            label: 'Log Debug Environment',
             onClick: () => {
-                console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
-                console.log('process.env.REACT_APP_REDIRECT_URI:', process.env.REACT_APP_REDIRECT_URI);
+                console.log('NODE_ENV:', process.env.NODE_ENV);
+                console.log('REACT_APP_REDIRECT_URI:', process.env.REACT_APP_REDIRECT_URI);
+            }
+        }, {
+            label: 'Toggle User Message Logging',
+            onClick: () => {
+                return this.setState(prevState => ({
+                    logUserMessages: !prevState.logUserMessages
+                }));
             }
         }];
     }
@@ -299,6 +326,17 @@ export default class MainScreen extends Component {
 
     onMessage = (message, user, metadata) => {
         this.chatActivity.updateLastMessageTime(user);
+    }
+
+    onSettingsUpdate = (nextSettings) => {
+        let {settings} = this.state;
+        localStorage.setItem('__settings', JSON.stringify(
+            Object.assign({}, settings, nextSettings)
+        ));
+        console.log('Settings saved:', settings);
+        return this.setState(prevState => ({
+            settings: Object.assign({}, settings, nextSettings)
+        }));
     }
 
     toggleAllowGameRequests = (allow=null) => {
@@ -564,6 +602,8 @@ export default class MainScreen extends Component {
                     ref={this.setMessageHandlerRef}
                     removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
                     setNextGame={this.setNextGame}
+                    settings={this.state.settings}
+                    onSettingsUpdate={this.onSettingsUpdate}
                     startGame={this.startGame}
                     toggleAllowGameRequests={this.toggleAllowGameRequests}
                     upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
@@ -601,6 +641,8 @@ export default class MainScreen extends Component {
                     reloadGameList={this.messageHandler?.reloadGameList}
                     onHide={this.toggleOptionsMenu}
                     onLogout={this.props.onLogout}
+                    onSettingsUpdate={this.onSettingsUpdate}
+                    settings={this.state.settings}
                     showOptionsMenu={this.state.showOptionsMenu} />
             </div>
         )
