@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="Web site created using create-react-app" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+        <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+        <title>Game Requests</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+        <style>
+            .game-request {
+                box-shadow: inset 1px 1px 40px 0 rgba(0, 0, 0, 0.45);
+                background-size: cover;
+                border-radius: 5px;
+                text-align: left;
+                text-transform: capitalize;
+            }
+
+            .game-request.chosen {
+                background-color: greenyellow;
+                color: black;
+            }
+
+            .game-request.pending {
+                background-color: steelblue;
+            }
+
+            .game-request-body {
+                align-items: center;
+                display: flex;
+                font-size: 16px;
+                justify-content: space-between;
+                margin: 0px 15px 7px;
+                padding: 4px;
+            }
+
+            .game-request-body .options {
+                display: flex;
+            }
+
+            .game-request .lock {
+                width: 16px;
+                opacity:  0.2;
+                padding-right: 8px;
+            }
+
+            .game-request .deleteButton {
+                background-color: red;
+                float: right;
+                height: 50%;
+                color: white;
+                font-size: 11px;
+                padding: 3px 5px;
+                opacity: 0.5;
+            }
+            .game-request .lock,
+            .game-request .deleteButton {
+                cursor: pointer;
+            }
+            .game-request .lock:hover,
+            .game-request .lock:active,
+            .game-request .lock.locked,
+            .game-request .deleteButton:hover,
+            .game-request .deleteButton:active {
+                opacity: 1;
+            }
+
+
+
+            .game-request .tooltip {
+                display: flex;
+                align-items: center;
+            }
+
+            .game-request .tooltipText {
+                margin: 0;
+            }
+
+            .game-request .status {
+                width: 8px;
+                height: 8px;
+                border-radius: 5px;
+                margin-left: 6px;
+                margin-top: 3px;
+            }
+
+            .game-request .status.active {
+                background-color: green;
+            }
+
+            .game-request .status.idle {
+                background-color: yellow;
+            }
+
+            .game-request .status.disconnected {
+                background-color: darkgrey;
+            }
+
+        </style>
+
+        <style>
+            #sidebar {
+                margin-left: 12px;
+                text-transform: capitalize;
+                width: 33%;
+            }
+            #sidebar.game {
+                width: 33%;
+            }
+            #sidebar.seat {
+                width: 20%;
+            }
+            #sidebar .sidebar-panel {
+                background-color: darkslategrey;
+                border-radius: 5px;
+                margin-top: 0;
+                margin-bottom: 10px;
+                padding: 1px;
+            }
+            #sidebar .sidebar-panel:last-child {
+                padding: 5px;
+            }
+
+            #sidebar .sidebar-panel-up-next,
+            #sidebar .sidebar-panel-history {
+                font-size: 16px;
+                font-weight: 700;
+            }
+            #sidebar .sidebar-panel-up-next {
+                padding: 8px;
+            }
+            #sidebar .next-game-name {
+                margin-bottom: 5px;
+            }
+            #sidebar .next-game-party-pack {
+                font-size: 11px;
+                font-weight: 400;
+                margin-top: 0px;
+                color: lightgray;
+            }
+            #sidebar .sidebar-panel-up-next button {
+                font-weight: bold;
+                font-size: 12px;
+                padding: 5px;
+                background-color: aquamarine;
+                color: black;
+                border-radius: 5px;
+                width: 90%;
+            }
+            #sidebar .sidebar-panel-up-next button:disabled {
+                color: gray;
+                font-weight: inherit;
+                font-style: italic;
+            }
+
+            #sidebar .nav-wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+            #sidebar .nav-wrapper button {
+                background-color: darkcyan;
+                border-radius: 5px;
+                margin-top: 0;
+                width: 50%;
+                margin-bottom: 20px;
+            }
+            #sidebar .nav-wrapper button.move-next-game-back {
+                margin-right: 5px;
+            }
+            #sidebar .nav-wrapper button.move-next-game-fwd {
+                margin-left: 5px;
+            }
+
+            #sidebar .sidebar-panel-history-list {
+                font-size: 13px;
+                list-style: none;
+            }
+            #sidebar .sidebar-panel-history-list li b {
+                color: aquamarine;
+                font-size: 14px;
+            }
+            #sidebar .sidebar-panel-history-list li:not([tabindex="0"]),
+            .history-placeholder {
+                list-style: none;
+            }
+
+        </style>
+
+        <style>
+            button.changeCol {
+                text-transform: uppercase;
+                margin: 3px;
+                font-size: 11px;
+                background-color: lightgray;
+            }
+
+            div.changeColButtonsContainer {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                visibility: hidden;
+                margin-top: -25px;
+            }
+
+            div.changeColButtonsContainer:hover {
+                display: flex;
+                flex-direction: row;
+            }
+
+            div.changeColButtonsContainer .changeCol {
+                background-color: indianred;
+            }
+
+            .playerCard:hover {
+                background-color: dimgray;
+            }
+
+            .playerCard:hover>.changeColButtonsContainer {
+                visibility: visible;
+            }
+
+            div.header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-top: 5px;
+                margin: 0px 15px;
+            }
+
+            .playerCount {
+                font-size: 16px;
+                margin-top: 5px;
+            }
+
+            .playerCount.overlimit {
+                font-weight: bold;
+                color: darkorange;
+            }
+
+            button.startGame {
+                margin: 15px;
+            }
+
+            .playerSelectContainer {
+                background-color: darkslategrey;
+                border-radius: 5px;
+            }
+
+            .playerSelectContainer .game-name {
+                margin-top: 10px;
+            }
+
+            .playerCardContainer {
+                margin: 5px 10px 7px;
+                height: 700px;
+                font-size: 16px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .playerCardColumn {
+                width: 50%;
+                height: 100%;
+                margin: 5px;
+                border-radius: 5px;
+            }
+
+            .playerCardColumn.interested {
+                background-color: slategrey;
+            }
+
+            .playerCardColumn.playing {
+                background-color: teal;
+            }
+
+            .playerCardColumn.joined {
+                background-color: seagreen;
+                display: none;
+            }
+
+            .playerCardColumn>p {
+                margin-top: 0;
+                padding-top: 10px;
+                margin-bottom: 10px;
+                font-size: 17px;
+                font-weight: bold;
+            }
+
+            .playerCard {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                background-color: gray;
+                margin: 8px;
+                padding: 2px;
+                font-size: 12px;
+                border-radius: 5px;
+                border-style: outset;
+                border-color: cadetblue;
+            }
+
+            .playerCard-username {
+                display: flex;
+            }
+
+            .playerCard-username>img {
+                width: 16px;
+                margin-left: 3px;
+            }
+
+            .playerName {
+                margin: 3px 5px;
+                font-size: 14px;
+                font-weight: 500;
+                word-wrap: break-word;
+                text-align: left;
+            }
+
+            button.dice {
+                width: 25px;
+                height: 25px;
+                background-color: greenyellow;
+                border-radius: 5px;
+                margin-left: 10px;
+                padding: 0px;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+
+            button.dice>img {
+                width: 100%;
+                height: 100%;
+            }
+
+            /* // ---------------------- Variables */
+            :root {
+                --my-toggle-background: #e5e7eb;
+                --my-toggle-label-color: #1f2937;
+                --my-toggle-sublabel-color: #6b7280;
+                --my-toggle-width: 50px;
+                --my-toggle-height: calc(var(--my-toggle-width) / 2);
+                --my-toggle-gap-size: 4px;
+                --my-toggle-text-color: #ffffff;
+                --my-toggle-orb-background-color: #ffffff;
+                --my-toggle-orb-size: calc(var(--my-toggle-height) - (var(--my-toggle-gap-size) * 2));
+                --my-toggle-active-background-color: #34d399;
+                --my-toggle-inactive-background-color: #f87171;
+            }
+
+            /* // ---------------------- The toggle group */
+            .playerSelectContainer .my-toggle-group {
+                display: flex;
+                align-items: center;
+            }
+
+            .playerSelectContainer .my-toggle {
+                background: var(--my-toggle-background);
+                width: var(--my-toggle-width);
+                height: var(--my-toggle-height);
+                border-radius: var(--my-toggle-height);
+                display: inline-block;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .playerSelectContainer .toggle-label {
+                font-size: 12px;
+                max-width: 80px;
+                overflow-wrap: break-word;
+                text-align: right;
+                margin-right: 8px;
+            }
+
+            /* // ------ On off texts */
+            .playerSelectContainer .my-toggle-text {
+                width: calc(var(--my-toggle-width) / 2);
+                position: absolute;
+                height: var(--my-toggle-height);
+                font-size: 0.6rem;
+                color: var(--my-toggle-text-color);
+                top: 0;
+                display: flex;
+                line-height: var(--my-toggle-orb-size);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+                left: var(--my-toggle-gap-size);
+                font-weight: 500;
+            }
+
+            .playerSelectContainer .my-toggle-text:nth-child(2) {
+                left: calc(50% - var(--my-toggle-gap-size));
+                right: var(--my-toggle-gap-size);
+            }
+
+            /* // ------ Toggle orb */
+            .playerSelectContainer .my-toggle-orb {
+                width: var(--my-toggle-orb-size);
+                height: var(--my-toggle-orb-size);
+                display: block;
+                border-radius: var(--my-toggle-orb-size);
+                top: var(--my-toggle-gap-size);
+                right: var(--my-toggle-gap-size);
+                transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+                position: absolute;
+                background: var(--my-toggle-orb-background-color);
+                z-index: 2;
+                pointer-events: none;
+            }
+
+            /* // ------ The checkbox */
+            .playerSelectContainer input[type="checkbox"] {
+                height: var(--my-toggle-width);
+                width: var(--my-toggle-width);
+                margin: 0;
+                background: var(--my-toggle-active-background-color);
+                position: relative;
+                cursor: pointer;
+                -webkit-appearance: none;
+                        appearance: none;
+            }
+
+            .playerSelectContainer input[type="checkbox"]:checked {
+                background: var(--my-toggle-inactive-background-color);
+            }
+
+            .playerSelectContainer input[type="checkbox"]:checked~.my-toggle-orb {
+                transform: translateX(calc(-1 * (calc(var(--my-toggle-width) - var(--my-toggle-orb-size))) + calc(var(--my-toggle-gap-size) * 2)));
+            }
+
+            .playerSelectContainer input[type="checkbox"]:checked~.my-toggle-text.yes {
+                visibility: hidden;
+            }
+
+            .playerSelectContainer input[type="checkbox"]:not(:checked)~.my-toggle-text.no {
+                visibility: hidden;
+            }
+
+        </style>
+
+        <style>
+            #main-screen {
+                display: flex;
+            }
+            #main-screen.game-select .left-column {
+                width: 45vw;
+            }
+            #main-screen.player-select .left-column {
+                width: 90vw;
+            }
+
+            #main-screen .left-column h2 {
+                margin-top: 0.83em;
+                margin-bottom: 0;
+                font-weight: bold;
+                font-size: 1.5em;
+            }
+            #main-screen .left-column h4 {
+                color: yellow;
+                font-size: 20px;
+                font-weight:  400;
+                margin-bottom: 12px;
+                margin-top: 6px;
+            }
+            #main-screen.player-select .subheading-game,
+            #main-screen.game-select .subheading-player {
+                display: none;
+            }
+
+            .left-column .left-column-body {
+                display: flex;
+                align-items: flex-start;
+                height: 100%;
+            }
+            .left-column .left-column-inner-body {
+                flex-grow: 2;
+                margin-left: 15px;
+            }
+
+            #main-screen .right-column {
+                /* width: 50vw; */
+                text-transform: capitalize;
+            }
+
+            .wheel-wrapper {
+                font-size: 16px;
+                overflow: hidden;
+                width: 600px;
+            }
+            .wheel-wrapper canvas {
+                cursor: pointer;
+            }
+
+            #main-screen .btn {
+                position: absolute;
+                top:  0;
+                background-color: darkcyan;
+                border-radius: 5px;
+                margin-top:  0;
+                padding-bottom: 5px;
+                padding-top: 5px;
+                color: #fff;
+            }
+            #main-screen .options {
+                left:  0;
+            }
+
+            #main-screen .logout {
+                right:  0;
+            }
+
+
+            #main-screen .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0,0,0,0.5);
+            }
+            #main-screen .confetti-wrapper {
+                position: absolute;
+                right: 50%;
+                left: 50%;
+                bottom: 50;
+            }
+            #main-screen .fade-in-out {
+                opacity: 0;
+                animation: 3.5s linear 0s main-modal-fade;
+                animation-fill-mode: forwards;
+            }
+            #main-screen .modal {
+                position: fixed;
+                -webkit-backface-visibility: hidden;
+                        backface-visibility: hidden;
+                background: rgba(0,0,0,0.5);
+                padding: 2vh 4vw;
+                color: #fff;
+            }
+            #main-screen .modal.modal-game-chosen {
+                top: 0;
+                left: 0;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            #main-screen .modal.modal-options {
+                height: 70vh;
+                margin: auto;
+                width: 70%;
+            }
+            @keyframes main-modal-fade {
+                0%,100% { opacity: 0 }
+                5%,95% { opacity: 1 }
+            }
+
+            #main-screen .modal .options-list {
+                overflow-y: auto;
+                height: 56vh;
+            }
+            #main-screen .modal .options-list ul {
+                font-size: 18px;
+                text-align: left;
+                text-rendering: optimizeLegibility;
+                list-style-type: none;
+            }
+            /* // ------ The checkbox */
+            #main-screen .modal .options-list input[type="checkbox"] {
+                height: 18px;
+                width: 18px;
+                margin: 0;
+                background-color: #fff;
+                border: 1px solid #fff;
+                position: relative;
+                cursor: pointer;
+                -webkit-appearance: none;
+                        appearance: none;
+            }
+            #main-screen .modal .options-list input[type="checkbox"]:checked {
+                background-color: #333;
+                border: 1px solid #fff;
+            }
+            #main-screen .modal .options-list input[type="checkbox"]:checked ~ label {
+                color:#888;
+            }
+
+        </style>
+
+        <style>
+            .partyPackList {
+              display: flex;
+              margin: 10px;
+              flex-wrap: wrap;
+              text-align: left;
+            }
+
+            .partyPackCard {
+              background-color: darkslategrey;
+              border-radius: 10px;
+              margin: 10px;
+              padding: 20px;
+            }
+
+            .partyPackName > input[type='checkbox'] {
+                float: right;
+            }
+
+            .partyPackGameList {
+                list-style-type: none;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .partyPackGameList .gameName {
+
+            }
+
+            /* Extra small devices (phones, 600px and down) */
+            @media only screen and (max-width: 600px) {
+              .partyPackCard {
+                width: 80%;
+              }
+            }
+
+            /* Small devices (portrait tablets and large phones, 600px and up) */
+            @media only screen and (min-width: 600px) {
+              .partyPackCard {
+                width: 38%;
+              }
+            }
+
+            /* Medium devices (landscape tablets, 768px and up) */
+            @media only screen and (min-width: 768px) {
+              .partyPackCard {
+                width: 25%;
+              }
+            }
+
+            /* Large devices (laptops/desktops, 992px and up) */
+            @media only screen and (min-width: 992px) {
+              .partyPackCard {
+                width: 18%;
+              }
+            }
+
+            /* Extra large devices (large laptops and desktops, 1200px and up) */
+            @media only screen and (min-width: 1200px) {
+              .partyPackCard {
+                width: 18%;
+              }
+            }
+
+            .partyPackName {
+              font-size: 16px;
+              margin: 0;
+            }
+
+            .gameName {
+              font-size: 12px;
+              margin-bottom: 2px;
+            }
+
+            .possibleGameMatch {
+              font-size: 10px;
+              color: darkgrey;
+            }
+
+        </style>
+
+        <style>
+            #login-screen a {
+                background-color: rebeccapurple;
+                border-radius: 5px;
+                padding: 10px;
+                color: white;
+            }
+            #login-screen a:not(:hover) {
+                text-decoration: none;
+            }
+
+            #login-screen small {
+                font-size: calc(6px + 0.75vmin);
+                color: rgba(255, 255, 255, 0.2);
+            }
+
+        </style>
+
+        <style>
+            .App {
+                text-align: center;
+            }
+
+            .App-logo {
+                height: 40vmin;
+                pointer-events: none;
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                .App-logo {
+                    animation: App-logo-spin infinite 20s linear;
+                }
+            }
+
+            .App-header {
+                background-color: #282c34;
+                min-height: 100vh;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: calc(10px + 2vmin);
+                color: white;
+            }
+
+            .App-link {
+                color: #61dafb;
+            }
+
+            @keyframes App-logo-spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+        </style>
+
+        <style>
+            body {
+              margin: 0;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+
+            code {
+              font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+                monospace;
+            }
+
+            /* paragraph styles */
+            .p {
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+            }
+
+            .fade-in {
+                opacity: 0;
+                animation: 0.25s linear 0s fadein;
+                animation-fill-mode: forwards;
+            }
+            .fade-in-delay {
+                opacity: 0;
+                animation: 0.25s linear 0.75s fadein;
+                animation-fill-mode: forwards;
+            }
+            @keyframes fadein {
+                from    { opacity:0; }
+                to      { opacity:1; }
+            }
+
+            button:not(:disabled) {
+                cursor: pointer;
+            }
+            button:disabled {
+                cursor: not-allowed;
+            }
+
+        </style>
+
+        <style type="text/css" data-rbd-always="1">
+            /* [data-rbd-drag-handle-context-id="1"] {
+                  -webkit-touch-callout: none;
+                  -webkit-tap-highlight-color: rgba(0,0,0,0);
+                  touch-action: manipulation;
+                 } [data-rbd-droppable-context-id="1"] { overflow-anchor: none; } </style><style type="text/css" data-rbd-dynamic="1"> [data-rbd-drag-handle-context-id="1"] {
+              cursor: -webkit-grab;
+              cursor: grab;
+             } */
+        </style>
+    </head>
+
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root">
+            <div class="App">
+                <header class="App-header">
+                    <div id="authenticated-app">
+                        <div id="main-screen" class="container-fluid game-select">
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                                <button class="btn options">Options</button>
+                                <button class="btn logout">Logout ➧</button>
+                            </nav>
+                            <div class="left-column fade-in">
+                                <h2>Game Requests</h2>
+                                <h4>
+                                    <span class="subheading-game fade-in-delay">Type e.g. <b>"!request Blather Round"</b> in dcpesses's chat to add</span>
+                                </h4>
+                                <div class="left-column-body">
+                                    <div id="sidebar" class="game">
+                                        <div class="sidebar-panel">
+                                            <div class="p sidebar-panel-up-next"> Up Next:
+                                                <p class="next-game-name">not yet decided</p>
+                                                <p class="next-game-party-pack"><i></i></p>
+                                                <button class="open-seat-requests" disabled="">OPEN SEAT REQUESTS</button>
+                                            </div>
+                                        </div>
+                                        <div class="nav-wrapper">
+                                            <button class="move-next-game-back"> ⇦ </button>
+                                            <button class="move-next-game-fwd"> ⇨ </button>
+                                        </div>
+                                        <div class="sidebar-panel">
+                                            <p class="sidebar-panel-history"> History </p>
+                                            <p class="sidebar-panel-history-list"><span class="history-placeholder">No games yet</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="left-column-inner-body">
+                                        <div class="game-request-wrapper fade-in">
+                                            <div class="__react_component_tooltip tf2b7f94d-2e59-401c-99bc-5c8eab71a301 place-left type-dark" id="tf2b7f94d-2e59-401c-99bc-5c8eab71a301" data-id="tooltip" style="left: 95px; top: 113px;">
+                                                <div class="tooltip">
+                                                    <p class="tooltipText"> Requested just now by dcpesses </p>
+                                                    <div class="status active">
+                                                    </div>
+                                                    <style aria-hidden="true">
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301 {
+                                                    	    color: #fff;
+                                                    	    background: #222;
+                                                    	    border: 1px solid transparent;
+                                                      	}
+
+                                                      	.tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-top {
+                                                            margin-top: -10px;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-top::before {
+                                                            border-top: 8px solid transparent;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-top::after {
+                                                            border-left: 8px solid transparent;
+                                                            border-right: 8px solid transparent;
+                                                            bottom: -6px;
+                                                            left: 50%;
+                                                            margin-left: -8px;
+                                                            border-top-color: #222;
+                                                            border-top-style: solid;
+                                                            border-top-width: 6px;
+                                                        }
+
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-bottom {
+                                                            margin-top: 10px;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-bottom::before {
+                                                            border-bottom: 8px solid transparent;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-bottom::after {
+                                                            border-left: 8px solid transparent;
+                                                            border-right: 8px solid transparent;
+                                                            top: -6px;
+                                                            left: 50%;
+                                                            margin-left: -8px;
+                                                            border-bottom-color: #222;
+                                                            border-bottom-style: solid;
+                                                            border-bottom-width: 6px;
+                                                        }
+
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-left {
+                                                            margin-left: -10px;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-left::before {
+                                                            border-left: 8px solid transparent;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-left::after {
+                                                            border-top: 5px solid transparent;
+                                                            border-bottom: 5px solid transparent;
+                                                            right: -6px;
+                                                            top: 50%;
+                                                            margin-top: -4px;
+                                                            border-left-color: #222;
+                                                            border-left-style: solid;
+                                                            border-left-width: 6px;
+                                                        }
+
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-right {
+                                                            margin-left: 10px;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-right::before {
+                                                            border-right: 8px solid transparent;
+                                                        }
+                                                        .tf2b7f94d-2e59-401c-99bc-5c8eab71a301.place-right::after {
+                                                            border-top: 5px solid transparent;
+                                                            border-bottom: 5px solid transparent;
+                                                            left: -6px;
+                                                            top: 50%;
+                                                            margin-top: -4px;
+                                                            border-right-color: #222;
+                                                            border-right-style: solid;
+                                                            border-right-width: 6px;
+                                                        }
+                                                      </style>
+                                                </div>
+                                            </div>
+                                            <div id="baseDiv" class="game-request pending" data-tip="
+                                                <div class=&quot;tooltip&quot;>
+                                                    <p class=&quot;tooltipText&quot;>
+                                                        Requested just now by dcpesses
+                                                    </p>
+                                                    <div class=&quot;status active&quot; />
+                                                </div>"
+                                                data-html="true" currentitem="false">
+                                                <div class="game-request-body">Job Job (Party Pack 8)<div class="options"><img src="/static/media/lock.6857c469.svg" alt="lock" class="lock unlocked"><button type="button" class="deleteButton">X</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="game-request-wrapper fade-in">
+                                            <div class="__react_component_tooltip tab34458b-8033-405d-b5db-ba15daf0819a place-left type-dark" id="tab34458b-8033-405d-b5db-ba15daf0819a" data-id="tooltip" style="left: 95px; top: 113px;">
+                                                <div class="tooltip">
+                                                    <p class="tooltipText"> Requested just now by dcpesses </p>
+                                                    <div class="status active">
+                                                    </div>
+                                                    <style aria-hidden="true">
+                                                        .tab34458b-8033-405d-b5db-ba15daf0819a {
+                                                	    color: #fff;
+                                                	    background: #222;
+                                                	    border: 1px solid transparent;
+                                                  	}
+
+                                                  	.tab34458b-8033-405d-b5db-ba15daf0819a.place-top {
+                                                        margin-top: -10px;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-top::before {
+                                                        border-top: 8px solid transparent;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-top::after {
+                                                        border-left: 8px solid transparent;
+                                                        border-right: 8px solid transparent;
+                                                        bottom: -6px;
+                                                        left: 50%;
+                                                        margin-left: -8px;
+                                                        border-top-color: #222;
+                                                        border-top-style: solid;
+                                                        border-top-width: 6px;
+                                                    }
+
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-bottom {
+                                                        margin-top: 10px;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-bottom::before {
+                                                        border-bottom: 8px solid transparent;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-bottom::after {
+                                                        border-left: 8px solid transparent;
+                                                        border-right: 8px solid transparent;
+                                                        top: -6px;
+                                                        left: 50%;
+                                                        margin-left: -8px;
+                                                        border-bottom-color: #222;
+                                                        border-bottom-style: solid;
+                                                        border-bottom-width: 6px;
+                                                    }
+
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-left {
+                                                        margin-left: -10px;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-left::before {
+                                                        border-left: 8px solid transparent;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-left::after {
+                                                        border-top: 5px solid transparent;
+                                                        border-bottom: 5px solid transparent;
+                                                        right: -6px;
+                                                        top: 50%;
+                                                        margin-top: -4px;
+                                                        border-left-color: #222;
+                                                        border-left-style: solid;
+                                                        border-left-width: 6px;
+                                                    }
+
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-right {
+                                                        margin-left: 10px;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-right::before {
+                                                        border-right: 8px solid transparent;
+                                                    }
+                                                    .tab34458b-8033-405d-b5db-ba15daf0819a.place-right::after {
+                                                        border-top: 5px solid transparent;
+                                                        border-bottom: 5px solid transparent;
+                                                        left: -6px;
+                                                        top: 50%;
+                                                        margin-top: -4px;
+                                                        border-right-color: #222;
+                                                        border-right-style: solid;
+                                                        border-right-width: 6px;
+                                                    }
+                                                  </style>
+                                                </div>
+                                            </div>
+                                            <div id="baseDiv" class="game-request pending" data-tip="
+                                                <div class=&quot;tooltip&quot;>
+                                                    <p class=&quot;tooltipText&quot;>
+                                                        Requested 0 by dcpesses
+                                                    </p>
+                                                    <div class=&quot;status &quot; />
+                                                </div>"
+                                                data-html="true" currentitem="false">
+                                                <div class="game-request-body">GeoGuesser (Standalone)<div class="options"><img src="/static/media/lock.6857c469.svg" alt="lock" class="lock unlocked"><button type="button" class="deleteButton">X</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="game-request-wrapper fade-in">
+                                            <div class="__react_component_tooltip t8e29e39a-16c2-49be-8595-9dc50b7b57c0 place-left type-dark" id="t8e29e39a-16c2-49be-8595-9dc50b7b57c0" data-id="tooltip" style="left: 95px; top: 113px;">
+                                                <div class="tooltip">
+                                                    <p class="tooltipText"> Requested just now by dcpesses </p>
+                                                    <div class="status active">
+                                                    </div>
+                                                    <style aria-hidden="true">
+                                                        .t8e29e39a-16c2-49be-8595-9dc50b7b57c0 {
+                                                	    color: #fff;
+                                                	    background: #222;
+                                                	    border: 1px solid transparent;
+                                                  	}
+
+                                                  	.t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-top {
+                                                        margin-top: -10px;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-top::before {
+                                                        border-top: 8px solid transparent;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-top::after {
+                                                        border-left: 8px solid transparent;
+                                                        border-right: 8px solid transparent;
+                                                        bottom: -6px;
+                                                        left: 50%;
+                                                        margin-left: -8px;
+                                                        border-top-color: #222;
+                                                        border-top-style: solid;
+                                                        border-top-width: 6px;
+                                                    }
+
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-bottom {
+                                                        margin-top: 10px;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-bottom::before {
+                                                        border-bottom: 8px solid transparent;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-bottom::after {
+                                                        border-left: 8px solid transparent;
+                                                        border-right: 8px solid transparent;
+                                                        top: -6px;
+                                                        left: 50%;
+                                                        margin-left: -8px;
+                                                        border-bottom-color: #222;
+                                                        border-bottom-style: solid;
+                                                        border-bottom-width: 6px;
+                                                    }
+
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-left {
+                                                        margin-left: -10px;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-left::before {
+                                                        border-left: 8px solid transparent;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-left::after {
+                                                        border-top: 5px solid transparent;
+                                                        border-bottom: 5px solid transparent;
+                                                        right: -6px;
+                                                        top: 50%;
+                                                        margin-top: -4px;
+                                                        border-left-color: #222;
+                                                        border-left-style: solid;
+                                                        border-left-width: 6px;
+                                                    }
+
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-right {
+                                                        margin-left: 10px;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-right::before {
+                                                        border-right: 8px solid transparent;
+                                                    }
+                                                    .t8e29e39a-16c2-49be-8595-9dc50b7b57c0.place-right::after {
+                                                        border-top: 5px solid transparent;
+                                                        border-bottom: 5px solid transparent;
+                                                        left: -6px;
+                                                        top: 50%;
+                                                        margin-top: -4px;
+                                                        border-right-color: #222;
+                                                        border-right-style: solid;
+                                                        border-right-width: 6px;
+                                                    }
+                                                  </style>
+                                                </div>
+                                            </div>
+                                            <div id="baseDiv" class="game-request pending" data-tip="
+                                                <div class=&quot;tooltip&quot;>
+                                                    <p class=&quot;tooltipText&quot;>
+                                                        Requested 0 by dcpesses
+                                                    </p>
+                                                    <div class=&quot;status &quot; />
+                                                </div>"
+                                                data-html="true" currentitem="false">
+                                                <div class="game-request-body">CityGuesser (Standalone)<div class="options"><img src="/static/media/lock.6857c469.svg" alt="lock" class="lock unlocked"><button type="button" class="deleteButton">X</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-column" width="50px">
+                                <div class="wheel-wrapper fade-in">
+                                    <div id="wheel" style="position: relative;"><canvas id="canvas" width="600" height="720" style="pointer-events: auto;"></canvas>
+                                        <div style="border-radius: 50%; cursor: pointer; position: absolute; height: 500px; width: 500px; left: 50px; right: 50px; top: 38px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+    </body>
+
+</html>
