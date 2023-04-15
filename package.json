@@ -33,7 +33,7 @@
     "test:coverage": "npm run test -- --coverage",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build -m \"Deployed $npm_package_version via $(git branch --show-current)\""
   },
   "eslintConfig": {
     "extends": [
