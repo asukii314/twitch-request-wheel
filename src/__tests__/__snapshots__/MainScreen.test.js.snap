@@ -27,6 +27,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
     channel="sirgoosewell"
     clearQueueHandler={[Function]}
     closeQueueHandler={[Function]}
+    logUserMessages={false}
     messages={
       Object {
         "Survive The Internet (Party Pack 4)": Object {
@@ -50,11 +51,13 @@ exports[`MainScreen render should render the game request screen 1`] = `
     modList={Array []}
     onDelete={[Function]}
     onMessage={[Function]}
+    onSettingsUpdate={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
     previousGames={Array []}
     removeSelectedGameFromHistory={[Function]}
     setNextGame={[Function]}
+    settings={Object {}}
     startGame={[Function]}
     toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
@@ -104,6 +107,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
             "counter": 1,
             "gameSelected": null,
             "history": Array [],
+            "logUserMessages": false,
             "messages": Object {
               "Survive The Internet (Party Pack 4)": Object {
                 "Max players": 8,
@@ -123,6 +127,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
               },
             },
             "nextGameIdx": 0,
+            "settings": Object {},
             "showOptionsMenu": false,
             "showOptionsModal": false,
             "showPlayerSelect": false,
@@ -209,7 +214,11 @@ exports[`MainScreen render should render the game request screen 1`] = `
           "onClick": [Function],
         },
         Object {
-          "label": "Debug Env",
+          "label": "Log Debug Environment",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Toggle User Message Logging",
           "onClick": [Function],
         },
       ]
@@ -230,6 +239,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
+    onSettingsUpdate={[Function]}
     parentState={
       Object {
         "allowGameRequests": true,
@@ -244,6 +254,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
         "counter": 1,
         "gameSelected": null,
         "history": Array [],
+        "logUserMessages": false,
         "messages": Object {
           "Survive The Internet (Party Pack 4)": Object {
             "Max players": 8,
@@ -263,12 +274,15 @@ exports[`MainScreen render should render the game request screen 1`] = `
           },
         },
         "nextGameIdx": 0,
+        "settings": Object {},
         "showOptionsMenu": false,
         "showOptionsModal": false,
         "showPlayerSelect": false,
       }
     }
+    settings={Object {}}
     showOptionsMenu={false}
+    showSettingsMenu={false}
   />
 </div>
 `;
@@ -300,6 +314,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     channel="sirgoosewell"
     clearQueueHandler={[Function]}
     closeQueueHandler={[Function]}
+    logUserMessages={false}
     messages={
       Object {
         "Survive The Internet (Party Pack 4)": Object {
@@ -323,11 +338,13 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     modList={Array []}
     onDelete={[Function]}
     onMessage={[Function]}
+    onSettingsUpdate={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
     previousGames={Array []}
     removeSelectedGameFromHistory={[Function]}
     setNextGame={[Function]}
+    settings={Object {}}
     startGame={[Function]}
     toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
@@ -392,6 +409,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
               "username": "dcpesses",
             },
             "history": Array [],
+            "logUserMessages": false,
             "messages": Object {
               "Survive The Internet (Party Pack 4)": Object {
                 "Max players": 8,
@@ -411,6 +429,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
               },
             },
             "nextGameIdx": 0,
+            "settings": Object {},
             "showOptionsMenu": false,
             "showOptionsModal": false,
             "showPlayerSelect": false,
@@ -526,7 +545,11 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
           "onClick": [Function],
         },
         Object {
-          "label": "Debug Env",
+          "label": "Log Debug Environment",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Toggle User Message Logging",
           "onClick": [Function],
         },
       ]
@@ -547,6 +570,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
+    onSettingsUpdate={[Function]}
     parentState={
       Object {
         "allowGameRequests": true,
@@ -576,6 +600,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
           "username": "dcpesses",
         },
         "history": Array [],
+        "logUserMessages": false,
         "messages": Object {
           "Survive The Internet (Party Pack 4)": Object {
             "Max players": 8,
@@ -595,12 +620,15 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
           },
         },
         "nextGameIdx": 0,
+        "settings": Object {},
         "showOptionsMenu": false,
         "showOptionsModal": false,
         "showPlayerSelect": false,
       }
     }
+    settings={Object {}}
     showOptionsMenu={false}
+    showSettingsMenu={false}
   />
 </div>
 `;
@@ -632,6 +660,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     channel="sirgoosewell"
     clearQueueHandler={[Function]}
     closeQueueHandler={[Function]}
+    logUserMessages={false}
     messages={
       Object {
         "Survive The Internet (Party Pack 4)": Object {
@@ -655,11 +684,13 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     modList={Array []}
     onDelete={[Function]}
     onMessage={[Function]}
+    onSettingsUpdate={[Function]}
     openQueueHandler={[Function]}
     playerExitHandler={[Function]}
     previousGames={Array []}
     removeSelectedGameFromHistory={[Function]}
     setNextGame={[Function]}
+    settings={Object {}}
     startGame={[Function]}
     toggleAllowGameRequests={[Function]}
     upcomingGames={Array []}
@@ -707,6 +738,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
             "counter": 1,
             "gameSelected": null,
             "history": Array [],
+            "logUserMessages": false,
             "messages": Object {
               "Survive The Internet (Party Pack 4)": Object {
                 "Max players": 8,
@@ -726,6 +758,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
               },
             },
             "nextGameIdx": 0,
+            "settings": Object {},
             "showOptionsMenu": false,
             "showOptionsModal": false,
             "showPlayerSelect": true,
@@ -756,7 +789,11 @@ exports[`MainScreen render should render the player selection screen 1`] = `
           "onClick": [Function],
         },
         Object {
-          "label": "Debug Env",
+          "label": "Log Debug Environment",
+          "onClick": [Function],
+        },
+        Object {
+          "label": "Toggle User Message Logging",
           "onClick": [Function],
         },
       ]
@@ -777,6 +814,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
     }
     onHide={[Function]}
     onLogout={[MockFunction]}
+    onSettingsUpdate={[Function]}
     parentState={
       Object {
         "allowGameRequests": true,
@@ -791,6 +829,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
         "counter": 1,
         "gameSelected": null,
         "history": Array [],
+        "logUserMessages": false,
         "messages": Object {
           "Survive The Internet (Party Pack 4)": Object {
             "Max players": 8,
@@ -810,12 +849,15 @@ exports[`MainScreen render should render the player selection screen 1`] = `
           },
         },
         "nextGameIdx": 0,
+        "settings": Object {},
         "showOptionsMenu": false,
         "showOptionsModal": false,
         "showPlayerSelect": true,
       }
     }
+    settings={Object {}}
     showOptionsMenu={false}
+    showSettingsMenu={false}
   />
 </div>
 `;
