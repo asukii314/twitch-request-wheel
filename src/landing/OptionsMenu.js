@@ -186,7 +186,12 @@ export default class OptionsMenu extends Component {
                 : true;
             onSettingsUpdate({enableSubRequestLimit: value});
         };
-
+        let toggleClearSeatsAfterRedeem = () => {
+            let value = typeof settings?.clearSeatsAfterRedeem === 'boolean'
+                ? !settings?.clearSeatsAfterRedeem
+                : true;
+            onSettingsUpdate({clearSeatsAfterRedeem: value});
+        };
 
         return (
             <Offcanvas
@@ -227,6 +232,12 @@ export default class OptionsMenu extends Component {
                                         disabled={!(settings?.enableSubRequests)}
                                     >
                                         <input type="checkbox" role="switch" checked={(settings?.enableSubRequestLimit)} readOnly /> <span>Limit 1 Sub Request</span>
+                                    </Button>
+                                    <Button variant="link" className="btn settings-menu"
+                                        onClick={toggleClearSeatsAfterRedeem}
+                                        title="Clears the list of player signups after a game redemption."
+                                    >
+                                        <input type="checkbox" role="switch" checked={(settings?.clearSeatsAfterRedeem)} readOnly /> <span>Clear Seats After Redeem</span>
                                     </Button>
                                 </div>
                             </div>

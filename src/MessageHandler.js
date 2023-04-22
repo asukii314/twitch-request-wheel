@@ -284,7 +284,9 @@ export default class MessageHandler extends Component {
                 } else {
                     this.sendMessage(`/me @${username}, ${gameObj.name} has been inserted in the queue following ${numGamesAhead} other manual game request${numGamesAhead > 1 ? 's' : ''}.`);
                 }
-
+                if (this.props.settings?.clearSeatsAfterRedeem === true) {
+                    this.props?.clearQueueHandler();
+                }
             }
             return true;
         }
