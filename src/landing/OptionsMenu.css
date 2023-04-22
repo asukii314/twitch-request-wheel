@@ -1,4 +1,7 @@
 
+#options-menu .accordion-body {
+    padding: calc(var(--bs-accordion-body-padding-y) / 3) calc(var(--bs-accordion-body-padding-x) / 2);
+}
 #options-menu .options-menu-items .btn {
     display: block;
     text-align: left !important;
@@ -6,10 +9,26 @@
     font-weight: 500 !important;
     opacity:0.8;
     transition: opacity 0.125s linear;
+    padding-left: 0;
+    padding-right: 0;
 }
 #options-menu .options-menu-items .btn:hover {
     opacity:1;
 }
+#options-menu .options-menu-items .btn:disabled {
+    opacity: 0.2;
+}
+#options-menu .options-menu-items .btn.subsetting::before {
+    content: '\2514';
+    margin-left: -5px;
+    margin-right: 1px;
+    /* content: '\231E'; */
+    display: inline-block;
+    color: #555;
+}
+/* #options-menu .options-menu-items .btn.subsetting:has(+ .btn.subsetting)::before {
+    content: '\251C';
+} */
 #options-menu .btn.btn-link,
 #options-menu .btn.btn-link:hover {
     text-decoration: none;

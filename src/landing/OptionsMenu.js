@@ -179,7 +179,14 @@ export default class OptionsMenu extends Component {
                 ? !settings?.enableSubRequests
                 : true;
             onSettingsUpdate({enableSubRequests: value});
-        }
+        };
+        let toggleSubRequestLimit = () => {
+            let value = typeof settings?.enableSubRequestLimit === 'boolean'
+                ? !settings?.enableSubRequestLimit
+                : true;
+            onSettingsUpdate({enableSubRequestLimit: value});
+        };
+
 
         return (
             <Offcanvas
@@ -212,8 +219,15 @@ export default class OptionsMenu extends Component {
                                         onClick={toggleSubRequests}
                                         title="Allows subscribers to make additional game requests when enabled."
                                     >
-                                    <input type="checkbox" role="switch" checked={(settings?.enableSubRequests)} readOnly /> Enable Sub Requests
-                                </Button>
+                                        <input type="checkbox" role="switch" checked={(settings?.enableSubRequests)} readOnly /> <span>Enable Sub Requests</span>
+                                    </Button>
+                                    <Button variant="link" className="btn settings-menu subsetting"
+                                        onClick={toggleSubRequestLimit}
+                                        title="Limit subscribers to one additional game requests when enabled."
+                                        disabled={!(settings?.enableSubRequests)}
+                                    >
+                                        <input type="checkbox" role="switch" checked={(settings?.enableSubRequestLimit)} readOnly /> <span>Limit 1 Sub Request</span>
+                                    </Button>
                                 </div>
                             </div>
                         </Collapse>
