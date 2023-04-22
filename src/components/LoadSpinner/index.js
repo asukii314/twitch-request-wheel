@@ -1,7 +1,7 @@
 import './load-spinner.css';
 
 function LoadSpinner(props) {
-    return <div class="lds-ripple">
+    return <div className="lds-ripple">
         <div></div>
         <div></div>
     </div>;
