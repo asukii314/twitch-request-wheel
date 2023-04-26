@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadSpinner render should render without error 1`] = `
+<div
+  className="lds-ripple"
+>
+  <div />
+  <div />
+</div>
+`;

@@ -306,7 +306,7 @@ describe('AuthenticatedApp', () => {
                 username: null
             });
             let component = shallowRenderer.getRenderOutput();
-            expect(component.props.children).toBeUndefined();
+            expect(component.props.children).toBeDefined();
             expect(component).toMatchSnapshot();
             shallowRenderer.unmount();
         });

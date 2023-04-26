@@ -115,7 +115,28 @@ exports[`OptionsMenu render should render with menu items 1`] = `
                 role="switch"
                 type="checkbox"
               />
-               Enable Sub Requests
+               
+              <span>
+                Enable Sub Requests
+              </span>
+            </Button>
+            <Button
+              active={false}
+              className="btn settings-menu subsetting"
+              disabled={true}
+              onClick={[Function]}
+              title="Limit subscribers to one additional game requests when enabled."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               
+              <span>
+                Limit 1 Sub Request
+              </span>
             </Button>
           </div>
         </div>
@@ -281,7 +302,28 @@ exports[`OptionsMenu render should render without error 1`] = `
                 role="switch"
                 type="checkbox"
               />
-               Enable Sub Requests
+               
+              <span>
+                Enable Sub Requests
+              </span>
+            </Button>
+            <Button
+              active={false}
+              className="btn settings-menu subsetting"
+              disabled={true}
+              onClick={[Function]}
+              title="Limit subscribers to one additional game requests when enabled."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               
+              <span>
+                Limit 1 Sub Request
+              </span>
             </Button>
           </div>
         </div>

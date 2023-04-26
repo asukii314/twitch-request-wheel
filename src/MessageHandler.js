@@ -290,7 +290,7 @@ export default class MessageHandler extends Component {
         }
 
         //========= player queue management =========
-        if (message === "!caniplay" || message === "!new" || (message === "!dew" && this.props?.channel?.toLowerCase() === 'dewinblack')) {
+        if (message === "!caniplay" || message.startsWith("!new") || (message.toLowerCase().startsWith("!dew") && this.props?.channel?.toLowerCase() === 'dewinblack')) {
             this.props?.caniplayHandler(username, {
                 sendConfirmationMsg: message === "!caniplay"
             });
@@ -423,11 +423,11 @@ export default class MessageHandler extends Component {
 
     checkForSubrequest = (message, username, subscriber) => {
         if (!message.startsWith(GAME_SUBREQUEST_COMMAND)) return;
-        if (subscriber !== true && this.props.channel !== username) { //!this.isModOrBroadcaster(username)
+        if (subscriber !== true && this.props.channel !== username) {
             this.sendMessage(`/me @${username}, you must be a subscriber to use this command.`);
             return null;
         }
-        // if subrequests > maxsubrequests
+
         const requestedGame = message.replace(GAME_SUBREQUEST_COMMAND, "").trim();
 
         if (requestedGame === "") {
@@ -512,8 +512,8 @@ export default class MessageHandler extends Component {
         if (prevRequestedGameName) {
             if (this.props.channel === tags.username) {
                 this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
-            } else if (isSubRequest /* && requests <= max requests */) {
-                this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue. Your previous game request(s) weren't deleted, since subrequests are enabled. :)`);
+            } else if (isSubRequest && !this.props.settings?.enableSubRequestLimit) {
+                this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue via a subrequest.`);
             } else {
                 this.props.onDelete(prevRequestedGameName);
                 this.sendMessage(`/me @${tags.username}, your previous request of ${prevRequestedGameName} has been replaced with ${gameObj.name}.`);

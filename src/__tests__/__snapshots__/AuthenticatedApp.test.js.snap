@@ -22,5 +22,11 @@ exports[`AuthenticatedApp render should render with Redirect on failed login 1`]
 exports[`AuthenticatedApp render should render with null 1`] = `
 <div
   id="authenticated-app"
-/>
+>
+  <h2>
+    <LoadSpinner />
+    <br />
+    Loading...
+  </h2>
+</div>
 `;
