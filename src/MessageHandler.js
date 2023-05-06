@@ -2,6 +2,7 @@ import {Component} from 'react';
 import PropTypes from 'prop-types';
 import rawJackboxGameList from './JackboxGames.yaml';
 import YAML from 'yaml'
+import {version} from '../package.json';
 const fetch = require('node-fetch');
 const tmi = require('tmi.js');
 
@@ -10,8 +11,16 @@ const GAME_SUBREQUEST_COMMAND = "!subrequest";
 
 const easterEggRequests = [
     {
+        RequestName: 'Version',
+        Response: `is using Twitch Request Wheel, v${version}`,
+        Variants: [
+            'version',
+            'v',
+            'info'
+        ]
+    }, {
         RequestName: 'Affection',
-        Response: 'there there, it\'s going to be okay. VirtualHug',
+        Response: () => 'there there, it\'s going to be okay. VirtualHug',
         Variants: [
             'a friend',
             'a hug',
@@ -264,15 +273,15 @@ export default class MessageHandler extends Component {
         }
 
         //========= set next game =========
-        if (message.startsWith("!setnextgame") || message.startsWith("!redeemgame")) {
+        if (message.startsWith("!setnextgame") || message.startsWith("!sng") || message.startsWith("!redeemgame")) {
             if (!this.isModOrBroadcaster(username)) {
                 this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!s") ? "!setNextGame" : "!redeemgame"} command.`);
                 return true;
             }
 
-            const requestedGame = message.replace("!setnextgame", "").replace("!redeemgame", "").trim();
+            const requestedGame = message.replace("!setnextgame", "").replace("!sng", "").replace("!redeemgame", "").trim();
             if (requestedGame === "") {
-                this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, ${message.startsWith("!s") ? "!setNextGame" : "!redeemgame"} TMP 2`);
+                this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, ${message.startsWith("!s") ? "!setnextgame" : "!redeemgame"} TMP 2`);
                 return true;
             }
 
@@ -388,7 +397,11 @@ export default class MessageHandler extends Component {
         // easter egg responses
         for (let requestEntry of easterEggRequests) {
             if (requestEntry?.Variants?.includes(requestedGame)) {
-                this.sendMessage(`/me @${username} ${requestEntry.Response}`);
+                if (typeof requestEntry.Response === 'function') {
+                    this.sendMessage(`/me @${username} ${requestEntry.Response()}`);
+                } else {
+                    this.sendMessage(`/me @${username} ${requestEntry.Response}`);
+                }
                 return null;
             }
         }
