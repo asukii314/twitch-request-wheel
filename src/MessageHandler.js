@@ -2,6 +2,7 @@ import {Component} from 'react';
 import PropTypes from 'prop-types';
 import rawJackboxGameList from './JackboxGames.yaml';
 import YAML from 'yaml'
+import {version} from '../package.json';
 const fetch = require('node-fetch');
 const tmi = require('tmi.js');
 
@@ -10,8 +11,16 @@ const GAME_SUBREQUEST_COMMAND = "!subrequest";
 
 const easterEggRequests = [
     {
+        RequestName: 'Version',
+        Response: `is using Twitch Request Wheel, v${version}`,
+        Variants: [
+            'version',
+            'v',
+            'info'
+        ]
+    }, {
         RequestName: 'Affection',
-        Response: 'there there, it\'s going to be okay. VirtualHug',
+        Response: () => 'there there, it\'s going to be okay. VirtualHug',
         Variants: [
             'a friend',
             'a hug',
@@ -163,8 +172,10 @@ export default class MessageHandler extends Component {
         }
 
         //========= list requested games =========
-        if (message === "!onthewheel" || message === "!gamesqueued" || message === "!listrequests") {
-            let pipe = ' ⋆ '; // TODO: allow delimiter to be user configurable
+        if (message === "!onthewheel" || message.startsWith("!gamesqueue") || message === "!listrequests") {
+            let pipe = (this.props.settings?.customDelimiter)
+                ? ` ${this.props.settings.customDelimiter} `
+                : ' ⋆ ';
             let requests = Object.values(this.props.messages).map(m => m.name).sort();
             try {
                 this.sendMessage(`/me @${username}, Requested: ${requests.join(pipe)}.`);
@@ -250,7 +261,7 @@ export default class MessageHandler extends Component {
         }
 
         //========= advance prev game =========
-        if (message === "!nextgameback" || message === "!nextgamebackward") {
+        if (message === "!advanceprevgame" || message === "!nextgameback" || message === "!nextgamebackward") {
             if (!this.isModOrBroadcaster(username)) {
                 this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
                 return true;
@@ -264,15 +275,15 @@ export default class MessageHandler extends Component {
         }
 
         //========= set next game =========
-        if (message.startsWith("!setnextgame") || message.startsWith("!redeemgame")) {
+        if (message.startsWith("!setnextgame") || message.startsWith("!sng") || message.startsWith("!redeemgame")) {
             if (!this.isModOrBroadcaster(username)) {
                 this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!s") ? "!setNextGame" : "!redeemgame"} command.`);
                 return true;
             }
 
-            const requestedGame = message.replace("!setnextgame", "").replace("!redeemgame", "").trim();
+            const requestedGame = message.replace("!setnextgame", "").replace("!sng", "").replace("!redeemgame", "").trim();
             if (requestedGame === "") {
-                this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, ${message.startsWith("!s") ? "!setNextGame" : "!redeemgame"} TMP 2`);
+                this.sendMessage(`/me @${username}, please specify the game you would like to insert in the queue: for example, ${message.startsWith("!s") ? "!setnextgame" : "!redeemgame"} TMP 2`);
                 return true;
             }
 
@@ -284,7 +295,9 @@ export default class MessageHandler extends Component {
                 } else {
                     this.sendMessage(`/me @${username}, ${gameObj.name} has been inserted in the queue following ${numGamesAhead} other manual game request${numGamesAhead > 1 ? 's' : ''}.`);
                 }
-
+                if (this.props.settings?.clearSeatsAfterRedeem === true) {
+                    this.props?.clearQueueHandler();
+                }
             }
             return true;
         }
@@ -386,7 +399,11 @@ export default class MessageHandler extends Component {
         // easter egg responses
         for (let requestEntry of easterEggRequests) {
             if (requestEntry?.Variants?.includes(requestedGame)) {
-                this.sendMessage(`/me @${username} ${requestEntry.Response}`);
+                if (typeof requestEntry.Response === 'function') {
+                    this.sendMessage(`/me @${username} ${requestEntry.Response()}`);
+                } else {
+                    this.sendMessage(`/me @${username} ${requestEntry.Response}`);
+                }
                 return null;
             }
         }
@@ -468,7 +485,9 @@ export default class MessageHandler extends Component {
                 if (this.props.previousGames.length > 1) {
                     previous += `, followed by ${this.props.previousGames[1].name}`
                     for (let i = 2; i < this.props.previousGames.length; i++) {
-                        previous += `, and ${this.props.previousGames[i].name}`
+                        previous += (i+1 === this.props.previousGames.length)
+                            ? `, ${this.props.previousGames[i].name}`
+                            : `, and ${this.props.previousGames[i].name}`; // oxford comma, y'all
                     }
                 }
                 this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)

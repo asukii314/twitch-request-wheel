@@ -138,6 +138,40 @@ exports[`OptionsMenu render should render with menu items 1`] = `
                 Limit 1 Sub Request
               </span>
             </Button>
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              onClick={[Function]}
+              title="Clears the list of player signups after a game redemption."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               
+              <span>
+                Clear Seats After Redeem
+              </span>
+            </Button>
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              title="Uses a custom character or emote to separate requests listed in the chat."
+              variant="link"
+            >
+              <span>
+                Use Custom Delimiter: 
+              </span>
+              <input
+                name="custom-delimiter"
+                onChange={[Function]}
+                type="text"
+              />
+            </Button>
           </div>
         </div>
       </ForwardRef>
@@ -324,6 +358,40 @@ exports[`OptionsMenu render should render without error 1`] = `
               <span>
                 Limit 1 Sub Request
               </span>
+            </Button>
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              onClick={[Function]}
+              title="Clears the list of player signups after a game redemption."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               
+              <span>
+                Clear Seats After Redeem
+              </span>
+            </Button>
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              title="Uses a custom character or emote to separate requests listed in the chat."
+              variant="link"
+            >
+              <span>
+                Use Custom Delimiter: 
+              </span>
+              <input
+                name="custom-delimiter"
+                onChange={[Function]}
+                type="text"
+              />
             </Button>
           </div>
         </div>

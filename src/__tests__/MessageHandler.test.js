@@ -424,12 +424,14 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!nextgamefwd', username)).toBeTruthy();
 
             //========= advance prev game =========
+            expect(component.checkForMiscCommands('!advanceprevgame', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!nextgameback', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!nextgamebackward', username)).toBeTruthy();
 
             //========= set next game =========
             expect(component.checkForMiscCommands('!setnextgame', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!setnextgame quiplash3', username)).toBeTruthy();
+            expect(component.checkForMiscCommands('!sng quiplash3', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!redeemgame quiplash3', username)).toBeTruthy();
 
             //========= player queue management =========
@@ -452,7 +454,7 @@ describe('MessageHandler', () => {
             expect(component.props.playerExitHandler).toHaveBeenCalledWith(username);
 
             // console.log(component.sendMessage.mock.calls);
-            expect(component.sendMessage).toHaveBeenCalledTimes(15);
+            expect(component.sendMessage).toHaveBeenCalledTimes(17);
 
             expect(component.sendMessage.mock.calls[0][0]).toEqual(
                 expect.stringContaining('list of available games'),
@@ -685,9 +687,17 @@ describe('MessageHandler', () => {
                 Variants: [
                     'goose'
                 ]
+            }, {
+                RequestName: 'Affection',
+                Response: () => {
+                    return 'there there, it\'s going to be okay. VirtualHug'
+                },
+                Variants: [
+                    'affection'
+                ]
             }
         ];
-        test('should handle "goose" requests', () => {
+        test('should handle string requests', () => {
             let component = new MessageHandler(props);
 
             jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
@@ -695,6 +705,15 @@ describe('MessageHandler', () => {
             component.findGame('goose', 'username');
             expect(component.sendMessage).toBeCalledTimes(1);
             expect(component.sendMessage).toBeCalledWith(`/me @username ${easterEggRequests[1].Response}`);
+        });
+        test('should handle requests with function responses', () => {
+            let component = new MessageHandler(props);
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            component.findGame('affection', 'username');
+            expect(component.sendMessage).toBeCalledTimes(1);
+            expect(component.sendMessage).toBeCalledWith(`/me @username ${easterEggRequests[2].Response()}`);
         });
         test('should handle existing requests', () => {
             let component = new MessageHandler(props);
@@ -734,6 +753,44 @@ describe('MessageHandler', () => {
             jest.spyOn(component, 'findGame').mockReturnValue(true);
 
             expect(component.checkForGameCommand('!request tmp2 ', 'cactus_dad')).toBeTruthy();
+            expect(component.findGame).toHaveBeenCalledWith('tmp2', 'cactus_dad');
+        });
+    });
+    describe('checkForSubrequest', () => {
+        test('returns if no valid game request command is detected', () => {
+            let component = new MessageHandler(props);
+
+            jest.spyOn(component, 'findGame').mockReturnValue(true);
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            expect(component.checkForSubrequest('!reeq tmp2', 'tttonypepperoni', true)).toBeUndefined();
+
+            expect(component.sendMessage).not.toHaveBeenCalled();
+            expect(component.findGame).not.toHaveBeenCalled();
+        });
+        test('calls sendMessage when user is not a subscriber and returns', () => {
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            expect(component.checkForSubrequest('!subrequest', 'arsonimp', false)).toBeNull();
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('/me @arsonimp, you must be a subscriber'),
+            );
+        });
+        test('calls sendMessage when no game is specified and returns', () => {
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            expect(component.checkForSubrequest('!subrequest', 'left4red14', true)).toBeNull();
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('/me @left4red14, please specify the game'),
+            );
+        });
+        test('calls & returns findGame when a game is specified', () => {
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'findGame').mockReturnValue(true);
+
+            expect(component.checkForSubrequest('!subrequest tmp2 ', 'cactus_dad', true)).toBeTruthy();
             expect(component.findGame).toHaveBeenCalledWith('tmp2', 'cactus_dad');
         });
     });

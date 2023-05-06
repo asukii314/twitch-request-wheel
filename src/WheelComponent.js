@@ -80,7 +80,7 @@ const WheelComponent = ({
         if (timerHandle === 0) {
             spinStart = new Date().getTime();
             // maxSpeed = Math.PI / ((segments.length*2) + Math.random())
-            maxSpeed = Math.PI / segments.length;
+            maxSpeed = Math.max(0.4, Math.PI / segments.length);
             frames = 0;
             timerHandle = setInterval(onTimerTick, timerDelay);
         }
