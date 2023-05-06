@@ -172,8 +172,10 @@ export default class MessageHandler extends Component {
         }
 
         //========= list requested games =========
-        if (message === "!onthewheel" || message === "!gamesqueued" || message === "!listrequests") {
-            let pipe = ' ⋆ '; // TODO: allow delimiter to be user configurable
+        if (message === "!onthewheel" || message.startsWith("!gamesqueue") || message === "!listrequests") {
+            let pipe = (this.props.settings?.customDelimiter)
+                ? ` ${this.props.settings.customDelimiter} `
+                : ' ⋆ ';
             let requests = Object.values(this.props.messages).map(m => m.name).sort();
             try {
                 this.sendMessage(`/me @${username}, Requested: ${requests.join(pipe)}.`);
@@ -483,7 +485,9 @@ export default class MessageHandler extends Component {
                 if (this.props.previousGames.length > 1) {
                     previous += `, followed by ${this.props.previousGames[1].name}`
                     for (let i = 2; i < this.props.previousGames.length; i++) {
-                        previous += `, and ${this.props.previousGames[i].name}`
+                        previous += (i+1 === this.props.previousGames.length)
+                            ? `, ${this.props.previousGames[i].name}`
+                            : `, and ${this.props.previousGames[i].name}`; // oxford comma, y'all
                     }
                 }
                 this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)

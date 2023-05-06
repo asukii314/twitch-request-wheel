@@ -192,6 +192,15 @@ export default class OptionsMenu extends Component {
                 : true;
             onSettingsUpdate({clearSeatsAfterRedeem: value});
         };
+        let updateCustomDelimiter = (e) => {
+            let {value} = e.target;
+            if (!value) {
+                value = null;
+            } else {
+                value = value.trim();
+            }
+            onSettingsUpdate({customDelimiter: value});
+        };
 
         return (
             <Offcanvas
@@ -238,6 +247,14 @@ export default class OptionsMenu extends Component {
                                         title="Clears the list of player signups after a game redemption."
                                     >
                                         <input type="checkbox" role="switch" checked={(settings?.clearSeatsAfterRedeem)} readOnly /> <span>Clear Seats After Redeem</span>
+                                    </Button>
+
+                                    <Button variant="link" className="btn settings-menu"
+                                        title="Uses a custom character or emote to separate requests listed in the chat."
+                                    >
+                                        <span>Use Custom Delimiter: </span>
+                                        <input type="text" name="custom-delimiter" defaultValue={settings?.customDelimiter}
+                                        onChange={updateCustomDelimiter} />
                                     </Button>
                                 </div>
                             </div>
