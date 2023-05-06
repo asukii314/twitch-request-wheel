@@ -424,6 +424,7 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!nextgamefwd', username)).toBeTruthy();
 
             //========= advance prev game =========
+            expect(component.checkForMiscCommands('!advanceprevgame', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!nextgameback', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!nextgamebackward', username)).toBeTruthy();
 
@@ -453,7 +454,7 @@ describe('MessageHandler', () => {
             expect(component.props.playerExitHandler).toHaveBeenCalledWith(username);
 
             // console.log(component.sendMessage.mock.calls);
-            expect(component.sendMessage).toHaveBeenCalledTimes(16);
+            expect(component.sendMessage).toHaveBeenCalledTimes(17);
 
             expect(component.sendMessage.mock.calls[0][0]).toEqual(
                 expect.stringContaining('list of available games'),

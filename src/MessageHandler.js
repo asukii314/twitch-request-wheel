@@ -261,7 +261,7 @@ export default class MessageHandler extends Component {
         }
 
         //========= advance prev game =========
-        if (message === "!nextgameback" || message === "!nextgamebackward") {
+        if (message === "!advanceprevgame" || message === "!nextgameback" || message === "!nextgamebackward") {
             if (!this.isModOrBroadcaster(username)) {
                 this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
                 return true;
