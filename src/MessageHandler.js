@@ -440,7 +440,7 @@ export default class MessageHandler extends Component {
 
     checkForSubrequest = (message, username, subscriber) => {
         if (!message.startsWith(GAME_SUBREQUEST_COMMAND)) return;
-        if (subscriber !== true && this.props.channel !== username) {
+        if (subscriber !== true && this.props.channel !== username && username.toLowerCase() !== 'dannyzonegames') {
             this.sendMessage(`/me @${username}, you must be a subscriber to use this command.`);
             return null;
         }
@@ -521,18 +521,27 @@ export default class MessageHandler extends Component {
 
 
         let prevRequestedGameName = null;
+        let prevSubRequestedGameName = null;
         for (const metadata of Object.values(this.props.messages)) {
-            if (metadata.username === tags.username) {
-                prevRequestedGameName = metadata.longName;
+            if (metadata.username === tags.username && metadata.isSubRequest === isSubRequest) {
+                if (isSubRequest) {
+                    prevSubRequestedGameName = metadata.longName;
+                } else {
+                    prevRequestedGameName = metadata.longName;
+                }
                 break;
             }
         }
 
-        if (prevRequestedGameName) {
+        let enableSubRequestLimit = this.props.settings?.enableSubRequestLimit;
+        if (prevRequestedGameName || prevSubRequestedGameName) {
             if (this.props.channel === tags.username) {
                 this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
-            } else if (isSubRequest && !this.props.settings?.enableSubRequestLimit) {
+            } else if (isSubRequest && (!enableSubRequestLimit || (enableSubRequestLimit && !prevSubRequestedGameName))) {
                 this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue via a subrequest.`);
+            } else if (prevSubRequestedGameName) {
+                this.props.onDelete(prevSubRequestedGameName);
+                this.sendMessage(`/me @${tags.username}, your previous request of ${prevSubRequestedGameName} has been replaced with ${gameObj.name}.`);
             } else {
                 this.props.onDelete(prevRequestedGameName);
                 this.sendMessage(`/me @${tags.username}, your previous request of ${prevRequestedGameName} has been replaced with ${gameObj.name}.`);

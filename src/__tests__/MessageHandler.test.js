@@ -20,6 +20,7 @@ describe('MessageHandler', () => {
         messages: {
             'Trivia Murder Party 2 (Party Pack 6)': {
                 name: 'Trivia Murder Party 2',
+                isSubRequest: false,
                 longName: 'Trivia Murder Party 2 (Party Pack 6)',
                 partyPack: 'Party Pack 6',
                 Variants: [
@@ -34,6 +35,7 @@ describe('MessageHandler', () => {
             },
             'Quiplash 3 (Party Pack 7)': {
                 name: 'Quiplash 3',
+                isSubRequest: false,
                 longName: 'Quiplash 3 (Party Pack 7)',
                 partyPack: 'Party Pack 7',
                 "Min players": 3,
@@ -51,6 +53,7 @@ describe('MessageHandler', () => {
             },
             'Survive The Internet (Party Pack 4)': {
                 name: 'Survive The Internet',
+                isSubRequest: false,
                 longName: 'Survive The Internet (Party Pack 4)',
                 partyPack: 'Party Pack 4',
                 'Min players': 3,
