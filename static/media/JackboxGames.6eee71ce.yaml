@@ -473,6 +473,58 @@ Party Pack 9:
       - boomerang
       - room
 
+Party Pack 10:
+  Dodo Re Mi:
+    Min players: 1
+    Max players: 9
+    Variants:
+      - dodo re mi
+      - dodo re me
+      - dodo re mee
+      - dodoremi
+      - do re mi
+      - do re me
+      - do re mee
+      - doreme
+      - doremi
+      - drm
+  FixyText:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - fixytext
+      - fixtext
+      - fixytest
+      - ft
+  Tee K.O. 2:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - tko2
+      - tko 2
+      - t ko 2
+      - tee ko 2
+      - tee k.o 2
+      - tee k.o. 2
+      - t.k.o. 2
+  Timejinx:
+    Min players: 1
+    Max players: 8
+    Variants:
+      - timejinx
+      - timejinks
+      - time jinx
+      - time jinks
+      - tj
+  Hypnotorious:
+    Min players: 4
+    Max players: 8
+    Variants:
+      - hypnotorious
+      - hypnotorius
+      - hypno
+      - hyp
+
 Standalone:
   Drawful 2:
     Min players: 3
