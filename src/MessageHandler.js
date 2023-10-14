@@ -302,6 +302,33 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        //========= add games from party pack =========
+        if (message.startsWith("!addpack") || message.startsWith("!pack")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!a") ? "!addpack" : "!pack"} command.`);
+                return true;
+            }
+
+            const requestedPack = message.replace("!addpack", "").replace("!pack", "").trim();
+            if (requestedPack === "") {
+                this.sendMessage(`/me @${username}, please specify the pack you would like to insert in the queue: for example, ${message.startsWith("!a") ? "!addpack" : "!pack"} 9`);
+                return true;
+            }
+
+            if (requestedPack.toLowerCase() === "standalone") {
+                this.sendMessage(`/me @${username}, sorry, you can only add Jackbox Party Pack games with this command.`);
+                return true;
+            }
+
+            const packObj = this.addPack(requestedPack, username);
+            if (packObj) {
+                this.sendMessage(`/me @${username}, ${packObj.name} games have been added to the request queue.`);
+            } else {
+                this.sendMessage(`/me @${username}, no games added; could not find any games for Party Pack ${requestedPack}.`);
+            }
+            return true;
+        }
+
         //========= player queue management =========
         if (message === "!caniplay" || message.startsWith("!new") || (message.toLowerCase().startsWith("!dew") && this.props?.channel?.toLowerCase() === 'dewinblack')) {
             this.props?.caniplayHandler(username, {
@@ -486,8 +513,8 @@ export default class MessageHandler extends Component {
                     previous += `, followed by ${this.props.previousGames[1].name}`
                     for (let i = 2; i < this.props.previousGames.length; i++) {
                         previous += (i+1 === this.props.previousGames.length)
-                            ? `, ${this.props.previousGames[i].name}`
-                            : `, and ${this.props.previousGames[i].name}`; // oxford comma, y'all
+                            ? `, and ${this.props.previousGames[i].name}` // oxford comma, y'all
+                            : `, ${this.props.previousGames[i].name}`;
                     }
                 }
                 this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)
@@ -554,6 +581,26 @@ export default class MessageHandler extends Component {
         }
 
         this.props.addGameRequest(gameObj, tags.username, isSubRequest);
+        return;
+    }
+
+    addPack = (pack, username) => {
+        for (let partyPackName in this.state.validGames) {
+            let packslug = partyPackName.trim().toLowerCase().replace(/([^\d]+)/gi, '');
+            window.console.log({packslug, pack});
+            if (packslug === pack) {
+                let partyPackObj = this.state.validGames[partyPackName]
+                for (const [formalGameName, metadata] of Object.entries(partyPackObj)) {
+                     this.props.addGameRequest({
+                        name: formalGameName,
+                        longName: `${formalGameName} (${partyPackName})`,
+                        partyPack: partyPackName,
+                        ...metadata
+                    }, username, false);
+                }
+                return {name: partyPackName};
+            }
+        }
         return;
     }
 
