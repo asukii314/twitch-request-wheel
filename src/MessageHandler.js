@@ -302,6 +302,33 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        //========= add games from party pack =========
+        if (message.startsWith("!addpack") || message.startsWith("!pack")) {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use the ${message.startsWith("!a") ? "!addpack" : "!pack"} command.`);
+                return true;
+            }
+
+            const requestedPack = message.replace("!addpack", "").replace("!pack", "").trim();
+            if (requestedPack === "") {
+                this.sendMessage(`/me @${username}, please specify the pack you would like to insert in the queue: for example, ${message.startsWith("!a") ? "!addpack" : "!pack"} 9`);
+                return true;
+            }
+
+            if (requestedPack.toLowerCase() === "standalone") {
+                this.sendMessage(`/me @${username}, sorry, you can only add Jackbox Party Pack games with this command.`);
+                return true;
+            }
+
+            const packObj = this.addPack(requestedPack, username);
+            if (packObj) {
+                this.sendMessage(`/me @${username}, ${packObj.name} games have been added to the request queue.`);
+            } else {
+                this.sendMessage(`/me @${username}, no games added; could not find any games for Party Pack ${requestedPack}.`);
+            }
+            return true;
+        }
+
         //========= player queue management =========
         if (message === "!caniplay" || message.startsWith("!new") || (message.toLowerCase().startsWith("!dew") && this.props?.channel?.toLowerCase() === 'dewinblack')) {
             this.props?.caniplayHandler(username, {
@@ -440,7 +467,7 @@ export default class MessageHandler extends Component {
 
     checkForSubrequest = (message, username, subscriber) => {
         if (!message.startsWith(GAME_SUBREQUEST_COMMAND)) return;
-        if (subscriber !== true && this.props.channel !== username) {
+        if (subscriber !== true && this.props.channel !== username && username.toLowerCase() !== 'dannyzonegames') {
             this.sendMessage(`/me @${username}, you must be a subscriber to use this command.`);
             return null;
         }
@@ -486,8 +513,8 @@ export default class MessageHandler extends Component {
                     previous += `, followed by ${this.props.previousGames[1].name}`
                     for (let i = 2; i < this.props.previousGames.length; i++) {
                         previous += (i+1 === this.props.previousGames.length)
-                            ? `, ${this.props.previousGames[i].name}`
-                            : `, and ${this.props.previousGames[i].name}`; // oxford comma, y'all
+                            ? `, and ${this.props.previousGames[i].name}` // oxford comma, y'all
+                            : `, ${this.props.previousGames[i].name}`;
                     }
                 }
                 this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)
@@ -521,18 +548,27 @@ export default class MessageHandler extends Component {
 
 
         let prevRequestedGameName = null;
+        let prevSubRequestedGameName = null;
         for (const metadata of Object.values(this.props.messages)) {
-            if (metadata.username === tags.username) {
-                prevRequestedGameName = metadata.longName;
+            if (metadata.username === tags.username && metadata.isSubRequest === isSubRequest) {
+                if (isSubRequest) {
+                    prevSubRequestedGameName = metadata.longName;
+                } else {
+                    prevRequestedGameName = metadata.longName;
+                }
                 break;
             }
         }
 
-        if (prevRequestedGameName) {
+        let enableSubRequestLimit = this.props.settings?.enableSubRequestLimit;
+        if (prevRequestedGameName || prevSubRequestedGameName) {
             if (this.props.channel === tags.username) {
                 this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue. Your previous game request(s) weren't deleted, since you have special broadcaster privilege :P`);
-            } else if (isSubRequest && !this.props.settings?.enableSubRequestLimit) {
+            } else if (isSubRequest && (!enableSubRequestLimit || (enableSubRequestLimit && !prevSubRequestedGameName))) {
                 this.sendMessage(`/me @${tags.username}, ${gameObj.name} has been added to the request queue via a subrequest.`);
+            } else if (prevSubRequestedGameName) {
+                this.props.onDelete(prevSubRequestedGameName);
+                this.sendMessage(`/me @${tags.username}, your previous request of ${prevSubRequestedGameName} has been replaced with ${gameObj.name}.`);
             } else {
                 this.props.onDelete(prevRequestedGameName);
                 this.sendMessage(`/me @${tags.username}, your previous request of ${prevRequestedGameName} has been replaced with ${gameObj.name}.`);
@@ -545,6 +581,26 @@ export default class MessageHandler extends Component {
         }
 
         this.props.addGameRequest(gameObj, tags.username, isSubRequest);
+        return;
+    }
+
+    addPack = (pack, username) => {
+        for (let partyPackName in this.state.validGames) {
+            let packslug = partyPackName.trim().toLowerCase().replace(/([^\d]+)/gi, '');
+            window.console.log({packslug, pack});
+            if (packslug === pack) {
+                let partyPackObj = this.state.validGames[partyPackName]
+                for (const [formalGameName, metadata] of Object.entries(partyPackObj)) {
+                     this.props.addGameRequest({
+                        name: formalGameName,
+                        longName: `${formalGameName} (${partyPackName})`,
+                        partyPack: partyPackName,
+                        ...metadata
+                    }, username, false);
+                }
+                return {name: partyPackName};
+            }
+        }
         return;
     }
 
