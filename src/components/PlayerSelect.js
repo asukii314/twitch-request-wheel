@@ -248,7 +248,8 @@ export default class PlayerSelect extends Component {
     }
 
     sendCode = (userObj) => {
-        console.log('sendCode', userObj, this.state.roomCode);
+        console.log('sendCode', userObj['user-id'], this.state.roomCode);
+        return this.props.sendWhisper(userObj['user-id'], this.state.roomCode);
     }
 
     render() {

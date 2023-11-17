@@ -10,6 +10,7 @@ class AuthenticatedApp extends Component {
         super();
         this.state = {
             username: localStorage.getItem('__username'),
+            user_id: localStorage.getItem('__user_id'),
             access_token: localStorage.getItem('__access_token'),
             failed_login: false
         }
@@ -38,6 +39,7 @@ class AuthenticatedApp extends Component {
             console.error(e);
         }
         localStorage.removeItem('__username');
+        localStorage.removeItem('__user_id');
         localStorage.removeItem('__access_token');
 
         const queryParams = queryString.parse(this.props.location.search);
@@ -96,6 +98,7 @@ class AuthenticatedApp extends Component {
         .then(userInfo => {
             //console.log(userInfo); login [aka lowercase username?], display_name, profile_image_url, description
             localStorage.setItem('__username', userInfo.data[0].login);
+            localStorage.setItem('__user_id', userInfo.data[0].id);
             return fetch(`https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=${userInfo.data[0].id}`, {
                 headers: {
                     'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
@@ -110,6 +113,7 @@ class AuthenticatedApp extends Component {
                 if (this._isMounted) {
                     return this.setState({
                         username: userInfo.data[0].login,
+                        user_id: userInfo.data[0].id,
                         modList
                     });
                 }
@@ -120,6 +124,7 @@ class AuthenticatedApp extends Component {
 
     logOut() {
         localStorage.removeItem('__username');
+        localStorage.removeItem('__user_id');
         localStorage.removeItem('__access_token');
 
         const requestParams = new URLSearchParams({
@@ -154,6 +159,7 @@ class AuthenticatedApp extends Component {
             mainContent = (
                 <MainScreen
                     channel={this.state.username}
+                    id={this.state.user_id}
                     modList={this.state.modList}
                     access_token={this.state.access_token}
                     onLogout={this.logOut}

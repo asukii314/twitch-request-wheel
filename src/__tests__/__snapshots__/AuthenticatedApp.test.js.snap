@@ -7,6 +7,7 @@ exports[`AuthenticatedApp render should render with MainScreen 1`] = `
   <MainScreen
     access_token="yadayadayada"
     channel="sirgoosewell"
+    id="123456789"
     modList={Array []}
     onLogout={[Function]}
   />

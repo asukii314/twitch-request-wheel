@@ -423,12 +423,17 @@ export default class MainScreen extends Component {
     // https://dev.twitch.tv/docs/api/reference/#send-whisper
     // note: access token must include user:manage:whispers scope
     // note: sending user must have a verified phone number
-    sendWhisper = ({player_id, msg, channel_id}) => {
+    sendWhisper = (player_id, msg) => {
+        console.log('sendWhisper', {
+            from: this.props.id,
+            to: player_id,
+            msg
+        });
         let requestParams = new URLSearchParams({
-            from_user_id: channel_id,
+            from_user_id: this.props.id,
             to_user_id: player_id
         });
-        let requestBody = {message: msg}; 
+        let requestBody = {message: msg};
         return fetch(`https://api.twitch.tv/helix/whispers?${requestParams}`, {
             method: 'POST',
             body: JSON.stringify(requestBody),
@@ -438,7 +443,16 @@ export default class MainScreen extends Component {
                 'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
                 'Content-Type': 'application/json'
             }
-        }).then(console.log);
+        }).then(response => {
+            console.log(response.ok);
+            console.log(response.status);
+            console.log(response.statusText);
+            console.log(response.headers.get('content-type'));
+            return response.json().then(data => {
+                console.log({data});
+                return;
+            });
+        });
     }
 
     startGame = () => {
@@ -567,6 +581,7 @@ export default class MainScreen extends Component {
             innerContent = (
                 <PlayerSelect
                     game={this.state.history?.[this.state.nextGameIdx]}
+                    sendWhisper={this.sendWhisper}
                     startGame={this.startGame}
                     ref={this.setPlayerSelectRef}
                     userLookup={this.state.userLookup}

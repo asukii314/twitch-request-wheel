@@ -777,6 +777,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
         className="left-column-inner-body"
       >
         <PlayerSelect
+          sendWhisper={[Function]}
           startGame={[Function]}
           userLookup={Object {}}
         />

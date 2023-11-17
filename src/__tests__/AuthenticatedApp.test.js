@@ -24,13 +24,13 @@ describe('AuthenticatedApp', () => {
     		action: 'POP',
     		location: {
     			pathname: '/',
-    			search: '?code=foobar&scope=chat:read chat:edit moderation:read',
+    			search: '?code=foobar&scope=chat:read chat:edit moderation:read whispers:edit',
     			hash: ""
     		}
     	},
     	location: {
     		pathname: '/',
-    		search: '?code=foobar&scope=chat:read chat:edit moderation:read',
+    		search: '?code=foobar&scope=chat:read chat:edit moderation:read whispers:edit',
     		hash: ""
     	},
     	match: {
@@ -75,7 +75,7 @@ describe('AuthenticatedApp', () => {
     describe('getAuth', () => {
         const props = {
             location: {
-                search: 'code=54vabs9d2sd1f08pk4bjmwyjpx3iju&scope=chat%3Aread+chat%3Aedit+moderation%3Aread'
+                search: 'code=54vabs9d2sd1f08pk4bjmwyjpx3iju&scope=chat%3Aread+chat%3Aedit+moderation%3Aread+whispers%3Aedit'
             }
         }
         test('should call setState and getUsers', async () => {
@@ -95,7 +95,7 @@ describe('AuthenticatedApp', () => {
 
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(2);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
             expect(component.getUsers).toHaveBeenCalledTimes(1);
             expect(component.setState).toHaveBeenCalledWith({access_token: 'vroom-vroom-lewmon-crew'});
         });
@@ -115,7 +115,7 @@ describe('AuthenticatedApp', () => {
             await component.getAuth('error stub');
 
             expect(console.error).toHaveBeenCalledWith('error stub');
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(2);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
             expect(component.setState).toHaveBeenCalledWith({
                 failed_login: true
             });
@@ -134,7 +134,7 @@ describe('AuthenticatedApp', () => {
 
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(2);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
             expect(component.setState).toHaveBeenCalledWith({
                 failed_login: true
             });
@@ -158,7 +158,7 @@ describe('AuthenticatedApp', () => {
             await component.getAuth();
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(4);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(6);
             expect(component.setState).toHaveBeenCalledTimes(0);
         });
     });
@@ -166,7 +166,7 @@ describe('AuthenticatedApp', () => {
     describe('getUsers', () => {
         const props = {
             location: {
-                search: 'code=54vabs9d2sd1f08pk4bjmwyjpx3iju&scope=chat%3Aread+chat%3Aedit+moderation%3Aread'
+                search: 'code=54vabs9d2sd1f08pk4bjmwyjpx3iju&scope=chat%3Aread+chat%3Aedit+moderation%3Aread+whispers%3Aedit'
             }
         }
         test('should call setState with broadcaster and list of mods', async () => {
@@ -205,9 +205,10 @@ describe('AuthenticatedApp', () => {
 
             await component.getUsers();
 
-            expect(window.localStorage.__proto__.setItem).toHaveBeenCalledTimes(1);
+            expect(window.localStorage.__proto__.setItem).toHaveBeenCalledTimes(2);
             expect(component.setState).toHaveBeenCalledWith({
                 username: 'sirfarewell',
+                user_id: '123456789',
                 modList: ['heroofthesprites']
             });
         });
@@ -235,7 +236,7 @@ describe('AuthenticatedApp', () => {
 
             await component.getUsers();
 
-            expect(window.localStorage.__proto__.setItem).toHaveBeenCalledTimes(1);
+            expect(window.localStorage.__proto__.setItem).toHaveBeenCalledTimes(2);
             expect(component.setState).toHaveBeenCalledTimes(0);
         });
     });
@@ -261,7 +262,7 @@ describe('AuthenticatedApp', () => {
             let component = new AuthenticatedApp();
             await component.logOut();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(2);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
             expect(window.location.reload).toHaveBeenCalled();
         });
     });
