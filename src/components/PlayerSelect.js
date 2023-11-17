@@ -14,6 +14,8 @@ export default class PlayerSelect extends Component {
             interested: [],
             playing: [],
             joined: [],
+            roomCode: null,
+            sentCodeStatus: {},
             streamerSeat: false,
             isQueueOpen: true
         }
@@ -65,6 +67,15 @@ export default class PlayerSelect extends Component {
             ? 'you have successfully joined the lobby.'
             : 'there was an error adding you to the lobby.';
     }
+
+    handleRoomCodeChange = (evt) => {
+        let roomCode;
+        if (evt.target?.value) {
+            roomCode = evt.target.value.trim();
+        }
+        this.setState({roomCode});
+    }
+    handleRoomCodeFocus = (evt) => evt.target.select();
 
     updateColumnForUser = (userObj, newColumn) => {
         if (!this.state || !this.state[newColumn]) return false;
@@ -148,7 +159,8 @@ export default class PlayerSelect extends Component {
                 ...state,
                 interested: [],
                 playing: [],
-                joined: []
+                joined: [],
+                roomCode: null
             };
         })
         this.props.startGame();
@@ -186,6 +198,11 @@ export default class PlayerSelect extends Component {
     }
 
     renderPlayerCard = (userObj, id, curColumn) => {
+        if (this.props.userLookup && this.props.userLookup[userObj?.username]) {
+            let metadata = this.props.userLookup[userObj.username];
+            userObj = Object.assign({}, userObj, metadata);
+        }
+
         return (
             <div key={id} className="player-card lh-sm fs-5">
                 <div className="player-card-username">
@@ -195,6 +212,7 @@ export default class PlayerSelect extends Component {
                     }}>{userObj.username}</p>
                 </div>
                 <div className="change-col-buttons-container">
+                    {curColumn === 'playing' && this.state.roomCode != null && <button className="change-col send-code" onClick={ this.sendCode.bind(this, userObj) }>Send Code</button>}
                     {curColumn !== 'interested' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
                     {curColumn !== 'playing' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
                     {/*curColumn !== 'joined' && <button className='change-col' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
@@ -206,7 +224,7 @@ export default class PlayerSelect extends Component {
 
     renderStreamerSeatToggle = () => {
         return (
-            <div className="toggle-streamer-seat">
+            <div className="toggle-streamer-seat card-header-item">
                 <label className="toggle-label form-check-label" htmlFor="reserve-seat-for-streamer">
                     Reserve seat for streamer?
                 </label>
@@ -229,10 +247,29 @@ export default class PlayerSelect extends Component {
         );
     }
 
+    sendCode = (userObj) => {
+        console.log('sendCode', userObj, this.state.roomCode);
+    }
+
     render() {
         let startGameClass = 'btn btn-sm start-game';
         if (this.playerCount() < this.props.game?.['Min players']){
             startGameClass += ' disabled';
+        }
+
+        let inputRoomCode;
+        if (this.state.playing.length > 0) {
+            inputRoomCode = (
+                <>
+                    <label id="room-code-label" className="card-header-item-label" htmlFor="room-code">Room Code</label>
+                    <input type="password" name="room-code" value={this.state.roomCode || ''} size="5"
+                        autoComplete="new-password"
+                        aria-autocomplete="none"
+                        aria-describedby="room-code-label"
+                        onChange={this.handleRoomCodeChange}
+                        onFocus={this.handleRoomCodeFocus} />
+                </>
+            );
         }
 
         return (
@@ -243,7 +280,11 @@ export default class PlayerSelect extends Component {
                         <b>{this.props.game?.name ?? "TBD"}</b>
                         {this.renderPlayerCount()}
                     </div>
-                    <button className={startGameClass} onClick={this.startGame} disabled={!this.canStartGame()}>Start Game</button>
+
+                    <div className="card-header-iteem d-flex align-items-center">
+                        {inputRoomCode}
+                        <button className={startGameClass} onClick={this.startGame} disabled={!this.canStartGame()}>Start Game</button>
+                    </div>
                 </div>
                 <div className="card-body player-card-container">
                     <div ref={this.firstColumn} className='player-card-column interested'>

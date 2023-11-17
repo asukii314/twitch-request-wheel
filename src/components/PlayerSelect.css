@@ -22,6 +22,12 @@ div.change-col-buttons-container .change-col {
     background-color: tomato;
     border-radius: 1rem;
 }
+div.change-col-buttons-container .change-col.send-code {
+    background-color: #d3d3d3;
+}
+div.change-col-buttons-container .change-col.send-code:hover {
+    background-color: #e3e3e3;
+}
 
 .player-card:hover {
     background-color: dimgray;
@@ -130,17 +136,23 @@ button.dice > img {
     vertical-align: unset;
 }
 
-.toggle-streamer-seat {
+.toggle-streamer-seat,
+.card-header-item {
     display: flex;
     align-items: center;
 }
 
-.toggle-streamer-seat .toggle-label {
+.toggle-streamer-seat .toggle-label,
+.card-header-item-label {
     font-size: 12px;
-    max-width: 80px;
+    max-width: 40px;
     overflow-wrap: break-word;
-    text-align: right;
+    text-align: center;
     margin-right: 8px;
+}
+.toggle-streamer-seat .toggle-label {
+    max-width: 80px;
+    text-align: right;
 }
 
 .toggle-streamer-seat .form-switch {

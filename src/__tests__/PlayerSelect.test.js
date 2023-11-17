@@ -19,7 +19,8 @@ describe('PlayerSelect', () => {
                 'blatheround'
             ],
             override: true
-        }
+        },
+        userLookup: {}
     };
     const propsTMP2 = {
         game: {
@@ -38,7 +39,8 @@ describe('PlayerSelect', () => {
             locked: false,
             chosen: false,
             override: false
-        }
+        },
+        userLookup: {}
     };
     const state = {
         interested: [
@@ -356,15 +358,16 @@ describe('PlayerSelect', () => {
         });
         test('should render component using Blather data', () => {
             const shallowRenderer = createRenderer();
-            shallowRenderer.render(<PlayerSelect game={propsBlather.game} />);
+            shallowRenderer.render(<PlayerSelect game={propsBlather.game} userLookup={propsBlather.userLookup} />);
             let instance = shallowRenderer.getMountedInstance();
             instance.setState(state);
-            expect(shallowRenderer.getRenderOutput()).toMatchSnapshot();
+            let component = shallowRenderer.getRenderOutput();
+            expect(component).toMatchSnapshot();
             shallowRenderer.unmount();
         });
         test('should render component using TMP2 data', () => {
             const shallowRenderer = createRenderer();
-            shallowRenderer.render(<PlayerSelect game={propsTMP2.game} />);
+            shallowRenderer.render(<PlayerSelect game={propsTMP2.game} userLookup={propsTMP2.userLookup} />);
             let instance = shallowRenderer.getMountedInstance();
             instance.setState(state);
             expect(shallowRenderer.getRenderOutput()).toMatchSnapshot();
