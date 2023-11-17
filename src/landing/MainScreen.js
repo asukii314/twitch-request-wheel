@@ -48,7 +48,8 @@ export default class MainScreen extends Component {
             settings,
             showOptionsMenu: false,
             showOptionsModal: false,
-            showPlayerSelect: false
+            showPlayerSelect: false,
+            userLookup: {}
         };
 
         this.playerSelector = null;
@@ -75,6 +76,8 @@ export default class MainScreen extends Component {
         this.sendWhisper = this.sendWhisper.bind(this);
         this.setMessageHandlerRef = this.setMessageHandlerRef.bind(this);
         this.setPlayerSelectRef = this.setPlayerSelectRef.bind(this);
+
+        this.toggleUserMessageLogging = this.toggleUserMessageLogging.bind(this);
     }
 
     componentDidMount() {
@@ -248,11 +251,15 @@ export default class MainScreen extends Component {
         }, {
             label: 'Toggle User Message Logging',
             onClick: () => {
-                return this.setState(prevState => ({
-                    logUserMessages: !prevState.logUserMessages
-                }));
+                return this.toggleUserMessageLogging();
             }
         }];
+    }
+
+    toggleUserMessageLogging = () => {
+        return this.setState(prevState => ({
+            logUserMessages: !prevState.logUserMessages
+        }), () => console.log('toggleUserMessageLogging | new state: ', this.state.logUserMessages?.toString()));
     }
 
     getOptionsMenu = () => {
@@ -327,6 +334,11 @@ export default class MainScreen extends Component {
 
     onMessage = (message, user, metadata) => {
         this.chatActivity.updateLastMessageTime(user);
+        if (!this.state.userLookup[user] && metadata && metadata['user-id']) {
+            this.setState(prevState => ({
+                userLookup: Object.assign({}, prevState.userLookup, {[user]: metadata})
+            }));
+        }
     }
 
     onSettingsUpdate = (nextSettings) => {
@@ -557,6 +569,7 @@ export default class MainScreen extends Component {
                     game={this.state.history?.[this.state.nextGameIdx]}
                     startGame={this.startGame}
                     ref={this.setPlayerSelectRef}
+                    userLookup={this.state.userLookup}
                 />
             );
         } else {
@@ -614,6 +627,7 @@ export default class MainScreen extends Component {
                     channel={this.props.channel}
                     clearQueueHandler={this.routeClearQueueRequest}
                     closeQueueHandler={this.routeCloseQueueRequest}
+                    logUserMessages={this.state.logUserMessages}
                     messages={this.state.messages}
                     modList={this.props.modList}
                     onDelete={this.removeGame}

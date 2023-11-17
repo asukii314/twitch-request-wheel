@@ -131,6 +131,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
             "showOptionsMenu": false,
             "showOptionsModal": false,
             "showPlayerSelect": false,
+            "userLookup": Object {},
           }
         }
         removeSelectedGameFromHistory={[Function]}
@@ -278,6 +279,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
         "showOptionsMenu": false,
         "showOptionsModal": false,
         "showPlayerSelect": false,
+        "userLookup": Object {},
       }
     }
     settings={Object {}}
@@ -433,6 +435,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
             "showOptionsMenu": false,
             "showOptionsModal": false,
             "showPlayerSelect": false,
+            "userLookup": Object {},
           }
         }
         removeSelectedGameFromHistory={[Function]}
@@ -624,6 +627,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
         "showOptionsMenu": false,
         "showOptionsModal": false,
         "showPlayerSelect": false,
+        "userLookup": Object {},
       }
     }
     settings={Object {}}
@@ -762,6 +766,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
             "showOptionsMenu": false,
             "showOptionsModal": false,
             "showPlayerSelect": true,
+            "userLookup": Object {},
           }
         }
         removeSelectedGameFromHistory={[Function]}
@@ -773,6 +778,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       >
         <PlayerSelect
           startGame={[Function]}
+          userLookup={Object {}}
         />
       </div>
     </div>
@@ -853,6 +859,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
         "showOptionsMenu": false,
         "showOptionsModal": false,
         "showPlayerSelect": true,
+        "userLookup": Object {},
       }
     }
     settings={Object {}}
