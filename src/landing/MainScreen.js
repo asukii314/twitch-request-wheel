@@ -72,6 +72,7 @@ export default class MainScreen extends Component {
         this.routeCloseQueueRequest = this.routeCloseQueueRequest.bind(this);
         this.routeClearQueueRequest = this.routeClearQueueRequest.bind(this);
         this.startGame = this.startGame.bind(this);
+        this.sendWhisper = this.sendWhisper.bind(this);
         this.setMessageHandlerRef = this.setMessageHandlerRef.bind(this);
         this.setPlayerSelectRef = this.setPlayerSelectRef.bind(this);
     }
@@ -405,6 +406,27 @@ export default class MainScreen extends Component {
 
     routeClearQueueRequest = () => {
         this.playerSelector?.clearQueue();
+    }
+
+    // https://dev.twitch.tv/docs/api/reference/#send-whisper
+    // note: access token must include user:manage:whispers scope
+    // note: sending user must have a verified phone number
+    sendWhisper = ({player_id, msg, channel_id}) => {
+        let requestParams = new URLSearchParams({
+            from_user_id: channel_id,
+            to_user_id: player_id
+        });
+        let requestBody = {message: msg}; 
+        return fetch(`https://api.twitch.tv/helix/whispers?${requestParams}`, {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                // Accept: 'application/vnd.twitchtv.v5+json',
+                Authorization: `Bearer ${this.props.access_token}`,
+                'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
+                'Content-Type': 'application/json'
+            }
+        }).then(console.log);
     }
 
     startGame = () => {
