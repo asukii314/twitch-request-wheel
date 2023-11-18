@@ -201,6 +201,12 @@ export default class OptionsMenu extends Component {
             }
             onSettingsUpdate({customDelimiter: value});
         };
+        let toggleEnableRoomCode = () => {
+            let value = typeof settings?.enableRoomCode === 'boolean'
+                ? !settings?.enableRoomCode
+                : true;
+            onSettingsUpdate({enableRoomCode: value});
+        };
 
         return (
             <Offcanvas
@@ -254,7 +260,14 @@ export default class OptionsMenu extends Component {
                                     >
                                         <span>Use Custom Delimiter: </span>
                                         <input type="text" name="custom-delimiter" defaultValue={settings?.customDelimiter}
-                                        onChange={updateCustomDelimiter} />
+                                        onChange={updateCustomDelimiter} className="form-control" />
+                                    </Button>
+
+                                    <Button variant="link" className="btn settings-menu"
+                                        onClick={toggleEnableRoomCode}
+                                        title="Allows host to set a room code that can be whispered to players."
+                                    >
+                                        <input type="checkbox" role="switch" checked={(settings?.enableRoomCode)} readOnly /> <span>Enable Room Code <small>(beta)</small></span>
                                     </Button>
                                 </div>
                             </div>

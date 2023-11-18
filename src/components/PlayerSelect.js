@@ -203,19 +203,55 @@ export default class PlayerSelect extends Component {
             userObj = Object.assign({}, userObj, metadata);
         }
 
+        let displaySendCodeBtn = (this.props.settings?.enableRoomCode && this.state.roomCode != null);
+
+        // let btnJoined;
+        let btnPlaying;
+        let btnInterested;
+        let btnSendCode;
+
+        // if (curColumn !== 'joined') {
+        //     btnJoined = (
+        //         <button className='change-col' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>
+        //     );
+        // }
+        if (curColumn !== 'playing') {
+            btnPlaying = (
+                <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>
+            );
+        }
+        if (curColumn !== 'interested') {
+            btnInterested = (
+                <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>
+            );
+        }
+        if (curColumn === 'playing' && displaySendCodeBtn) {
+            btnSendCode = (
+                <button className="change-col send-code" onClick={ this.sendCode.bind(this, userObj) }>Send Code</button>
+            );
+        }
+
+        let redemptionIndicator;
+        if (userObj.isPrioritySeat === true) {
+            redemptionIndicator = (
+                <img src={star} alt="Priority seat redemption"/>
+            );
+        }
+
+        let playerNameStyles = {
+            maxWidth: this.state.columnWidth - 25
+        };
         return (
             <div key={id} className="player-card lh-sm fs-5">
                 <div className="player-card-username">
-                    {userObj.isPrioritySeat === true && <img src={star} alt="Priority seat redemption"/>}
-                    <p className='player-name' style={{
-                        maxWidth: this.state.columnWidth - 25
-                    }}>{userObj.username}</p>
+                    {redemptionIndicator}
+                    <p className='player-name' style={playerNameStyles}>{userObj.username}</p>
                 </div>
                 <div className="change-col-buttons-container">
-                    {curColumn === 'playing' && this.state.roomCode != null && <button className="change-col send-code" onClick={ this.sendCode.bind(this, userObj) }>Send Code</button>}
-                    {curColumn !== 'interested' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'interested')}>Interested</button>}
-                    {curColumn !== 'playing' && <button className="change-col" onClick={this.updateColumnForUser.bind(this, userObj, 'playing')}>Playing</button>}
-                    {/*curColumn !== 'joined' && <button className='change-col' onClick={this.updateColumnForUser.bind(this, userObj, 'joined')}>Joined</button>*/}
+                    {btnSendCode}
+                    {btnInterested}
+                    {btnPlaying}
+                    {/*btnJoined*/}
                     <button className="change-col" onClick={this.removeUser.bind(this, userObj.username)}>X</button>
                 </div>
             </div>
@@ -248,8 +284,11 @@ export default class PlayerSelect extends Component {
     }
 
     sendCode = (userObj) => {
-        console.log('sendCode', userObj['user-id'], this.state.roomCode);
-        return this.props.sendWhisper(userObj['user-id'], this.state.roomCode);
+        let player = {
+            id: userObj['user-id'],
+            username: userObj.username
+        };
+        return this.props.sendWhisper(player, this.state.roomCode);
     }
 
     render() {
@@ -259,7 +298,7 @@ export default class PlayerSelect extends Component {
         }
 
         let inputRoomCode;
-        if (this.state.playing.length > 0) {
+        if (this.state.playing.length > 0 && this.props.settings?.enableRoomCode) {
             inputRoomCode = (
                 <>
                     <label id="room-code-label" className="card-header-item-label" htmlFor="room-code">Room Code</label>

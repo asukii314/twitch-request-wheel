@@ -136,26 +136,6 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
     <div
       className="card-header-iteem d-flex align-items-center"
     >
-      <React.Fragment>
-        <label
-          className="card-header-item-label"
-          htmlFor="room-code"
-          id="room-code-label"
-        >
-          Room Code
-        </label>
-        <input
-          aria-autocomplete="none"
-          aria-describedby="room-code-label"
-          autoComplete="new-password"
-          name="room-code"
-          onChange={[Function]}
-          onFocus={[Function]}
-          size="5"
-          type="password"
-          value=""
-        />
-      </React.Fragment>
       <button
         className="btn btn-sm start-game"
         disabled={true}
@@ -564,26 +544,6 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
     <div
       className="card-header-iteem d-flex align-items-center"
     >
-      <React.Fragment>
-        <label
-          className="card-header-item-label"
-          htmlFor="room-code"
-          id="room-code-label"
-        >
-          Room Code
-        </label>
-        <input
-          aria-autocomplete="none"
-          aria-describedby="room-code-label"
-          autoComplete="new-password"
-          name="room-code"
-          onChange={[Function]}
-          onFocus={[Function]}
-          size="5"
-          type="password"
-          value=""
-        />
-      </React.Fragment>
       <button
         className="btn btn-sm start-game"
         disabled={false}

@@ -778,6 +778,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       >
         <PlayerSelect
           sendWhisper={[Function]}
+          settings={Object {}}
           startGame={[Function]}
           userLookup={Object {}}
         />

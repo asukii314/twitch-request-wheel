@@ -423,15 +423,16 @@ export default class MainScreen extends Component {
     // https://dev.twitch.tv/docs/api/reference/#send-whisper
     // note: access token must include user:manage:whispers scope
     // note: sending user must have a verified phone number
-    sendWhisper = (player_id, msg) => {
-        console.log('sendWhisper', {
-            from: this.props.id,
-            to: player_id,
-            msg
-        });
+    /**
+     * Sends a message to the user specified in the player object
+     * @param {object} player Contains the username and id of recipient
+     * @param {string} msg The message to be sent
+     * @returns Promise
+     */
+    sendWhisper = (player, msg) => {
         let requestParams = new URLSearchParams({
             from_user_id: this.props.id,
-            to_user_id: player_id
+            to_user_id: player.id
         });
         let requestBody = {message: msg};
         return fetch(`https://api.twitch.tv/helix/whispers?${requestParams}`, {
@@ -443,15 +444,33 @@ export default class MainScreen extends Component {
                 'Client-ID': process.env.REACT_APP_TWITCH_CLIENT_ID,
                 'Content-Type': 'application/json'
             }
-        }).then(response => {
-            console.log(response.ok);
-            console.log(response.status);
-            console.log(response.statusText);
-            console.log(response.headers.get('content-type'));
-            return response.json().then(data => {
-                console.log({data});
-                return;
-            });
+        })
+        .then(async response => {
+            if (response.status !== 204) {
+                let errMsg = `Error ${response.status} sending to @${player.username}`;
+                // console.log(errMsg);
+                let errJson;
+                try {
+                    errJson = await response.json();
+                    if (errJson.error) {
+                        errMsg += `: ${errJson.error}`
+                    }
+                    errJson.player = player;
+                    console.log({errMsg, error: errJson});
+                } catch (e) {
+                    console.log({errMsg, error: e});
+                }
+                this.messageHandler?.sendMessage(`/me ${errMsg}`);
+                return Promise.resolve(errMsg);
+            }
+            let msg = `Code sent to @${player.username}`
+            this.messageHandler?.sendMessage(`/me ${msg}`);
+            return Promise.resolve(msg);
+        }).catch(error => {
+            let errMsg = `Error sending to @${player.username}, please check console for details.`;
+            console.log({errMsg, error});
+            this.messageHandler?.sendMessage(`/me ${errMsg}`);
+            return Promise.reject(errMsg);
         });
     }
 
@@ -582,6 +601,7 @@ export default class MainScreen extends Component {
                 <PlayerSelect
                     game={this.state.history?.[this.state.nextGameIdx]}
                     sendWhisper={this.sendWhisper}
+                    settings={this.state.settings}
                     startGame={this.startGame}
                     ref={this.setPlayerSelectRef}
                     userLookup={this.state.userLookup}

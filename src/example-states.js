@@ -508,7 +508,14 @@ const stateMainScreen = {
         }
     ],
     "nextGameIdx": 0,
-    "showPlayerSelect": false
+    "showPlayerSelect": false,
+    "userLookup": {
+        "dcpesses": {
+            "color": "#1E90FF",
+            "user-id": "473294395",
+            "username": "dcpesses"
+        }
+    }
 };
 
 const statePlayerSelect = {

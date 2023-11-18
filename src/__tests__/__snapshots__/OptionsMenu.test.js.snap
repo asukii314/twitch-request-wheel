@@ -167,10 +167,32 @@ exports[`OptionsMenu render should render with menu items 1`] = `
                 Use Custom Delimiter: 
               </span>
               <input
+                className="form-control"
                 name="custom-delimiter"
                 onChange={[Function]}
                 type="text"
               />
+            </Button>
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              onClick={[Function]}
+              title="Allows host to set a room code that can be whispered to players."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               
+              <span>
+                Enable Room Code 
+                <small>
+                  (beta)
+                </small>
+              </span>
             </Button>
           </div>
         </div>
@@ -388,10 +410,32 @@ exports[`OptionsMenu render should render without error 1`] = `
                 Use Custom Delimiter: 
               </span>
               <input
+                className="form-control"
                 name="custom-delimiter"
                 onChange={[Function]}
                 type="text"
               />
+            </Button>
+            <Button
+              active={false}
+              className="btn settings-menu"
+              disabled={false}
+              onClick={[Function]}
+              title="Allows host to set a room code that can be whispered to players."
+              variant="link"
+            >
+              <input
+                readOnly={true}
+                role="switch"
+                type="checkbox"
+              />
+               
+              <span>
+                Enable Room Code 
+                <small>
+                  (beta)
+                </small>
+              </span>
             </Button>
           </div>
         </div>
