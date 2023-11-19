@@ -73,6 +73,7 @@ export default class MainScreen extends Component {
         this.routeCloseQueueRequest = this.routeCloseQueueRequest.bind(this);
         this.routeClearQueueRequest = this.routeClearQueueRequest.bind(this);
         this.startGame = this.startGame.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
         this.sendWhisper = this.sendWhisper.bind(this);
         this.setMessageHandlerRef = this.setMessageHandlerRef.bind(this);
         this.setPlayerSelectRef = this.setPlayerSelectRef.bind(this);
@@ -420,6 +421,11 @@ export default class MainScreen extends Component {
         this.playerSelector?.clearQueue();
     }
 
+    sendMessage = (msg) => {
+        // this feels so janky...but it works
+        return this.messageHandler?.sendMessage(msg);
+    }
+
     // https://dev.twitch.tv/docs/api/reference/#send-whisper
     // note: access token must include user:manage:whispers scope
     // note: sending user must have a verified phone number
@@ -600,6 +606,7 @@ export default class MainScreen extends Component {
             innerContent = (
                 <PlayerSelect
                     game={this.state.history?.[this.state.nextGameIdx]}
+                    sendMessage={this.sendMessage}
                     sendWhisper={this.sendWhisper}
                     settings={this.state.settings}
                     startGame={this.startGame}

@@ -605,7 +605,7 @@ export default class MessageHandler extends Component {
     }
 
     sendMessage = (msg) => {
-        this.state.client.say(this.props.channel, msg)
+        return this.state.client.say(this.props.channel, msg);
     }
 
     setAllowedGames = (allowedGames) => {
