@@ -792,6 +792,7 @@ Standalone:
       - what a music
       - whatsmusic
       - whatmusic
+      - wam
 
   Crashword:
     Min players: 2
@@ -803,3 +804,15 @@ Standalone:
       - cashword
       - crashwrd
       - cw
+
+  Fall Guys:
+    Min players: 1
+    Max players: 4
+    Variants:
+      - fallguys
+      - fall guys
+      - fall guy
+      - fallguy
+      - falguys
+      - falguy
+      - fg
