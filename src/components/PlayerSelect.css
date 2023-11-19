@@ -47,8 +47,24 @@ div.change-col-buttons-container .change-col.send-code:hover {
     color: darkorange;
 }
 
-button.start-game {
-    margin: 15px;
+#main-screen button.btn.start-game {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+#main-screen .card-header-item > .input-group + button.start-game {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+button.start-game,
+.card-header-item > .input-group {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+input.room-code::placeholder {
+    /* letter-spacing: -0.5px; */
+    font-size: 90%;
 }
 
 .player-select .player-card-container {
@@ -148,7 +164,6 @@ button.dice > img {
     max-width: 40px;
     overflow-wrap: break-word;
     text-align: center;
-    margin-right: 8px;
 }
 .toggle-streamer-seat .toggle-label {
     max-width: 80px;
@@ -156,6 +171,7 @@ button.dice > img {
 }
 
 .toggle-streamer-seat .form-switch {
+    margin-left: 8px;
     padding-left: 3em;
 }
 .toggle-streamer-seat .form-switch .form-check-input {

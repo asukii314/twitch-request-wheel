@@ -44,7 +44,7 @@ exports[`PlayerSelect render should render component 1`] = `
       </div>
     </div>
     <div
-      className="card-header-iteem d-flex align-items-center"
+      className="card-header-item d-flex align-items-center align-self-center flex-column"
     >
       <button
         className="btn btn-sm start-game"
@@ -134,7 +134,7 @@ exports[`PlayerSelect render should render component using Blather data 1`] = `
       </div>
     </div>
     <div
-      className="card-header-iteem d-flex align-items-center"
+      className="card-header-item d-flex align-items-center align-self-center flex-column"
     >
       <button
         className="btn btn-sm start-game"
@@ -542,7 +542,7 @@ exports[`PlayerSelect render should render component using TMP2 data 1`] = `
       </div>
     </div>
     <div
-      className="card-header-iteem d-flex align-items-center"
+      className="card-header-item d-flex align-items-center align-self-center flex-column"
     >
       <button
         className="btn btn-sm start-game"

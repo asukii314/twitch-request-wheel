@@ -291,6 +291,34 @@ export default class PlayerSelect extends Component {
         return this.props.sendWhisper(player, this.state.roomCode);
     }
 
+    sendCodeToAll = () => {
+        if (!this.state.roomCode) {
+            return;
+        }
+        if (this.state.playing.length === 0) {
+            this.props.sendMessage('Sorry, can\'t send the code to 0 players. :p');
+            return;
+        }
+        let sendingToMsg = 'Sending room code to';
+        if (this.state.playing.length === 1) {
+            this.props.sendMessage(`${sendingToMsg} 1 person`);
+        } else {
+            this.props.sendMessage(`${sendingToMsg} ${this.state.playing.length} people`);
+        }
+
+        return this.state.playing.forEach((userObj, i) => {
+            (function(i, userObj, roomCode, props){
+                setTimeout(function(){
+                    let metadata = props.userLookup[userObj?.username] || {};
+                    return props.sendWhisper({
+                        id: metadata['user-id'],
+                        username: userObj.username
+                    }, roomCode);
+                }, 1000 * (i+1));
+            }(i, userObj, this.state.roomCode, this.props));
+        });
+    }
+
     render() {
         let startGameClass = 'btn btn-sm start-game';
         if (this.playerCount() < this.props.game?.['Min players']){
@@ -300,15 +328,18 @@ export default class PlayerSelect extends Component {
         let inputRoomCode;
         if (this.state.playing.length > 0 && this.props.settings?.enableRoomCode) {
             inputRoomCode = (
-                <>
-                    <label id="room-code-label" className="card-header-item-label" htmlFor="room-code">Room Code</label>
+                <div className="input-group input-group-sm">
                     <input type="password" name="room-code" value={this.state.roomCode || ''} size="5"
                         autoComplete="new-password"
                         aria-autocomplete="none"
                         aria-describedby="room-code-label"
+                        className="form-control room-code py-0"
                         onChange={this.handleRoomCodeChange}
-                        onFocus={this.handleRoomCodeFocus} />
-                </>
+                        onFocus={this.handleRoomCodeFocus}
+                        placeholder="Code"
+                        title="Paste Room Code Here" />
+                    <button className="btn btn-sm btn-outline-secondary" onClick={this.sendCodeToAll} title="Send Code to All Players">&#10132;</button>
+                </div>
             );
         }
 
@@ -321,9 +352,11 @@ export default class PlayerSelect extends Component {
                         {this.renderPlayerCount()}
                     </div>
 
-                    <div className="card-header-iteem d-flex align-items-center">
+                    <div className="card-header-item d-flex align-items-center align-self-center flex-column">
                         {inputRoomCode}
-                        <button className={startGameClass} onClick={this.startGame} disabled={!this.canStartGame()}>Start Game</button>
+                        <button className={startGameClass} onClick={this.startGame} disabled={!this.canStartGame()}>
+                            Start Game
+                        </button>
                     </div>
                 </div>
                 <div className="card-body player-card-container">
