@@ -435,12 +435,13 @@ export default class MainScreen extends Component {
      * @param {string} msg The message to be sent
      * @returns Promise
      */
-    sendWhisper = (player, msg) => {
+    sendWhisper = async (player, msg) => {
         let requestParams = new URLSearchParams({
             from_user_id: this.props.id,
             to_user_id: player.id
         });
         let requestBody = {message: msg};
+        await this.props.validateToken();
         return fetch(`https://api.twitch.tv/helix/whispers?${requestParams}`, {
             method: 'POST',
             body: JSON.stringify(requestBody),

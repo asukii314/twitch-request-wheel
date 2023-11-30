@@ -244,6 +244,7 @@ class AuthenticatedApp extends Component {
                     modList={this.state.modList}
                     access_token={this.state.access_token}
                     onLogout={this.logOut}
+                    validateToken={this.validateToken}
                 />
             );
         }
