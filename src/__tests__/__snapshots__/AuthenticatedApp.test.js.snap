@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AuthenticatedApp getAuth should call setState and getUsers 1`] = `
+Array [
+  Array [
+    Object {
+      "access_token": "vroom-vroom-lewmon-crew",
+      "expires_in": undefined,
+      "expiry_time": NaN,
+      "refresh_token": undefined,
+    },
+  ],
+]
+`;
+
 exports[`AuthenticatedApp render should render with MainScreen 1`] = `
 <div
   id="authenticated-app"
@@ -10,6 +23,7 @@ exports[`AuthenticatedApp render should render with MainScreen 1`] = `
     id="123456789"
     modList={Array []}
     onLogout={[Function]}
+    validateToken={[Function]}
   />
 </div>
 `;
