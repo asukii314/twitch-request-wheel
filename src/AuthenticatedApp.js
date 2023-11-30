@@ -12,11 +12,13 @@ class AuthenticatedApp extends Component {
             username: localStorage.getItem('__username'),
             user_id: localStorage.getItem('__user_id'),
             access_token: localStorage.getItem('__access_token'),
+            refresh_token: localStorage.getItem('__refresh_token'),
             failed_login: false
         }
         this.getAuth = this.getAuth.bind(this);
         this.getUsers = this.getUsers.bind(this);
         this.logOut = this.logOut.bind(this);
+        this.validateToken = this.validateToken.bind(this);
     }
 
     componentDidMount() {
@@ -41,6 +43,7 @@ class AuthenticatedApp extends Component {
         localStorage.removeItem('__username');
         localStorage.removeItem('__user_id');
         localStorage.removeItem('__access_token');
+        localStorage.removeItem('__refresh_token');
 
         const queryParams = queryString.parse(this.props.location.search);
         const requestParams = new URLSearchParams({
@@ -67,9 +70,11 @@ class AuthenticatedApp extends Component {
                 }
 
                 localStorage.setItem('__access_token', oauth.access_token);
+                localStorage.setItem('__refresh_token', oauth.refresh_token);
 
                 this.setState({
-                    access_token: oauth.access_token
+                    access_token: oauth.access_token,
+                    refresh_token: oauth.refresh_token
                 });
 
                 return this.getUsers(oauth.access_token);
@@ -126,6 +131,7 @@ class AuthenticatedApp extends Component {
         localStorage.removeItem('__username');
         localStorage.removeItem('__user_id');
         localStorage.removeItem('__access_token');
+        localStorage.removeItem('__refresh_token');
 
         const requestParams = new URLSearchParams({
             client_id: process.env.REACT_APP_TWITCH_CLIENT_ID,
@@ -140,6 +146,20 @@ class AuthenticatedApp extends Component {
             }
         }).then(() => {
             return window.location.reload();
+        });
+    }
+
+    async validateToken(token) {
+        return await fetch(`https://id.twitch.tv/oauth2/validate`, {
+            method: 'GET',
+            headers: {
+                Authorization: `OAuth ${token}`
+            }
+        })
+        .then(r => r.json())
+        .catch(e => {
+            console.error(e);
+            return;
         });
     }
 

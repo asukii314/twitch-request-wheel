@@ -95,7 +95,7 @@ describe('AuthenticatedApp', () => {
 
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(4);
             expect(component.getUsers).toHaveBeenCalledTimes(1);
             expect(component.setState).toHaveBeenCalledWith({access_token: 'vroom-vroom-lewmon-crew'});
         });
@@ -115,7 +115,7 @@ describe('AuthenticatedApp', () => {
             await component.getAuth('error stub');
 
             expect(console.error).toHaveBeenCalledWith('error stub');
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(4);
             expect(component.setState).toHaveBeenCalledWith({
                 failed_login: true
             });
@@ -134,7 +134,7 @@ describe('AuthenticatedApp', () => {
 
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(4);
             expect(component.setState).toHaveBeenCalledWith({
                 failed_login: true
             });
@@ -158,7 +158,7 @@ describe('AuthenticatedApp', () => {
             await component.getAuth();
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(6);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(8);
             expect(component.setState).toHaveBeenCalledTimes(0);
         });
     });
@@ -262,7 +262,7 @@ describe('AuthenticatedApp', () => {
             let component = new AuthenticatedApp();
             await component.logOut();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(4);
             expect(window.location.reload).toHaveBeenCalled();
         });
     });
