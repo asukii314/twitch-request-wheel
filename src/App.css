@@ -58,6 +58,10 @@
     /* min-height: 100vh; */
 }
 
+.App.theme {
+    font-size: inherit;
+}
+
 .App-logo {
     height: 40vmin;
     pointer-events: none;
@@ -70,7 +74,7 @@
 }
 
 .App-link {
-    color: #61dafb;
+    color: hsl(193, 95%, 68%);
 }
 
 .App .card {
@@ -93,4 +97,63 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Theme Colors */
+
+.App.theme.theme-legacy {
+    --bs-hue: 175deg;
+}
+
+.App.theme.theme-beta {
+    --bs-hue: 204deg;
+    /* background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 57%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(to bottom, rgba(175, 46, 168, 1) 0%, rgba(0, 69, 197, 1) 100%); */
+    background: 
+        radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%),
+        /* radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%), */
+        /* linear-gradient(to right, hsla(0, 0%, 100%, 0.5) 0%, hsla(0, 0%, 100%, 0) 10%, hsla(0, 0%, 100%, 0) 90%, hsla(0, 0%, 100%, 0.5) 100%), */
+        /* linear-gradient(to bottom, hsla(303, 50%, 50%, 0.5) 0%, #ffffff00 10%, hsla(0, 0%, 50%, 0) 90%, hsla(219, 50%, 50%, 0.5) 100%), */
+        linear-gradient(to bottom, hsl(303, 58%, 43%) 0%, hsl(219, 100%, 39%) 100%);
+}
+
+/* Theme Elements */
+
+.App.theme .App-link {
+    color: hsl(var(--bs-hue), 95%, 68%);
+}
+
+.App.theme .card,
+.App.theme #sidebar .card {
+    /* background-color: hsl(var(--bs-hue) 25% 25%); */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.App.theme #sidebar .nav-wrapper button {
+    background-color: hsl(var(--bs-hue) 100% 27%);
+}
+
+.App.theme button#sidebar-up-next {
+    background-color: hsl(var(--bs-hue) 100% 75%);
+}
+
+.App.theme #sidebar .sidebar-history-list-panel li b {
+    color: hsl(var(--bs-hue) 100% 75%);
+}
+
+.App.theme #main-screen .btn {
+    background-color: hsl(var(--bs-hue) 100% 27%);
+}
+
+.App.theme .player-card-column.interested {
+    background-color: rgba(144, 144, 144, 0.5);
+}
+
+.App.theme .player-card {
+    border-color: hsl(var(--bs-hue) 25% 50%);
+    background-color: rgba(127, 127, 127, 0.75);
+}
+
+.App.theme .player-card-column.playing {
+    background-color: hsl(var(--bs-hue) 100% 25%);
 }
