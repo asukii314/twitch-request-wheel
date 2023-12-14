@@ -2,8 +2,7 @@
 
 exports[`MainScreen render should render the game request screen 1`] = `
 <div
-  className="game-select"
-  id="main-screen"
+  className="main-screen-wrapper"
 >
   <nav
     className="main-screen-nav navbar-dark"
@@ -18,245 +17,22 @@ exports[`MainScreen render should render the game request screen 1`] = `
       />
     </button>
   </nav>
-  <MessageHandler
-    access_token="foo"
-    addGameRequest={[Function]}
-    allowGameRequests={true}
-    caniplayHandler={[Function]}
-    changeNextGameIdx={[Function]}
-    channel="sirgoosewell"
-    clearQueueHandler={[Function]}
-    closeQueueHandler={[Function]}
-    logUserMessages={false}
-    messages={
-      Object {
-        "Survive The Internet (Party Pack 4)": Object {
-          "Max players": 8,
-          "Min players": 3,
-          "Variants": Array [
-            "survive",
-            "survive the internet",
-            "sti",
-          ],
-          "chosen": false,
-          "locked": false,
-          "longName": "Survive The Internet (Party Pack 4)",
-          "name": "Survive The Internet",
-          "partyPack": "Party Pack 4",
-          "time": 1627509347466,
-          "username": "dcpesses",
-        },
-      }
-    }
-    modList={Array []}
-    onDelete={[Function]}
-    onMessage={[Function]}
-    onSettingsUpdate={[Function]}
-    openQueueHandler={[Function]}
-    playerExitHandler={[Function]}
-    previousGames={Array []}
-    removeSelectedGameFromHistory={[Function]}
-    setNextGame={[Function]}
-    settings={Object {}}
-    startGame={[Function]}
-    toggleAllowGameRequests={[Function]}
-    upcomingGames={Array []}
-  />
   <div
-    className="left-column fade-in"
+    className="game-select"
+    id="main-screen"
   >
-    <h1>
-      Game Requests
-    </h1>
-    <h4>
-      <span
-        className="subheading-game fade-in-delay"
-        onClick={[Function]}
-        title="Click to disable game requests."
-      >
-        Type e.g. 
-        <b>
-          "!request Blather Round"
-        </b>
-         in 
-        sirgoosewell
-        's chat to add
-      </span>
-    </h4>
-    <div
-      className="left-column-body"
-    >
-      <Sidebar
-        changeGameOrder={[Function]}
-        changeNextGameIdx={[Function]}
-        history={Array []}
-        moveNextGameBack={[Function]}
-        moveNextGameFwd={[Function]}
-        nextGameIdx={0}
-        parentState={
-          Object {
-            "allowGameRequests": true,
-            "colors": Array [
-              "#99b0fc",
-              "#b4a7f2",
-              "#beb4f7",
-              "#cdc2f9",
-              "#aec2f9",
-              "#a4d6f9",
-            ],
-            "counter": 1,
-            "gameSelected": null,
-            "history": Array [],
-            "logUserMessages": false,
-            "messages": Object {
-              "Survive The Internet (Party Pack 4)": Object {
-                "Max players": 8,
-                "Min players": 3,
-                "Variants": Array [
-                  "survive",
-                  "survive the internet",
-                  "sti",
-                ],
-                "chosen": false,
-                "locked": false,
-                "longName": "Survive The Internet (Party Pack 4)",
-                "name": "Survive The Internet",
-                "partyPack": "Party Pack 4",
-                "time": 1627509347466,
-                "username": "dcpesses",
-              },
-            },
-            "nextGameIdx": 0,
-            "settings": Object {},
-            "showOptionsMenu": false,
-            "showOptionsModal": false,
-            "showPlayerSelect": false,
-            "userLookup": Object {},
-          }
-        }
-        removeSelectedGameFromHistory={[Function]}
-        requestMode="game"
-        togglePlayerSelect={[Function]}
-      />
-      <div
-        className="left-column-inner-body"
-      >
-        <GameRequest
-          gameName="Survive The Internet (Party Pack 4)"
-          getActivity={[Function]}
-          metadata={
-            Object {
-              "Max players": 8,
-              "Min players": 3,
-              "Variants": Array [
-                "survive",
-                "survive the internet",
-                "sti",
-              ],
-              "chosen": false,
-              "locked": false,
-              "longName": "Survive The Internet (Party Pack 4)",
-              "name": "Survive The Internet",
-              "partyPack": "Party Pack 4",
-              "time": 1627509347466,
-              "username": "dcpesses",
-            }
-          }
-          onDelete={[Function]}
-          toggleLock={[Function]}
-        />
-      </div>
-    </div>
-  </div>
-  <div
-    className="right-column"
-    width="50px"
-  >
-    <div
-      className="wheel-wrapper fade-in"
-    >
-      <WheelComponent
-        contrastColor="black"
-        downDuration={1000}
-        fontFamily="Arial"
-        isOnlyOnce={false}
-        multilineDelimiter=" ("
-        onFinished={[Function]}
-        primaryColor="white"
-        segColors={
-          Array [
-            "#99b0fc",
-            "#b4a7f2",
-            "#beb4f7",
-            "#cdc2f9",
-            "#aec2f9",
-            "#a4d6f9",
-          ]
-        }
-        segments={
-          Array [
-            "Survive The Internet (Party Pack 4)",
-          ]
-        }
-        size={250}
-        upDuration={100}
-      />
-    </div>
-  </div>
-  <OptionsMenu
-    debugItems={
-      Array [
+    <MessageHandler
+      access_token="foo"
+      addGameRequest={[Function]}
+      allowGameRequests={true}
+      caniplayHandler={[Function]}
+      changeNextGameIdx={[Function]}
+      channel="sirgoosewell"
+      clearQueueHandler={[Function]}
+      closeQueueHandler={[Function]}
+      logUserMessages={false}
+      messages={
         Object {
-          "label": "Load Mock Game Requests",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Load Mock Game & Player Requests",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Log Debug Environment",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Toggle User Message Logging",
-          "onClick": [Function],
-        },
-      ]
-    }
-    gamesList={
-      Object {
-        "allowedGames": undefined,
-        "validGames": undefined,
-      }
-    }
-    items={
-      Array [
-        Object {
-          "label": "Reload Game List",
-          "onClick": undefined,
-        },
-      ]
-    }
-    onHide={[Function]}
-    onLogout={[MockFunction]}
-    onSettingsUpdate={[Function]}
-    parentState={
-      Object {
-        "allowGameRequests": true,
-        "colors": Array [
-          "#99b0fc",
-          "#b4a7f2",
-          "#beb4f7",
-          "#cdc2f9",
-          "#aec2f9",
-          "#a4d6f9",
-        ],
-        "counter": 1,
-        "gameSelected": null,
-        "history": Array [],
-        "logUserMessages": false,
-        "messages": Object {
           "Survive The Internet (Party Pack 4)": Object {
             "Max players": 8,
             "Min players": 3,
@@ -273,26 +49,253 @@ exports[`MainScreen render should render the game request screen 1`] = `
             "time": 1627509347466,
             "username": "dcpesses",
           },
-        },
-        "nextGameIdx": 0,
-        "settings": Object {},
-        "showOptionsMenu": false,
-        "showOptionsModal": false,
-        "showPlayerSelect": false,
-        "userLookup": Object {},
+        }
       }
-    }
-    settings={Object {}}
-    showOptionsMenu={false}
-    showSettingsMenu={false}
-  />
+      modList={Array []}
+      onDelete={[Function]}
+      onMessage={[Function]}
+      onSettingsUpdate={[Function]}
+      openQueueHandler={[Function]}
+      playerExitHandler={[Function]}
+      previousGames={Array []}
+      removeSelectedGameFromHistory={[Function]}
+      setNextGame={[Function]}
+      settings={Object {}}
+      startGame={[Function]}
+      toggleAllowGameRequests={[Function]}
+      upcomingGames={Array []}
+    />
+    <div
+      className="left-column fade-in"
+    >
+      <h1>
+        Game Requests
+      </h1>
+      <h4>
+        <span
+          className="subheading-game fade-in-delay"
+          onClick={[Function]}
+          title="Click to disable game requests."
+        >
+          Type e.g. 
+          <b>
+            "!request Blather Round"
+          </b>
+           in 
+          sirgoosewell
+          's chat to add
+        </span>
+      </h4>
+      <div
+        className="left-column-body"
+      >
+        <Sidebar
+          changeGameOrder={[Function]}
+          changeNextGameIdx={[Function]}
+          history={Array []}
+          moveNextGameBack={[Function]}
+          moveNextGameFwd={[Function]}
+          nextGameIdx={0}
+          parentState={
+            Object {
+              "allowGameRequests": true,
+              "colors": Array [
+                "#99b0fc",
+                "#b4a7f2",
+                "#beb4f7",
+                "#cdc2f9",
+                "#aec2f9",
+                "#a4d6f9",
+              ],
+              "counter": 1,
+              "gameSelected": null,
+              "history": Array [],
+              "logUserMessages": false,
+              "messages": Object {
+                "Survive The Internet (Party Pack 4)": Object {
+                  "Max players": 8,
+                  "Min players": 3,
+                  "Variants": Array [
+                    "survive",
+                    "survive the internet",
+                    "sti",
+                  ],
+                  "chosen": false,
+                  "locked": false,
+                  "longName": "Survive The Internet (Party Pack 4)",
+                  "name": "Survive The Internet",
+                  "partyPack": "Party Pack 4",
+                  "time": 1627509347466,
+                  "username": "dcpesses",
+                },
+              },
+              "nextGameIdx": 0,
+              "settings": Object {},
+              "showOptionsMenu": false,
+              "showOptionsModal": false,
+              "showPlayerSelect": false,
+              "userLookup": Object {},
+            }
+          }
+          removeSelectedGameFromHistory={[Function]}
+          requestMode="game"
+          togglePlayerSelect={[Function]}
+        />
+        <div
+          className="left-column-inner-body"
+        >
+          <GameRequest
+            gameName="Survive The Internet (Party Pack 4)"
+            getActivity={[Function]}
+            metadata={
+              Object {
+                "Max players": 8,
+                "Min players": 3,
+                "Variants": Array [
+                  "survive",
+                  "survive the internet",
+                  "sti",
+                ],
+                "chosen": false,
+                "locked": false,
+                "longName": "Survive The Internet (Party Pack 4)",
+                "name": "Survive The Internet",
+                "partyPack": "Party Pack 4",
+                "time": 1627509347466,
+                "username": "dcpesses",
+              }
+            }
+            onDelete={[Function]}
+            toggleLock={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="right-column"
+      width="50px"
+    >
+      <div
+        className="wheel-wrapper fade-in"
+      >
+        <WheelComponent
+          contrastColor="black"
+          downDuration={1000}
+          fontFamily="Arial"
+          isOnlyOnce={false}
+          multilineDelimiter=" ("
+          onFinished={[Function]}
+          primaryColor="white"
+          segColors={
+            Array [
+              "#99b0fc",
+              "#b4a7f2",
+              "#beb4f7",
+              "#cdc2f9",
+              "#aec2f9",
+              "#a4d6f9",
+            ]
+          }
+          segments={
+            Array [
+              "Survive The Internet (Party Pack 4)",
+            ]
+          }
+          size={250}
+          upDuration={100}
+        />
+      </div>
+    </div>
+    <OptionsMenu
+      debugItems={
+        Array [
+          Object {
+            "label": "Load Mock Game Requests",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Load Mock Game & Player Requests",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Log Debug Environment",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Toggle User Message Logging",
+            "onClick": [Function],
+          },
+        ]
+      }
+      gamesList={
+        Object {
+          "allowedGames": undefined,
+          "validGames": undefined,
+        }
+      }
+      items={
+        Array [
+          Object {
+            "label": "Reload Game List",
+            "onClick": undefined,
+          },
+        ]
+      }
+      onHide={[Function]}
+      onLogout={[MockFunction]}
+      onSettingsUpdate={[Function]}
+      parentState={
+        Object {
+          "allowGameRequests": true,
+          "colors": Array [
+            "#99b0fc",
+            "#b4a7f2",
+            "#beb4f7",
+            "#cdc2f9",
+            "#aec2f9",
+            "#a4d6f9",
+          ],
+          "counter": 1,
+          "gameSelected": null,
+          "history": Array [],
+          "logUserMessages": false,
+          "messages": Object {
+            "Survive The Internet (Party Pack 4)": Object {
+              "Max players": 8,
+              "Min players": 3,
+              "Variants": Array [
+                "survive",
+                "survive the internet",
+                "sti",
+              ],
+              "chosen": false,
+              "locked": false,
+              "longName": "Survive The Internet (Party Pack 4)",
+              "name": "Survive The Internet",
+              "partyPack": "Party Pack 4",
+              "time": 1627509347466,
+              "username": "dcpesses",
+            },
+          },
+          "nextGameIdx": 0,
+          "settings": Object {},
+          "showOptionsMenu": false,
+          "showOptionsModal": false,
+          "showPlayerSelect": false,
+          "userLookup": Object {},
+        }
+      }
+      settings={Object {}}
+      showOptionsMenu={false}
+      showSettingsMenu={false}
+    />
+  </div>
 </div>
 `;
 
 exports[`MainScreen render should render the game request screen with modal 1`] = `
 <div
-  className="game-select"
-  id="main-screen"
+  className="main-screen-wrapper"
 >
   <nav
     className="main-screen-nav navbar-dark"
@@ -307,113 +310,98 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       />
     </button>
   </nav>
-  <MessageHandler
-    access_token="foo"
-    addGameRequest={[Function]}
-    allowGameRequests={true}
-    caniplayHandler={[Function]}
-    changeNextGameIdx={[Function]}
-    channel="sirgoosewell"
-    clearQueueHandler={[Function]}
-    closeQueueHandler={[Function]}
-    logUserMessages={false}
-    messages={
-      Object {
-        "Survive The Internet (Party Pack 4)": Object {
-          "Max players": 8,
-          "Min players": 3,
-          "Variants": Array [
-            "survive",
-            "survive the internet",
-            "sti",
-          ],
-          "chosen": false,
-          "locked": false,
-          "longName": "Survive The Internet (Party Pack 4)",
-          "name": "Survive The Internet",
-          "partyPack": "Party Pack 4",
-          "time": 1627509347466,
-          "username": "dcpesses",
-        },
-      }
-    }
-    modList={Array []}
-    onDelete={[Function]}
-    onMessage={[Function]}
-    onSettingsUpdate={[Function]}
-    openQueueHandler={[Function]}
-    playerExitHandler={[Function]}
-    previousGames={Array []}
-    removeSelectedGameFromHistory={[Function]}
-    setNextGame={[Function]}
-    settings={Object {}}
-    startGame={[Function]}
-    toggleAllowGameRequests={[Function]}
-    upcomingGames={Array []}
-  />
   <div
-    className="left-column fade-in"
+    className="game-select"
+    id="main-screen"
   >
-    <h1>
-      Game Requests
-    </h1>
-    <h4>
-      <span
-        className="subheading-game fade-in-delay"
-        onClick={[Function]}
-        title="Click to disable game requests."
-      >
-        Type e.g. 
-        <b>
-          "!request Blather Round"
-        </b>
-         in 
-        sirgoosewell
-        's chat to add
-      </span>
-    </h4>
-    <div
-      className="left-column-body"
-    >
-      <Sidebar
-        changeGameOrder={[Function]}
-        changeNextGameIdx={[Function]}
-        history={Array []}
-        moveNextGameBack={[Function]}
-        moveNextGameFwd={[Function]}
-        nextGameIdx={0}
-        parentState={
-          Object {
-            "allowGameRequests": true,
-            "colors": Array [
-              "#99b0fc",
-              "#b4a7f2",
-              "#beb4f7",
-              "#cdc2f9",
-              "#aec2f9",
-              "#a4d6f9",
+    <MessageHandler
+      access_token="foo"
+      addGameRequest={[Function]}
+      allowGameRequests={true}
+      caniplayHandler={[Function]}
+      changeNextGameIdx={[Function]}
+      channel="sirgoosewell"
+      clearQueueHandler={[Function]}
+      closeQueueHandler={[Function]}
+      logUserMessages={false}
+      messages={
+        Object {
+          "Survive The Internet (Party Pack 4)": Object {
+            "Max players": 8,
+            "Min players": 3,
+            "Variants": Array [
+              "survive",
+              "survive the internet",
+              "sti",
             ],
-            "counter": 1,
-            "gameSelected": Object {
-              "Max players": 8,
-              "Min players": 3,
-              "Variants": Array [
-                "survive",
-                "survive the internet",
-                "sti",
+            "chosen": false,
+            "locked": false,
+            "longName": "Survive The Internet (Party Pack 4)",
+            "name": "Survive The Internet",
+            "partyPack": "Party Pack 4",
+            "time": 1627509347466,
+            "username": "dcpesses",
+          },
+        }
+      }
+      modList={Array []}
+      onDelete={[Function]}
+      onMessage={[Function]}
+      onSettingsUpdate={[Function]}
+      openQueueHandler={[Function]}
+      playerExitHandler={[Function]}
+      previousGames={Array []}
+      removeSelectedGameFromHistory={[Function]}
+      setNextGame={[Function]}
+      settings={Object {}}
+      startGame={[Function]}
+      toggleAllowGameRequests={[Function]}
+      upcomingGames={Array []}
+    />
+    <div
+      className="left-column fade-in"
+    >
+      <h1>
+        Game Requests
+      </h1>
+      <h4>
+        <span
+          className="subheading-game fade-in-delay"
+          onClick={[Function]}
+          title="Click to disable game requests."
+        >
+          Type e.g. 
+          <b>
+            "!request Blather Round"
+          </b>
+           in 
+          sirgoosewell
+          's chat to add
+        </span>
+      </h4>
+      <div
+        className="left-column-body"
+      >
+        <Sidebar
+          changeGameOrder={[Function]}
+          changeNextGameIdx={[Function]}
+          history={Array []}
+          moveNextGameBack={[Function]}
+          moveNextGameFwd={[Function]}
+          nextGameIdx={0}
+          parentState={
+            Object {
+              "allowGameRequests": true,
+              "colors": Array [
+                "#99b0fc",
+                "#b4a7f2",
+                "#beb4f7",
+                "#cdc2f9",
+                "#aec2f9",
+                "#a4d6f9",
               ],
-              "chosen": false,
-              "locked": false,
-              "longName": "Survive The Internet (Party Pack 4)",
-              "name": "Survive The Internet",
-              "partyPack": "Party Pack 4",
-              "time": 1627509347466,
-              "username": "dcpesses",
-            },
-            "history": Array [],
-            "logUserMessages": false,
-            "messages": Object {
-              "Survive The Internet (Party Pack 4)": Object {
+              "counter": 1,
+              "gameSelected": Object {
                 "Max players": 8,
                 "Min players": 3,
                 "Variants": Array [
@@ -429,183 +417,183 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
                 "time": 1627509347466,
                 "username": "dcpesses",
               },
-            },
-            "nextGameIdx": 0,
-            "settings": Object {},
-            "showOptionsMenu": false,
-            "showOptionsModal": false,
-            "showPlayerSelect": false,
-            "userLookup": Object {},
-          }
-        }
-        removeSelectedGameFromHistory={[Function]}
-        requestMode="game"
-        togglePlayerSelect={[Function]}
-      />
-      <div
-        className="left-column-inner-body"
-      >
-        <GameRequest
-          gameName="Survive The Internet (Party Pack 4)"
-          getActivity={[Function]}
-          metadata={
-            Object {
-              "Max players": 8,
-              "Min players": 3,
-              "Variants": Array [
-                "survive",
-                "survive the internet",
-                "sti",
-              ],
-              "chosen": false,
-              "locked": false,
-              "longName": "Survive The Internet (Party Pack 4)",
-              "name": "Survive The Internet",
-              "partyPack": "Party Pack 4",
-              "time": 1627509347466,
-              "username": "dcpesses",
+              "history": Array [],
+              "logUserMessages": false,
+              "messages": Object {
+                "Survive The Internet (Party Pack 4)": Object {
+                  "Max players": 8,
+                  "Min players": 3,
+                  "Variants": Array [
+                    "survive",
+                    "survive the internet",
+                    "sti",
+                  ],
+                  "chosen": false,
+                  "locked": false,
+                  "longName": "Survive The Internet (Party Pack 4)",
+                  "name": "Survive The Internet",
+                  "partyPack": "Party Pack 4",
+                  "time": 1627509347466,
+                  "username": "dcpesses",
+                },
+              },
+              "nextGameIdx": 0,
+              "settings": Object {},
+              "showOptionsMenu": false,
+              "showOptionsModal": false,
+              "showPlayerSelect": false,
+              "userLookup": Object {},
             }
           }
-          onDelete={[Function]}
-          toggleLock={[Function]}
+          removeSelectedGameFromHistory={[Function]}
+          requestMode="game"
+          togglePlayerSelect={[Function]}
+        />
+        <div
+          className="left-column-inner-body"
+        >
+          <GameRequest
+            gameName="Survive The Internet (Party Pack 4)"
+            getActivity={[Function]}
+            metadata={
+              Object {
+                "Max players": 8,
+                "Min players": 3,
+                "Variants": Array [
+                  "survive",
+                  "survive the internet",
+                  "sti",
+                ],
+                "chosen": false,
+                "locked": false,
+                "longName": "Survive The Internet (Party Pack 4)",
+                "name": "Survive The Internet",
+                "partyPack": "Party Pack 4",
+                "time": 1627509347466,
+                "username": "dcpesses",
+              }
+            }
+            onDelete={[Function]}
+            toggleLock={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="right-column"
+      width="50px"
+    >
+      <div
+        className="wheel-wrapper fade-in"
+      >
+        <WheelComponent
+          contrastColor="black"
+          downDuration={1000}
+          fontFamily="Arial"
+          isOnlyOnce={false}
+          multilineDelimiter=" ("
+          onFinished={[Function]}
+          primaryColor="white"
+          segColors={
+            Array [
+              "#99b0fc",
+              "#b4a7f2",
+              "#beb4f7",
+              "#cdc2f9",
+              "#aec2f9",
+              "#a4d6f9",
+            ]
+          }
+          segments={
+            Array [
+              "Survive The Internet (Party Pack 4)",
+            ]
+          }
+          size={250}
+          upDuration={100}
         />
       </div>
     </div>
-  </div>
-  <div
-    className="right-column"
-    width="50px"
-  >
-    <div
-      className="wheel-wrapper fade-in"
-    >
-      <WheelComponent
-        contrastColor="black"
-        downDuration={1000}
-        fontFamily="Arial"
-        isOnlyOnce={false}
-        multilineDelimiter=" ("
-        onFinished={[Function]}
-        primaryColor="white"
-        segColors={
-          Array [
+    <React.Fragment>
+      <div
+        className="overlay fade-in-out"
+      >
+        <div
+          className="confetti-wrapper"
+        >
+          <ConfettiExplosion
+            duration={3500}
+            floorHeight={1024}
+            floorWidth={1024}
+            force={0.6}
+            particleCount={100}
+          />
+        </div>
+      </div>
+      <div
+        className="confetti-modal modal-game-chosen fade-in-out"
+        onClick={[Function]}
+      >
+        <h1>
+          Survive The Internet
+        </h1>
+        <h4>
+          requested by @
+          dcpesses
+        </h4>
+      </div>
+    </React.Fragment>
+    <OptionsMenu
+      debugItems={
+        Array [
+          Object {
+            "label": "Load Mock Game Requests",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Load Mock Game & Player Requests",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Log Debug Environment",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Toggle User Message Logging",
+            "onClick": [Function],
+          },
+        ]
+      }
+      gamesList={
+        Object {
+          "allowedGames": undefined,
+          "validGames": undefined,
+        }
+      }
+      items={
+        Array [
+          Object {
+            "label": "Reload Game List",
+            "onClick": undefined,
+          },
+        ]
+      }
+      onHide={[Function]}
+      onLogout={[MockFunction]}
+      onSettingsUpdate={[Function]}
+      parentState={
+        Object {
+          "allowGameRequests": true,
+          "colors": Array [
             "#99b0fc",
             "#b4a7f2",
             "#beb4f7",
             "#cdc2f9",
             "#aec2f9",
             "#a4d6f9",
-          ]
-        }
-        segments={
-          Array [
-            "Survive The Internet (Party Pack 4)",
-          ]
-        }
-        size={250}
-        upDuration={100}
-      />
-    </div>
-  </div>
-  <React.Fragment>
-    <div
-      className="overlay fade-in-out"
-    >
-      <div
-        className="confetti-wrapper"
-      >
-        <ConfettiExplosion
-          duration={3500}
-          floorHeight={1024}
-          floorWidth={1024}
-          force={0.6}
-          particleCount={100}
-        />
-      </div>
-    </div>
-    <div
-      className="confetti-modal modal-game-chosen fade-in-out"
-      onClick={[Function]}
-    >
-      <h1>
-        Survive The Internet
-      </h1>
-      <h4>
-        requested by @
-        dcpesses
-      </h4>
-    </div>
-  </React.Fragment>
-  <OptionsMenu
-    debugItems={
-      Array [
-        Object {
-          "label": "Load Mock Game Requests",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Load Mock Game & Player Requests",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Log Debug Environment",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Toggle User Message Logging",
-          "onClick": [Function],
-        },
-      ]
-    }
-    gamesList={
-      Object {
-        "allowedGames": undefined,
-        "validGames": undefined,
-      }
-    }
-    items={
-      Array [
-        Object {
-          "label": "Reload Game List",
-          "onClick": undefined,
-        },
-      ]
-    }
-    onHide={[Function]}
-    onLogout={[MockFunction]}
-    onSettingsUpdate={[Function]}
-    parentState={
-      Object {
-        "allowGameRequests": true,
-        "colors": Array [
-          "#99b0fc",
-          "#b4a7f2",
-          "#beb4f7",
-          "#cdc2f9",
-          "#aec2f9",
-          "#a4d6f9",
-        ],
-        "counter": 1,
-        "gameSelected": Object {
-          "Max players": 8,
-          "Min players": 3,
-          "Variants": Array [
-            "survive",
-            "survive the internet",
-            "sti",
           ],
-          "chosen": false,
-          "locked": false,
-          "longName": "Survive The Internet (Party Pack 4)",
-          "name": "Survive The Internet",
-          "partyPack": "Party Pack 4",
-          "time": 1627509347466,
-          "username": "dcpesses",
-        },
-        "history": Array [],
-        "logUserMessages": false,
-        "messages": Object {
-          "Survive The Internet (Party Pack 4)": Object {
+          "counter": 1,
+          "gameSelected": Object {
             "Max players": 8,
             "Min players": 3,
             "Variants": Array [
@@ -621,26 +609,45 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
             "time": 1627509347466,
             "username": "dcpesses",
           },
-        },
-        "nextGameIdx": 0,
-        "settings": Object {},
-        "showOptionsMenu": false,
-        "showOptionsModal": false,
-        "showPlayerSelect": false,
-        "userLookup": Object {},
+          "history": Array [],
+          "logUserMessages": false,
+          "messages": Object {
+            "Survive The Internet (Party Pack 4)": Object {
+              "Max players": 8,
+              "Min players": 3,
+              "Variants": Array [
+                "survive",
+                "survive the internet",
+                "sti",
+              ],
+              "chosen": false,
+              "locked": false,
+              "longName": "Survive The Internet (Party Pack 4)",
+              "name": "Survive The Internet",
+              "partyPack": "Party Pack 4",
+              "time": 1627509347466,
+              "username": "dcpesses",
+            },
+          },
+          "nextGameIdx": 0,
+          "settings": Object {},
+          "showOptionsMenu": false,
+          "showOptionsModal": false,
+          "showPlayerSelect": false,
+          "userLookup": Object {},
+        }
       }
-    }
-    settings={Object {}}
-    showOptionsMenu={false}
-    showSettingsMenu={false}
-  />
+      settings={Object {}}
+      showOptionsMenu={false}
+      showSettingsMenu={false}
+    />
+  </div>
 </div>
 `;
 
 exports[`MainScreen render should render the player selection screen 1`] = `
 <div
-  className="player-select"
-  id="main-screen"
+  className="main-screen-wrapper"
 >
   <nav
     className="main-screen-nav navbar-dark"
@@ -655,191 +662,22 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       />
     </button>
   </nav>
-  <MessageHandler
-    access_token="foo"
-    addGameRequest={[Function]}
-    allowGameRequests={true}
-    caniplayHandler={[Function]}
-    changeNextGameIdx={[Function]}
-    channel="sirgoosewell"
-    clearQueueHandler={[Function]}
-    closeQueueHandler={[Function]}
-    logUserMessages={false}
-    messages={
-      Object {
-        "Survive The Internet (Party Pack 4)": Object {
-          "Max players": 8,
-          "Min players": 3,
-          "Variants": Array [
-            "survive",
-            "survive the internet",
-            "sti",
-          ],
-          "chosen": false,
-          "locked": false,
-          "longName": "Survive The Internet (Party Pack 4)",
-          "name": "Survive The Internet",
-          "partyPack": "Party Pack 4",
-          "time": 1627509347466,
-          "username": "dcpesses",
-        },
-      }
-    }
-    modList={Array []}
-    onDelete={[Function]}
-    onMessage={[Function]}
-    onSettingsUpdate={[Function]}
-    openQueueHandler={[Function]}
-    playerExitHandler={[Function]}
-    previousGames={Array []}
-    removeSelectedGameFromHistory={[Function]}
-    setNextGame={[Function]}
-    settings={Object {}}
-    startGame={[Function]}
-    toggleAllowGameRequests={[Function]}
-    upcomingGames={Array []}
-  />
   <div
-    className="left-column fade-in"
+    className="player-select"
+    id="main-screen"
   >
-    <h1>
-      Seat Requests
-    </h1>
-    <h4>
-      <span
-        className="subheading-player fade-in-delay"
-      >
-        Type 
-        <b>
-          !new
-        </b>
-         in 
-        sirgoosewell
-        's chat if you want to join the next game
-      </span>
-    </h4>
-    <div
-      className="left-column-body"
-    >
-      <Sidebar
-        changeGameOrder={[Function]}
-        changeNextGameIdx={[Function]}
-        history={Array []}
-        moveNextGameBack={[Function]}
-        moveNextGameFwd={[Function]}
-        nextGameIdx={0}
-        parentState={
-          Object {
-            "allowGameRequests": true,
-            "colors": Array [
-              "#99b0fc",
-              "#b4a7f2",
-              "#beb4f7",
-              "#cdc2f9",
-              "#aec2f9",
-              "#a4d6f9",
-            ],
-            "counter": 1,
-            "gameSelected": null,
-            "history": Array [],
-            "logUserMessages": false,
-            "messages": Object {
-              "Survive The Internet (Party Pack 4)": Object {
-                "Max players": 8,
-                "Min players": 3,
-                "Variants": Array [
-                  "survive",
-                  "survive the internet",
-                  "sti",
-                ],
-                "chosen": false,
-                "locked": false,
-                "longName": "Survive The Internet (Party Pack 4)",
-                "name": "Survive The Internet",
-                "partyPack": "Party Pack 4",
-                "time": 1627509347466,
-                "username": "dcpesses",
-              },
-            },
-            "nextGameIdx": 0,
-            "settings": Object {},
-            "showOptionsMenu": false,
-            "showOptionsModal": false,
-            "showPlayerSelect": true,
-            "userLookup": Object {},
-          }
-        }
-        removeSelectedGameFromHistory={[Function]}
-        requestMode="seat"
-        togglePlayerSelect={[Function]}
-      />
-      <div
-        className="left-column-inner-body"
-      >
-        <PlayerSelect
-          sendMessage={[Function]}
-          sendWhisper={[Function]}
-          settings={Object {}}
-          startGame={[Function]}
-          userLookup={Object {}}
-        />
-      </div>
-    </div>
-  </div>
-  <OptionsMenu
-    debugItems={
-      Array [
+    <MessageHandler
+      access_token="foo"
+      addGameRequest={[Function]}
+      allowGameRequests={true}
+      caniplayHandler={[Function]}
+      changeNextGameIdx={[Function]}
+      channel="sirgoosewell"
+      clearQueueHandler={[Function]}
+      closeQueueHandler={[Function]}
+      logUserMessages={false}
+      messages={
         Object {
-          "label": "Load Mock Game Requests",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Load Mock Game & Player Requests",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Log Debug Environment",
-          "onClick": [Function],
-        },
-        Object {
-          "label": "Toggle User Message Logging",
-          "onClick": [Function],
-        },
-      ]
-    }
-    gamesList={
-      Object {
-        "allowedGames": undefined,
-        "validGames": undefined,
-      }
-    }
-    items={
-      Array [
-        Object {
-          "label": "Reload Game List",
-          "onClick": undefined,
-        },
-      ]
-    }
-    onHide={[Function]}
-    onLogout={[MockFunction]}
-    onSettingsUpdate={[Function]}
-    parentState={
-      Object {
-        "allowGameRequests": true,
-        "colors": Array [
-          "#99b0fc",
-          "#b4a7f2",
-          "#beb4f7",
-          "#cdc2f9",
-          "#aec2f9",
-          "#a4d6f9",
-        ],
-        "counter": 1,
-        "gameSelected": null,
-        "history": Array [],
-        "logUserMessages": false,
-        "messages": Object {
           "Survive The Internet (Party Pack 4)": Object {
             "Max players": 8,
             "Min players": 3,
@@ -856,19 +694,193 @@ exports[`MainScreen render should render the player selection screen 1`] = `
             "time": 1627509347466,
             "username": "dcpesses",
           },
-        },
-        "nextGameIdx": 0,
-        "settings": Object {},
-        "showOptionsMenu": false,
-        "showOptionsModal": false,
-        "showPlayerSelect": true,
-        "userLookup": Object {},
+        }
       }
-    }
-    settings={Object {}}
-    showOptionsMenu={false}
-    showSettingsMenu={false}
-  />
+      modList={Array []}
+      onDelete={[Function]}
+      onMessage={[Function]}
+      onSettingsUpdate={[Function]}
+      openQueueHandler={[Function]}
+      playerExitHandler={[Function]}
+      previousGames={Array []}
+      removeSelectedGameFromHistory={[Function]}
+      setNextGame={[Function]}
+      settings={Object {}}
+      startGame={[Function]}
+      toggleAllowGameRequests={[Function]}
+      upcomingGames={Array []}
+    />
+    <div
+      className="left-column fade-in"
+    >
+      <h1>
+        Seat Requests
+      </h1>
+      <h4>
+        <span
+          className="subheading-player fade-in-delay"
+        >
+          Type 
+          <b>
+            !new
+          </b>
+           in 
+          sirgoosewell
+          's chat if you want to join the next game
+        </span>
+      </h4>
+      <div
+        className="left-column-body"
+      >
+        <Sidebar
+          changeGameOrder={[Function]}
+          changeNextGameIdx={[Function]}
+          history={Array []}
+          moveNextGameBack={[Function]}
+          moveNextGameFwd={[Function]}
+          nextGameIdx={0}
+          parentState={
+            Object {
+              "allowGameRequests": true,
+              "colors": Array [
+                "#99b0fc",
+                "#b4a7f2",
+                "#beb4f7",
+                "#cdc2f9",
+                "#aec2f9",
+                "#a4d6f9",
+              ],
+              "counter": 1,
+              "gameSelected": null,
+              "history": Array [],
+              "logUserMessages": false,
+              "messages": Object {
+                "Survive The Internet (Party Pack 4)": Object {
+                  "Max players": 8,
+                  "Min players": 3,
+                  "Variants": Array [
+                    "survive",
+                    "survive the internet",
+                    "sti",
+                  ],
+                  "chosen": false,
+                  "locked": false,
+                  "longName": "Survive The Internet (Party Pack 4)",
+                  "name": "Survive The Internet",
+                  "partyPack": "Party Pack 4",
+                  "time": 1627509347466,
+                  "username": "dcpesses",
+                },
+              },
+              "nextGameIdx": 0,
+              "settings": Object {},
+              "showOptionsMenu": false,
+              "showOptionsModal": false,
+              "showPlayerSelect": true,
+              "userLookup": Object {},
+            }
+          }
+          removeSelectedGameFromHistory={[Function]}
+          requestMode="seat"
+          togglePlayerSelect={[Function]}
+        />
+        <div
+          className="left-column-inner-body"
+        >
+          <PlayerSelect
+            sendMessage={[Function]}
+            sendWhisper={[Function]}
+            settings={Object {}}
+            startGame={[Function]}
+            userLookup={Object {}}
+          />
+        </div>
+      </div>
+    </div>
+    <OptionsMenu
+      debugItems={
+        Array [
+          Object {
+            "label": "Load Mock Game Requests",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Load Mock Game & Player Requests",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Log Debug Environment",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Toggle User Message Logging",
+            "onClick": [Function],
+          },
+        ]
+      }
+      gamesList={
+        Object {
+          "allowedGames": undefined,
+          "validGames": undefined,
+        }
+      }
+      items={
+        Array [
+          Object {
+            "label": "Reload Game List",
+            "onClick": undefined,
+          },
+        ]
+      }
+      onHide={[Function]}
+      onLogout={[MockFunction]}
+      onSettingsUpdate={[Function]}
+      parentState={
+        Object {
+          "allowGameRequests": true,
+          "colors": Array [
+            "#99b0fc",
+            "#b4a7f2",
+            "#beb4f7",
+            "#cdc2f9",
+            "#aec2f9",
+            "#a4d6f9",
+          ],
+          "counter": 1,
+          "gameSelected": null,
+          "history": Array [],
+          "logUserMessages": false,
+          "messages": Object {
+            "Survive The Internet (Party Pack 4)": Object {
+              "Max players": 8,
+              "Min players": 3,
+              "Variants": Array [
+                "survive",
+                "survive the internet",
+                "sti",
+              ],
+              "chosen": false,
+              "locked": false,
+              "longName": "Survive The Internet (Party Pack 4)",
+              "name": "Survive The Internet",
+              "partyPack": "Party Pack 4",
+              "time": 1627509347466,
+              "username": "dcpesses",
+            },
+          },
+          "nextGameIdx": 0,
+          "settings": Object {},
+          "showOptionsMenu": false,
+          "showOptionsModal": false,
+          "showPlayerSelect": true,
+          "userLookup": Object {},
+        }
+      }
+      settings={Object {}}
+      showOptionsMenu={false}
+      showSettingsMenu={false}
+    />
+  </div>
 </div>
 `;
 
