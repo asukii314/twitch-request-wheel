@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import PropTypes from 'prop-types';
+import rawCommandList from './Commands.yaml';
 import rawJackboxGameList from './JackboxGames.yaml';
 import YAML from 'yaml'
 import {version} from '../package.json';
@@ -80,6 +81,7 @@ export default class MessageHandler extends Component {
         this.state = {
             client: null,
             allowedGames: {},
+            validCommands: {},
             validGames: []
         };
         this.getTwitchClient = this.getTwitchClient.bind(this);
@@ -98,7 +100,8 @@ export default class MessageHandler extends Component {
         client.on('message', this.onMessage);
         client.connect();
 
-        return this.getGameList(rawJackboxGameList, client);
+        this.getGameList(rawJackboxGameList, client);
+        return this.getCommandList(rawCommandList, client);
     }
 
     componentWillUnmount = (props) => {
@@ -109,6 +112,19 @@ export default class MessageHandler extends Component {
         } catch(e) {
             console.log('Error', e);
         }
+    }
+
+    getCommandList = async (yamlCommandsList, client) => {
+        return await fetch(yamlCommandsList)
+            .then(r => r.text())
+            .then(text => {
+                return this.setState({
+                    client,
+                    validCommands: YAML.parse(text)
+                });
+            }).catch(e => {
+                console.warn(e);
+            });
     }
 
     getGameList = async (yamlGameList, client) => {
@@ -147,6 +163,12 @@ export default class MessageHandler extends Component {
     // returns true iff a known command was found & responded to
     checkForMiscCommands = (message, username) => {
         //========= general =========
+        if (message.startsWith("!commands")) {
+            let commands = Object.keys(this.state.validCommands).map(c => `!${c}`).join(' ');
+            this.sendMessage(`Game Request Commands: ${commands}`);
+            return true;
+        }
+
         if (message.startsWith("!gamelist") || message.startsWith("!gameslist")) {
             this.sendMessage(`/me @${username}, click here for a list of available games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
             return true;

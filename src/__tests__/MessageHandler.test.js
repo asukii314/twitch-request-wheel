@@ -1,5 +1,6 @@
 import {createRenderer} from 'react-test-renderer/shallow';
 import MessageHandler from '../MessageHandler';
+import rawCommandList from './Commands.yaml';
 import rawJackboxGameList from './JackboxGames.yaml';
 import React from 'react';
 import YAML from 'yaml'
@@ -326,9 +327,10 @@ describe('MessageHandler', () => {
     };
 
     describe('componentDidMount', () => {
-        test('should create a new Twitch client and call getGameList', () => {
+        test('should create a new Twitch client and call getCommandList & getGameList', () => {
             let component = new MessageHandler(props);
             jest.spyOn(component, 'getGameList').mockImplementation(()=>{});
+            jest.spyOn(component, 'getCommandList').mockImplementation(()=>{});
             let _Client = {
                 connect: jest.fn(),
                 on: jest.fn()
@@ -342,8 +344,46 @@ describe('MessageHandler', () => {
             expect(component.getTwitchClient).toHaveBeenCalledTimes(1);
             expect(_Client.on).toHaveBeenCalledTimes(1);
             expect(_Client.connect).toHaveBeenCalledTimes(1);
+            expect(component.getCommandList).toHaveBeenCalledTimes(1);
+            expect(component.getCommandList).toHaveBeenCalledWith(rawCommandList, _Client);
             expect(component.getGameList).toHaveBeenCalledTimes(1);
             expect(component.getGameList).toHaveBeenCalledWith(rawJackboxGameList, _Client);
+        });
+    });
+    describe('getCommandList', () => {
+        test('should call setState with valid game list and client object', async () => {
+    		fetch.mock('/commandlist', {
+                status: 200,
+                body: rawCommandList
+            });
+
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            await component.getCommandList('/commandlist', {});
+
+            expect(fetch).toHaveFetched('/commandlist');
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState).toHaveBeenCalledWith({
+                client: {},
+                validCommands: YAML.parse(rawCommandList)
+            });
+    		fetch.reset();
+        });
+        test('should log a warning to the console', async () => {
+            jest.spyOn(console, 'warn').mockImplementation(()=>{});
+            fetch.mock('/commandlist', {
+                status: 404,
+                throws: 'network error'
+            });
+
+            let component = new MessageHandler(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            await component.getCommandList('/commandlist', {});
+
+            expect(console.warn).toHaveBeenCalledWith('network error');
+            expect(component.setState).not.toHaveBeenCalled();
         });
     });
     describe('getGameList', () => {
