@@ -1,7 +1,7 @@
 #main-screen {
     display: flex;
 }
-#main-screen > nav {
+.main-screen-wrapper > nav {
     position: absolute;
     top: 0;
     right: 0;
@@ -60,22 +60,27 @@
 }
 .wheel-wrapper canvas {
     cursor: pointer;
+    /* avoid clicking in blank space around wheel */
+    clip-path: circle(255px at 50% 40%);
 }
 
-#main-screen .btn {
+.main-screen-wrapper .btn {
     padding: 1px 6px;
-    background-color: darkcyan;
     color: #fff;
 }
-#main-screen .options {
+.App:not(.theme) .main-screen-wrapper .btn {
+    background-color: darkcyan;
+}
+
+.main-screen-wrapper .options {
     left:  0;
 }
 
-#main-screen .logout {
+.main-screen-wrapper .logout {
     right:  0;
 }
 
-#main-screen .btn.btn-toggle-options {
+.main-screen-wrapper .btn.btn-toggle-options {
     padding: 0.375rem 0.75rem;
     background-color: transparent;
     border: 2px solid #ddd;
@@ -83,10 +88,10 @@
     margin: 5px;
     transition: opacity 0.15s linear;
 }
-#main-screen .btn.btn-toggle-options:hover {
+.main-screen-wrapper .btn.btn-toggle-options:hover {
     opacity: 0.8;
 }
-#main-screen .btn.btn-toggle-options:focus {
+.main-screen-wrapper .btn.btn-toggle-options:focus {
     box-shadow: 0 0 0 0.05rem;
 }
 

@@ -1,7 +1,7 @@
 #login-screen a {
-    background-color: rebeccapurple;
-    border-radius: 5px;
-    padding: 10px;
+    background-color: #663399;
+    border-radius: 12px;
+    padding: 10px 16px;
     color: white;
 }
 #login-screen a:not(:hover) {

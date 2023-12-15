@@ -53,24 +53,13 @@
     color: white;
 }
 
-.legacy.App  {
+.App.legacy  {
     font-size: calc(10px + 2vmin);
     /* min-height: 100vh; */
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-link {
-    color: #61dafb;
+.App.theme {
+    font-size: inherit;
 }
 
 .App .card {
@@ -85,12 +74,148 @@
     color:white;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
+
+/* Theme Colors */
+
+.App.theme.theme-legacy {
+    --bs-hue: 175deg;
+}
+
+.App.theme.theme-beta {
+    --bs-hue: 204deg;
+    /* background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 57%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(to bottom, rgba(175, 46, 168, 1) 0%, rgba(0, 69, 197, 1) 100%); */
+    background: 
+        radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%),
+        /* radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%), */
+        /* linear-gradient(to right, hsla(0, 0%, 100%, 0.5) 0%, hsla(0, 0%, 100%, 0) 10%, hsla(0, 0%, 100%, 0) 90%, hsla(0, 0%, 100%, 0.5) 100%), */
+        /* linear-gradient(to bottom, hsla(303, 50%, 50%, 0.5) 0%, #ffffff00 10%, hsla(0, 0%, 50%, 0) 90%, hsla(219, 50%, 50%, 0.5) 100%), */
+        linear-gradient(to bottom, hsl(303, 58%, 43%) 0%, hsl(219, 100%, 39%) 100%);
+}
+.App.theme.theme-beta.bgkd-animate {
+    background-size: cover, 200% 200%;
+    animation: none, BkgdGradientAnimation 15s cubic-bezier(.25, 0, .75, 1) infinite;
+}
+
+@keyframes BkgdGradientAnimation {
+    0% {
+        background-position: 0% 0%
     }
 
-    to {
-        transform: rotate(360deg);
+    33% {
+        background-position: 100% 100%
+    }
+
+    67% {
+        background-position: 100% 0%
+    }
+
+    100% {
+        background-position: 0% 0%
+    }
+}
+
+
+
+/* Theme Elements */
+
+.App.theme .App-link {
+    color: hsl(var(--bs-hue), 95%, 68%);
+}
+
+.App.theme #login-screen .btn {
+    box-shadow: 0 2px rgba(0, 0, 0, .42);
+}
+.App.theme #login-screen .btn:active {
+    box-shadow: 0 1px rgba(0, 0, 0, .42);
+    opacity: 0.88;
+}
+
+.App.theme #main-screen button:not(.btn) {
+    border: 1px solid hsl(var(--bs-hue) 100% 25%);
+    box-shadow: 0 3px rgba(0, 0, 0, .2);
+}
+.App.theme #main-screen button:not(.btn):active {
+    box-shadow: 0 1px rgba(0, 0, 0, .2);
+    opacity: 0.88;
+}
+
+.App.theme .card,
+.App.theme #sidebar .card {
+    /* background-color: hsl(var(--bs-hue) 25% 25%); */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.App.theme #sidebar .nav-wrapper button {
+    background-color: hsl(var(--bs-hue) 100% 42%);
+}
+
+.App.theme button#sidebar-up-next {
+    background-color: hsl(var(--bs-hue) 100% 75%);
+}
+
+.App.theme #sidebar .sidebar-history-list-panel li b {
+    color: hsl(var(--bs-hue) 100% 75%);
+}
+
+.App.theme #main-screen {
+    clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0% calc(100% - 20px), 0% 20px);
+    background-color: rgba(0,0,0,0.5);
+}
+
+.App.theme #main-screen button:not(.btn[class*="btn-"]) {
+    border-style: solid;
+}
+
+.App.theme #main-screen .btn:not(.btn[class*="btn-"]) {
+    background-color: hsl(var(--bs-hue) 100% 27%);
+}
+
+.App.theme .player-card-column.interested {
+    background-color: rgba(144, 144, 144, 0.5);
+}
+
+.App.theme .player-card {
+    border-color: hsl(var(--bs-hue) 25% 50%);
+    background-color: rgba(127, 127, 127, 0.75);
+}
+
+.App.theme .player-card-column.playing {
+    background-color: hsl(var(--bs-hue) 100% 25%);
+}
+
+.App.theme .game-request.pending {
+    background-color: hsl(var(--bs-hue) 100% 42%);
+}
+
+.App.theme .game-request.chosen {
+    background-color: hsl(var(--bs-hue), 100%, 59%);
+    color: black;
+    animation: ChosenGameAnimation 0.25s;
+    animation-iteration-count: 12;
+}
+
+.App.theme div.change-col-buttons-container .change-col {
+    transition: opacity 0.15s;
+    opacity: 0.5;
+    border-radius: 1rem;
+    margin: 4px;
+}
+.App.theme div.change-col-buttons-container .change-col:hover {
+    opacity: 1;
+}
+
+@keyframes ChosenGameAnimation {
+
+    0%,
+    49% {
+        background-color: hsl(var(--bs-hue), 100%, 59%);
+        color: black;
+    }
+
+    50%,
+    100% {
+        background-color: hsl(var(--bs-hue) 100% 42%);
+        color: unset;
     }
 }

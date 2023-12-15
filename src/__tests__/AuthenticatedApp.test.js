@@ -95,9 +95,9 @@ describe('AuthenticatedApp', () => {
 
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(6);
             expect(component.getUsers).toHaveBeenCalledTimes(1);
-            expect(component.setState).toHaveBeenCalledWith({access_token: 'vroom-vroom-lewmon-crew'});
+            expect(component.setState.mock.calls).toMatchSnapshot();
         });
         test('should log events if passed and only call setState if no token returned', async () => {
             jest.spyOn(console, 'error');
@@ -115,7 +115,7 @@ describe('AuthenticatedApp', () => {
             await component.getAuth('error stub');
 
             expect(console.error).toHaveBeenCalledWith('error stub');
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(6);
             expect(component.setState).toHaveBeenCalledWith({
                 failed_login: true
             });
@@ -134,7 +134,7 @@ describe('AuthenticatedApp', () => {
 
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(6);
             expect(component.setState).toHaveBeenCalledWith({
                 failed_login: true
             });
@@ -158,8 +158,29 @@ describe('AuthenticatedApp', () => {
             await component.getAuth();
             await component.getAuth();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(6);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(12);
             expect(component.setState).toHaveBeenCalledTimes(0);
+        });
+    });
+
+    describe('promisedSetState', () => {
+        const props = {
+            location: {
+                search: 'code=54vabs9d2sd1f08pk4bjmwyjpx3iju&scope=chat%3Aread+chat%3Aedit+moderation%3Aread+whispers%3Aedit'
+            }
+        }
+        test('should call setState with expected values', async () => {
+            let component = new AuthenticatedApp(props);
+
+            jest.spyOn(component, 'setState').mockImplementation(( obj, cb=()=>{} ) => cb());
+
+            await component.promisedSetState({ username: 'sirfarewell' });
+
+            expect(component.setState).toHaveBeenCalledWith(
+                { username: 'sirfarewell' },
+                expect.any(Function) // anonymous function
+            );
+
         });
     });
 
@@ -199,20 +220,21 @@ describe('AuthenticatedApp', () => {
 
 
             let component = new AuthenticatedApp(props);
-            jest.spyOn(component, 'setState').mockImplementation(() => {});
+            jest.spyOn(component, 'promisedSetState').mockResolvedValue();
             component._isMounted = true;
             component.props = props;
 
             await component.getUsers();
 
+
             expect(window.localStorage.__proto__.setItem).toHaveBeenCalledTimes(2);
-            expect(component.setState).toHaveBeenCalledWith({
+            expect(component.promisedSetState).toHaveBeenCalledWith({
                 username: 'sirfarewell',
                 user_id: '123456789',
                 modList: ['heroofthesprites']
             });
         });
-        test('should not call setState if not mounted', async () => {
+        test('should not call promisedSetState if not mounted', async () => {
             jest.spyOn(window.localStorage.__proto__, 'setItem');
             fetch.mockImplementationOnce(() => {
                 return Promise.resolve({
@@ -231,13 +253,13 @@ describe('AuthenticatedApp', () => {
 
 
             let component = new AuthenticatedApp(props);
-            jest.spyOn(component, 'setState').mockImplementation(() => {});
+            jest.spyOn(component, 'promisedSetState').mockImplementation(() => {});
             component.props = props;
 
             await component.getUsers();
 
             expect(window.localStorage.__proto__.setItem).toHaveBeenCalledTimes(2);
-            expect(component.setState).toHaveBeenCalledTimes(0);
+            expect(component.promisedSetState).toHaveBeenCalledTimes(0);
         });
     });
 
@@ -262,7 +284,7 @@ describe('AuthenticatedApp', () => {
             let component = new AuthenticatedApp();
             await component.logOut();
 
-            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(3);
+            expect(window.localStorage.__proto__.removeItem).toHaveBeenCalledTimes(6);
             expect(window.location.reload).toHaveBeenCalled();
         });
     });

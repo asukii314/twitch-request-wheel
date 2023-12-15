@@ -435,12 +435,13 @@ export default class MainScreen extends Component {
      * @param {string} msg The message to be sent
      * @returns Promise
      */
-    sendWhisper = (player, msg) => {
+    sendWhisper = async (player, msg) => {
         let requestParams = new URLSearchParams({
             from_user_id: this.props.id,
             to_user_id: player.id
         });
         let requestBody = {message: msg};
+        await this.props.validateToken();
         return fetch(`https://api.twitch.tv/helix/whispers?${requestParams}`, {
             method: 'POST',
             body: JSON.stringify(requestBody),
@@ -654,74 +655,76 @@ export default class MainScreen extends Component {
         let gamesList = this.getGamesList();
 
         return (
-            <div id="main-screen" className={mainClassName}>
+            <div className="main-screen-wrapper">
                 <nav className="main-screen-nav navbar-dark">
                     <button className="btn btn-toggle-options float-end navbar-toggler" type="button" onClick={this.toggleOptionsMenu}>
                         <span className="navbar-toggler-icon"></span>
                     </button>
                 </nav>
-                <MessageHandler
-                    access_token={this.props.access_token}
-                    addGameRequest={this.addGameRequest}
-                    allowGameRequests={this.state.allowGameRequests}
-                    caniplayHandler={this.routePlayRequest}
-                    changeNextGameIdx={this.changeNextGameIdx}
-                    channel={this.props.channel}
-                    clearQueueHandler={this.routeClearQueueRequest}
-                    closeQueueHandler={this.routeCloseQueueRequest}
-                    logUserMessages={this.state.logUserMessages}
-                    messages={this.state.messages}
-                    modList={this.props.modList}
-                    onDelete={this.removeGame}
-                    onMessage={this.onMessage}
-                    openQueueHandler={this.routeOpenQueueRequest}
-                    playerExitHandler={this.routeLeaveRequest}
-                    previousGames={this.state.history.slice(0, this.state.nextGameIdx)}
-                    ref={this.setMessageHandlerRef}
-                    removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
-                    setNextGame={this.setNextGame}
-                    settings={this.state.settings}
-                    onSettingsUpdate={this.onSettingsUpdate}
-                    startGame={this.startGame}
-                    toggleAllowGameRequests={this.toggleAllowGameRequests}
-                    upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
-                />
-                <div className="left-column fade-in">
+                <div id="main-screen" className={mainClassName}>
+                    <MessageHandler
+                        access_token={this.props.access_token}
+                        addGameRequest={this.addGameRequest}
+                        allowGameRequests={this.state.allowGameRequests}
+                        caniplayHandler={this.routePlayRequest}
+                        changeNextGameIdx={this.changeNextGameIdx}
+                        channel={this.props.channel}
+                        clearQueueHandler={this.routeClearQueueRequest}
+                        closeQueueHandler={this.routeCloseQueueRequest}
+                        logUserMessages={this.state.logUserMessages}
+                        messages={this.state.messages}
+                        modList={this.props.modList}
+                        onDelete={this.removeGame}
+                        onMessage={this.onMessage}
+                        openQueueHandler={this.routeOpenQueueRequest}
+                        playerExitHandler={this.routeLeaveRequest}
+                        previousGames={this.state.history.slice(0, this.state.nextGameIdx)}
+                        ref={this.setMessageHandlerRef}
+                        removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
+                        setNextGame={this.setNextGame}
+                        settings={this.state.settings}
+                        onSettingsUpdate={this.onSettingsUpdate}
+                        startGame={this.startGame}
+                        toggleAllowGameRequests={this.toggleAllowGameRequests}
+                        upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
+                    />
+                    <div className="left-column fade-in">
 
-                    <h1>{this.state.showPlayerSelect ? 'Seat Requests' : 'Game Requests'}</h1>
-                    <h4>{subheading}</h4>
+                        <h1>{this.state.showPlayerSelect ? 'Seat Requests' : 'Game Requests'}</h1>
+                        <h4>{subheading}</h4>
 
-                    <div className="left-column-body">
-                        <Sidebar
-                            changeGameOrder={this.changeGameOrder}
-                            parentState={this.state}
-                            history={this.state.history}
-                            nextGameIdx={this.state.nextGameIdx}
-                            changeNextGameIdx={this.changeNextGameIdx}
-                            moveNextGameFwd={this.moveNextGameFwd}
-                            moveNextGameBack={this.moveNextGameBack}
-                            togglePlayerSelect={this.togglePlayerSelect}
-                            requestMode={this.state.showPlayerSelect ? 'seat' : 'game'}
-                            removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
-                        />
-                        <div className="left-column-inner-body">
-                            {innerContent}
+                        <div className="left-column-body">
+                            <Sidebar
+                                changeGameOrder={this.changeGameOrder}
+                                parentState={this.state}
+                                history={this.state.history}
+                                nextGameIdx={this.state.nextGameIdx}
+                                changeNextGameIdx={this.changeNextGameIdx}
+                                moveNextGameFwd={this.moveNextGameFwd}
+                                moveNextGameBack={this.moveNextGameBack}
+                                togglePlayerSelect={this.togglePlayerSelect}
+                                requestMode={this.state.showPlayerSelect ? 'seat' : 'game'}
+                                removeSelectedGameFromHistory={this.removeSelectedGameFromHistory}
+                            />
+                            <div className="left-column-inner-body">
+                                {innerContent}
+                            </div>
                         </div>
                     </div>
+                    {rightColumn}
+                    {gameSelectedModal}
+                    <OptionsMenu
+                        gamesList={gamesList}
+                        parentState={this.state}
+                        debugItems={this.getOptionsDebugMenu()}
+                        items={this.getOptionsMenu()}
+                        reloadGameList={this.messageHandler?.reloadGameList}
+                        onHide={this.toggleOptionsMenu}
+                        onLogout={this.props.onLogout}
+                        onSettingsUpdate={this.onSettingsUpdate}
+                        settings={this.state.settings}
+                        showOptionsMenu={this.state.showOptionsMenu} />
                 </div>
-                {rightColumn}
-                {gameSelectedModal}
-                <OptionsMenu
-                    gamesList={gamesList}
-                    parentState={this.state}
-                    debugItems={this.getOptionsDebugMenu()}
-                    items={this.getOptionsMenu()}
-                    reloadGameList={this.messageHandler?.reloadGameList}
-                    onHide={this.toggleOptionsMenu}
-                    onLogout={this.props.onLogout}
-                    onSettingsUpdate={this.onSettingsUpdate}
-                    settings={this.state.settings}
-                    showOptionsMenu={this.state.showOptionsMenu} />
             </div>
         )
     }
