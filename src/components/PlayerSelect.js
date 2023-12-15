@@ -17,8 +17,10 @@ export default class PlayerSelect extends Component {
             roomCode: null,
             sentCodeStatus: {},
             streamerSeat: false,
-            isQueueOpen: true
+            isQueueOpen: true,
+            randCount: 0
         }
+        this.randInt = 0;
     }
 
     componentDidMount() {
@@ -32,6 +34,7 @@ export default class PlayerSelect extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateColumnSizes);
+        clearInterval(this.randInt);
         return;
     }
 
@@ -164,6 +167,36 @@ export default class PlayerSelect extends Component {
             };
         })
         this.props.startGame();
+    }
+
+    initRandomizePlayersAnimation = () => {
+        const numPlayersToAdd = Math.min(
+            this.props.game['Max players'] - this.playerCount(),
+            this.state.interested.length
+        );
+        if (numPlayersToAdd > 0) {
+            this.randInt = setInterval(this.randomizePlayersAnimation, 50);
+            return;
+        }
+    }
+
+    randomizePlayersAnimation = () => {
+        switch (this.state.randCount) {
+            case 15:
+                this.randomizePlayers();
+                clearInterval(this.randInt);
+                this.setState({
+                    randCount: 0
+                });
+                break;
+            default:
+                this.setState(
+                    (prevState) => ({
+                        randCount: prevState.randCount + 1
+                    })
+                );
+                break;
+        }
     }
 
     randomizePlayers = () => {
@@ -344,7 +377,7 @@ export default class PlayerSelect extends Component {
         }
 
         return (
-            <div className="card player-select-container">
+            <div className={`card player-select-container rand-${this.state.randCount}`}>
                 <div className="card-header d-flex justify-content-between">
                     {this.renderStreamerSeatToggle()}
                     <div className="fs-2 lh-sm game-name">
@@ -368,7 +401,7 @@ export default class PlayerSelect extends Component {
 
                     <div className='player-card-column playing'>
                         <p className="player-card-column-header">Playing
-                        <button className="dice" onClick={this.randomizePlayers}>
+                        <button className="dice" onClick={this.initRandomizePlayersAnimation}>
                             <img src={dice} alt="dice icon"/>
                         </button>
                         </p>

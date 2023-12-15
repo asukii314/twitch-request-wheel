@@ -143,6 +143,8 @@ button.dice {
     margin-left: 10px;
     padding: 0px;
     vertical-align: middle;
+    transform: scale(1) rotate(0deg);
+    transition: transform 0.2s;
     cursor: pointer;
 }
 
@@ -208,3 +210,39 @@ input#reserve-seat-for-streamer:checked:after {
     content: "yes";
     margin-left: 0;
 }
+
+.card.rand-1 .interested .player-card:nth-last-child(12n+2),
+.card.rand-2 .interested .player-card:nth-child(9n-3),
+.card.rand-3 .interested .player-card:nth-child(4n-3),
+.card.rand-4 .interested .player-card:nth-child(3n+2),
+.card.rand-5 .interested .player-card:nth-child(5n+4),
+.card.rand-6 .interested .player-card:nth-child(6n-4),
+.card.rand-7 .interested .player-card:nth-child(3n+3),
+.card.rand-8 .interested .player-card:nth-child(4n+1),
+.card.rand-9 .interested .player-card:nth-child(4n-2),
+.card.rand-10 .interested .player-card:nth-child(8n-3),
+.card.rand-11 .interested .player-card:nth-child(6n-2),
+.card.rand-12 .interested .player-card:nth-child(4n+1),
+.card.rand-13 .interested .player-card:nth-child(5n-3),
+.card.rand-14 .interested .player-card:nth-last-child(11n+3) {
+    background-color: hsl(0deg 0% 80% / 75%);
+}
+.card:not(.rand-0) button.dice {
+    transition: all 0.15s;
+    animation: tilt-shaking 0.15s infinite;
+    pointer-events: none;
+}
+.card:not(.rand-0) button.dice img {
+    transform: scale(2);
+    border-radius: 5px;
+    background-color: greenyellow;
+    transition: all 0.15s;
+}
+
+@keyframes tilt-shaking {
+    0% { transform: scale(2) rotate(0deg); }
+    25% { transform: scale(2) rotate(5deg); }
+    50% { transform: scale(2) rotate(0deg); }
+    75% { transform: scale(2) rotate(-5deg); }
+    100% { transform: scale(2) rotate(0deg); }
+  }
