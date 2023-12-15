@@ -124,7 +124,20 @@
 }
 
 .App.theme #login-screen .btn {
-    box-shadow: 0 5px rgba(0, 0, 0, .42);
+    box-shadow: 0 2px rgba(0, 0, 0, .42);
+}
+.App.theme #login-screen .btn:active {
+    box-shadow: 0 1px rgba(0, 0, 0, .42);
+    opacity: 0.88;
+}
+
+.App.theme #main-screen button:not(.btn) {
+    border: 1px solid hsl(var(--bs-hue) 100% 25%);
+    box-shadow: 0 3px rgba(0, 0, 0, .2);
+}
+.App.theme #main-screen button:not(.btn):active {
+    box-shadow: 0 1px rgba(0, 0, 0, .2);
+    opacity: 0.88;
 }
 
 .App.theme .card,
@@ -134,7 +147,7 @@
 }
 
 .App.theme #sidebar .nav-wrapper button {
-    background-color: hsl(var(--bs-hue) 100% 27%);
+    background-color: hsl(var(--bs-hue) 100% 42%);
 }
 
 .App.theme button#sidebar-up-next {
@@ -150,8 +163,11 @@
     background-color: rgba(0,0,0,0.5);
 }
 
+.App.theme #main-screen button:not(.btn[class*="btn-"]) {
+    border-style: solid;
+}
 
-.App.theme #main-screen .btn {
+.App.theme #main-screen .btn:not(.btn[class*="btn-"]) {
     background-color: hsl(var(--bs-hue) 100% 27%);
 }
 
@@ -179,7 +195,15 @@
     animation-iteration-count: 12;
 }
 
-
+.App.theme div.change-col-buttons-container .change-col {
+    transition: opacity 0.15s;
+    opacity: 0.5;
+    border-radius: 1rem;
+    margin: 4px;
+}
+.App.theme div.change-col-buttons-container .change-col:hover {
+    opacity: 1;
+}
 
 @keyframes ChosenGameAnimation {
 

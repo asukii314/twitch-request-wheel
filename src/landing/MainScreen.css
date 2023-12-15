@@ -66,9 +66,12 @@
 
 .main-screen-wrapper .btn {
     padding: 1px 6px;
-    background-color: darkcyan;
     color: #fff;
 }
+.App:not(.theme) .main-screen-wrapper .btn {
+    background-color: darkcyan;
+}
+
 .main-screen-wrapper .options {
     left:  0;
 }
