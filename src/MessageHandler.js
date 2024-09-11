@@ -445,9 +445,11 @@ export default class MessageHandler extends Component {
     }
 
     findGame = (requestedGame, username) => {
+        // remove extraneous chars from requested game
+        let regEx = /[\s:']+/g;
         // easter egg responses
         for (let requestEntry of easterEggRequests) {
-            if (requestEntry?.Variants?.includes(requestedGame)) {
+            if (requestEntry?.Variants?.includes(requestedGame) || requestEntry?.Variants?.includes(requestedGame.replace(regEx, '')) ) {
                 if (typeof requestEntry.Response === 'function') {
                     this.sendMessage(`/me @${username} ${requestEntry.Response()}`);
                 } else {
@@ -460,7 +462,11 @@ export default class MessageHandler extends Component {
         for (let partyPackName in this.state.validGames) {
             const partyPackObj = this.state.validGames[partyPackName]
             for (const [formalGameName, metadata] of Object.entries(partyPackObj)) {
-                if (metadata?.Variants?.includes(requestedGame)) {
+                if (!metadata?.Variants || metadata?.Variants.length === 0) {
+                    continue;
+                }
+                if (metadata?.Variants?.includes(requestedGame) ||
+                    metadata?.Variants?.includes(requestedGame.replace(regEx, '') )) {
                     return {
                         name: formalGameName,
                         longName: `${formalGameName} (${partyPackName})`,

@@ -740,6 +740,52 @@ describe('MessageHandler', () => {
                 ]
             }
         ];
+        const mockValidGames = {
+            "Any Version": {
+                "Trivia Murder Party": {
+                    "Min players": 1,
+                    "Max players": 8,
+                    "Variants": [
+                        "tmp",
+                        "trivia murder party"
+                    ]
+                },
+                "You Don't Know Jack": {
+                    "Min players": 1,
+                    "Max players": 8,
+                    "Variants": [
+                        "ydkj",
+                        "you don't know jack"
+                    ]
+                },
+                "Drawful": {
+                    "Min players": 3,
+                    "Max players": 8,
+                    "Variants": [
+                        "drawful",
+                        "drawfull",
+                        "draw full"
+                    ]
+                }
+            },
+            "Jackbox Bunion Pack": {
+                "Mock Game": {
+                    "Min players": 3,
+                    "Max players": 8,
+                    "Variants": []
+                }
+            }
+        };
+        test('should handle matching game requests', () => {
+            let component = new MessageHandler(props);
+            component.state.validGames = mockValidGames;
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            let output = component.findGame('drawful', 'username');
+            expect(component.sendMessage).toBeCalledTimes(0);
+            expect(output.name).toBe('Drawful');
+        });
         test('should handle string requests', () => {
             let component = new MessageHandler(props);
 
