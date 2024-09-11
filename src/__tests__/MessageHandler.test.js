@@ -786,6 +786,22 @@ describe('MessageHandler', () => {
             expect(component.sendMessage).toBeCalledTimes(0);
             expect(output.name).toBe('Drawful');
         });
+        test('should strip extraneous characters from requests & variants and handle game requests', () => {
+            let component = new MessageHandler(props);
+            component.state.validGames = mockValidGames;
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            let output = [
+                component.findGame('draw ful', 'username'),
+                component.findGame('triviamurderparty', 'username'),
+                component.findGame('you don\'t know jack', 'username'),
+            ];
+            expect(component.sendMessage).toBeCalledTimes(0);
+            expect(output[0].name).toBe('Drawful');
+            expect(output[1].name).toBe('Trivia Murder Party');
+            expect(output[2].name).toBe('You Don\'t Know Jack');
+        });
         test('should handle string requests', () => {
             let component = new MessageHandler(props);
 

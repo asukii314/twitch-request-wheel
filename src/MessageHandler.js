@@ -465,8 +465,8 @@ export default class MessageHandler extends Component {
                 if (!metadata?.Variants || metadata?.Variants.length === 0) {
                     continue;
                 }
-                if (metadata?.Variants?.includes(requestedGame) ||
-                    metadata?.Variants?.includes(requestedGame.replace(regEx, '') )) {
+                let variants = metadata.Variants.map(v => v.replace(regEx, ''));
+                if (variants.includes(requestedGame.replace(regEx, '') )) {
                     return {
                         name: formalGameName,
                         longName: `${formalGameName} (${partyPackName})`,
