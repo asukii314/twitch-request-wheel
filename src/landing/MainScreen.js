@@ -79,6 +79,7 @@ export default class MainScreen extends Component {
         this.setPlayerSelectRef = this.setPlayerSelectRef.bind(this);
 
         this.toggleUserMessageLogging = this.toggleUserMessageLogging.bind(this);
+        this.showUndoAvailable = this.showUndoAvailable.bind(this);
     }
 
     componentDidMount() {
@@ -353,6 +354,18 @@ export default class MainScreen extends Component {
         }));
     }
 
+    onUndoState = () => {
+        if (!this.state.showPlayerSelect) {
+            this.togglePlayerSelect();
+            this.moveNextGameBack();
+        }
+        this.setState({
+            showOptionsMenu: false
+        }, () => {
+            this.playerSelector?.onUndoState(this.state.undoState);
+        });
+    }
+
     toggleAllowGameRequests = (allow=null) => {
         let {allowGameRequests} = this.state;
         if (allow !== null && typeof allow !== 'object') {
@@ -481,10 +494,34 @@ export default class MainScreen extends Component {
         });
     }
 
-    startGame = () => {
+    showUndoAvailable = () => {
+        let {history, lastStartIdx, lastStartLongName, lastStartTimestamp, undoState} = this.state;
+        if (!undoState || !lastStartIdx || !lastStartLongName || !lastStartTimestamp) {
+            return false;
+        }
+        if (history[lastStartIdx].longName === lastStartLongName) {
+            return true;
+        }
+        return false;
+    }
+
+    startGame = (undoState) => {
         if (this.state.showPlayerSelect) {
+            if (!undoState) {
+                undoState = this.playerSelector?.state;
+            }
+            let lastStartIdx = this.state.nextGameIdx;
+            let lastStartLongName = this.state.history[lastStartIdx]?.longName;
+            // console.log('Saving Undo State', {undoState});
             this.togglePlayerSelect();
+            this.setState({
+                undoState,
+                lastStartIdx,
+                lastStartLongName,
+                lastStartTimestamp: (new Date()).toLocaleString()
+            });
             this.moveNextGameFwd();
+            // console.log('State saved', {lastStartIdx, lastStartLongName});
             return true;
         }
         return false;
@@ -715,6 +752,7 @@ export default class MainScreen extends Component {
                     {gameSelectedModal}
                     <OptionsMenu
                         gamesList={gamesList}
+                        onUndo={this.onUndoState}
                         parentState={this.state}
                         debugItems={this.getOptionsDebugMenu()}
                         items={this.getOptionsMenu()}
@@ -723,7 +761,8 @@ export default class MainScreen extends Component {
                         onLogout={this.props.onLogout}
                         onSettingsUpdate={this.onSettingsUpdate}
                         settings={this.state.settings}
-                        showOptionsMenu={this.state.showOptionsMenu} />
+                        showOptionsMenu={this.state.showOptionsMenu}
+                        showUndoAvailable={this.showUndoAvailable()} />
                 </div>
             </div>
         )
