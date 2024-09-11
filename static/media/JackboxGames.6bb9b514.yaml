@@ -482,12 +482,15 @@ Party Pack 10:
       - dodo re me
       - dodo re mee
       - dodoremi
+      - do do re mi
+      - do do re me
       - do re mi
       - do re me
       - do re mee
       - doreme
       - doremi
       - drm
+      - ddrm
   FixyText:
     Min players: 3
     Max players: 8
@@ -524,6 +527,34 @@ Party Pack 10:
       - hypnotorius
       - hypno
       - hyp
+
+Naughty Pack:
+  Fakin' It All Night Long:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - fakin it all night long
+      - fakin it all night
+      - fakin it all
+      - faking it all night long
+      - faking it all night
+      - faking it all
+      - fianl
+  Dirty Drawful:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - dirty drawful
+      - naughty drawful
+      - drawful dirty
+      - dd
+  Let Me Finish:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - let me finish
+      - lemme finish
+      - lmf
 
 Standalone:
   Drawful 2:
@@ -804,6 +835,13 @@ Standalone:
       - cashword
       - crashwrd
       - cw
+
+  Redactionary:
+    Min players: 2
+    Max players: 50
+    Variants:
+      - redactionary
+      - redact
 
   Fall Guys:
     Min players: 1
