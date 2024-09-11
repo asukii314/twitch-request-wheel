@@ -208,6 +208,17 @@ export default class OptionsMenu extends Component {
             onSettingsUpdate({enableRoomCode: value});
         };
 
+        let undoStartButton = (this.props.showUndoAvailable) ? (
+            <li className="mb-1 fs-4 d-grid text-start">
+                <Button variant="link" className="btn undo-start-game" onClick={this.props.onUndo}>
+                    Undo Start
+                    <div className="fs-6 fst-italic opacity-75 lh-1">
+                        Start Time: {this.props.parentState?.lastStartTimestamp}
+                    </div>
+                </Button>
+            </li>
+        ) : null;
+
         return (
             <Offcanvas
                 id="options-menu"
@@ -227,6 +238,7 @@ export default class OptionsMenu extends Component {
                             </Button>
                         </li>
                         <hr />
+                        {undoStartButton}
                         <li className="mb-1 fs-4 d-grid text-start">
                             <Button variant="link" className="btn settings-menu" onClick={this.toggleSettingsMenu}>
                                 Settings

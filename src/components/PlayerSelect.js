@@ -155,18 +155,34 @@ export default class PlayerSelect extends Component {
                      this.props.game?.['Min players'] <= this.playerCount();
     }
 
+    onUndoState = (undoState) => {
+        // revert to state right before streamer pressed "Start Game"
+        if (!undoState) {
+            undoState = {...this.state.undoState};
+        }
+        this.setState ((state) => {
+            return {
+                ...undoState,
+            };
+        });
+    }
+
     startGame = () => {
         // clear for now; eventually, save elsewhere to report on user play history for that session
+        let undoState = {...this.state};
         this.setState ((state) => {
             return {
                 ...state,
+                undoState: {
+                    ...state
+                },
                 interested: [],
                 playing: [],
                 joined: [],
-                roomCode: null
+                roomCode: null,
             };
         })
-        this.props.startGame();
+        this.props.startGame(undoState);
     }
 
     initRandomizePlayersAnimation = () => {

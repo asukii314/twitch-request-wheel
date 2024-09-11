@@ -298,6 +298,7 @@ describe('PlayerSelect', () => {
             );
             jest.spyOn(component, 'setState').mockImplementation(()=>{});
 
+            let prevState = component.state;
             component.startGame();
 
             expect(component.setState).toHaveBeenCalledTimes(1);
@@ -305,7 +306,9 @@ describe('PlayerSelect', () => {
                 ...component.state,
                 interested: [],
                 playing: [],
-                joined: []
+                joined: [],
+                roomCode: null,
+                undoState: prevState
             });
             expect(component.props.startGame).toHaveBeenCalledTimes(1);
         });

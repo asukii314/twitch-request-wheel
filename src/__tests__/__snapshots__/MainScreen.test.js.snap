@@ -244,6 +244,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
       onHide={[Function]}
       onLogout={[MockFunction]}
       onSettingsUpdate={[Function]}
+      onUndo={[Function]}
       parentState={
         Object {
           "allowGameRequests": true,
@@ -288,6 +289,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
       settings={Object {}}
       showOptionsMenu={false}
       showSettingsMenu={false}
+      showUndoAvailable={false}
     />
   </div>
 </div>
@@ -581,6 +583,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       onHide={[Function]}
       onLogout={[MockFunction]}
       onSettingsUpdate={[Function]}
+      onUndo={[Function]}
       parentState={
         Object {
           "allowGameRequests": true,
@@ -640,6 +643,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       settings={Object {}}
       showOptionsMenu={false}
       showSettingsMenu={false}
+      showUndoAvailable={false}
     />
   </div>
 </div>
@@ -835,6 +839,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       onHide={[Function]}
       onLogout={[MockFunction]}
       onSettingsUpdate={[Function]}
+      onUndo={[Function]}
       parentState={
         Object {
           "allowGameRequests": true,
@@ -879,6 +884,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       settings={Object {}}
       showOptionsMenu={false}
       showSettingsMenu={false}
+      showUndoAvailable={false}
     />
   </div>
 </div>

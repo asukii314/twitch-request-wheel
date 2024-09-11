@@ -740,6 +740,68 @@ describe('MessageHandler', () => {
                 ]
             }
         ];
+        const mockValidGames = {
+            "Any Version": {
+                "Trivia Murder Party": {
+                    "Min players": 1,
+                    "Max players": 8,
+                    "Variants": [
+                        "tmp",
+                        "trivia murder party"
+                    ]
+                },
+                "You Don't Know Jack": {
+                    "Min players": 1,
+                    "Max players": 8,
+                    "Variants": [
+                        "ydkj",
+                        "you don't know jack"
+                    ]
+                },
+                "Drawful": {
+                    "Min players": 3,
+                    "Max players": 8,
+                    "Variants": [
+                        "drawful",
+                        "drawfull",
+                        "draw full"
+                    ]
+                }
+            },
+            "Jackbox Bunion Pack": {
+                "Mock Game": {
+                    "Min players": 3,
+                    "Max players": 8,
+                    "Variants": []
+                }
+            }
+        };
+        test('should handle matching game requests', () => {
+            let component = new MessageHandler(props);
+            component.state.validGames = mockValidGames;
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            let output = component.findGame('drawful', 'username');
+            expect(component.sendMessage).toBeCalledTimes(0);
+            expect(output.name).toBe('Drawful');
+        });
+        test('should strip extraneous characters from requests & variants and handle game requests', () => {
+            let component = new MessageHandler(props);
+            component.state.validGames = mockValidGames;
+
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            let output = [
+                component.findGame('draw ful', 'username'),
+                component.findGame('triviamurderparty', 'username'),
+                component.findGame('you don\'t know jack', 'username'),
+            ];
+            expect(component.sendMessage).toBeCalledTimes(0);
+            expect(output[0].name).toBe('Drawful');
+            expect(output[1].name).toBe('Trivia Murder Party');
+            expect(output[2].name).toBe('You Don\'t Know Jack');
+        });
         test('should handle string requests', () => {
             let component = new MessageHandler(props);
 
