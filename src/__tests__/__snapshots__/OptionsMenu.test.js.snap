@@ -9,13 +9,48 @@ Array [
   >
     item
   </DropdownItem>,
+  <DropdownDivider
+    role="separator"
+  />,
+  <DropdownItem
+    eventKey="item"
+    href={null}
+    onClick={null}
+  >
+    item
+  </DropdownItem>,
 ]
 `;
 
-exports[`OptionsMenu createMenuItems should return array of items 1`] = `
+exports[`OptionsMenu createDebugMenuItems should return array of remaining items when some items are missing keys or values 1`] = `
+Array [
+  <DropdownItem
+    eventKey="item"
+    href={null}
+    onClick={[MockFunction]}
+  >
+    item
+  </DropdownItem>,
+]
+`;
+
+exports[`OptionsMenu createMenuItems should return array of items and filter invalid items 1`] = `
 Array [
   <li
-    className="mb-1 fs-4 d-grid text-start item"
+    className="mb-1 fs-4 d-grid text-start item1"
+  >
+    <Button
+      active={false}
+      className="btn"
+      disabled={false}
+      onClick={[Function]}
+      variant="link"
+    >
+      item1
+    </Button>
+  </li>,
+  <li
+    className="mb-1 fs-4 d-grid text-start"
   >
     <Button
       active={false}
@@ -24,7 +59,20 @@ Array [
       onClick={[MockFunction]}
       variant="link"
     >
-      item
+       
+    </Button>
+  </li>,
+  <li
+    className="mb-1 fs-4 d-grid text-start my-item"
+  >
+    <Button
+      active={false}
+      className="btn"
+      disabled={false}
+      onClick={[MockFunction]}
+      variant="link"
+    >
+      item3
     </Button>
   </li>,
 ]
@@ -74,6 +122,24 @@ exports[`OptionsMenu render should render with menu items 1`] = `
         </Button>
       </li>
       <hr />
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn undo-start-game"
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          Undo Start
+          <div
+            className="fs-6 fst-italic opacity-75 lh-1"
+          >
+            Start Time: 
+          </div>
+        </Button>
+      </li>
       <li
         className="mb-1 fs-4 d-grid text-start"
       >
