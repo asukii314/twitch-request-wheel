@@ -19,6 +19,7 @@ describe('OptionsMenu', () => {
             let props = OptionsMenu.defaultProps;
             expect(props.onHide()).toBeUndefined();
             expect(props.onLogout()).toBeUndefined();
+            expect(props.onUndo()).toBeUndefined();
             expect(props.showOptionsMenu).toBe(false);
         });
     });
@@ -26,6 +27,22 @@ describe('OptionsMenu', () => {
         test('should return array of items', () => {
             const component = new OptionsMenu();
             let items = [{
+                label: 'item',
+                onClick: jest.fn()
+            }, {
+                label: '---'
+            }, {
+                label: 'item'
+            }];
+            let menuItems = component.createDebugMenuItems(items);
+            expect(menuItems).toMatchSnapshot();
+        });
+        test('should return array of remaining items when some items are missing keys or values', () => {
+            const component = new OptionsMenu();
+            let items = [{
+                label: null,
+                onClick: jest.fn()
+            }, null, {
                 label: 'item',
                 onClick: jest.fn()
             }];
@@ -38,14 +55,24 @@ describe('OptionsMenu', () => {
         });
     });
     describe('createMenuItems', () => {
-        test('should return array of items', () => {
+        test('should return array of items and filter invalid items', () => {
             const component = new OptionsMenu();
             let items = [{
-                label: 'item',
+                label: 'item1'
+            }, {
+                label: ' ',
+                onClick: jest.fn()
+            }, {
+                label: null,
+                onClick: jest.fn()
+            }, {
+                label: 'item3',
+                listItemClassName: 'my-item',
                 onClick: jest.fn()
             }];
             let menuItems = component.createMenuItems(items);
             expect(menuItems).toMatchSnapshot();
+            expect(menuItems[0].props.children.props.onClick()).toBeUndefined();
         });
         test('should return an empty array', () => {
             const component = new OptionsMenu();
@@ -63,6 +90,17 @@ describe('OptionsMenu', () => {
             expect(component.setState.mock.calls[0][0]({})).toEqual({showGameList: true});
         });
     });
+    describe('toggleSettingsMenu', () => {
+        test('should change state.showGameList', () => {
+            const component = new OptionsMenu();
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            component.toggleSettingsMenu();
+
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState.mock.calls[0][0]({})).toEqual({showSettingsMenu: true});
+        });
+    });
     describe('render', () => {
         test('should render without error', () => {
             const shallowRenderer = createRenderer();
@@ -75,7 +113,8 @@ describe('OptionsMenu', () => {
         });
         test('should render with menu items', () => {
             const props = {
-                showOptionsMenu: true
+                showOptionsMenu: true,
+                showUndoAvailable: true
             };
             const shallowRenderer = createRenderer();
             shallowRenderer.render(<OptionsMenu {...props} />);

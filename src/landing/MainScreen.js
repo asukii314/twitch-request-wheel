@@ -337,7 +337,7 @@ export default class MainScreen extends Component {
     onMessage = (message, user, metadata) => {
         this.chatActivity.updateLastMessageTime(user);
         if (!this.state.userLookup[user] && metadata && metadata['user-id']) {
-            this.setState(prevState => ({
+            return this.setState(prevState => ({
                 userLookup: Object.assign({}, prevState.userLookup, {[user]: metadata})
             }));
         }
@@ -359,10 +359,10 @@ export default class MainScreen extends Component {
             this.togglePlayerSelect();
             this.moveNextGameBack();
         }
-        this.setState({
+        return this.setState({
             showOptionsMenu: false
         }, () => {
-            this.playerSelector?.onUndoState(this.state.undoState);
+            return this.playerSelector?.onUndoState(this.state.undoState);
         });
     }
 
@@ -496,10 +496,10 @@ export default class MainScreen extends Component {
 
     showUndoAvailable = () => {
         let {history, lastStartIdx, lastStartLongName, lastStartTimestamp, undoState} = this.state;
-        if (!undoState || !lastStartIdx || !lastStartLongName || !lastStartTimestamp) {
+        if (!undoState || (!lastStartIdx && lastStartIdx !== 0) || !lastStartLongName || !lastStartTimestamp) {
             return false;
         }
-        if (history[lastStartIdx].longName === lastStartLongName) {
+        if (history.length > 0 && history[lastStartIdx].longName === lastStartLongName) {
             return true;
         }
         return false;

@@ -14,8 +14,10 @@ export default class OptionsMenu extends Component {
             items: PropTypes.array,
             onHide: PropTypes.func,
             onLogout: PropTypes.func,
+            onUndo: PropTypes.func,
             showOptionsMenu: PropTypes.bool,
-            showSettingsMenu: PropTypes.bool
+            showSettingsMenu: PropTypes.bool,
+            showUndoAvailable: PropTypes.bool
         };
     }
     static get defaultProps() {
@@ -28,8 +30,10 @@ export default class OptionsMenu extends Component {
             items: [],
             onHide: () => void 0,
             onLogout: () => void 0,
+            onUndo: () => void 0,
             showOptionsMenu: false,
-            showSettingsMenu: false
+            showSettingsMenu: false,
+            showUndoAvailable: false
         };
     }
 
@@ -84,6 +88,7 @@ export default class OptionsMenu extends Component {
         if (!items) {
             return [];
         }
+        let noop = () => void 0;
         return items.map(i => {
             if (!i.label) {
                 return null;
@@ -95,7 +100,7 @@ export default class OptionsMenu extends Component {
             let btnClassNames = ['btn', i.btnClassName || null].filter(n => n).join(' ');
             return (
                 <li className={listItemClassNames} key={i.label}>
-                    <Button variant="link" className={btnClassNames} onClick={i.onClick || null}>
+                    <Button variant="link" className={btnClassNames} onClick={i.onClick || noop}>
                         {i.label}
                     </Button>
                 </li>
