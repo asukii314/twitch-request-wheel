@@ -1,5 +1,6 @@
 import AuthenticatedApp from './AuthenticatedApp';
 import {HashRouter, Route, Switch} from "react-router-dom";
+import CommandsList from './CommandsList';
 import JackboxGameList from './JackboxGameList';
 import LoginScreen from './LoginScreen';
 import OptionsList from './OptionsList';
@@ -51,6 +52,7 @@ class App extends Component {
                 <div className={classNames.join(' ')}>
                     <Switch>
                         <Route exact path="/login" component={LoginScreen} />
+                        <Route exact path="/commands" component={CommandsList}/>
                         <Route exact path="/gamelist" component={JackboxGameList}/>
                         <Route exact path="/options" component={OptionsList}/>
                         <Route path="/" component={AuthenticatedApp}/>
