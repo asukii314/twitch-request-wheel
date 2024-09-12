@@ -148,7 +148,7 @@ Seat Requests:
     OnScreenEquivalent: 'The "Start Game" button in the top right hand corner of the seat request screen.'
     Variants: 'n/a'
 
-Other Misc:
+Other / Misc:
   commands:
     Example: '!commands'
     Availability: 'Everyone'

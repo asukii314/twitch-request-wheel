@@ -2,9 +2,33 @@ import { Component } from 'react';
 import YAML from 'yaml'
 import rawCommandsList from './Commands.yaml';
 import './CommandsList.css';
-import Table from 'react-bootstrap/Table';
+import {Nav, Table} from 'react-bootstrap';
 const fetch = require('node-fetch');
 
+
+const SectionTable = function (data, i) {
+    console.log('SectionTable:', data);
+    let {entries/*, section*/} = data;
+    return (
+        <Table striped bordered hover variant="dark" responsive="lg" key={`command-table-row-${i}`} className="mb-0">
+            {/* <caption>{section}</caption> */}
+            <thead>
+                <tr className="text-center align-middle">
+                    <th width="10%">Command</th>
+                    <th width="10%">Permissions</th>
+                    <th width="40%">Description</th>
+                    <th width="20%">On Screen Equivalent</th>
+                    <th width="10%">Variants</th>
+                    <th width="10%">Example</th>
+                </tr>
+            </thead>
+            <tbody className="table-group-divider">
+                {!!entries && entries.map(CommandTableRow)}
+            </tbody>
+        </Table>
+
+    );
+}
 const CommandTableRow = function ({command, info}, i) {
     const {
         Example,
@@ -15,38 +39,14 @@ const CommandTableRow = function ({command, info}, i) {
     } = info;
 
     return (
-      <tr key={`command-table-row-${i}`} className="small">
-        <td className="command-name fw-semibold fs-6 text-primary-emphasis">!{command}</td>
-        <td className="text-center">{Availability}</td>
-        <td>{Description}</td>
-        <td>{OnScreenEquivalent}</td>
-        <td className={Variants==='n/a' ? null : 'font-monospace fst-italic'}>{Variants}</td>
-        <td className="font-monospace fst-italic">{Example}</td>
-      </tr>
-    );
-}
-
-const SectionTable = function (data, i) {
-    console.log('SectionTable:', data);
-    let {entries/*, section*/} = data;
-    return (
-        <Table striped bordered hover variant="dark" key={`command-table-row-${i}`} className="caption-top">
-            {/* <caption>{section}</caption> */}
-            <thead class="table-group-divider">
-                <tr className="text-center">
-                    <th width="10%">Command</th>
-                    <th width="10%">Permissions</th>
-                    <th width="40%">Description</th>
-                    <th width="20%">On Screen Equivalent</th>
-                    <th width="10%">Variants</th>
-                    <th width="10%">Example</th>
-                </tr>
-            </thead>
-            <tbody>
-                {!!entries && entries.map(CommandTableRow)}
-            </tbody>
-        </Table>
-
+        <tr key={`command-table-row-${i}`} className="small">
+            <td className="command-name fw-semibold fs-6 text-primary-emphasis">!{command}</td>
+            <td className="text-center">{Availability}</td>
+            <td>{Description}</td>
+            <td>{OnScreenEquivalent}</td>
+            <td className={Variants==='n/a' ? null : 'font-monospace fst-italic'}>{Variants}</td>
+            <td className="font-monospace fst-italic">{Example}</td>
+        </tr>
     );
 }
 
@@ -54,6 +54,7 @@ export default class CommandsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            activeFilter: null,
             validCommands: []
         };
     }
@@ -63,11 +64,9 @@ export default class CommandsList extends Component {
             .then(r => r.text())
             .then(text => {
                 let validCommands = YAML.parse(text);
-                // console.log('validCommands:', JSON.stringify(validCommands));
                 this.setState((state) => {
                     return {
                         ...state,
-                        validCommandsBackup: Object.entries(validCommands).map(([command, info], i) => ({command, info})),
                         validCommands: Object.entries(validCommands).map(
                             ([section, commands], i) => {
                                 return {
@@ -82,24 +81,57 @@ export default class CommandsList extends Component {
             });
     }
 
+    onSelectTab = (eventKey) => {
+        console.log({eventKey});
+        switch (eventKey) {
+            case 'All Commands':
+                return this.setState({
+                    activeFilter: null
+                });
+            default:
+                return this.setState({
+                    activeFilter: eventKey
+                });
+        }
+    }
+
     render() {
-        // const commandsList = Object.keys(this.state.validCommands);
         const {validCommands} = this.state;
-        // Object.entries(this.state.validCommands).map(([key, value], i) => {return {key, value}})
         return (
-            <div className="commands-list container text-start">
-                {!!validCommands && validCommands.map(
-                    (data, i) => {
-                        return (
-                            <div key={`section-${i}`}>
-                                <h5 key={`section-table-row-${i}`}>
-                                    {data.section}
-                                </h5>
-                                {SectionTable(data)}
-                            </div>
-                        );
-                    }
-                )}
+            <div id="commands-list" className="container">
+                <h1 className="fw-bolder pt-3">Chat Commands</h1>
+                <Nav variant="tabs" activeKey={this.state.activeFilter || 'All Commands'} onSelect={this.onSelectTab}>
+                    <Nav.Item>
+                        <Nav.Link eventKey="All Commands">All Commands</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="Game Requests">Game Requests</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="Seat Requests">Seat Requests</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="Other / Misc">Other / Misc</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+                <div className="col-12 px-3 pb-1 mb-3 text-start commands-table-wrapper">
+                    {!!validCommands && validCommands.map(
+                        (data, i) => {
+                            let {activeFilter} = this.state;
+                            if (activeFilter && activeFilter !== data.section) {
+                                return null;
+                            }
+                            return (
+                                <div key={`section-${i}`}>
+                                    <h4 className="px-1 pt-3 fw-bolder" key={`section-table-row-${i}`}>
+                                        {data.section}
+                                    </h4>
+                                    {SectionTable(data)}
+                                </div>
+                            );
+                        }
+                    ).filter(cmd => cmd)}
+                </div>
             </div>
         );
     }

@@ -39,10 +39,12 @@ class App extends Component {
     render() {
 
         let classNames = ['App'];
+        if (window.location.hash.indexOf('commands') !== -1) {
+            classNames.push('justify-content-start');
+        }
         if (window.location.hash.indexOf('legacy=true') !== -1) {
             classNames.push('legacy');
         }
-
         if (this.state.theme) {
             classNames.push(`theme theme-${this.state.theme}`);
         }
