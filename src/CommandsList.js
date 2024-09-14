@@ -6,9 +6,9 @@ import {Nav, Table} from 'react-bootstrap';
 const fetch = require('node-fetch');
 
 
-const SectionTable = function (data, i) {
-    console.log('SectionTable:', data);
-    let {entries/*, section*/} = data;
+export const SectionTable = function (data, i) {
+    // console.log('SectionTable:', data);
+    let {entries} = data;
     return (
         <Table striped bordered hover variant="dark" responsive="lg" key={`command-table-row-${i}`} className="mb-0">
             {/* <caption>{section}</caption> */}
@@ -29,7 +29,7 @@ const SectionTable = function (data, i) {
 
     );
 }
-const CommandTableRow = function ({command, info}, i) {
+export const CommandTableRow = function ({command, info}, i) {
     const {
         Example,
         Availability,
@@ -82,7 +82,6 @@ export default class CommandsList extends Component {
     }
 
     onSelectTab = (eventKey) => {
-        console.log({eventKey});
         switch (eventKey) {
             case 'All Commands':
                 return this.setState({
@@ -97,22 +96,29 @@ export default class CommandsList extends Component {
 
     render() {
         const {validCommands} = this.state;
+
+        let navItems = [
+            {section: 'All Commands'},
+            ...validCommands
+        ].map(cmd => {
+            const {section} = cmd;
+            return (
+                <Nav.Item key={section}>
+                    <Nav.Link eventKey={section} data-testid={section}>
+                        {section}
+                    </Nav.Link>
+                </Nav.Item>
+            );
+        });
+
         return (
             <div id="commands-list" className="container">
                 <h1 className="fw-bolder pt-3">Chat Commands</h1>
                 <Nav variant="tabs" activeKey={this.state.activeFilter || 'All Commands'} onSelect={this.onSelectTab}>
-                    <Nav.Item>
-                        <Nav.Link eventKey="All Commands">All Commands</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="Game Requests">Game Requests</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="Seat Requests">Seat Requests</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="Other / Misc">Other / Misc</Nav.Link>
-                    </Nav.Item>
+                    {/* <Nav.Item>
+                        <Nav.Link eventKey="All Commands" data-testid="All Commands">All Commands</Nav.Link>
+                    </Nav.Item> */}
+                    {validCommands.length > 0 && navItems}
                 </Nav>
                 <div className="col-12 px-3 pb-1 mb-3 text-start commands-table-wrapper">
                     {!!validCommands && validCommands.map(

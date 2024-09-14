@@ -1,0 +1,365 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommandsList render renders component with list of all commands using yaml content 1`] = `
+<div>
+  <div
+    class="container"
+    id="commands-list"
+  >
+    <h1
+      class="fw-bolder pt-3"
+    >
+      Chat Commands
+    </h1>
+    <div
+      class="nav nav-tabs"
+    >
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link active"
+          data-rr-ui-event-key="All Commands"
+          data-testid="All Commands"
+          href="#"
+          role="button"
+          tabindex="0"
+        >
+          All Commands
+        </a>
+      </div>
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          data-rr-ui-event-key="Game Requests"
+          data-testid="Game Requests"
+          href="#"
+          role="button"
+          tabindex="0"
+        >
+          Game Requests
+        </a>
+      </div>
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          data-rr-ui-event-key="Seat Requests"
+          data-testid="Seat Requests"
+          href="#"
+          role="button"
+          tabindex="0"
+        >
+          Seat Requests
+        </a>
+      </div>
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          data-rr-ui-event-key="Other / Misc"
+          data-testid="Other / Misc"
+          href="#"
+          role="button"
+          tabindex="0"
+        >
+          Other / Misc
+        </a>
+      </div>
+    </div>
+    <div
+      class="col-12 px-3 pb-1 mb-3 text-start commands-table-wrapper"
+    >
+      <div>
+        <h4
+          class="px-1 pt-3 fw-bolder"
+        >
+          Game Requests
+        </h4>
+        <div
+          class="table-responsive-lg"
+        >
+          <table
+            class="mb-0 table table-dark table-striped table-bordered table-hover"
+          >
+            <thead>
+              <tr
+                class="text-center align-middle"
+              >
+                <th
+                  width="10%"
+                >
+                  Command
+                </th>
+                <th
+                  width="10%"
+                >
+                  Permissions
+                </th>
+                <th
+                  width="40%"
+                >
+                  Description
+                </th>
+                <th
+                  width="20%"
+                >
+                  On Screen Equivalent
+                </th>
+                <th
+                  width="10%"
+                >
+                  Variants
+                </th>
+                <th
+                  width="10%"
+                >
+                  Example
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table-group-divider"
+            >
+              <tr
+                class="small"
+              >
+                <td
+                  class="command-name fw-semibold fs-6 text-primary-emphasis"
+                >
+                  !
+                  request
+                </td>
+                <td
+                  class="text-center"
+                >
+                  Everyone
+                </td>
+                <td>
+                  Adds the requested game to the wheel. (If you already had a different active game request, it will be replaced - unless you are the broadcaster.)
+                </td>
+                <td>
+                  n/a
+                </td>
+                <td
+                  class="font-monospace fst-italic"
+                >
+                  !request
+                </td>
+                <td
+                  class="font-monospace fst-italic"
+                >
+                  !request MSM
+                </td>
+              </tr>
+              <tr
+                class="small"
+              >
+                <td
+                  class="command-name fw-semibold fs-6 text-primary-emphasis"
+                >
+                  !
+                  subrequest
+                </td>
+                <td
+                  class="text-center"
+                >
+                  Subscribers
+                </td>
+                <td>
+                  Adds the requested game to the wheel in a separate section when enabled in settings; this will not replace a previously request game using the !request command. (If you already had a different active game request, it will be not replaced unless Limit 1 Sub Request is enabled in streamer settings.)
+                </td>
+                <td>
+                  n/a
+                </td>
+                <td>
+                  n/a
+                </td>
+                <td
+                  class="font-monospace fst-italic"
+                >
+                  !subrequest MSM
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h4
+          class="px-1 pt-3 fw-bolder"
+        >
+          Seat Requests
+        </h4>
+        <div
+          class="table-responsive-lg"
+        >
+          <table
+            class="mb-0 table table-dark table-striped table-bordered table-hover"
+          >
+            <thead>
+              <tr
+                class="text-center align-middle"
+              >
+                <th
+                  width="10%"
+                >
+                  Command
+                </th>
+                <th
+                  width="10%"
+                >
+                  Permissions
+                </th>
+                <th
+                  width="40%"
+                >
+                  Description
+                </th>
+                <th
+                  width="20%"
+                >
+                  On Screen Equivalent
+                </th>
+                <th
+                  width="10%"
+                >
+                  Variants
+                </th>
+                <th
+                  width="10%"
+                >
+                  Example
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table-group-divider"
+            >
+              <tr
+                class="small"
+              >
+                <td
+                  class="command-name fw-semibold fs-6 text-primary-emphasis"
+                >
+                  !
+                  new
+                </td>
+                <td
+                  class="text-center"
+                >
+                  Everyone
+                </td>
+                <td>
+                  Adds the requesting user to the "interested" column. (If the !caniplay command is used, a confirmation message will be sent in chat.)
+                </td>
+                <td>
+                  n/a
+                </td>
+                <td
+                  class="font-monospace fst-italic"
+                >
+                  !caniplay
+                </td>
+                <td
+                  class="font-monospace fst-italic"
+                >
+                  !new
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h4
+          class="px-1 pt-3 fw-bolder"
+        >
+          Other / Misc
+        </h4>
+        <div
+          class="table-responsive-lg"
+        >
+          <table
+            class="mb-0 table table-dark table-striped table-bordered table-hover"
+          >
+            <thead>
+              <tr
+                class="text-center align-middle"
+              >
+                <th
+                  width="10%"
+                >
+                  Command
+                </th>
+                <th
+                  width="10%"
+                >
+                  Permissions
+                </th>
+                <th
+                  width="40%"
+                >
+                  Description
+                </th>
+                <th
+                  width="20%"
+                >
+                  On Screen Equivalent
+                </th>
+                <th
+                  width="10%"
+                >
+                  Variants
+                </th>
+                <th
+                  width="10%"
+                >
+                  Example
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table-group-divider"
+            >
+              <tr
+                class="small"
+              >
+                <td
+                  class="command-name fw-semibold fs-6 text-primary-emphasis"
+                >
+                  !
+                  whichpack
+                </td>
+                <td
+                  class="text-center"
+                >
+                  Everyone
+                </td>
+                <td>
+                  Looks up the specified game and responds with which party pack (if any) it is in.
+                </td>
+                <td>
+                  n/a
+                </td>
+                <td>
+                  n/a
+                </td>
+                <td
+                  class="font-monospace fst-italic"
+                >
+                  !whichpack TMP 2
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
