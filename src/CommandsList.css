@@ -1,0 +1,29 @@
+#commands-list,
+#commands-list .nav-tabs,
+#commands-list .nav-link {
+    --bs-body-bg: #212529;
+    --bs-link-color: #63a8fe;
+    --bs-link-hover-color: #8bb9fe;
+    --bs-secondary-color: rgba(222, 226, 230, 0.75);
+    --bs-border-color: #495057;
+    --bs-secondary-bg: #343a40;
+    --bs-emphasis-color: #fff;
+    --bs-nav-tabs-link-active-bg: #2f4f4f;
+    --bs-nav-tabs-link-active-color: #fff;
+    --bs-nav-tabs-border-color: #2f4f4f;
+    --bs-nav-tabs-link-active-border-color: var(--bs-border-color) var(--bs-border-color) var(--bs-body-bg);
+    --bs-nav-tabs-link-hover-border-color: var(--bs-border-color) var(--bs-border-color) var(--bs-body-bg);
+
+}
+
+.commands-table-wrapper {
+    background-color: #2f4f4f;
+}
+
+#commands-list .text-primary-emphasis {
+    color: #7fffd4!important;
+}
+
+#commands-list a.nav-link {
+    border-bottom-color: var(--bs-nav-tabs-link-active-bg)!important;
+}

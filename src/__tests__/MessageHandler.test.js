@@ -714,6 +714,50 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!dew', username)).toBeTruthy();
             expect(component.props.caniplayHandler).toHaveBeenCalledTimes(1);
         });
+        test('calls undoStart', () => {
+            let component = new MessageHandler(
+                Object.assign({}, props, {
+                    undoStart: jest.fn(),
+                    channel: 'sirfarewell',
+                })
+            );
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+            expect(component.checkForMiscCommands('!undostart', 'sirfarewell')).toBeTruthy();
+            expect(component.checkForMiscCommands('!undostart', 'dewinblack')).toBeTruthy();
+            expect(component.props.undoStart).toHaveBeenCalledTimes(1);
+        });
+        test('should handle requests to display commands', () => {
+            let component = new MessageHandler(
+                Object.assign({}, props, {
+                    settings: {
+                        useLinkForCommandList: false
+                    },
+                    channel: 'sirfarewell',
+                })
+            );
+            component.state.validCommands = {
+                'Game Requests': {
+                    lastgame: {},
+                    nextgame: {},
+                    request: {},
+                },
+                'Seat Requests': {
+                    clear: {},
+                    close: {},
+                    open: {},
+                }
+            };
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+            expect(component.checkForMiscCommands('!wheelcommands', 'sirfarewell')).toBeTruthy();
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('!clear !close !lastgame !nextgame !open !request'),
+            );
+            component.props.settings.useLinkForCommandList = true;
+            expect(component.checkForMiscCommands('!commands', 'sirfarewell')).toBeTruthy();
+            expect(component.sendMessage.mock.calls[1][0]).toEqual(
+                expect.stringContaining('all supported commands'),
+            );
+        });
     });
     describe('findGame', () => {
         const easterEggRequests = [
@@ -1025,7 +1069,51 @@ describe('MessageHandler', () => {
             );
 
         });
+        test('should list last played games from !lastgame command', () => {
+            const previousGames = [
+                {name: 'Split the Room'},
+                {name: 'Fibbage 3'},
+                {name: `Dirty Drawful`},
+                {name: `You Don't Know Jack`},
+            ];
+            const component = new MessageHandler({
+                ...props,
+                onMessage: jest.fn(),
+                sendMessage: jest.fn(),
+                previousGames: []
+            });
 
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+
+            expect(component.onMessage(target, tags, '!lastgame', false)).toBeUndefined();
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('no games have been played yet'),
+            );
+
+            component.props.previousGames = previousGames;
+            expect(component.onMessage(target, tags, '!lastgame', false)).toBeUndefined();
+            expect(component.sendMessage.mock.calls[1][0]).toEqual(
+                expect.stringContaining('was You Don\'t Know Jack, followed by Dirty Drawful, Fibbage 3, and Split the Room!'),
+            );
+
+            component.props.previousGames.pop();
+            expect(component.onMessage(target, tags, '!lastgame', false)).toBeUndefined();
+            expect(component.sendMessage.mock.calls[2][0]).toEqual(
+                expect.stringContaining('was Dirty Drawful, followed by Fibbage 3, and Split the Room!'),
+            );
+
+            component.props.previousGames.pop();
+            expect(component.onMessage(target, tags, '!lastgame', false)).toBeUndefined();
+            expect(component.sendMessage.mock.calls[3][0]).toEqual(
+                expect.stringContaining('was Fibbage 3, followed by Split the Room!'),
+            );
+
+            component.props.previousGames.pop();
+            expect(component.onMessage(target, tags, '!lastgame', false)).toBeUndefined();
+            expect(component.sendMessage.mock.calls[4][0]).toEqual(
+                expect.stringContaining('was Split the Room!'),
+            );
+        });
     });
     describe('sendMessage', () => {
         test('calls state.client.say with channel and message', () => {

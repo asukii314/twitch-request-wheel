@@ -163,19 +163,21 @@ export default class MessageHandler extends Component {
     // returns true iff a known command was found & responded to
     checkForMiscCommands = (message, username) => {
         //========= general =========
-        if (message.startsWith("!commands")) {
-            let commands = Object.keys(this.state.validCommands).map(c => `!${c}`).join(' ');
-            this.sendMessage(`Game Request Commands: ${commands}`);
+        if (message.startsWith("!commands") || message.startsWith("!wheelcommands")) {
+            if (this.props.settings?.useLinkForCommandList) {
+                this.sendMessage(`/me @${username}, list of all supported commands: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/commands`);
+            } else {
+                let commands = Object.values(this.state.validCommands).flatMap(
+                    (section) => Object.keys(section).map(c => `!${c}`)
+                ).sort().join(' ');
+                this.sendMessage(`/me @${username}, list of all supported commands: ${commands}`);
+            }
+
             return true;
         }
 
         if (message.startsWith("!gamelist") || message.startsWith("!gameslist")) {
-            this.sendMessage(`/me @${username}, click here for a list of available games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
-            return true;
-        }
-
-        if (message === "!wheelcommands") {
-            this.sendMessage(`/me @${username}, click here to read about all supported commands: https://github.com/asukii314/twitch-request-wheel/blob/master/src/Commands.yaml`);
+            this.sendMessage(`/me @${username}, list of available games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
             return true;
         }
 
@@ -437,6 +439,20 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        if (message === "!undostart") {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            try {
+                this.props.undoStart();
+                this.sendMessage(`/me @${username}, previous game and player queues have been restored.`);
+            } catch (e) {
+                this.sendMessage(`/me @${username}, cannot restore previous game and/or player queues.`);
+            }
+            return true;
+        }
+
         if (message.startsWith("!redeem")) {
             this.sendMessage(`/me @${username}, this command is no longer supported: please specify either !redeemgame or !redeemseat.`);
             return true;
@@ -536,13 +552,14 @@ export default class MessageHandler extends Component {
 
         if (msg.trim() === "!lastgame") {
             if (this.props.previousGames && this.props.previousGames.length > 0) {
-                let previous = this.props.previousGames[0].name;
-                if (this.props.previousGames.length > 1) {
-                    previous += `, followed by ${this.props.previousGames[1].name}`
-                    for (let i = 2; i < this.props.previousGames.length; i++) {
-                        previous += (i+1 === this.props.previousGames.length)
-                            ? `, and ${this.props.previousGames[i].name}` // oxford comma, y'all
-                            : `, ${this.props.previousGames[i].name}`;
+                let lastPlayedGames = [...this.props.previousGames].reverse();
+                let previous = lastPlayedGames[0].name;
+                if (lastPlayedGames.length > 1) {
+                    previous += `, followed by ${lastPlayedGames[1].name}`
+                    for (let i = 2; i < lastPlayedGames.length; i++) {
+                        previous += (i+1 === lastPlayedGames.length)
+                            ? `, and ${lastPlayedGames[i].name}` // oxford comma, y'all
+                            : `, ${lastPlayedGames[i].name}`;
                     }
                 }
                 this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)

@@ -212,6 +212,12 @@ export default class OptionsMenu extends Component {
                 : true;
             onSettingsUpdate({enableRoomCode: value});
         };
+        let toggleUseLinkForCommandList = () => {
+            let value = typeof settings?.useLinkForCommandList === 'boolean'
+                ? !settings?.useLinkForCommandList
+                : true;
+            onSettingsUpdate({useLinkForCommandList: value});
+        };
 
         let undoStartButton = (this.props.showUndoAvailable) ? (
             <li className="mb-1 fs-4 d-grid text-start">
@@ -244,6 +250,11 @@ export default class OptionsMenu extends Component {
                         </li>
                         <hr />
                         {undoStartButton}
+                        <li className="mb-1 fs-4 d-grid text-start">
+                            <Button variant="link" className="btn logout" onClick={this.props.toggleCommandsModal}>
+                                Show Chat Commands
+                            </Button>
+                        </li>
                         <li className="mb-1 fs-4 d-grid text-start">
                             <Button variant="link" className="btn settings-menu" onClick={this.toggleSettingsMenu}>
                                 Settings
@@ -284,7 +295,14 @@ export default class OptionsMenu extends Component {
                                         onClick={toggleEnableRoomCode}
                                         title="Allows host to set a room code that can be whispered to players."
                                     >
-                                        <input type="checkbox" role="switch" checked={(settings?.enableRoomCode)} readOnly /> <span>Enable Room Code <small>(beta)</small></span>
+                                        <input type="checkbox" role="switch" checked={(settings?.enableRoomCode)} readOnly /> <span>Enable Room Code</span>
+                                    </Button>
+
+                                    <Button variant="link" className="btn settings-menu"
+                                        onClick={toggleUseLinkForCommandList}
+                                        title="Posts a link in chat to the commands page when '!command' is used; otherwise, lists all available commands in chat when disabled."
+                                    >
+                                        <input type="checkbox" role="switch" checked={(settings?.useLinkForCommandList)} readOnly /> <span>Use Link for <tt>!command</tt></span>
                                     </Button>
                                 </div>
                             </div>
