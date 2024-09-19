@@ -550,13 +550,14 @@ export default class MessageHandler extends Component {
 
         if (msg.trim() === "!lastgame") {
             if (this.props.previousGames && this.props.previousGames.length > 0) {
-                let previous = this.props.previousGames[0].name;
-                if (this.props.previousGames.length > 1) {
-                    previous += `, followed by ${this.props.previousGames[1].name}`
-                    for (let i = 2; i < this.props.previousGames.length; i++) {
-                        previous += (i+1 === this.props.previousGames.length)
-                            ? `, and ${this.props.previousGames[i].name}` // oxford comma, y'all
-                            : `, ${this.props.previousGames[i].name}`;
+                let lastPlayedGames = [...this.props.previousGames].reverse();
+                let previous = lastPlayedGames[0].name;
+                if (lastPlayedGames.length > 1) {
+                    previous += `, followed by ${lastPlayedGames[1].name}`
+                    for (let i = 2; i < lastPlayedGames.length; i++) {
+                        previous += (i+1 === lastPlayedGames.length)
+                            ? `, and ${lastPlayedGames[i].name}` // oxford comma, y'all
+                            : `, ${lastPlayedGames[i].name}`;
                     }
                 }
                 this.sendMessage(`/me @${tags.username}, the last game played was ${previous}!`)
