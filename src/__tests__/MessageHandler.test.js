@@ -726,6 +726,38 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!undostart', 'dewinblack')).toBeTruthy();
             expect(component.props.undoStart).toHaveBeenCalledTimes(1);
         });
+        test('should handle requests to display commands', () => {
+            let component = new MessageHandler(
+                Object.assign({}, props, {
+                    settings: {
+                        useLinkForCommandList: false
+                    },
+                    channel: 'sirfarewell',
+                })
+            );
+            component.state.validCommands = {
+                'Game Requests': {
+                    lastgame: {},
+                    nextgame: {},
+                    request: {},
+                },
+                'Seat Requests': {
+                    clear: {},
+                    close: {},
+                    open: {},
+                }
+            };
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+            expect(component.checkForMiscCommands('!wheelcommands', 'sirfarewell')).toBeTruthy();
+            expect(component.sendMessage.mock.calls[0][0]).toEqual(
+                expect.stringContaining('!clear !close !lastgame !nextgame !open !request'),
+            );
+            component.props.settings.useLinkForCommandList = true;
+            expect(component.checkForMiscCommands('!commands', 'sirfarewell')).toBeTruthy();
+            expect(component.sendMessage.mock.calls[1][0]).toEqual(
+                expect.stringContaining('all supported commands'),
+            );
+        });
     });
     describe('findGame', () => {
         const easterEggRequests = [

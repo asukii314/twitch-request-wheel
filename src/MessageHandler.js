@@ -167,7 +167,9 @@ export default class MessageHandler extends Component {
             if (this.props.settings?.useLinkForCommandList) {
                 this.sendMessage(`/me @${username}, list of all supported commands: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/commands`);
             } else {
-                let commands = Object.keys(this.state.validCommands).map(c => `!${c}`).join(' ');
+                let commands = Object.values(this.state.validCommands).flatMap(
+                    (section) => Object.keys(section).map(c => `!${c}`)
+                ).sort().join(' ');
                 this.sendMessage(`/me @${username}, list of all supported commands: ${commands}`);
             }
 

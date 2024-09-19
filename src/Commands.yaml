@@ -148,11 +148,18 @@ Seat Requests:
     OnScreenEquivalent: 'The "Start Game" button in the top right hand corner of the seat request screen.'
     Variants: 'n/a'
 
+  undostart:
+    Example: '!undostart'
+    Availability: 'Mods + broadcaster'
+    Description: 'Reopens the player select screen, reselects the last game, and restores all of the player queues prior to starting the game.'
+    OnScreenEquivalent: 'The "Undo Start" option in the settings menu.'
+    Variants: 'n/a'
+
 Other / Misc:
   commands:
     Example: '!commands'
     Availability: 'Everyone'
-    Description: 'Responds with a list of all available chat commands when enabled in the streamer settings.'
+    Description: 'Responds with a list of all available chat commands, when enabled, in the streamer settings.'
     OnScreenEquivalent: 'n/a'
     Variants: 'n/a'
 
