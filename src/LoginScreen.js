@@ -14,6 +14,8 @@ class LoginScreen extends Component {
     render() {
         return (
             <div id="login-screen" className="fade-in">
+                <h1>Twitch Request Wheel</h1>
+                <hr />
                 <a href={loginUrl} className="btn btn-sm fs-2">
                     Log In With <strong>Twitch</strong>
                 </a>
