@@ -163,19 +163,19 @@ export default class MessageHandler extends Component {
     // returns true iff a known command was found & responded to
     checkForMiscCommands = (message, username) => {
         //========= general =========
-        if (message.startsWith("!commands")) {
-            let commands = Object.keys(this.state.validCommands).map(c => `!${c}`).join(' ');
-            this.sendMessage(`Game Request Commands: ${commands}`);
+        if (message.startsWith("!commands") || message.startsWith("!wheelcommands")) {
+            if (this.props.settings?.useLinkForCommandList) {
+                this.sendMessage(`/me @${username}, list of all supported commands: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/commands`);
+            } else {
+                let commands = Object.keys(this.state.validCommands).map(c => `!${c}`).join(' ');
+                this.sendMessage(`/me @${username}, list of all supported commands: ${commands}`);
+            }
+
             return true;
         }
 
         if (message.startsWith("!gamelist") || message.startsWith("!gameslist")) {
-            this.sendMessage(`/me @${username}, click here for a list of available games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
-            return true;
-        }
-
-        if (message === "!wheelcommands") {
-            this.sendMessage(`/me @${username}, click here to read about all supported commands: https://github.com/asukii314/twitch-request-wheel/blob/master/src/Commands.yaml`);
+            this.sendMessage(`/me @${username}, list of available games: ${process.env.REACT_APP_REDIRECT_URI_NOENCODE}/gamelist`);
             return true;
         }
 
