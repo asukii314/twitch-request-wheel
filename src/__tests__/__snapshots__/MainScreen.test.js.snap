@@ -132,6 +132,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
               },
               "nextGameIdx": 0,
               "settings": Object {},
+              "showCommandsModal": false,
               "showOptionsMenu": false,
               "showOptionsModal": false,
               "showPlayerSelect": false,
@@ -281,6 +282,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
           },
           "nextGameIdx": 0,
           "settings": Object {},
+          "showCommandsModal": false,
           "showOptionsMenu": false,
           "showOptionsModal": false,
           "showPlayerSelect": false,
@@ -291,6 +293,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
       showOptionsMenu={false}
       showSettingsMenu={false}
       showUndoAvailable={false}
+      toggleCommandsModal={[Function]}
     />
   </div>
 </div>
@@ -443,6 +446,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
               },
               "nextGameIdx": 0,
               "settings": Object {},
+              "showCommandsModal": false,
               "showOptionsMenu": false,
               "showOptionsModal": false,
               "showPlayerSelect": false,
@@ -636,6 +640,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
           },
           "nextGameIdx": 0,
           "settings": Object {},
+          "showCommandsModal": false,
           "showOptionsMenu": false,
           "showOptionsModal": false,
           "showPlayerSelect": false,
@@ -646,6 +651,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       showOptionsMenu={false}
       showSettingsMenu={false}
       showUndoAvailable={false}
+      toggleCommandsModal={[Function]}
     />
   </div>
 </div>
@@ -781,6 +787,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
               },
               "nextGameIdx": 0,
               "settings": Object {},
+              "showCommandsModal": false,
               "showOptionsMenu": false,
               "showOptionsModal": false,
               "showPlayerSelect": true,
@@ -878,6 +885,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
           },
           "nextGameIdx": 0,
           "settings": Object {},
+          "showCommandsModal": false,
           "showOptionsMenu": false,
           "showOptionsModal": false,
           "showPlayerSelect": true,
@@ -888,6 +896,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       showOptionsMenu={false}
       showSettingsMenu={false}
       showUndoAvailable={false}
+      toggleCommandsModal={[Function]}
     />
   </div>
 </div>

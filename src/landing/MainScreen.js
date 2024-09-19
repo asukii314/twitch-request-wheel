@@ -2,6 +2,7 @@ import {Component} from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import ChatActivity, { ActivityStatus } from '../ChatActivity';
 import ConfettiExplosion from 'react-confetti-explosion';
+import CommandsList from '../CommandsList'
 import GameRequest from '../components/GameRequest'
 import MessageHandler from '../MessageHandler';
 import OptionsMenu from './OptionsMenu';
@@ -46,6 +47,7 @@ export default class MainScreen extends Component {
             logUserMessages: false,
             nextGameIdx: 0,
             settings,
+            showCommandsModal: false,
             showOptionsMenu: false,
             showOptionsModal: false,
             showPlayerSelect: false,
@@ -66,6 +68,7 @@ export default class MainScreen extends Component {
         this.removeGame = this.removeGame.bind(this);
         this.onMessage = this.onMessage.bind(this);
         this.toggleAllowGameRequests = this.toggleAllowGameRequests.bind(this);
+        this.toggleCommandsModal = this.toggleCommandsModal.bind(this);
         this.togglePlayerSelect = this.togglePlayerSelect.bind(this);
         this.routePlayRequest = this.routePlayRequest.bind(this);
         this.routeLeaveRequest = this.routeLeaveRequest.bind(this);
@@ -378,6 +381,14 @@ export default class MainScreen extends Component {
         })
     }
 
+    toggleCommandsModal = () => {
+        this.setState((state) => {
+            return {
+                showCommandsModal: !state.showCommandsModal
+            }
+        })
+    }
+
     toggleOptionsMenu = () => {
         this.setState((state) => {
             return {
@@ -535,6 +546,26 @@ export default class MainScreen extends Component {
         this.playerSelector = mh;
     };
 
+    renderCommandsModal = () => {
+        return (
+            <Modal
+                show={this.state.showCommandsModal}
+                onHide={()=>this.toggleCommandsModal(false)}
+                fullscreen={true}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Header closeVariant="white" closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Chat Commands
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CommandsList hideHeader={true} />
+                </Modal.Body>
+            </Modal>
+        );
+    }
+
     renderGameChosenModal(gameObj) {
         let confettiProps = {
             force: 0.6,
@@ -618,6 +649,8 @@ export default class MainScreen extends Component {
         let gameSelectedModal;
         if (this.state.showOptionsModal) {
             gameSelectedModal = this.renderOptionsModal();
+        } else if (this.state.showCommandsModal) {
+            gameSelectedModal = this.renderCommandsModal();
         } else if (this.state.gameSelected) {
             gameSelectedModal = this.renderGameChosenModal(this.state.gameSelected);
         }
@@ -762,6 +795,7 @@ export default class MainScreen extends Component {
                         onLogout={this.props.onLogout}
                         onSettingsUpdate={this.onSettingsUpdate}
                         settings={this.state.settings}
+                        toggleCommandsModal={this.toggleCommandsModal}
                         showOptionsMenu={this.state.showOptionsMenu}
                         showUndoAvailable={this.showUndoAvailable()} />
                 </div>

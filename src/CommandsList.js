@@ -64,21 +64,25 @@ export default class CommandsList extends Component {
             .then(r => r.text())
             .then(text => {
                 let validCommands = YAML.parse(text);
-                this.setState((state) => {
-                    return {
-                        ...state,
-                        validCommands: Object.entries(validCommands).map(
-                            ([section, commands], i) => {
-                                return {
-                                    section,
-                                    commands,
-                                    entries: Object.entries(commands).map(([command, info], i) => ({command, info})),
-                                };
-                            }
-                        )
-                    };
-                });
+                return  this.onValidCommands(validCommands);
             });
+    }
+
+    onValidCommands = (validCommands) => {
+        return this.setState((state) => {
+            return {
+                ...state,
+                validCommands: Object.entries(validCommands).map(
+                    ([section, commands], i) => {
+                        return {
+                            section,
+                            commands,
+                            entries: Object.entries(commands).map(([command, info], i) => ({command, info})),
+                        };
+                    }
+                )
+            };
+        });
     }
 
     onSelectTab = (eventKey) => {
@@ -111,9 +115,13 @@ export default class CommandsList extends Component {
             );
         });
 
+        const header = (this.props.hideHeader) ? null : (
+            <h1 className="fw-bolder pt-3">Chat Commands</h1>
+        );
+
         return (
             <div id="commands-list" className="container">
-                <h1 className="fw-bolder pt-3">Chat Commands</h1>
+                {header}
                 <Nav variant="tabs" activeKey={this.state.activeFilter || 'All Commands'} onSelect={this.onSelectTab}>
                     {/* <Nav.Item>
                         <Nav.Link eventKey="All Commands" data-testid="All Commands">All Commands</Nav.Link>

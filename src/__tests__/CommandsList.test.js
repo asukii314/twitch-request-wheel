@@ -72,7 +72,8 @@ describe('CommandsList', () => {
             expect(screen.queryByText(/!whichpack TMP 2/i)).toBeInTheDocument();
             expect(container).toMatchSnapshot();
         });
-        test('renders component with filtered list of commands yaml content', async () => {
+        test('renders component with filtered list of commands yaml content and hides header', async () => {
+            props.hideHeader = true;
             render(<CommandsList {...props} />);
 
             await waitFor(() => screen.getByText(/All Commands/i));

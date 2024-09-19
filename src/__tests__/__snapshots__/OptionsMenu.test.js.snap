@@ -145,6 +145,18 @@ exports[`OptionsMenu render should render with menu items 1`] = `
       >
         <Button
           active={false}
+          className="btn logout"
+          disabled={false}
+          variant="link"
+        >
+          Show Chat Commands
+        </Button>
+      </li>
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
           className="btn settings-menu"
           disabled={false}
           onClick={[Function]}
@@ -401,6 +413,18 @@ exports[`OptionsMenu render should render without error 1`] = `
         </Button>
       </li>
       <hr />
+      <li
+        className="mb-1 fs-4 d-grid text-start"
+      >
+        <Button
+          active={false}
+          className="btn logout"
+          disabled={false}
+          variant="link"
+        >
+          Show Chat Commands
+        </Button>
+      </li>
       <li
         className="mb-1 fs-4 d-grid text-start"
       >

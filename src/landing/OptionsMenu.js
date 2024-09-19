@@ -251,6 +251,11 @@ export default class OptionsMenu extends Component {
                         <hr />
                         {undoStartButton}
                         <li className="mb-1 fs-4 d-grid text-start">
+                            <Button variant="link" className="btn logout" onClick={this.props.toggleCommandsModal}>
+                                Show Chat Commands
+                            </Button>
+                        </li>
+                        <li className="mb-1 fs-4 d-grid text-start">
                             <Button variant="link" className="btn settings-menu" onClick={this.toggleSettingsMenu}>
                                 Settings
                             </Button>

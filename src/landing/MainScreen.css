@@ -166,3 +166,16 @@
 #main-screen .confetti-modal .options-list input[type="checkbox"]:checked ~ label {
     color:#888;
 }
+
+
+/* bootstrap modal */
+.modal {
+    --bs-modal-color: var(--bs-body-bg)!important;
+    --bs-modal-bg: var(--bs-body-color)!important;
+    --bs-modal-header-border-color: var(--bs-gray-700)!important;
+}
+
+#main-screen .modal-content {
+    background-color: var(--bs-modal-bg)!important;
+    color: var(--bs-modal-color)!important;
+}
