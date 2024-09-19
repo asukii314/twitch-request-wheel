@@ -437,6 +437,20 @@ export default class MessageHandler extends Component {
             return true;
         }
 
+        if (message === "!undostart") {
+            if (!this.isModOrBroadcaster(username)) {
+                this.sendMessage(`/me @${username}, only channel moderators can use this command.`);
+                return true;
+            }
+            try {
+                this.props.undoStart();
+                this.sendMessage(`/me @${username}, previous game and player queues have been restored.`);
+            } catch (e) {
+                this.sendMessage(`/me @${username}, cannot restore previous game and/or player queues.`);
+            }
+            return true;
+        }
+
         if (message.startsWith("!redeem")) {
             this.sendMessage(`/me @${username}, this command is no longer supported: please specify either !redeemgame or !redeemseat.`);
             return true;

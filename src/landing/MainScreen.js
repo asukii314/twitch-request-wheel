@@ -723,6 +723,7 @@ export default class MainScreen extends Component {
                         onSettingsUpdate={this.onSettingsUpdate}
                         startGame={this.startGame}
                         toggleAllowGameRequests={this.toggleAllowGameRequests}
+                        undoStart={this.onUndoState}
                         upcomingGames={this.state.history.slice(this.state.nextGameIdx)}
                     />
                     <div className="left-column fade-in">

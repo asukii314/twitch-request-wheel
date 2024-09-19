@@ -714,6 +714,18 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!dew', username)).toBeTruthy();
             expect(component.props.caniplayHandler).toHaveBeenCalledTimes(1);
         });
+        test('calls undoStart', () => {
+            let component = new MessageHandler(
+                Object.assign({}, props, {
+                    undoStart: jest.fn(),
+                    channel: 'sirfarewell',
+                })
+            );
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+            expect(component.checkForMiscCommands('!undostart', 'sirfarewell')).toBeTruthy();
+            expect(component.checkForMiscCommands('!undostart', 'dewinblack')).toBeTruthy();
+            expect(component.props.undoStart).toHaveBeenCalledTimes(1);
+        });
     });
     describe('findGame', () => {
         const easterEggRequests = [

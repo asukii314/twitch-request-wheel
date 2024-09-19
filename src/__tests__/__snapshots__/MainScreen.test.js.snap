@@ -63,6 +63,7 @@ exports[`MainScreen render should render the game request screen 1`] = `
       settings={Object {}}
       startGame={[Function]}
       toggleAllowGameRequests={[Function]}
+      undoStart={[Function]}
       upcomingGames={Array []}
     />
     <div
@@ -358,6 +359,7 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
       settings={Object {}}
       startGame={[Function]}
       toggleAllowGameRequests={[Function]}
+      undoStart={[Function]}
       upcomingGames={Array []}
     />
     <div
@@ -712,6 +714,7 @@ exports[`MainScreen render should render the player selection screen 1`] = `
       settings={Object {}}
       startGame={[Function]}
       toggleAllowGameRequests={[Function]}
+      undoStart={[Function]}
       upcomingGames={Array []}
     />
     <div
