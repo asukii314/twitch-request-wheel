@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "./static/css/main.dc8dcc0b.chunk.css",
-    "main.js": "./static/js/main.ba0ee119.chunk.js",
-    "main.js.map": "./static/js/main.ba0ee119.chunk.js.map",
+    "main.js": "./static/js/main.f1296d62.chunk.js",
+    "main.js.map": "./static/js/main.f1296d62.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.c3e385af.js",
     "runtime-main.js.map": "./static/js/runtime-main.c3e385af.js.map",
     "static/css/2.b8e408b6.chunk.css": "./static/css/2.b8e408b6.chunk.css",
@@ -13,7 +13,7 @@
     "static/css/main.dc8dcc0b.chunk.css.map": "./static/css/main.dc8dcc0b.chunk.css.map",
     "static/js/2.9b28fc8c.chunk.js.LICENSE.txt": "./static/js/2.9b28fc8c.chunk.js.LICENSE.txt",
     "static/media/Commands.d88afb03.yaml": "./static/media/Commands.d88afb03.yaml",
-    "static/media/JackboxGames.d35c9635.yaml": "./static/media/JackboxGames.d35c9635.yaml",
+    "static/media/JackboxGames.9ac07b94.yaml": "./static/media/JackboxGames.9ac07b94.yaml",
     "static/media/dice.021a7158.svg": "./static/media/dice.021a7158.svg",
     "static/media/lock.6857c469.svg": "./static/media/lock.6857c469.svg",
     "static/media/star.de82f684.svg": "./static/media/star.de82f684.svg"
@@ -23,6 +23,6 @@
     "static/css/2.b8e408b6.chunk.css",
     "static/js/2.9b28fc8c.chunk.js",
     "static/css/main.dc8dcc0b.chunk.css",
-    "static/js/main.ba0ee119.chunk.js"
+    "static/js/main.f1296d62.chunk.js"
   ]
 }
