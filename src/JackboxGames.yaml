@@ -557,6 +557,38 @@ Naughty Pack:
       - lemme finish
       - lmf
 
+Survey Scramble:
+  Hilo:
+    Min players: 2
+    Max players: 10
+    Variants:
+      - hilo
+      - hi lo
+      - hilow
+      - highlow
+      - high low
+      - highlo
+      - high lo
+  Squares:
+    Min players: 2
+    Max players: 10
+    Variants:
+      - squares
+      - square
+  Speed:
+    Min players: 2
+    Max players: 10
+    Variants:
+      - speed
+      - speeed
+      - sped
+  Bounce:
+    Min players: 2
+    Max players: 10
+    Variants:
+      - bounce
+      - bounced
+
 Standalone:
   Drawful 2:
     Min players: 3
