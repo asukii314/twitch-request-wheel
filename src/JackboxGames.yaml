@@ -588,6 +588,22 @@ Survey Scramble:
     Variants:
       - bounce
       - bounced
+  Tour Mode:
+    Min players: 2
+    Max players: 10
+    Variants:
+      - tour
+      - tourmode
+      - tm
+  Pick For Me:
+    Min players: 2
+    Max players: 10
+    Variants:
+      - pickforme
+      - pick4me
+      - pick
+      - p4m
+      - pfm
 
 Standalone:
   Drawful 2:
