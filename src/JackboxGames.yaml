@@ -1,4 +1,4 @@
-# Here's a list of all Jackbox games (as of December 2022)
+# Here's a list of all Jackbox games (as of November 2024)
 # along with some other popular standalone party games,
 # and all the different ways you can !request them.
 # (Any capitalization is fine.)
@@ -558,7 +558,7 @@ Naughty Pack:
       - lmf
 
 Survey Scramble:
-  Hilo:
+  "Hilo (Survey Scramble)":
     Min players: 2
     Max players: 10
     Variants:
@@ -569,33 +569,33 @@ Survey Scramble:
       - high low
       - highlo
       - high lo
-  Squares:
+  "Squares (Survey Scramble)":
     Min players: 2
     Max players: 10
     Variants:
       - squares
       - square
-  Speed:
+  "Speed (Survey Scramble)":
     Min players: 2
     Max players: 10
     Variants:
       - speed
       - speeed
       - sped
-  Bounce:
+  "Bounce (Survey Scramble)":
     Min players: 2
     Max players: 10
     Variants:
       - bounce
       - bounced
-  Tour Mode:
+  "Tour Mode (Survey Scramble)":
     Min players: 2
     Max players: 10
     Variants:
       - tour
       - tourmode
       - tm
-  Pick For Me:
+  "Pick For Me (Survey Scramble)":
     Min players: 2
     Max players: 10
     Variants:
@@ -890,7 +890,26 @@ Standalone:
     Max players: 50
     Variants:
       - redactionary
+      - redictionary
       - redact
+
+  Wordabeast:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - wordabeast
+      - wordsabeast
+      - wordsbeast
+      - word beast
+
+  "Death By A.I.":
+    Min players: 2
+    Max players: 10
+    Variants:
+      - deathbyai
+      - deathai
+      - diebyai
+      - aideath
 
   Fall Guys:
     Min players: 1
