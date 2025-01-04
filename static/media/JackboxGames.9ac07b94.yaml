@@ -1,4 +1,4 @@
-# Here's a list of all Jackbox games (as of November 2024)
+# Here's a list of all Jackbox games (as of January 2025)
 # along with some other popular standalone party games,
 # and all the different ways you can !request them.
 # (Any capitalization is fine.)
@@ -588,6 +588,16 @@ Survey Scramble:
     Variants:
       - bounce
       - bounced
+  "Dash (Survey Scramble)":
+    Min players: 2
+    Max players: 10
+    Variants:
+      - dash
+  "Dare (Survey Scramble)":
+    Min players: 2
+    Max players: 10
+    Variants:
+      - dare
   "Tour Mode (Survey Scramble)":
     Min players: 2
     Max players: 10
