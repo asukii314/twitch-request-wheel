@@ -1,4 +1,4 @@
-# Here's a list of all Jackbox games (as of January 2025)
+# Here's a list of all Jackbox games (as of February 2025)
 # along with some other popular standalone party games,
 # and all the different ways you can !request them.
 # (Any capitalization is fine.)
@@ -541,6 +541,56 @@ Naughty Pack:
       - faking it all
       - fakin it 2
       - fianl
+  "Fakin' It All Night Long (Clean)":
+    Min players: 3
+    Max players: 8
+    Variants:
+      - fakin it all night long clean
+      - fakin it all night clean
+      - fakin it all clean
+      - faking it all night long clean
+      - faking it all night clean
+      - faking it all clean
+      - fakin it 2 clean
+      - fianlc
+  "Fakin' It All Night Long (Medium)":
+    Min players: 3
+    Max players: 8
+    Variants:
+      - fakin it all night long medium
+      - fakin it all night medium
+      - fakin it all medium
+      - faking it all night long medium
+      - faking it all night medium
+      - faking it all medium
+      - fakin it 2 medium
+      - fakin it all night long med
+      - fakin it all night med
+      - fakin it all med
+      - faking it all night long med
+      - faking it all night med
+      - faking it all med
+      - fakin it 2 med
+      - fianlm
+  "Fakin' It All Night Long (Spicy)":
+    Min players: 3
+    Max players: 8
+    Variants:
+      - fakin it all night long spicy
+      - fakin it all night spicy
+      - fakin it all spicy
+      - faking it all night long spicy
+      - faking it all night spicy
+      - faking it all spicy
+      - fakin it 2 spicy
+      - fakin it all night long hot
+      - fakin it all night hot
+      - fakin it all hot
+      - faking it all night long hot
+      - faking it all night hot
+      - faking it all hot
+      - fakin it 2 hot
+      - fianls
   Dirty Drawful:
     Min players: 3
     Max players: 8
@@ -593,11 +643,12 @@ Survey Scramble:
     Max players: 10
     Variants:
       - dash
-  "Dare (Survey Scramble)":
+  "Dares (Survey Scramble)":
     Min players: 2
     Max players: 10
     Variants:
       - dare
+      - dares
   "Tour Mode (Survey Scramble)":
     Min players: 2
     Max players: 10
