@@ -1,4 +1,4 @@
-# Here's a list of all Jackbox games (as of February 2025)
+# Here's a list of all Jackbox games (as of March 2025)
 # along with some other popular standalone party games,
 # and all the different ways you can !request them.
 # (Any capitalization is fine.)
@@ -541,7 +541,7 @@ Naughty Pack:
       - faking it all
       - fakin it 2
       - fianl
-  "Fakin' It All Night Long (Clean)":
+  "Fakin' It All Night Long (Nice)":
     Min players: 3
     Max players: 8
     Variants:
@@ -552,26 +552,14 @@ Naughty Pack:
       - faking it all night clean
       - faking it all clean
       - fakin it 2 clean
-      - fianlc
-  "Fakin' It All Night Long (Medium)":
-    Min players: 3
-    Max players: 8
-    Variants:
-      - fakin it all night long medium
-      - fakin it all night medium
-      - fakin it all medium
-      - faking it all night long medium
-      - faking it all night medium
-      - faking it all medium
-      - fakin it 2 medium
-      - fakin it all night long med
-      - fakin it all night med
-      - fakin it all med
-      - faking it all night long med
-      - faking it all night med
-      - faking it all med
-      - fakin it 2 med
-      - fianlm
+      - fakin it all night long normal
+      - fakin it all night normal
+      - fakin it all normal
+      - faking it all night long normal
+      - faking it all night normal
+      - faking it all normal
+      - fakin it 2 normal
+      - fianln
   "Fakin' It All Night Long (Spicy)":
     Min players: 3
     Max players: 8
@@ -590,6 +578,9 @@ Naughty Pack:
       - faking it all night hot
       - faking it all hot
       - fakin it 2 hot
+      - fakin it 2 spicy
+      - fianl naughty
+      - fianl spicy
       - fianls
   Dirty Drawful:
     Min players: 3
@@ -983,3 +974,50 @@ Standalone:
       - falguys
       - falguy
       - fg
+
+  Awkward:
+    Min players: 2
+    Max players: 100
+    Variants:
+      - awkward
+      - awkwerd
+      - akward
+      - awk
+
+  Awkward 2:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - awkward 2
+      - awkwerd 2
+      - akward 2
+      - awk 2
+
+  "Trivial Pursuit Live! 2":
+    Min players: 2
+    Max players: 100
+    Variants:
+      - trivial pursuit live! 2
+      - trivial pursuit live 2
+      - trivial pursuit live
+      - trivial pursuit 2
+      - trivial pursuit
+      - trivial persuit
+      - trivia pursuit
+      - trivia pursuit
+
+  "It's Quiz Time":
+    Min players: 2
+    Max players: 100
+    Variants:
+      - its quiz time
+      - quiz time
+      - its quiz
+
+  "Family Feud ®":
+    Min players: 2
+    Max players: 100
+    Variants:
+      - family feud
+      - family fued
+      - fued
