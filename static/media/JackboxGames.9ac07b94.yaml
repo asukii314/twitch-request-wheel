@@ -1,4 +1,4 @@
-# Here's a list of all Jackbox games (as of February 2025)
+# Here's a list of all Jackbox games (as of March 2025)
 # along with some other popular standalone party games,
 # and all the different ways you can !request them.
 # (Any capitalization is fine.)
@@ -578,6 +578,9 @@ Naughty Pack:
       - faking it all night hot
       - faking it all hot
       - fakin it 2 hot
+      - fakin it 2 spicy
+      - fianl naughty
+      - fianl spicy
       - fianls
   Dirty Drawful:
     Min players: 3
@@ -971,3 +974,50 @@ Standalone:
       - falguys
       - falguy
       - fg
+
+  Awkward:
+    Min players: 2
+    Max players: 100
+    Variants:
+      - awkward
+      - awkwerd
+      - akward
+      - awk
+
+  Awkward 2:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - awkward 2
+      - awkwerd 2
+      - akward 2
+      - awk 2
+
+  "Trivial Pursuit Live! 2":
+    Min players: 2
+    Max players: 100
+    Variants:
+      - trivial pursuit live! 2
+      - trivial pursuit live 2
+      - trivial pursuit live
+      - trivial pursuit 2
+      - trivial pursuit
+      - trivial persuit
+      - trivia pursuit
+      - trivia pursuit
+
+  "It's Quiz Time":
+    Min players: 2
+    Max players: 100
+    Variants:
+      - its quiz time
+      - quiz time
+      - its quiz
+
+  "Family Feud ®":
+    Min players: 2
+    Max players: 100
+    Variants:
+      - family feud
+      - family fued
+      - fued
