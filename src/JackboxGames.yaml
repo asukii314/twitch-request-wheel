@@ -664,6 +664,7 @@ Party Pack 11:
     Variants:
       - doominate
       - dominate
+      - doom
       - dom
   Hear Say:
     Min players: 2
@@ -673,6 +674,7 @@ Party Pack 11:
       - here say
       - heresey
       - hearsey
+      - hear
       - hs
   Cookie Haus:
     Min players: 3
@@ -680,6 +682,7 @@ Party Pack 11:
     Variants:
       - cookie haus
       - cookie house
+      - cookie
       - ch
   Suspectives:
     Min players: 4
@@ -687,6 +690,8 @@ Party Pack 11:
     Variants:
       - suspectives
       - suspective
+      - suspects
+      - suspect
       - sus
   Legends of Trivia:
     Min players: 1
