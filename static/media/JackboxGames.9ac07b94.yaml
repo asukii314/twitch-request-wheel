@@ -1,4 +1,4 @@
-# Here's a list of all Jackbox games (as of March 2025)
+# Here's a list of all Jackbox games (as of September 2025)
 # along with some other popular standalone party games,
 # and all the different ways you can !request them.
 # (Any capitalization is fine.)
@@ -656,6 +656,47 @@ Survey Scramble:
       - pick
       - p4m
       - pfm
+
+Party Pack 11:
+  Doominate:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - doominate
+      - dominate
+      - dom
+  Hear Say:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - hear say
+      - here say
+      - heresey
+      - hearsey
+      - hs
+  Cookie Haus:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - cookie haus
+      - cookie house
+      - ch
+  Suspectives:
+    Min players: 4
+    Max players: 8
+    Variants:
+      - suspectives
+      - suspective
+      - sus
+  Legends of Trivia:
+    Min players: 1
+    Max players: 6
+    Variants:
+      - legends of trivia
+      - legend of trivia
+      - trivia legends
+      - trivia legend
+      - lot
 
 Standalone:
   Drawful 2:
