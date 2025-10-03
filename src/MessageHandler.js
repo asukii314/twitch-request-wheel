@@ -80,6 +80,7 @@ export default class MessageHandler extends Component {
         super(props);
         this.state = {
             client: null,
+            connected: false,
             allowedGames: {},
             validCommands: {},
             validGames: []
@@ -90,7 +91,9 @@ export default class MessageHandler extends Component {
         this.findGame = this.findGame.bind(this);
         this.checkForGameCommand = this.checkForGameCommand.bind(this);
         this.onMessage = this.onMessage.bind(this);
+        this.onDisconnected = this.onDisconnected.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
+        this.refreshTwitchClient = this.refreshTwitchClient.bind(this);
     }
 
     componentDidMount = (props) => {
@@ -98,6 +101,7 @@ export default class MessageHandler extends Component {
         this.client = client;
 
         client.on('message', this.onMessage);
+        client.on('disconnected', this.onDisconnected);
         client.connect();
 
         this.getGameList(rawJackboxGameList, client);
@@ -526,6 +530,20 @@ export default class MessageHandler extends Component {
         return this.findGame(requestedGame, username);
     }
 
+    onConnected = (client) => {
+        this.setState({
+            client,
+            connected: true
+        });
+    }
+
+    onDisconnected = (evt) => {
+        this.setState({
+            client: null,
+            connected: false
+        });
+    }
+
     onMessage = (target, tags, msg, self) => {
         if (this.props.logUserMessages) {
             console.log({target, tags, msg, self});
@@ -658,6 +676,43 @@ export default class MessageHandler extends Component {
             allowedGames
         });
     }
+
+    _disconnect = async() => {
+        try {
+            if (this.client) {
+                await this.client.disconnect();
+                this.client.removeAllListeners();
+                this.onDisconnected();
+            }
+        } catch(e) {
+            console.log('Error Disconnecting Twitch Client', e);
+            return false;
+        }
+        return true;
+    }
+
+    _connect = async() => {
+        try {
+            const client = this.getTwitchClient(this.props);
+            this.client = client;
+
+            client.on('message', this.onMessage);
+            client.on('disconnected', this.onDisconnected);
+            await client.connect();
+            this.onConnected(client);
+            return client;
+        } catch(e) {
+            console.log('Error Reconnecting Twitch Client', e);
+        }
+        return false;
+    }
+
+    refreshTwitchClient = async() => {
+        await this._disconnect();
+        await this._connect();
+        return;
+    }
+
     reloadGameList = () => {
         let gameList = `${rawJackboxGameList}?${Date.now()}`;
         return this.getGameList(gameList, this.client);

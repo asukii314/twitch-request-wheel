@@ -342,7 +342,7 @@ describe('MessageHandler', () => {
             component.componentDidMount(props);
 
             expect(component.getTwitchClient).toHaveBeenCalledTimes(1);
-            expect(_Client.on).toHaveBeenCalledTimes(1);
+            expect(_Client.on).toHaveBeenCalledTimes(2);
             expect(_Client.connect).toHaveBeenCalledTimes(1);
             expect(component.getCommandList).toHaveBeenCalledTimes(1);
             expect(component.getCommandList).toHaveBeenCalledWith(rawCommandList, _Client);
@@ -943,6 +943,34 @@ describe('MessageHandler', () => {
             expect(component.findGame).toHaveBeenCalledWith('tmp2', 'cactus_dad');
         });
     });
+    describe('onConnected', () => {
+        test('should set state.connected to true', () => {
+            const component = new MessageHandler(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            component.onConnected({mockClient: true});
+
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState).toHaveBeenCalledWith({
+                client: {mockClient: true},
+                connected: true
+            });
+        });
+    });
+    describe('onDisconnected', () => {
+        test('should set state.connected to true', () => {
+            const component = new MessageHandler(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            component.onDisconnected();
+
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState).toHaveBeenCalledWith({
+                client: null,
+                connected: false
+            });
+        });
+    });
     describe('onMessage', () => {
         const target = 'dcpesses';
         const tags = {
@@ -1126,6 +1154,67 @@ describe('MessageHandler', () => {
 
             expect(component.state.client.say).toHaveBeenCalledTimes(1);
             expect(component.state.client.say).toHaveBeenCalledWith('sirfarewell', 'This is a dummy message.');
+        });
+    });
+    describe('_disconnect', () => {
+        test('should disconnect Twitch client', async() => {
+            let component = new MessageHandler(props);
+            component.client = {
+                disconnect: jest.fn().mockResolvedValue({}),
+                removeAllListeners: jest.fn()
+            };
+            jest.spyOn(component, 'onDisconnected').mockImplementation(()=>{});
+
+            await component._disconnect();
+
+            expect(component.client.disconnect).toHaveBeenCalledTimes(1);
+            expect(component.onDisconnected).toHaveBeenCalledTimes(1);
+        });
+    });
+    describe('_connect', () => {
+        test('should connect Twitch client', async() => {
+            let component = new MessageHandler(props);
+            let _Client = {
+                connect: jest.fn(),
+                disconnect: jest.fn().mockResolvedValue({}),
+                on: jest.fn(),
+                removeAllListeners: jest.fn(),
+            };
+            jest.spyOn(component, 'onConnected').mockImplementation(()=>{});
+            jest.spyOn(component, 'getTwitchClient').mockImplementation(()=>{
+                return _Client;
+            });
+
+            await component._connect();
+
+            expect(component.getTwitchClient).toHaveBeenCalledTimes(1);
+            expect(component.onConnected).toHaveBeenCalledTimes(1);
+            expect(_Client.on).toHaveBeenCalledTimes(2);
+            expect(_Client.connect).toHaveBeenCalledTimes(1);
+        });
+    });
+    describe('refreshTwitchClient', () => {
+        test('should disconnect existing Twitch client if exists and create a new Twitch client', async() => {
+            let component = new MessageHandler(props);
+            let _Client = {
+                connect: jest.fn(),
+                disconnect: jest.fn().mockResolvedValue({}),
+                on: jest.fn(),
+                removeAllListeners: jest.fn(),
+            };
+            component.client = _Client;
+            jest.spyOn(component, 'onConnected').mockImplementation(()=>{});
+            jest.spyOn(component, 'onDisconnected').mockImplementation(()=>{});
+            jest.spyOn(component, 'getTwitchClient').mockImplementation(()=>{
+                return _Client;
+            });
+
+            await component.refreshTwitchClient();
+
+            expect(component.getTwitchClient).toHaveBeenCalledTimes(1);
+            expect(_Client.on).toHaveBeenCalledTimes(2);
+            expect(_Client.disconnect).toHaveBeenCalledTimes(1);
+            expect(_Client.connect).toHaveBeenCalledTimes(1);
         });
     });
     describe('render', () => {
