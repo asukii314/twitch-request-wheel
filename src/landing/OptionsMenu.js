@@ -68,7 +68,9 @@ export default class OptionsMenu extends Component {
             }
             if (/^[-]+$/i.test(i.label)) {
                 return (
-                    <Dropdown.Divider eventKey={i.idx} />
+                    <Dropdown.Divider
+                        key={`${idx} ${i.label}`}
+                    />
                 );
             }
             return (
@@ -89,7 +91,7 @@ export default class OptionsMenu extends Component {
             return [];
         }
         let noop = () => void 0;
-        return items.map(i => {
+        return items.map((i, idx) => {
             if (!i.label) {
                 return null;
             }
@@ -99,7 +101,7 @@ export default class OptionsMenu extends Component {
             let listItemClassNames = ['mb-1 fs-4 d-grid text-start', liClassName || null].filter(n => n).join(' ');
             let btnClassNames = ['btn', i.btnClassName || null].filter(n => n).join(' ');
             return (
-                <li className={listItemClassNames} key={i.label}>
+                <li className={listItemClassNames} key={`${idx}-${i.label}`}>
                     <Button variant="link" className={btnClassNames} onClick={i.onClick || noop}>
                         {i.label}
                     </Button>
