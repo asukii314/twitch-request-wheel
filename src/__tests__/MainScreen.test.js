@@ -2,6 +2,7 @@ import {ActivityStatus} from '../ChatActivity';
 import {createRenderer} from 'react-test-renderer/shallow';
 import MainScreen from '../landing/MainScreen';
 import React from 'react';
+import * as fakeStates from '../example-states';
 
 // jest.mock('react-wheel-of-prizes', () => {
 //     return {
@@ -53,6 +54,88 @@ describe('MainScreen', () => {
         nextGameIdx: 0,
         showPlayerSelect: false
     };
+
+    describe('componentDidMount', () => {
+        test('should call onMount', () => {
+            const mainScreen = new MainScreen(props);
+            jest.spyOn(mainScreen, 'onMount');
+
+            mainScreen.componentDidMount();
+            expect(mainScreen.onMount).toHaveBeenCalled();
+        });
+    });
+
+    describe('componentDidUpdate', () => {
+        test('should backup main screen state to LocalStorage', () => {
+            jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation(()=>{});
+            const component = new MainScreen(props);
+            component.state = Object.assign({}, state);
+            const prevState = Object.assign({}, component.state, {
+                counter: component.state.counter - 1
+            });
+
+            component.componentDidUpdate(component.props, prevState);
+
+            expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe('onMount', () => {
+        const {location} = window;
+
+        beforeAll(() => {
+            delete window.location;
+            window.location = Object.assign({}, location);
+        });
+
+        afterAll(() => {
+            window.location = location;
+        });
+
+        test('should load without any fake state', async () => {
+
+            Object.defineProperty(window.location, 'hash', {
+                get: jest.fn(() => '#'),
+            });
+
+            const component = new MainScreen(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            component.onMount();
+
+            expect(component.setState).toHaveBeenCalledTimes(0);
+        });
+
+        test('should load fakeStates', async () => {
+
+            Object.defineProperty(window.location, 'hash', {
+                get: jest.fn(() => '#?fakestate=true'),
+            });
+
+            const component = new MainScreen(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            component.onMount();
+
+            expect(component.setState).toHaveBeenCalledWith(fakeStates.MainScreen);
+        });
+
+        test('should load fakeStates and show seat selection screen', async () => {
+
+            Object.defineProperty(window.location, 'hash', {
+                get: jest.fn(() => '#?fakestate=true&playerselect=true'),
+            });
+
+            const component = new MainScreen(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+
+            component.onMount();
+
+            expect(component.setState).toHaveBeenCalledWith(
+                Object.assign({}, fakeStates.MainScreen, {showPlayerSelect: true})
+            );
+        });
+    });
 
     describe('changeNextGameIdx', () => {
         test('should call setState', () => {
@@ -245,13 +328,15 @@ describe('MainScreen', () => {
             component.state.logUserMessages = false;
             jest.spyOn(console, 'log').mockImplementation(()=>{});
             jest.spyOn(component, 'toggleUserMessageLogging').mockImplementation(()=>{});
+            jest.spyOn(component, 'refreshTwitchClient').mockImplementation(()=>{});
+            jest.spyOn(component, 'getLastState').mockImplementation(()=>{});
             jest.spyOn(component, 'setState').mockImplementation(( obj, cb=()=>{} ) => cb());
             debugMenuItems = component.getOptionsDebugMenu();
         });
-        afterEach(()=>{
-        });
+        // afterEach(()=>{
+        // });
         test('should return an array of menu items', () => {
-            expect(debugMenuItems.length).toEqual(4);
+            expect(debugMenuItems.length).toEqual(7);
         });
         test('should load mock game requests', () => {
             debugMenuItems[0].onClick();
@@ -273,6 +358,16 @@ describe('MainScreen', () => {
             debugMenuItems[3].onClick();
             expect(debugMenuItems[3].label).toBe('Toggle User Message Logging');
             expect(component.toggleUserMessageLogging).toHaveBeenCalledTimes(1);
+        });
+        test('should reconnect to chat', () => {
+            debugMenuItems[5].onClick();
+            expect(debugMenuItems[5].label).toBe('Reconnect to Chat');
+            expect(component.refreshTwitchClient).toHaveBeenCalledTimes(1);
+        });
+        test('should load the last state', () => {
+            debugMenuItems[6].onClick();
+            expect(debugMenuItems[6].label).toBe('Load Last State');
+            expect(component.getLastState).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -306,6 +401,29 @@ describe('MainScreen', () => {
             component.toggleUserMessageLogging();
             expect(component.setState).toHaveBeenCalledTimes(1);
             expect(console.log).toHaveBeenCalledWith('toggleUserMessageLogging | new state: ', 'false');
+        });
+    });
+
+    describe('getLastState', () => {
+        const lastState = {};
+        test('should call setState and log the change to the console', () => {
+            jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue(JSON.stringify(lastState));
+            jest.spyOn(JSON, 'parse').mockReturnValue(lastState);
+            jest.spyOn(console, 'log').mockImplementation(()=>{});
+
+
+            const component = new MainScreen(props);
+            component.state = state;
+
+            jest.spyOn(component, 'setState').mockImplementation(( objOrFn, cb=()=>{} ) => {
+                objOrFn(component.state);
+                cb();
+            });
+            component.getLastState();
+
+            expect(window.localStorage.__proto__.getItem).toHaveBeenCalledTimes(2);
+            expect(window.localStorage.__proto__.getItem).toHaveBeenCalledWith('__stateMainScreen');
+            expect(component.setState).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -503,6 +621,17 @@ describe('MainScreen', () => {
         });
     });
 
+    describe('onSettingsUpdate', () => {
+        test('should save settings to LocalStorage', () => {
+            jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation(()=>{});
+            const component = new MainScreen(props);
+            jest.spyOn(component, 'setState').mockImplementation(( obj, cb=()=>{} ) => cb());
+            const nextSettings = Object.assign({}, component.state.settings, {__access_token: 'newMockAccessToken'});
+            component.onSettingsUpdate(nextSettings);
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState.mock.calls[0][0]()).toStrictEqual({settings: nextSettings});
+        });
+    });
 
     describe('onUndoState', () => {
         test('should call playerSelector.onUndoState with value of state.undoState', async () => {
@@ -547,6 +676,20 @@ describe('MainScreen', () => {
             expect(component.setState).toHaveBeenCalledTimes(1);
             expect(component.setState.mock.calls[0][0](component.state)).toEqual({
                 allowGameRequests: false
+            });
+        });
+    });
+
+    describe('toggleCommandsModal', () => {
+        test('should toggle the value of state.showCommandsModal', () => {
+            const component = new MainScreen(props);
+            jest.spyOn(component, 'setState').mockImplementation(()=>{});
+            component.state.showCommandsModal = true;
+            component.toggleCommandsModal();
+
+            expect(component.setState).toHaveBeenCalledTimes(1);
+            expect(component.setState.mock.calls[0][0](component.state)).toEqual({
+                showCommandsModal: false
             });
         });
     });
@@ -671,6 +814,20 @@ describe('MainScreen', () => {
             component.setPlayerSelectRef({clearQueue: jest.fn()});
             component.routeClearQueueRequest();
             expect(component.playerSelector.clearQueue).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe('sendMessage', () => {
+        test('should call messageHandler.sendMessage when available', () => {
+            const component = new MainScreen(props);
+            component.messageHandler = {
+                sendMessage: jest.fn().mockImplementation((msg) => {
+                    return Promise.resolve(msg);
+                })
+            };
+
+            component.sendMessage('foo');
+            expect(component.messageHandler.sendMessage).toHaveBeenCalledTimes(1);
         });
     });
 

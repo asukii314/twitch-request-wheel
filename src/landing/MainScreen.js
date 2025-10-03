@@ -82,10 +82,24 @@ export default class MainScreen extends Component {
         this.setPlayerSelectRef = this.setPlayerSelectRef.bind(this);
 
         this.toggleUserMessageLogging = this.toggleUserMessageLogging.bind(this);
+        this.getLastState = this.getLastState.bind(this);
         this.showUndoAvailable = this.showUndoAvailable.bind(this);
     }
 
     componentDidMount() {
+        this.onMount();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.history.length !== prevState.history.length ||
+            Object.keys(this.state.messages).length !== Object.keys(prevState.messages).length ||
+            this.state.counter !== prevState.counter
+        ) {
+            localStorage.setItem('__stateMainScreen', JSON.stringify(this.state));
+        }
+    }
+
+    onMount = () => {
         if (window.location.hash.indexOf('fakestate=true') !== -1) {
             if (window.location.hash.indexOf('playerselect=true') !== -1) {
                 this.setState(
@@ -258,6 +272,18 @@ export default class MainScreen extends Component {
             onClick: () => {
                 return this.toggleUserMessageLogging();
             }
+        }, {
+            label: '-'
+        }, {
+            label: 'Reconnect to Chat',
+            onClick: () => {
+                return this.refreshTwitchClient();
+            }
+        }, {
+            label: 'Load Last State',
+            onClick: () => {
+                return this.getLastState();
+            }
         }];
     }
 
@@ -265,6 +291,28 @@ export default class MainScreen extends Component {
         return this.setState(prevState => ({
             logUserMessages: !prevState.logUserMessages
         }), () => console.log('toggleUserMessageLogging | new state: ', this.state.logUserMessages?.toString()));
+    }
+
+    getLastState = () => {
+        let isJestEnv = (process.env.JEST_WORKER_ID !== undefined);
+        try {
+            let lastState = localStorage.getItem('__stateMainScreen');
+            if (!!lastState) {
+                lastState = JSON.parse(lastState);
+                this.setState(prevState => (
+                    Object.assign({}, prevState, {...lastState})
+                ), () => console.log('getLastState | resumed state: '/*, this.state*/));
+                if (!isJestEnv) {
+                    console.log('Last state loaded!');
+                }
+            } else {
+                if (!isJestEnv) {
+                    console.log('Last state not found.');
+                }
+            }
+        } catch (e) {
+            console.log('Error loading last state:', e);
+        }
     }
 
     getOptionsMenu = () => {
@@ -411,6 +459,10 @@ export default class MainScreen extends Component {
                 showPlayerSelect: !state.showPlayerSelect
             }
         })
+    }
+
+    refreshTwitchClient = () => {
+        return this.messageHandler?.refreshTwitchClient();
     }
 
     routePlayRequest = (user, {sendConfirmationMsg = true, isPrioritySeat = false}) => {
@@ -791,6 +843,7 @@ export default class MainScreen extends Component {
                         debugItems={this.getOptionsDebugMenu()}
                         items={this.getOptionsMenu()}
                         reloadGameList={this.messageHandler?.reloadGameList}
+                        refreshTwitchClient={this.messageHandler?.refreshTwitchClient}
                         onHide={this.toggleOptionsMenu}
                         onLogout={this.props.onLogout}
                         onSettingsUpdate={this.onSettingsUpdate}

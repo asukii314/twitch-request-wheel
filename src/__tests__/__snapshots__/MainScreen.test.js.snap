@@ -227,6 +227,17 @@ exports[`MainScreen render should render the game request screen 1`] = `
             "label": "Toggle User Message Logging",
             "onClick": [Function],
           },
+          Object {
+            "label": "-",
+          },
+          Object {
+            "label": "Reconnect to Chat",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Load Last State",
+            "onClick": [Function],
+          },
         ]
       }
       gamesList={
@@ -570,6 +581,17 @@ exports[`MainScreen render should render the game request screen with modal 1`] 
             "label": "Toggle User Message Logging",
             "onClick": [Function],
           },
+          Object {
+            "label": "-",
+          },
+          Object {
+            "label": "Reconnect to Chat",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Load Last State",
+            "onClick": [Function],
+          },
         ]
       }
       gamesList={
@@ -828,6 +850,17 @@ exports[`MainScreen render should render the player selection screen 1`] = `
           },
           Object {
             "label": "Toggle User Message Logging",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "-",
+          },
+          Object {
+            "label": "Reconnect to Chat",
+            "onClick": [Function],
+          },
+          Object {
+            "label": "Load Last State",
             "onClick": [Function],
           },
         ]
