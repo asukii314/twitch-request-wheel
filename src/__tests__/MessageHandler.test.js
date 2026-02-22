@@ -487,6 +487,8 @@ describe('MessageHandler', () => {
             expect(component.checkForMiscCommands('!close', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!startgame', username)).toBeTruthy();
             expect(component.checkForMiscCommands('!dew', username)).toBeUndefined();
+            expect(component.checkForMiscCommands('!lemmein', username)).toBeUndefined();
+            expect(component.checkForMiscCommands('!lemmeout', username)).toBeUndefined();
             expect(component.checkForMiscCommands('!undefinedcommand', username)).not.toBeDefined();
 
             expect(component.findGame).toHaveBeenCalledWith('Quiplash 3', username);
@@ -702,7 +704,7 @@ describe('MessageHandler', () => {
                 expect.stringContaining('requests have now been enabled'),
             );
         });
-        test('calls easter eggs', () => {
+        test('calls caniplayHandler in @dewinblack\'s chat', () => {
             let component = new MessageHandler(
                 Object.assign({}, props, {
                     caniplayHandler: jest.fn(),
@@ -713,6 +715,30 @@ describe('MessageHandler', () => {
             const username = 'sirfarewell';
             expect(component.checkForMiscCommands('!dew', username)).toBeTruthy();
             expect(component.props.caniplayHandler).toHaveBeenCalledTimes(1);
+        });
+        test('calls caniplayHandler in @simpleperson98\'s chat', () => {
+            let component = new MessageHandler(
+                Object.assign({}, props, {
+                    caniplayHandler: jest.fn(),
+                    channel: 'simpleperson98',
+                })
+            );
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+            const username = 'sirfarewell';
+            expect(component.checkForMiscCommands('!lemmein', username)).toBeTruthy();
+            expect(component.props.caniplayHandler).toHaveBeenCalledTimes(1);
+        });
+        test('calls playerExitHandler in @simpleperson98\'s chat', () => {
+            let component = new MessageHandler(
+                Object.assign({}, props, {
+                    playerExitHandler: jest.fn(),
+                    channel: 'simpleperson98',
+                })
+            );
+            jest.spyOn(component, 'sendMessage').mockImplementation(()=>{});
+            const username = 'sirfarewell';
+            expect(component.checkForMiscCommands('!lemmeout', username)).toBeTruthy();
+            expect(component.props.playerExitHandler).toHaveBeenCalledTimes(1);
         });
         test('calls undoStart', () => {
             let component = new MessageHandler(

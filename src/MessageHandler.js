@@ -13,7 +13,7 @@ const GAME_SUBREQUEST_COMMAND = "!subrequest";
 const easterEggRequests = [
     {
         RequestName: 'Version',
-        Response: `is using Twitch Request Wheel, v${version}`,
+        Response: `is using Twitch Request Wheel, v${version} GlitchCat`,
         Variants: [
             'version',
             'v',
@@ -44,7 +44,9 @@ const easterEggRequests = [
             'woof',
             'bark',
             'nugs',
-            'chicken nugs'
+            'chicken nugs',
+            '67',
+            '69'
         ]
     }, {
         RequestName: 'Lewmon',
@@ -358,7 +360,11 @@ export default class MessageHandler extends Component {
         }
 
         //========= player queue management =========
-        if (message === "!caniplay" || message.startsWith("!new") || (message.toLowerCase().startsWith("!dew") && this.props?.channel?.toLowerCase() === 'dewinblack')) {
+        if (
+            message === "!caniplay" || message.startsWith("!new")
+            || (message.toLowerCase().startsWith("!dew") && this.props?.channel?.toLowerCase() === 'dewinblack')
+            || (message.toLowerCase().startsWith("!lemmein") && this.props?.channel?.toLowerCase() === 'simpleperson98')
+        ) {
             this.props?.caniplayHandler(username, {
                 sendConfirmationMsg: message === "!caniplay"
             });
@@ -396,7 +402,10 @@ export default class MessageHandler extends Component {
             return true;
         }
 
-        if (message === "!leave" || message === "!murd") {
+        if (
+            message === "!leave" || message === "!murd"
+            || (message.toLowerCase().startsWith("!lemmeout") && this.props?.channel?.toLowerCase() === 'simpleperson98')
+        ) {
             this.props?.playerExitHandler(username);
             return true;
         }
