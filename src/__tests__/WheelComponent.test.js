@@ -166,13 +166,16 @@ describe('WheelComponent', () => {
     test('spin completes and calls onFinished after timer runs', () => {
         jest.useFakeTimers();
         const onFinished = jest.fn();
+        // reduced values by 20x for sake of test brevity
+        // else would have to wait 2+ seconds for test to complete
+        // (upDuration: 100, downDuration: 1000)
         render(
             <WheelComponent
                 segments={['A', 'B']}
                 segColors={['#fff', '#000']}
                 onFinished={onFinished}
-                upDuration={100}
-                downDuration={1000}
+                upDuration={5}
+                downDuration={50}
             />
         );
         const canvas = document.getElementById('canvas');
@@ -237,8 +240,8 @@ describe('WheelComponent', () => {
                 segColors={['#fff', '#000']}
                 onFinished={onFinished}
                 isOnlyOnce={true}
-                upDuration={100}
-                downDuration={1000}
+                upDuration={5}
+                downDuration={50}
             />
         );
         const canvasEl = container.querySelector('#canvas');

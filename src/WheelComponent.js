@@ -93,7 +93,7 @@ const WheelComponent = ({
             frames = 0;
             timerHandleRef.current = setInterval(onTimerTick, timerDelay);
         }
-        console.log({maxSpeed});
+        // console.log({maxSpeed});
         onStart();
     };
     const onTimerTick = () => {
