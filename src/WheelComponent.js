@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 const WheelComponent = ({
     segments,
@@ -6,7 +6,7 @@ const WheelComponent = ({
     winningSegment,
     onStart = ()=>{},
     onSpinProgress,
-    onFinished,
+    onFinished = () => {},
     primaryColor,
     contrastColor,
     buttonText,
@@ -24,7 +24,8 @@ const WheelComponent = ({
     let currentSegmentLabel = '';
     let isStarted = false;
     const [isFinished, setFinished] = useState(false);
-    let timerHandle = 0;
+    const timerHandleRef = useRef(0);
+    const isMountedRef = useRef(true);
     const timerDelay = segments.length / 2;
     let angleCurrent = 0;
     let angleDelta = 0;
@@ -38,12 +39,20 @@ const WheelComponent = ({
     const centerY = Math.round(wheelHeight/2.5);
 
     useEffect(() => {
+        isMountedRef.current = true;
         wheelInit();
         if (enableScrollTop) {
             setTimeout(() => {
                 window.scrollTo(0, 1);
             }, 0);
         }
+        return () => {
+            isMountedRef.current = false;
+            if (timerHandleRef.current) {
+                clearInterval(timerHandleRef.current);
+                timerHandleRef.current = 0;
+            }
+        };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     // const spinButton = new Path2D();
@@ -77,12 +86,12 @@ const WheelComponent = ({
         //     return;
         // }
         isStarted = true;
-        if (timerHandle === 0) {
+        if (timerHandleRef.current === 0) {
             spinStart = new Date().getTime();
             // maxSpeed = Math.PI / ((segments.length*2) + Math.random())
             maxSpeed = Math.max(0.4, Math.PI / segments.length);
             frames = 0;
-            timerHandle = setInterval(onTimerTick, timerDelay);
+            timerHandleRef.current = setInterval(onTimerTick, timerDelay);
         }
         console.log({maxSpeed});
         onStart();
@@ -120,11 +129,15 @@ const WheelComponent = ({
             angleCurrent -= Math.PI * 2;
         }
         if (finished) {
-            setFinished(true);
-            onFinished(currentSegment);
-            clearInterval(timerHandle);
-            timerHandle = 0;
+            if (timerHandleRef.current) {
+                clearInterval(timerHandleRef.current);
+                timerHandleRef.current = 0;
+            }
             angleDelta = 0;
+            if (isMountedRef.current) {
+                setFinished(true);
+                onFinished(currentSegment);
+            }
         }
         onSpinProgress && onSpinProgress({finished, progress, frames})
     };
