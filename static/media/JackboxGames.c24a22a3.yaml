@@ -709,6 +709,55 @@ Party Pack 11:
       - trivia legend
       - lot
 
+Party Pack 12:
+  Idol Factions:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - idol factions
+      - idol faction
+      - idol fictions
+      - idol fiction
+      - idol
+      - if
+  We Forgot a Card:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - we forgot a card
+      - forgot a card
+      - forgot
+      - card
+      - wfac
+  Debate and Switch:
+    Min players: 2
+    Max players: 8
+    Variants:
+      - debate and switch
+      - debate an switch
+      - debate n switch
+      - debate switch
+      - bate and switch
+      - debate
+      - das
+      - dns
+  MegaPals:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - megapals
+      - megapal
+      - pals
+      - mp
+  Hyperface:
+    Min players: 3
+    Max players: 8
+    Variants:
+      - hyperface
+      - hyperspace
+      - hypeface
+      - hf
+
 Standalone:
   Drawful 2:
     Min players: 3
